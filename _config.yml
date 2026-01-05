@@ -29,9 +29,6 @@ baseurl: ""
 github:
   username: z-larsen
 
-twitter:
-  username: twitter_username # change to your Twitter username
-
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
