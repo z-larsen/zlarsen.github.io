@@ -8,7 +8,6 @@ order: 2
 
 ## Certifications
 
-
 <div class="cert-grid">
   <a
     href="https://learn.microsoft.com/api/credentials/share/en-us/ZacLarsen-9767/9209D026AA374403?sharingId=DE68F1EA2957BC1D"
