@@ -24,15 +24,59 @@ All automated. All free (except the domain). If you want to build a modern perso
 
 ---
 
+## Prerequisites
+
+Before we begin, you'll need:
+
+### 1. Create a GitHub Account
+
+If you don't already have one:
+
+1. Go to [github.com](https://github.com)
+2. Click **Sign up**
+3. Follow the registration process
+4. Verify your email address and good luck with the CAPTCHA
+
+### 2. Install Git
+
+Download and install Git from [git-scm.com](https://git-scm.com/downloads)
+
+Verify installation:
+```bash
+git --version
+```
+
+### 3. Configure Git
+
+Set your identity:
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
+
+---
+
 ## Creating the GitHub Pages Repository
 
 GitHub Pages serves sites from a repository named: `<username>.github.io`
 
-For my site, I created:
+### Step-by-Step Repository Creation
 
-```
-zlarsen.github.io
-```
+1. **Log in to GitHub** and navigate to your profile
+
+2. **Create a new repository:**
+   - Click the **+** icon in the top-right corner
+   - Select **New repository**
+
+3. **Configure the repository:**
+   - **Repository name:** `<your-username>.github.io`
+     - For example, mine is: `zlarsen.github.io`
+     - The username must match your GitHub username exactly
+   - **Description:** (optional) "My personal website"
+   - **Visibility:** Public (required for free GitHub Pages)
+   - **Initialize:** Check "Add a README file"
+
+4. **Click** "Create repository"
 
 This repository becomes the source of your deployed website.
 
@@ -107,6 +151,35 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
+### Configure Repository Settings for GitHub Actions
+
+After creating your workflow file, you need to configure GitHub Pages to use GitHub Actions as the build source:
+
+1. **Navigate to your repository** on GitHub
+
+2. **Go to Settings:**
+   - Click the **Settings** tab (⚙️ icon)
+
+3. **Find Pages settings:**
+   - In the left sidebar, click **Pages** (under "Code and automation")
+
+4. **Configure Build and Deployment:**
+   - **Source:** Select **GitHub Actions** from the dropdown
+     - This is critical! Don't use "Deploy from a branch"
+   - The page should show: "Use GitHub Actions to deploy from workflows in your repository"
+
+5. **Save** (settings auto-save)
+
+6. **Trigger the workflow:**
+   - Push any commit to the `main` branch, or
+   - Go to **Actions** tab → Select "Deploy Jekyll site to Pages" → Click **Run workflow**
+
+7. **Monitor the deployment:**
+   - Watch the workflow run in the **Actions** tab
+   - Once complete, your site will be live at: `https://<username>.github.io`
+
+> **Troubleshooting:** If you see "deploy from a branch" is selected, your Actions workflow won't run. Make sure to change the Source to "GitHub Actions".
+
 ---
 
 ## Adding a Custom Domain
@@ -125,7 +198,7 @@ A  @  185.199.111.153
 
 **CNAME Record (www subdomain):**
 ```
-CNAME  www  →  zlarsen.github.io
+CNAME  www  ->  zlarsen.github.io
 ```
 
 ### GitHub Configuration
@@ -237,13 +310,3 @@ git push
 - **GitHub Pages** updates within seconds
 
 ---
-
-## Summary
-
-You now have a fully automated personal website with:
-
-✅ Professional Jekyll theme  
-✅ Free hosting on GitHub Pages  
-✅ Automated deployments via GitHub Actions  
-✅ Local development in VS Code  
-✅ Custom domain with HTTPS  
