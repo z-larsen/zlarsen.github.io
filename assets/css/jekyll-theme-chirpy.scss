@@ -1,19 +1,17 @@
 
-/* Certification badge styling */
+/* Certifications badge grid */
 .cert-grid {
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
   align-items: center;
 }
-
 .cert-grid img {
   width: 140px;
   height: auto;
   border-radius: 6px;
   transition: transform 0.2s ease;
 }
-
 .cert-grid img:hover {
   transform: scale(1.05);
 }

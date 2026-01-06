@@ -1,26 +1,19 @@
+
 {
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Run Jekyll Server",
+      "label": "Run Jekyll",
       "type": "shell",
-      "command": "./tools/run.sh",
+      "command": "bundle exec jekyll s --host 0.0.0.0 --port 4000",
       "group": {
         "kind": "build",
         "isDefault": true
       },
-      "problemMatcher": [],
-      "detail": "Runs the Jekyll server with live reload."
-    },
-    {
-      "label": "Build Jekyll Site",
-      "type": "shell",
-      "command": "./tools/test.sh",
-      "group": {
-        "kind": "build"
+      "options": {
+        "cwd": "${workspaceFolder}"
       },
-      "problemMatcher": [],
-      "detail": "Build the Jekyll site for production."
+      "problemMatcher": []
     }
   ]
 }
