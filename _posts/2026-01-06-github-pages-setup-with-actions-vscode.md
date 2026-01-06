@@ -1,10 +1,11 @@
 ---
 layout: post
-title: "How I Built My GitHub Pages Site Using Actions and VS Code"
+title: "How I Built My GitHub Pages Site Using Actions + VS Code"
 date: 2026-01-06
-categories: [GitHub, CI/CD, Jekyll]
+categories: [GitHub]
 tags: [GitHub Actions, Pages, Chirpy, VSCode]
 ---
+
 
 Creating a personal website shouldn't require complicated tooling or expensive hosting. This post walks through exactly how I built this site using modern, free tools that work seamlessly together.
 
