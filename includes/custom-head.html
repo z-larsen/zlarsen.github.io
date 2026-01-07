@@ -1,4 +1,42 @@
 <!-- Force custom favicon -->
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/logo.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/logo.png">
-<link rel="apple-touch-icon" href="/assets/img/favicons/logo.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/assets/img/favicons/apple-touch-icon.png">
+
+
+<style>
+/* === Bigger sidebar avatar/logo === */
+:root { --zl-avatar: 180px; } /* change this: 140 / 160 / 180 / 200 */
+
+#sidebar .profile-wrapper .avatar,
+.sidebar  .profile-wrapper .avatar {
+  width: var(--zl-avatar) !important;
+  height: var(--zl-avatar) !important;
+  max-width: none !important;
+  max-height: none !important;
+  border: none !important;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.55) !important; /* ring */
+}
+
+/* Some Chirpy builds use pseudo-elements for the ring */
+#sidebar .profile-wrapper .avatar::before,
+#sidebar .profile-wrapper .avatar::after,
+.sidebar  .profile-wrapper .avatar::before,
+.sidebar  .profile-wrapper .avatar::after {
+  width: var(--zl-avatar) !important;
+  height: var(--zl-avatar) !important;
+}
+
+/* Make the image fill the container */
+#sidebar .profile-wrapper .avatar img,
+.sidebar  .profile-wrapper .avatar img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+</style>

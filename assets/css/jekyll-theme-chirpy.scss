@@ -15,3 +15,12 @@
 .cert-grid img:hover {
   transform: scale(1.05);
 }
+
+/* Title + subtitle alignment / spacing */
+.sidebar .site-title {
+  margin-top: 10px !important;
+}
+.sidebar .site-subtitle {
+  margin-top: 2px !important;
+  opacity: 0.85;
+}
