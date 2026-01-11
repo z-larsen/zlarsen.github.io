@@ -4,6 +4,7 @@ title: "Azure ExpressRoute Overview"
 date: 2026-01-06
 categories: [Azure]
 tags: [ExpressRoute, Networking]
+excerpt: "Coming soon: A deep dive into Azure ExpressRoute covering what it is, why enterprises use it, key design considerations, and integration with Azure networking patterns."
 ---
 
 ```
