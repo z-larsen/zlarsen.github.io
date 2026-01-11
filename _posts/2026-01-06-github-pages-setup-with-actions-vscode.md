@@ -6,6 +6,14 @@ categories: [GitHub]
 tags: [GitHub Actions, Pages, Chirpy, VSCode]
 ---
 
+```
+   _____ _ _   _    _       _       ____                       
+  / ____(_) | | |  | |     | |     |  _ \ __ _  __ _  ___  ___ 
+ | |  __ _| |_| |__| |_   _| |__   | |_) / _` |/ _` |/ _ \/ __|
+ | | |_ | | __|  __  | | | | '_ \  |  __/ (_| | (_| |  __/\__ \
+ | |__| | | |_| |  | | |_| | |_) | | |   \__,_|\__, |\___||___/
+  \_____|_|\__|_|  |_|\__,_|_.__/  |_|          |___/           
+```
 
 Creating a personal website shouldn't require complicated tooling or expensive hosting. This post walks through exactly how I built this site using modern, free tools that work seamlessly together.
 
