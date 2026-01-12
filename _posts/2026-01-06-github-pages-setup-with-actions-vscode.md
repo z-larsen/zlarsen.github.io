@@ -7,6 +7,8 @@ tags: [GitHub Actions, Pages, Chirpy, VSCode]
 excerpt: "Creating a personal website shouldn't require complicated tooling or expensive hosting. This post walks through exactly how I built this site using modern, free tools that work seamlessly together."
 ---
 
+Creating a personal website shouldn't require complicated tooling or expensive hosting. This post walks through exactly how I built this site using modern, free tools that work seamlessly together.
+
 ```
    _____ _ _   _    _       _       ____                       
   / ____(_) | | |  | |     | |     |  _ \ __ _  __ _  ___  ___ 
@@ -16,7 +18,7 @@ excerpt: "Creating a personal website shouldn't require complicated tooling or e
   \_____|_|\__|_|  |_|\__,_|_.__/  |_|          |___/           
 ```
 
-Creating a personal website shouldn't require complicated tooling or expensive hosting. This post walks through exactly how I built this site using modern, free tools that work seamlessly together.
+
 
 ## Overview
 
