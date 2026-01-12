@@ -30,13 +30,27 @@
 /* Make the image fill the container */
 #sidebar .profile-wrapper .avatar img,
 .sidebar  .profile-wrapper .avatar img {
-  width: 100% !important;
-  height: 100% !important;
+  width: 90% !important;
+  height: 90% !important;
   max-width: none !important;
   max-height: none !important;
   object-fit: contain !important;
   border-radius: 50% !important;
   border: none !important;
   box-shadow: none !important;
+  padding: 5% !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Override hover states to keep same size */
+#sidebar .profile-wrapper .avatar:hover img,
+.sidebar  .profile-wrapper .avatar:hover img,
+#sidebar .profile-wrapper:hover .avatar img,
+.sidebar  .profile-wrapper:hover .avatar img {
+  width: 90% !important;
+  height: 90% !important;
+  transform: none !important;
+  padding: 5% !important;
 }
 </style>
