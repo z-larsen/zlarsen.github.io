@@ -37,6 +37,58 @@ The solution works as follows:
 5. User completes MFA on their registered device
 6. Upon successful MFA, NPS grants access
 
+## Real-World Use Cases
+
+### Use Case 1: Securing Remote VPN Access
+
+**Scenario**: A healthcare organization needs to comply with HIPAA requirements for remote access to electronic health records (EHR) systems.
+
+**Implementation**:
+- Deploy NPS with Entra MFA for all VPN connections
+- Create separate network policies for different user groups (doctors, nurses, administrators)
+- Enforce MFA for all users regardless of location
+- Configure conditional access policies in Entra ID to require MFA and compliant devices
+
+**Benefits**:
+- Meets compliance requirements for multi-factor authentication
+- Protects patient data from credential-based attacks
+- Provides audit trail of all VPN access attempts
+- Reduces risk of unauthorized access even if passwords are compromised
+
+### Use Case 2: Enterprise WiFi with 802.1X Authentication
+
+**Scenario**: A financial services company wants to secure wireless access across multiple office locations without managing certificates on employee devices.
+
+**Implementation**:
+- Configure wireless access points to use RADIUS authentication with NPS
+- Deploy 802.1X with PEAP-MSCHAPv2 for seamless authentication
+- Enable Entra MFA for WiFi access during initial device enrollment
+- Use certificate-based authentication for subsequent connections after device trust is established
+
+**Benefits**:
+- Eliminates pre-shared keys (PSK) that can be easily shared
+- Automatically segments network access by user credentials
+- Provides individual accountability for network usage
+- Simplifies onboarding/offboarding - disable AD account to revoke WiFi access
+
+### Use Case 3: Privileged Network Device Management
+
+**Scenario**: An MSP (Managed Service Provider) needs to secure administrative access to customer network infrastructure (switches, routers, firewalls) across multiple client sites.
+
+**Implementation**:
+- Configure network devices to use RADIUS for administrative authentication
+- Create NPS policies that grant access only to specific AD security groups (Network Admins, NOC Engineers)
+- Require MFA for all administrative sessions
+- Implement time-based restrictions for scheduled maintenance windows
+- Use RADIUS accounting to log all administrative commands
+
+**Benefits**:
+- Prevents unauthorized configuration changes
+- Creates detailed audit logs for compliance and troubleshooting
+- Centralizes credential management - no local admin passwords on devices
+- Enables immediate access revocation when employees leave
+- Satisfies client security requirements for SOC 2, ISO 27001, etc.
+
 ## Part 1: Install and Configure NPS Role
 
 ### Install NPS Role
