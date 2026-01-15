@@ -22,7 +22,7 @@ order: 3
     <img src="/assets/img/az104Badge.jpeg" alt="AZ-104 Badge" class="no-lightbox" data-lity-ignore />
   </a>
   <a href="https://verify.skilljar.com/c/gfo2icfsodda" target="_blank" rel="noopener" onclick="window.open(this.href); return false;">
-    <img src="/assets/img/finopsBadge.png" alt="FinOps Certified Practitioner Badge" class="no-lightbox" data-lity-ignore />
+    <img src="/assets/img/finops-certified-practitioner.3.png" alt="FinOps Certified Practitioner Badge" class="no-lightbox" data-lity-ignore />
   </a>
 </div>
 
