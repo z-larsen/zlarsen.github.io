@@ -12,8 +12,8 @@ order: 3
 }
 .cert-grid img {
   pointer-events: none !important;
-  max-width: 200px;
-  max-height: 200px;
+  max-width: 150px;
+  max-height: 150px;
   width: auto;
   height: auto;
 }
