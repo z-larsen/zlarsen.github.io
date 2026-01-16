@@ -47,8 +47,8 @@ Browse by tags or categories to find the topics you want to explore.
 </div>
 
 ### Microsoft Certified: Azure Administrator Associate (AZ‑104)
-[View Certification](https://learn.microsoft.com/api/credentials/share/en-us/ZacLarsen-9767/9209D026AA374403?sharingId=DE68F1EA2957BC1D){:target="_blank"}
+[View](https://learn.microsoft.com/api/credentials/share/en-us/ZacLarsen-9767/9209D026AA374403?sharingId=DE68F1EA2957BC1D){:target="_blank"}
 
 ### FinOps Certified Practitioner
-[View Certification](https://verify.skilljar.com/c/gfo2icfsodda){:target="_blank"}
+[View](https://verify.skilljar.com/c/gfo2icfsodda){:target="_blank"}
 
