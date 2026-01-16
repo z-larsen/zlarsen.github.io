@@ -69,6 +69,45 @@
   padding-top: 1.5rem;
 }
 
+/* Force proper two-column layout on home page */
+#core-wrapper .row {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+}
+
+#core-wrapper #main {
+  flex: 1 1 auto !important;
+  max-width: 100% !important;
+}
+
+/* Ensure sidebar stays on the right */
+@media (min-width: 1200px) {
+  #core-wrapper .col-12.col-lg-11.col-xl-8 {
+    flex: 0 0 65% !important;
+    max-width: 65% !important;
+  }
+  
+  #core-wrapper aside {
+    flex: 0 0 35% !important;
+    max-width: 35% !important;
+    position: sticky !important;
+    top: 2rem !important;
+    height: fit-content !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  #core-wrapper .col-12.col-lg-11.col-xl-8 {
+    flex: 0 0 70% !important;
+    max-width: 70% !important;
+  }
+  
+  #core-wrapper aside {
+    flex: 0 0 30% !important;
+    max-width: 30% !important;
+  }
+}
+
 /* Better featured image handling */
 .post-preview .preview-img {
   border-radius: 10px;
