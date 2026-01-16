@@ -3,6 +3,7 @@ layout: page
 title: Certifications
 icon: fas fa-certificate
 order: 3
+published: false
 ---
 
 <style>
