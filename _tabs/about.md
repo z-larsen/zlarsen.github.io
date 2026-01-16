@@ -18,8 +18,8 @@ title: About
 }
 .cert-grid img {
   pointer-events: none !important;
-  max-width: 120px;
-  max-height: 120px;
+  max-width: 90px;
+  max-height: 90px;
   width: auto;
   height: auto;
 }
