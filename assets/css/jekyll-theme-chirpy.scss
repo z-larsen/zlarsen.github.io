@@ -3,7 +3,7 @@
 
 @import 'main';
 
-/* Certifications badge grid */
+/* Certifications badge grid (About page) */
 .cert-grid {
   display: flex;
   gap: 24px;
@@ -20,92 +20,11 @@
   transform: scale(1.05);
 }
 
-/* Title + subtitle alignment / spacing */
+/* Sidebar title spacing */
 .sidebar .site-title {
   margin-top: 10px !important;
 }
 .sidebar .site-subtitle {
   margin-top: 2px !important;
   opacity: 0.85;
-}
-
-/* ============================================
-   ENHANCED CARD STYLING - MORE VISIBLE
-   ============================================ */
-
-/* Highly visible post cards */
-.post-preview {
-  border: 2px solid rgba(100, 150, 255, 0.3) !important;
-  background: rgba(30, 35, 50, 0.8) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(100, 150, 255, 0.1) !important;
-  border-radius: 12px !important;
-  margin-bottom: 1.25rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.post-preview:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(100, 150, 255, 0.2) !important;
-  border-color: rgba(100, 150, 255, 0.5) !important;
-}
-
-/* Card wrapper styling */
-#post-list .card {
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  background: rgba(35, 35, 40, 0.7) !important;
-  border-radius: 10px !important;
-}
-
-/* ============================================
-   SHOW RIGHT PANEL AT SMALLER WIDTHS
-   ============================================ */
-
-/* Override the default 1200px breakpoint to show panel earlier */
-@media (min-width: 992px) {
-  #panel-wrapper {
-    display: block !important;
-  }
-}
-
-/* Adjust layout for medium screens (992px - 1199px) */
-@media (min-width: 992px) and (max-width: 1199px) {
-  #main-wrapper > .container > .row {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-  }
-  
-  #main-wrapper > .container > .row > main {
-    flex: 0 0 65% !important;
-    max-width: 65% !important;
-  }
-  
-  #panel-wrapper {
-    flex: 0 0 35% !important;
-    max-width: 35% !important;
-    padding-left: 1rem;
-  }
-  
-  #panel-wrapper .access {
-    margin-top: 0 !important;
-  }
-}
-
-/* Panel styling enhancements */
-#panel-wrapper .access > section {
-  background: rgba(35, 35, 40, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
-
-#panel-wrapper .panel-heading {
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 0.75rem;
-}
-
-/* Trending tags styling */
-#panel-wrapper .post-tag {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
