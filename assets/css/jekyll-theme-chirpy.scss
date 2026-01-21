@@ -30,23 +30,23 @@
 }
 
 /* ============================================
-   ENHANCED CARD STYLING
+   ENHANCED CARD STYLING - MORE VISIBLE
    ============================================ */
 
-/* More visible post cards */
+/* Highly visible post cards */
 .post-preview {
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  background: rgba(40, 40, 45, 0.6) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  border: 2px solid rgba(100, 150, 255, 0.3) !important;
+  background: rgba(30, 35, 50, 0.8) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(100, 150, 255, 0.1) !important;
   border-radius: 12px !important;
   margin-bottom: 1.25rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .post-preview:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(100, 150, 255, 0.2) !important;
+  border-color: rgba(100, 150, 255, 0.5) !important;
 }
 
 /* Card wrapper styling */
