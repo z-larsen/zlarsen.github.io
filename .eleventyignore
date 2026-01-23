@@ -1,0 +1,16 @@
+_posts
+_tabs
+_config.yml
+_config.yml.backup
+Gemfile
+Gemfile.lock
+_plugins
+_data/contact.yml
+_data/share.yml
+includes
+tools
+README.md
+LICENSE
+index.html
+.bundle
+vendor

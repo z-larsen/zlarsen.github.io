@@ -1,0 +1,24 @@
+{
+  "name": "zlarsen-cloud",
+  "version": "1.0.0",
+  "description": "zlarsen.cloud - Azure blog",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "start": "eleventy --serve",
+    "debug": "DEBUG=Eleventy* eleventy"
+  },
+  "keywords": [
+    "blog",
+    "azure",
+    "eleventy"
+  ],
+  "author": "Zac Larsen",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "dependencies": {
+    "luxon": "^3.4.4"
+  }
+}

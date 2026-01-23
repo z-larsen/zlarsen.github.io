@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if title %}{{ title }} - {% endif %}zlarsen.cloud</title>
+  <meta name="description" content="{{ description or 'Azure - Architecture - Learning' }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/assets/img/favicons/apple-touch-icon.png">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <a href="/"><img src="/assets/img/logo3.png" alt="zlarsen.cloud" width="60"></a>
+      </div>
+      <h1><a href="/">zlarsen.cloud</a></h1>
+      <p class="tagline">Azure - Architecture - Learning</p>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/blog/">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {{ content | safe }}
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Zac Larsen. All rights reserved.</p>
+      <p>
+        <a href="https://github.com/z-larsen" target="_blank">GitHub</a> |
+        <a href="https://www.linkedin.com/in/zac-larsen1/" target="_blank">LinkedIn</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
