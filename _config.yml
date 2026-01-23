@@ -1,102 +1,53 @@
-# The Site Configuration
-
-# Import the theme
-theme: jekyll-theme-chirpy
-
-# The language of the webpage › http://www.lingoes.net/en/translator/langcode.htm
-# If it has the same name as one of the files in folder `_data/locales`, the layout language will also be changed,
-# otherwise, the layout language will use the default value of 'en'.
-lang: en
-
-# Change to your timezone › https://zones.arilyn.cc
-timezone: America/Denver
-# jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
-# ↓ --------------------------
-
-title: zlarsen.cloud # the main title
-
-tagline: Azure - Architecture - Learning # it will display as the subtitle
-
-description: >- # used by seo meta and the atom feed
-  just an Azure blog
-
-# Fill in the protocol & hostname for your site.
-# E.g. 'https://username.github.io', note that it does not end with a '/'.
+# Site Settings
+title: zlarsen.cloud
+tagline: Azure - Architecture - Learning
+description: just an Azure blog
 url: "https://zlarsen.cloud"
 baseurl: ""
 
-github:
-  username: z-larsen
+# Theme
+theme: jekyll-theme-yat
 
-social:
-  # Change to your full name.
-  # It will be displayed as the default author of the posts and the copyright owner in the Footer
+# Author
+author:
   name: Zac Larsen
-  email:  # change to your email address
-  links:
-    # The first element serves as the copyright owner's link
-    - https://github.com/z-larsen # change to your GitHub homepage
-    - https://www.linkedin.com/in/zac-larsen1/
+  bio: Cloud Solution Architect with a passion for Azure
+  avatar: /assets/img/logo3.png
+  email: 
+  url: https://zlarsen.cloud
 
-# Site Verification Settings
-webmaster_verifications:
-  google: # fill in your Google verification code
-  bing: # fill in your Bing verification code
-  alexa: # fill in your Alexa verification code
-  yandex: # fill in your Yandex verification code
-  baidu: # fill in your Baidu verification code
-  facebook: # fill in your Facebook verification code
+# Social Links
+github_username: z-larsen
+linkedin_username: zac-larsen1
 
-# ↑ --------------------------
-# The end of `jekyll-seo-tag` settings
+# Build settings
+markdown: kramdown
+timezone: America/Denver
+lang: en
 
-# Web Analytics Settings
-analytics:
-  google:
-    id: # fill in your Google Analytics ID
-  goatcounter:
-    id: # fill in your GoatCounter ID
-  umami:
-    id: # fill in your Umami ID
-    domain: # fill in your Umami domain
-  matomo:
-    id: # fill in your Matomo ID
-    domain: # fill in your Matomo domain
-  cloudflare:
-    id: # fill in your Cloudflare Web Analytics token
-  fathom:
-    id: # fill in your Fathom Site ID
+# Yat theme settings
+yat:
+  date_format: "%b %d, %Y"
 
-# Page views settings
-pageviews:
-  provider: # now only supports 'goatcounter'
-
-# Prefer color scheme setting.
-#
-# Note: Keep empty will follow the system prefer color by default,
-# and there will be a toggle to switch the theme between dark and light
-# on the bottom left of the sidebar.
-#
-# Available options:
-#
-#     light — Use the light color scheme
-#     dark — Use the dark color scheme
-#
-theme_mode: dark
-
-# The CDN endpoint for media resources.
-# Notice that once it is assigned, the CDN url
-# will be added to all media resources (site avatar, posts' images, audio and video files) paths starting with '/'
-#
-# e.g. 'https://cdn.com'
-cdn:
-
-# the avatar on sidebar, support local or CORS resources
-avatar: /assets/img/logo3.png
-favicon: /assets/img/favicons/favicon-32x32.png
-favicon_32: /assets/img/favicons/favicon-32x32.png
-favicon_16: /assets/img/favicons/favicon-16x16.png
-apple_touch_icon: /assets/img/favicons/apple-touch-icon.png
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: false
+      
+# Exclude from processing
+exclude:
+  - "*.gem"
+  - "*.gemspec"
+  - tools
+  - README.md
+  - LICENSE
+  - "package*.json"
+  - node_modules
+  - vendor
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
