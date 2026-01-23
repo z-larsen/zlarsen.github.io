@@ -6,10 +6,17 @@
 /* Fix sidebar navigation - remove bullets */
 #sidebar ul li.nav-item {
   list-style: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
 }
 
 #sidebar ul li.nav-item::before {
   display: none !important;
+}
+
+#sidebar ul {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
 }
 
 /* Add padding between blog posts */
