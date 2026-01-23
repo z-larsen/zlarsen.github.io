@@ -2,3 +2,44 @@
 ---
 
 @import 'main';
+
+/* Fix sidebar navigation - remove bullets */
+#sidebar ul li.nav-item {
+  list-style: none !important;
+}
+
+#sidebar ul li.nav-item::before {
+  display: none !important;
+}
+
+/* Add padding between blog posts */
+#post-list .card-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+/* Ensure sidebar bottom icons stay at bottom */
+#sidebar .sidebar-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+@media all and (min-width: 850px) {
+  #sidebar {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #sidebar .profile-wrapper {
+    flex-shrink: 0;
+  }
+  
+  #sidebar ul {
+    flex-shrink: 0;
+  }
+  
+  #sidebar .sidebar-bottom {
+    margin-top: auto;
+    position: static;
+  }
+}
