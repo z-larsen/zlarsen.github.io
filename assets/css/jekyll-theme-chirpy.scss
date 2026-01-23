@@ -17,6 +17,19 @@
   margin-bottom: 1.5rem;
 }
 
+/* Fix hover effect - only highlight the post being hovered */
+.post-preview::before {
+  pointer-events: none !important;
+}
+
+#post-list .card-wrapper {
+  position: relative;
+}
+
+#post-list .card-wrapper:hover .post-preview::before {
+  opacity: 0.3;
+}
+
 /* Ensure sidebar bottom icons stay at bottom */
 #sidebar .sidebar-bottom {
   position: absolute;
@@ -29,15 +42,15 @@
     display: flex;
     flex-direction: column;
   }
-  
+
   #sidebar .profile-wrapper {
     flex-shrink: 0;
   }
-  
+
   #sidebar ul {
     flex-shrink: 0;
   }
-  
+
   #sidebar .sidebar-bottom {
     margin-top: auto;
     position: static;
