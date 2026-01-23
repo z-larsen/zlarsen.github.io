@@ -5,8 +5,8 @@ description: just an Azure blog
 url: "https://zlarsen.cloud"
 baseurl: ""
 
-# Theme
-theme: jekyll-theme-yat
+# Theme - using remote theme for GitHub Pages compatibility
+remote_theme: "jeffreytse/jekyll-theme-yat"
 
 # Author
 author:

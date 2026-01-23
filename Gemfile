@@ -2,7 +2,8 @@
 
 source "https://rubygems.org"
 
-gem "jekyll-theme-yat"
+gem "github-pages", group: :jekyll_plugins
+gem "jekyll-remote-theme"
 
 gem "html-proofer", "~> 5.0", group: :test
 
