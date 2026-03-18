@@ -2,7 +2,7 @@
 layout: post.njk
 title: "How I Built My GitHub Pages Site Using Actions + VS Code"
 date: 2026-01-06
-tags: [posts, GitHub Actions, Pages, Chirpy, VSCode]
+tags: [posts, GitHub Actions, Pages, Eleventy, VSCode]
 excerpt: "Creating a personal website shouldn't require complicated tooling or expensive hosting. This post walks through exactly how I built this site using modern, free tools that work seamlessly together."
 ---
 
@@ -25,8 +25,8 @@ This guide covers:
 
 - **GitHub Pages** — Free hosting for static sites
 - **GitHub Actions** — Automated CI/CD pipeline
-- **VS Code with Dev Containers** — Containerized development environment
-- **Chirpy Jekyll Theme** — Professional, modern UI
+- **VS Code** — Development environment with tasks
+- **Eleventy (11ty)** — Fast, flexible static site generator
 - **Custom Domain with HTTPS** — Professional branding
 
 All automated. All free (except the domain). If you want to build a modern personal site with a professional look, this guide gives you every step.
@@ -55,7 +55,17 @@ Verify installation:
 git --version
 ```
 
-### 3. Configure Git
+### 3. Install Node.js
+
+Download and install Node.js (LTS) from [nodejs.org](https://nodejs.org)
+
+Verify installation:
+```bash
+node --version
+npm --version
+```
+
+### 4. Configure Git
 
 Set your identity:
 ```bash
@@ -91,30 +101,113 @@ This repository becomes the source of your deployed website.
 
 ---
 
-## Adding the Chirpy Jekyll Starter
+## Setting Up Eleventy
 
-I downloaded the [Chirpy starter template](https://github.com/cotes2020/chirpy-starter) and ensured all files lived in the repo root:
+[Eleventy (11ty)](https://www.11ty.dev/) is a simple, fast static site generator that runs on Node.js. It supports multiple template languages and requires almost zero configuration to get started.
+
+### Initialize the Project
+
+```bash
+npm init -y
+npm install @11ty/eleventy --save-dev
+npm install luxon
+```
+
+### Project Structure
+
+Here's how I organized the site:
 
 ```
-/_tabs
-/_posts
-/assets
-/Gemfile
-/_config.yml
+/
+├── _includes/         # Layout templates (Nunjucks)
+│   ├── base.njk       # Base HTML layout
+│   └── post.njk       # Blog post layout
+├── _data/             # Global data files
+├── posts/             # Blog posts (Markdown)
+├── css/
+│   └── style.css      # Site styles
+├── assets/
+│   └── img/           # Images and favicons
+├── index.njk          # Homepage
+├── blog.njk           # Blog listing page
+├── about.md           # About page
+├── .eleventy.js       # Eleventy configuration
+└── package.json
 ```
 
-> **Important:** File and directory names must be lowercase. GitHub Actions and Jekyll are case-sensitive!
+### Eleventy Configuration
 
---- 
+Create `.eleventy.js` in the project root:
+
+```javascript
+const { DateTime } = require('luxon');
+
+module.exports = function (eleventyConfig) {
+  // Copy static assets to the output
+  eleventyConfig.addPassthroughCopy('assets');
+  eleventyConfig.addPassthroughCopy('css');
+
+  // Date filters for templates
+  eleventyConfig.addFilter('readableDate', (dateObj) => {
+    return DateTime.fromJSDate(dateObj, { zone: 'utc' })
+      .toFormat('LLL dd, yyyy');
+  });
+
+  eleventyConfig.addFilter('htmlDateString', (dateObj) => {
+    return DateTime.fromJSDate(dateObj, { zone: 'utc' })
+      .toFormat('yyyy-LL-dd');
+  });
+
+  // Blog posts collection
+  eleventyConfig.addCollection('posts', function (collectionApi) {
+    return collectionApi.getFilteredByGlob('posts/*.md')
+      .sort((a, b) => b.date - a.date);
+  });
+
+  return {
+    dir: {
+      input: '.',
+      includes: '_includes',
+      data: '_data',
+      output: '_site',
+    },
+    templateFormats: ['md', 'njk', 'html'],
+    markdownTemplateEngine: 'njk',
+    htmlTemplateEngine: 'njk',
+  };
+};
+```
+
+### Add Build Scripts
+
+In `package.json`, add:
+
+```json
+{
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "start": "eleventy --serve"
+  }
+}
+```
+
+### Templates
+
+Eleventy uses Nunjucks (`.njk`) templates. The base layout in `_includes/base.njk` defines the HTML shell — header, nav, main content area, and footer. Individual pages set `layout: base.njk` in their front matter.
+
+Blog posts use Markdown with a `post.njk` layout that wraps the content with a header, date, tags, and a back-link.
+
+---
 
 ## Setting Up GitHub Actions for CI/CD
 
-Instead of letting GitHub Pages build the site automatically, I use GitHub Actions. This gives full control over Ruby versions, Bundler, Jekyll plugins, deployments, and error visibility.
+Instead of letting GitHub Pages build the site automatically, I use GitHub Actions with Node.js and Eleventy. This gives full control over the build process, dependencies, and error visibility.
 
-Create `.github/workflows/pages-deploy.yml`:
+Create `.github/workflows/deploy.yml`:
 
 ```yaml
-name: Deploy Jekyll site to Pages
+name: Deploy Eleventy site to Pages
 
 on:
   push:
@@ -126,6 +219,10 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -133,19 +230,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          ruby-version: "3.3"
-          bundler-cache: true
+          node-version: "20"
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Install dependencies
+        run: npm install
 
-      - name: Build site
-        run: bundle exec jekyll build --destination _site
-        env:
-          JEKYLL_ENV: production
+      - name: Build with Eleventy
+        run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -153,10 +247,14 @@ jobs:
           path: _site
 
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
 ```
 
@@ -167,7 +265,7 @@ After creating your workflow file, you need to configure GitHub Pages to use Git
 1. **Navigate to your repository** on GitHub
 
 2. **Go to Settings:**
-   - Click the **Settings** tab (⚙️ icon)
+   - Click the **Settings** tab
 
 3. **Find Pages settings:**
    - In the left sidebar, click **Pages** (under "Code and automation")
@@ -181,7 +279,7 @@ After creating your workflow file, you need to configure GitHub Pages to use Git
 
 6. **Trigger the workflow:**
    - Push any commit to the `main` branch, or
-   - Go to **Actions** tab → Select "Deploy Jekyll site to Pages" → Click **Run workflow**
+   - Go to **Actions** tab → Select "Deploy Eleventy site to Pages" → Click **Run workflow**
 
 7. **Monitor the deployment:**
    - Watch the workflow run in the **Actions** tab
@@ -220,87 +318,50 @@ GitHub automatically issues an HTTPS certificate via Let's Encrypt.
 
 ---
 
-## Local Development with VS Code Dev Containers
-
-I didn't want to install Ruby directly on Windows, so I used containerized development:
-
-### Prerequisites
-
-1. **VS Code**
-2. **Docker Desktop**
-3. **Dev Containers extension**
-
-This setup provides a clean Linux environment with Ruby and Bundler pre-configured.
+## Local Development with VS Code
 
 ### Getting Started
 
-**1. Open project in Dev Container**
-
-Press `Ctrl + Shift + P` and search for "Dev Containers: Reopen in Container"
-
-This launches a Linux container and mounts your repository inside it.
-
-**2. Install dependencies**
+**1. Clone and install dependencies**
 
 ```bash
-bundle install
+git clone https://github.com/<your-username>/<your-username>.github.io.git
+cd <your-username>.github.io
+npm install
 ```
 
-**3. Start local preview**
+**2. Start local preview**
 
 ```bash
-bundle exec jekyll s
+npm run serve
 ```
 
-Visit `http://localhost:4000` to see your site.
+Visit `http://localhost:8080` to see your site. Eleventy watches for file changes and reloads automatically.
 
 ### Automating with VS Code Tasks
 
-Create `.vscode/tasks.json` to run Jekyll with a keyboard shortcut:
+Create `.vscode/tasks.json` to run the dev server with a keyboard shortcut:
 
 ```json
 {
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Run Jekyll",
+      "label": "Run Eleventy Dev Server",
       "type": "shell",
-      "command": "bundle exec jekyll s --host 0.0.0.0 --port 4000",
+      "command": "npm run serve",
       "group": {
         "kind": "build",
         "isDefault": true
       },
-      "isBackground": false,
+      "isBackground": true,
       "problemMatcher": []
     }
   ]
 }
 ```
 
-Now press `Ctrl + Shift + B` to instantly start Jekyll.
-
----
-
-## Customizing Navigation Tabs
-
-Chirpy uses `_tabs/` for sidebar navigation. I customized:
-
-- `_tabs/blog.md`
-- `_tabs/certifications.md`
-- `_tabs/about.md`
-
-Each tab requires YAML front matter:
-
-```yaml
----
-layout: page
-title: Certifications
-icon: fas fa-certificate
-order: 2
----
-```
-
-> **Note:** Filenames must be lowercase. If you create or rename a tab, restart Jekyll to see changes.
+Now press `Ctrl + Shift + B` to instantly start the dev server.
 
 ---
 
