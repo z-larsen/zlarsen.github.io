@@ -66,7 +66,7 @@ To understand what's happening in Azure, you need three types of data.
 
 ## Diagnostic Settings
 
-By default, most Azure resources do **not** send logs anywhere. You must configure diagnostic settings to enable log collection.
+By default, most Azure resources do not send logs anywhere. You must configure diagnostic settings to enable log collection.
 
 ### How They Work
 
@@ -254,7 +254,7 @@ Azure Resources → Diagnostic Settings → Log Analytics Workspace
 
 ## Shared Incident Response Responsibilities
 
-Monitoring and incident response is a **shared responsibility** between platform teams and workload owners.
+Monitoring and incident response is a shared responsibility between platform teams and workload owners.
 
 ### Responsibility Matrix
 
@@ -282,7 +282,7 @@ Monitoring and incident response is a **shared responsibility** between platform
 - Resource-specific metrics (VM CPU, database DTU)
 - User-reported issues
 
-> **Key principle:** The team that **owns** the resource **owns** the incident response, with support from other teams as needed.
+> **Key principle:** The team that owns the resource owns the incident response, with support from other teams as needed.
 
 ---
 

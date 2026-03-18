@@ -57,7 +57,7 @@ The top-level container for your Azure billing relationship. There are several t
 
 ### Billing Profiles (MCA)
 
-A **Billing Profile** represents a separate invoice and payment method. Each billing profile:
+A Billing Profile represents a separate invoice and payment method. Each billing profile:
 
 - Generates its own monthly invoice
 - Has its own payment method (credit card, wire transfer, check)
@@ -121,7 +121,7 @@ Use Azure Policy to enforce tagging at resource group and resource level. Polici
 
 ### Cost Allocation Rules
 
-Azure Cost Management supports **cost allocation rules** for shared costs:
+Azure Cost Management supports cost allocation rules for shared costs:
 
 1. **Split shared costs** - Distribute shared resources across teams
 2. **Redistribute untagged costs** - Allocate orphaned costs based on rules

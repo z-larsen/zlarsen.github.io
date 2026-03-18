@@ -69,7 +69,7 @@ Common roles: Subscription Owner, Contributor, Reader, or custom roles.
 
 ## Managed Identities
 
-A Managed Identity is an identity in Microsoft Entra ID that is **automatically managed** by Azure. No passwords, no certificates, no credential rotation.
+A Managed Identity is an identity in Microsoft Entra ID that is automatically managed by Azure. No passwords, no certificates, no credential rotation.
 
 ### The Problem They Solve
 
@@ -127,7 +127,7 @@ az storage blob list --account-name mystorageaccount --container mycontainer
 
 ## Role-Based Access Control (RBAC)
 
-RBAC is Azure's authorization system. It determines **who** can do **what** on **which** resources.
+RBAC is Azure's authorization system. It determines who can do what on which resources.
 
 **RBAC formula:**
 
@@ -156,7 +156,7 @@ Common built-in roles:
 
 ### Scope (Where?)
 
-Azure has 4 scope levels, and permissions flow **down** the hierarchy (never up):
+Azure has 4 scope levels, and permissions flow down the hierarchy (never up):
 
 ```
 Management Group
@@ -165,7 +165,7 @@ Management Group
               └── Resource (VM, Storage, Database)
 ```
 
-**Scope inheritance:** If you grant Reader at the subscription level, the user can read **all** resource groups and resources in that subscription.
+**Scope inheritance:** If you grant Reader at the subscription level, the user can read all resource groups and resources in that subscription.
 
 **Most permissive wins:** If a user has Reader at subscription level and Contributor at a specific RG, they are Contributor in that RG and Reader everywhere else.
 
@@ -179,13 +179,13 @@ Management Group
 - **Role:** Virtual Machine Contributor
 - **Scope:** Resource Group `rg-finance-prod`
 
-**Result:** Finance team **can** start/stop/resize VMs. They **cannot** delete the resource group, create storage accounts, or assign roles.
+**Result:** Finance team can start/stop/resize VMs. They cannot delete the resource group, create storage accounts, or assign roles.
 
 ---
 
 ## Least Privilege
 
-Grant the **minimum** permissions needed to perform a job. Nothing more.
+Grant the minimum permissions needed to perform a job. Nothing more.
 
 **Why it matters:**
 - Limits damage from compromised accounts

@@ -215,7 +215,7 @@ Subscription-NonProd-Finance
 
 ### Resource Group Best Practice
 
-Group resources by **lifecycle** — things deployed, updated, and deleted together:
+Group resources by lifecycle — things deployed, updated, and deleted together:
 
 **Good:** `rg-marketing-website-prod` contains App Service, SQL Database, Storage Account, Application Insights (all deployed together).
 
@@ -231,7 +231,7 @@ Group resources by **lifecycle** — things deployed, updated, and deleted toget
 
 Tags are key-value pairs attached to resources for organization, cost tracking, and automation.
 
-**Limits:** Max 50 tags per resource, 512-char names, 256-char values. Tags on a resource group do **not** inherit to resources (must apply separately or use Azure Policy).
+**Limits:** Max 50 tags per resource, 512-char names, 256-char values. Tags on a resource group do not inherit to resources (must apply separately or use Azure Policy).
 
 ### Required Tags
 

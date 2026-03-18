@@ -11,7 +11,7 @@ If you're just getting started with Azure — whether you're an individual, a sm
 
 ## Cloud Adoption Framework (CAF)
 
-The [Cloud Adoption Framework](https://learn.microsoft.com/azure/cloud-adoption-framework/) is Microsoft's proven guidance for cloud adoption. It isn't about specific Azure features — it's about the **organizational processes and best practices** that make cloud adoption successful.
+The [Cloud Adoption Framework](https://learn.microsoft.com/azure/cloud-adoption-framework/) is Microsoft's proven guidance for cloud adoption. It isn't about specific Azure features — it's about the organizational processes and best practices that make cloud adoption successful.
 
 ### CAF Phases
 
@@ -26,7 +26,7 @@ The [Cloud Adoption Framework](https://learn.microsoft.com/azure/cloud-adoption-
 6. **Manage** — Day-to-day operations and monitoring
 7. **Secure** — Continuously improve security posture across all phases
 
-> As of 2025, CAF distinguishes between **Foundational methodologies** (Strategy through Adopt, run sequentially) and **Operational methodologies** (Govern, Manage, Secure — run continuously throughout the cloud journey).
+> As of 2025, CAF distinguishes between Foundational methodologies (Strategy through Adopt, run sequentially) and Operational methodologies (Govern, Manage, Secure — run continuously throughout the cloud journey).
 
 ### CAF Strategy Phase
 
@@ -67,14 +67,14 @@ For each workload, CAF provides a decision framework:
 
 ### CAF Ready Phase — Landing Zones
 
-A **landing zone** is a pre-configured, pre-secured Azure environment that includes:
+A landing zone is a pre-configured, pre-secured Azure environment that includes:
 - **Networking** — Hub-spoke topology, firewall, private DNS
 - **Identity** — Entra ID integration, RBAC roles defined
 - **Security** — Policies enforced, Defender for Cloud enabled
 - **Cost management** — Budgets, tags, billing alerts
 - **Governance** — Azure Policy assignments in place
 
-Think of it like a **move-in-ready apartment** versus an empty lot. An empty lot means you build everything from scratch (risky, inconsistent). A landing zone is a pre-built unit with utilities connected and security locks installed.
+Think of it like a move-in-ready apartment versus an empty lot. An empty lot means you build everything from scratch (risky, inconsistent). A landing zone is a pre-built unit with utilities connected and security locks installed.
 
 Landing zones prevent shadow IT, ensure compliance baselines are in place from day one, and create a repeatable pattern for onboarding new workloads.
 
@@ -173,7 +173,7 @@ An Azure tenant is your organization's dedicated instance of [Microsoft Entra ID
 
 ### What is an Azure Subscription?
 
-A subscription is a **billing and access boundary**. It's where resources get deployed and costs accumulate.
+A subscription is a billing and access boundary. It's where resources get deployed and costs accumulate.
 
 Common subscription design patterns:
 1. **By Environment** — Dev, Test, Prod
@@ -237,7 +237,7 @@ Optional organizational folders for subscriptions. Useful when you have 10+ subs
 Reference: [Management Groups](https://learn.microsoft.com/azure/governance/management-groups/overview)
 
 ### Resource Groups
-Logical containers for resources that share the same lifecycle. When you delete a resource group, **all resources inside are deleted**. A resource can only belong to one resource group at a time.
+Logical containers for resources that share the same lifecycle. When you delete a resource group, all resources inside are deleted. A resource can only belong to one resource group at a time.
 
 Best practices:
 - Group resources that are deployed, updated, and deleted together
@@ -246,12 +246,12 @@ Best practices:
 
 ### Policy and RBAC Inheritance
 
-Policies and role assignments applied at a higher scope flow **down** to all children:
+Policies and role assignments applied at a higher scope flow down to all children:
 
 - A policy at the Management Group level is inherited by all subscriptions below it
 - An RBAC role assigned at the subscription level applies to all resource groups inside
 
-**Best practice:** Assign roles at the **lowest scope** that works — this is the principle of least privilege.
+**Best practice:** Assign roles at the lowest scope that works — this is the principle of least privilege.
 
 ### Resource Naming Conventions
 
@@ -284,7 +284,7 @@ You rent servers, storage, and networking. You manage the OS, middleware, runtim
 **When to use:** Maximum control, lift-and-shift migrations, custom software stacks
 
 ### PaaS (Platform as a Service)
-Azure manages infrastructure **and** the platform (OS, patching, scaling). You manage applications and data.
+Azure manages infrastructure and the platform (OS, patching, scaling). You manage applications and data.
 
 **Azure examples:** Azure App Service, Azure SQL Database, Azure Functions
 
@@ -311,15 +311,15 @@ Fully managed applications. You just use the software.
 - Want to deploy code without managing servers? → **PaaS**
 - Need a ready-to-use application? → **SaaS**
 
-> **Common IaaS mistake:** Forgetting to patch the OS. Azure does **not** auto-patch VMs unless you enable [Azure Update Manager](https://learn.microsoft.com/azure/update-manager/overview). Unpatched VMs are a leading cause of security breaches in Azure.
+> **Common IaaS mistake:** Forgetting to patch the OS. Azure does not auto-patch VMs unless you enable [Azure Update Manager](https://learn.microsoft.com/azure/update-manager/overview). Unpatched VMs are a leading cause of security breaches in Azure.
 
-> For most new development: **PaaS first**, IaaS only when required.
+> For most new development: PaaS first, IaaS only when required.
 
 ---
 
 ## Shared Responsibility Model
 
-In traditional on-premises, you manage **everything**. In Azure, responsibilities are **shared** — and the dividing line depends on the service model.
+In traditional on-premises, you manage everything. In Azure, responsibilities are shared — and the dividing line depends on the service model.
 
 ### Full Responsibility Matrix
 
@@ -339,7 +339,7 @@ In traditional on-premises, you manage **everything**. In Azure, responsibilitie
 
 ### Four Responsibilities You Always Retain
 
-Regardless of service model, you **always** own:
+Regardless of service model, you always own:
 
 1. **Data** — Classification, protection, encryption decisions, and compliance
 2. **Endpoints** — Protecting client devices that access cloud services
@@ -374,7 +374,7 @@ Why regions matter:
 
 Within some regions, Azure has multiple isolated datacenters called [Availability Zones](https://learn.microsoft.com/azure/reliability/availability-zones-overview). Each zone has independent power, cooling, and networking, connected with high-speed fiber (< 2ms latency).
 
-For high availability, deploy resources **across zones** so that a datacenter-level failure doesn't take down your application.
+For high availability, deploy resources across zones so that a datacenter-level failure doesn't take down your application.
 
 ### Region Pairs and Nonpaired Regions
 
@@ -387,7 +387,7 @@ Benefits of paired regions:
 - Geo-redundant storage replicates to the paired region by default
 - In massive outages, one region in each pair gets priority recovery
 
-> **Important (2025 update):** Newer Azure regions are **not paired**. They provide redundancy through multiple Availability Zones within the region. Always verify your target region's pairing status before designing a DR strategy.
+> **Important (2025 update):** Newer Azure regions are not paired. They provide redundancy through multiple Availability Zones within the region. Always verify your target region's pairing status before designing a DR strategy.
 
 > Reference: [Region Pairs](https://learn.microsoft.com/azure/reliability/regions-paired)
 
@@ -408,7 +408,7 @@ Azure operates special isolated cloud instances for specific regulatory needs:
 | VM across Availability Zones | 99.99% | ~52 minutes |
 | Azure App Service (Standard+) | 99.95% | ~4.4 hours |
 
-> **Important:** Azure SLAs cover **platform** availability. Your application SLA depends on **your** architecture decisions.
+> **Important:** Azure SLAs cover platform availability. Your application SLA depends on your architecture decisions.
 
 ### Design Guidance for Beginners
 

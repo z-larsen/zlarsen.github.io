@@ -13,7 +13,7 @@ This guide covers backup, disaster recovery, and business continuity in Azure. I
 
 ## Why BCDR Matters
 
-Business Continuity and Disaster Recovery is not just an IT concern — it's a **business requirement**.
+Business Continuity and Disaster Recovery is not just an IT concern — it's a business requirement.
 
 Every organization must answer:
 - How long can we be down before it severely impacts the business? (**RTO**)
@@ -46,7 +46,7 @@ Two Azure regions within the same geography paired for disaster recovery.
 3. **Data residency** — Pairs stay within the same geography for compliance
 4. **Recovery priority** — In massive outages, one region in each pair gets priority
 
-> **Important:** Many newer Azure regions are **not paired**. They provide redundancy through multiple Availability Zones within the region. Always verify your target region's pairing status before designing a DR strategy.
+> **Important:** Many newer Azure regions are not paired. They provide redundancy through multiple Availability Zones within the region. Always verify your target region's pairing status before designing a DR strategy.
 
 > Reference: [Cross-Region Replication](https://learn.microsoft.com/azure/reliability/cross-region-replication-azure)
 
@@ -122,7 +122,7 @@ Key benefits:
 
 ## Site Recovery Patterns
 
-While backups protect **data**, Site Recovery protects **applications** (infrastructure + data).
+While backups protect data, Site Recovery protects applications (infrastructure + data).
 
 ### Azure Site Recovery (ASR)
 

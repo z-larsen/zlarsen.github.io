@@ -72,7 +72,7 @@ Private IP address ranges (RFC 1918):
 
 ## Private Endpoints vs Service Endpoints
 
-By default, many Azure services are accessible over the public internet (with authentication). For sensitive data, you want **private** connectivity.
+By default, many Azure services are accessible over the public internet (with authentication). For sensitive data, you want private connectivity.
 
 ### Service Endpoints (Older, Simpler)
 
@@ -252,7 +252,7 @@ Key features:
 
 ### Egress Traffic Control
 
-By default, Azure resources **can** access the internet and all outbound traffic is allowed (unless an NSG blocks it).
+By default, Azure resources can access the internet and all outbound traffic is allowed (unless an NSG blocks it).
 
 **Best practice approaches:**
 1. **Allow-list** — Block all outbound by default, explicitly allow needed destinations

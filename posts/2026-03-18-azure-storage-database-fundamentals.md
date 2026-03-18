@@ -50,7 +50,7 @@ Azure stores multiple copies of your data for durability. You choose the redunda
 | **GRS** (Geo-Redundant) | 6 | 2 regions (LRS in each) | Regional disasters | 16 nines |
 | **GZRS** (Geo-Zone-Redundant) | 6 | Primary: 3 AZs, Secondary: LRS | Datacenter + region failures | 16 nines |
 
-**Read-access variants:** RA-GRS and RA-GZRS allow you to **read** from the secondary region, useful when you need data access during a primary region outage.
+**Read-access variants:** RA-GRS and RA-GZRS allow you to read from the secondary region, useful when you need data access during a primary region outage.
 
 ### When to Use What
 
@@ -76,7 +76,7 @@ Azure offers different "temperatures" for blob storage based on access frequency
 | **Cold** | Every few months | 90 days | Even lower | Even higher |
 | **Archive** | Yearly or less | 180 days | Lowest (~$0.002/GB) | Highest (offline) |
 
-> **Archive tier:** Data is **offline** and must be rehydrated before access (takes 1–15 hours).
+> **Archive tier:** Data is offline and must be rehydrated before access (takes 1–15 hours).
 
 ### Lifecycle Management
 
@@ -98,7 +98,7 @@ A single Storage Account can contain multiple types of data services.
 
 ### Blob Storage (Binary Large Objects)
 
-Unstructured data: images, videos, logs, backups, documents. Organized in **containers** (like folders), accessed via HTTP/HTTPS.
+Unstructured data: images, videos, logs, backups, documents. Organized in containers (like folders), accessed via HTTP/HTTPS.
 
 Three blob types:
 1. **Block Blobs** — Text and binary data (most common, up to 190.7 TB)
@@ -109,7 +109,7 @@ Three blob types:
 
 ### Azure Files
 
-Fully managed file shares accessible via **SMB** or **NFS** protocols. Can be mounted like a network drive (Z: drive).
+Fully managed file shares accessible via SMB or NFS protocols. Can be mounted like a network drive (Z: drive).
 
 Key features: Simultaneous access from multiple VMs, snapshot support, on-premises caching with Azure File Sync.
 
