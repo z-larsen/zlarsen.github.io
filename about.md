@@ -4,13 +4,15 @@ title: About
 permalink: /about/
 ---
 
+<div class="post-content">
+
 ## About Me
 
 I'm a Cloud Solution Architect with a passion for Azure. I enjoy helping organizations navigate their cloud journey and optimize their Azure environments.
 
 <div class="focus-areas">
   <span class="focus-tag">Cloud Architecture</span>
-  <span class="focus-tag">Security & Governance</span>
+  <span class="focus-tag">Security &amp; Governance</span>
   <span class="focus-tag">Networking</span>
   <span class="focus-tag">FinOps</span>
   <span class="focus-tag">Resiliency</span>
@@ -37,4 +39,6 @@ I started this blog to share what I've learned navigating the complex cloud land
     <img src="/assets/img/finops-certified-practitioner.3.png" alt="FinOps Certified Practitioner Badge" class="finops-badge" />
     <a href="https://verify.skilljar.com/c/gfo2icfsodda" target="_blank" rel="noopener noreferrer" class="cert-name">FinOps Certified Practitioner</a>
   </div>
+</div>
+
 </div>

@@ -3,16 +3,39 @@ layout: base.njk
 title: Home
 ---
 
-<h2>Recent Posts</h2>
+<section class="hero">
+  <p class="hero-tagline">Azure &middot; Architecture &middot; Learning</p>
+  <h1 class="hero-title">Hi, I'm <span class="hero-accent">Zac Larsen</span></h1>
+  <p class="hero-subtitle">Cloud Solution Architect sharing practical guides on Azure infrastructure, networking, security, and FinOps.</p>
+  <div class="hero-actions">
+    <a href="/blog/" class="btn btn-primary">Read the Blog</a>
+    <a href="/about/" class="btn btn-outline">About Me</a>
+  </div>
+</section>
 
-<ul class="post-list">
-  {%- for post in collections.posts | reverse -%}
-  <li class="post-item">
-    <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
-    <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-    {% if post.data.excerpt %}
-    <p class="excerpt">{{ post.data.excerpt }}</p>
-    {% endif %}
-  </li>
-  {%- endfor -%}
-</ul>
+<section class="section">
+  <h2 class="section-title">Recent Posts</h2>
+  <div class="post-grid">
+    {%- for post in collections.posts | reverse -%}
+    <article class="post-card">
+      <div class="post-card-body">
+        <time class="post-card-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+        <h3 class="post-card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+        {% if post.data.excerpt %}
+        <p class="post-card-excerpt">{{ post.data.excerpt }}</p>
+        {% endif %}
+        {% if post.data.tags %}
+        <div class="post-card-tags">
+          {% for tag in post.data.tags %}
+            {% if tag != "posts" %}
+            <span class="tag">{{ tag }}</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <a href="{{ post.url }}" class="post-card-link" aria-label="Read {{ post.data.title }}"></a>
+    </article>
+    {%- endfor -%}
+  </div>
+</section>

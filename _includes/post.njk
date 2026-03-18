@@ -4,17 +4,20 @@ layout: base.njk
 
 <article class="post">
   <header class="post-header">
+    <a href="/blog/" class="post-back">&larr; Back to all posts</a>
     <h1>{{ title }}</h1>
-    <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time>
-    {% if tags %}
-    <div class="tags">
-      {% for tag in tags %}
-        {% if tag != "posts" %}
-        <span class="tag">{{ tag }}</span>
-        {% endif %}
-      {% endfor %}
+    <div class="post-meta">
+      <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time>
+      {% if tags %}
+      <div class="tags">
+        {% for tag in tags %}
+          {% if tag != "posts" %}
+          <span class="tag">{{ tag }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
     </div>
-    {% endif %}
   </header>
   
   <div class="post-content">
@@ -23,5 +26,5 @@ layout: base.njk
 </article>
 
 <nav class="post-nav">
-  <a href="/blog/">← Back to all posts</a>
+  <a href="/blog/" class="btn btn-outline">&larr; Back to all posts</a>
 </nav>
