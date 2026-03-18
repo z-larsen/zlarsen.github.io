@@ -4,6 +4,7 @@ title: "New to Azure? Start Here"
 date: 2026-03-18
 tags: [posts, Azure, CAF, WAF, Landing Zones, Fundamentals]
 excerpt: "A comprehensive guide to Azure fundamentals — covering the Cloud Adoption Framework, Well-Architected Framework, landing zones, resource hierarchy, service models, shared responsibility, and regional design."
+pinned: true
 ---
 
 If you're just getting started with Azure — whether you're an individual, a small team, or an entire organization — the sheer number of services, acronyms, and design decisions can feel overwhelming. This guide breaks down the foundational concepts you need to understand before deploying your first workload.

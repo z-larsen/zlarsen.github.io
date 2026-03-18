@@ -5,11 +5,22 @@ title: Blog
 
 <section class="section">
   <h1 class="section-title">All Posts</h1>
+  {%- set sortedPosts = [] -%}
+  {%- for post in collections.posts | reverse -%}
+    {%- if post.data.pinned -%}
+      {%- set sortedPosts = [post] | concat(sortedPosts) -%}
+    {%- else -%}
+      {%- set sortedPosts = sortedPosts | concat([post]) -%}
+    {%- endif -%}
+  {%- endfor -%}
   <div class="post-grid">
-    {%- for post in collections.posts | reverse -%}
-    <article class="post-card">
+    {%- for post in sortedPosts -%}
+    <article class="post-card{% if post.data.pinned %} post-card--pinned{% endif %}">
       <div class="post-card-body">
-        <time class="post-card-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+        <time class="post-card-date" datetime="{{ post.date | htmlDateString }}">
+          {%- if post.data.pinned %}<span class="pin-badge" aria-label="Pinned post">📌 Pinned</span>{% endif -%}
+          {{ post.date | readableDate }}
+        </time>
         <h3 class="post-card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
         {% if post.data.excerpt %}
         <p class="post-card-excerpt">{{ post.data.excerpt }}</p>
