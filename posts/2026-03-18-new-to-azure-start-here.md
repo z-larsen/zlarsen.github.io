@@ -435,3 +435,16 @@ Azure operates special isolated cloud instances for specific regulatory needs:
 - [Shared Responsibility](https://learn.microsoft.com/azure/security/fundamentals/shared-responsibility)
 - [Availability Zones](https://learn.microsoft.com/azure/reliability/availability-zones-overview)
 - [Azure Regions](https://azure.microsoft.com/explore/global-infrastructure/geographies/)
+
+---
+
+## Ready to Explore the Next Fundamental Topic?
+
+This post covered the Azure platform foundations. The series continues with deep dives into each core area — pick whichever topic is most relevant to you:
+
+- [**Networking Fundamentals**](/posts/2026-03-18-azure-networking-fundamentals/) — VNets, subnets, private endpoints, NSGs, routing, peering, and firewall concepts
+- [**Identity & Access Management**](/posts/2026-03-18-azure-identity-access-management/) — Authentication vs authorization, managed identities, RBAC, least privilege, and identity lifecycle
+- [**Storage & Database Fundamentals**](/posts/2026-03-18-azure-storage-database-fundamentals/) — Redundancy, access tiers, blob/file/table/queue storage, SQL vs NoSQL, and managed database services
+- [**Monitoring & Incident Response**](/posts/2026-03-18-azure-monitoring-incident-response/) — Metrics, logs, traces, Log Analytics, alerting, Sentinel, and shared IR responsibilities
+- [**Governance, Cost & Tagging**](/posts/2026-03-18-azure-governance-cost-tagging/) — Cost hierarchy, billing models, cost drivers, resource organization, and tagging strategies
+- [**BCDR Fundamentals**](/posts/2026-03-18-azure-bcdr-fundamentals/) — Region pairs, backup best practices, Site Recovery patterns, RTO/RPO, and resiliency tiers

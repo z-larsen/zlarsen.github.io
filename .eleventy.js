@@ -16,11 +16,12 @@ module.exports = function (eleventyConfig) {
     return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('yyyy-LL-dd');
   });
 
-  // Collections
+  // Collections — visible posts only (excludes hidden: true)
   eleventyConfig.addCollection('posts', function (collectionApi) {
-    return collectionApi.getFilteredByGlob('posts/*.md').sort((a, b) => {
-      return b.date - a.date;
-    });
+    return collectionApi
+      .getFilteredByGlob('posts/*.md')
+      .filter((post) => !post.data.hidden)
+      .sort((a, b) => b.date - a.date);
   });
 
   return {
