@@ -20,7 +20,7 @@ Unlike complex FinOps implementations that require infrastructure deployment and
 
 ## Key Features and Capabilities
 
-### 🔍 **Comprehensive Tenant Scanning**
+### Comprehensive Tenant Scanning
 The tool provides deep visibility across your entire Azure estate:
 
 | Area | Data Source | What You Get |
@@ -31,20 +31,20 @@ The tool provides deep visibility across your entire Azure estate:
 | **Cost Anomalies** | Trend Analysis | Subscriptions with significant month-over-month changes |
 | **Resource Costs** | Cost Management API | Per-resource spend breakdown with filtering |
 
-### 🏷️ **Tagging Health & Management**
+### Tagging Health & Management
 - **Tag Inventory**: Complete view of all tags in use across your tenant
 - **Untagged Resources**: Identify resources missing critical tags
 - **Cost by Tag**: Spend analysis broken down by CAF allocation tags
 - **Tag Deployment**: Inline tag management with add/remove capabilities
 
-### 💰 **Cost Optimization Opportunities**
+### Cost Optimization Opportunities
 - **Azure Hybrid Benefit (AHB)**: Identify Windows VMs, SQL VMs, and SQL DBs missing licensing optimizations
 - **Reservations & Savings Plans**: Utilization analysis and underutilized commitments
 - **Orphaned Resources**: Find and quantify waste from unused disks, IPs, NICs, VMs, and snapshots
 - **Rightsizing Recommendations**: Advisor-driven suggestions for better resource sizing
 - **Budget Monitoring**: Budget vs. actual analysis with custom threshold alerts
 
-### 📊 **FinOps Maturity Scorecard**
+### FinOps Maturity Scorecard
 Get a per-subscription health assessment covering:
 - Cost management effectiveness
 - Tagging compliance
@@ -55,19 +55,19 @@ Get a per-subscription health assessment covering:
 
 ## Why Choose the Azure FinOps Multitool?
 
-### 🚀 **Fast Time to Value**
+### Fast Time to Value
 - **No Infrastructure Required**: Run from any machine with PowerShell 7.0+
 - **Read-Only Operations**: Safe to run in production environments
 - **Immediate Results**: Get comprehensive insights in minutes, not weeks
 
-### 🎯 **Perfect for FinOps Beginners**
+### Perfect for FinOps Beginners
 Most organizations know they have FinOps challenges but don't know where to start. This tool:
 - Identifies your biggest cost-saving opportunities
 - Validates assumptions about your current state
 - Provides actionable recommendations for next steps
 - Serves as the foundation for more advanced FinOps implementations
 
-### 🔗 **Complements Existing Tools**
+### Complements Existing Tools
 The Multitool doesn't replace Azure Cost Management, FinOps Hubs, or Power BI reports. Instead, it:
 - Accelerates conversations during FinOps workshops
 - Helps validate data before building complex dashboards
@@ -99,30 +99,30 @@ The Multitool doesn't replace Azure Cost Management, FinOps Hubs, or Power BI re
 
 ## Use Cases & Scenarios
 
-### 🔍 **Initial FinOps Assessment**
+### Initial FinOps Assessment
 Perfect for new FinOps practitioners or consultants joining an engagement. Get a complete picture of the current state in one comprehensive scan.
 
-### 📈 **Quarterly Cost Reviews**
+### Quarterly Cost Reviews
 Use the trend analysis and anomaly detection to identify cost changes and investigate root causes.
 
-### 🏗️ **Migration Planning**
+### Migration Planning
 Before migrating workloads to Azure, understand your current cost baseline and optimization opportunities.
 
-### 🎯 **Budget Planning**
+### Budget Planning
 Leverage the budget monitoring and forecasting features to set realistic budgets and track adherence.
 
-### 🔧 **Optimization Validation**
+### Optimization Validation
 After implementing cost-saving measures, use the tool to quantify the impact and identify next opportunities.
 
 ## Architecture & Security
 
-### 🔒 **Security First**
+### Security First
 - **Read-only operations** - never modifies your Azure resources
 - **No data storage** - all analysis happens locally
 - **Azure AD authentication** - uses your existing Azure credentials
 - **No external dependencies** - works entirely within your Azure tenant
 
-### 🏗️ **Technical Architecture**
+### Technical Architecture
 - **PowerShell 7.0+** with WPF GUI
 - **Azure Resource Graph** for resource queries
 - **Cost Management APIs** for spend data
@@ -133,10 +133,10 @@ After implementing cost-saving measures, use the tool to quantify the impact and
 
 The Azure FinOps Multitool is an open-source project released under the MIT License. It's actively maintained and welcomes contributions from the FinOps community.
 
-- **📖 Documentation**: Comprehensive README with setup instructions
-- **🐛 Issue Tracking**: GitHub Issues for bug reports and feature requests
-- **💡 Feature Requests**: Community-driven roadmap
-- **🤝 Contributions**: Pull requests welcome
+- **Documentation**: Comprehensive README with setup instructions
+- **Issue Tracking**: GitHub Issues for bug reports and feature requests
+- **Feature Requests**: Community-driven roadmap
+- **Contributions**: Pull requests welcome
 
 ## Conclusion
 
