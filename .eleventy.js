@@ -19,7 +19,7 @@ module.exports = function (eleventyConfig) {
   // Collections — visible posts only (excludes hidden: true)
   eleventyConfig.addCollection('posts', function (collectionApi) {
     return collectionApi
-      .getFilteredByGlob('_posts/*.md')
+      .getFilteredByGlob('posts/*.md')
       .filter((post) => !post.data.hidden)
       .sort((a, b) => b.date - a.date);
   });
