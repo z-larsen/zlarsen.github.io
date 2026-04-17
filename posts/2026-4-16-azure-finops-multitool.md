@@ -3,7 +3,7 @@ layout: post.njk
 title: "Azure FinOps Multitool: Your Fast Track to Cost Optimization"
 date: 2026-04-16
 tags: [posts, azure, finops, cost-management, powershell, tools]
-excerpt: "Discover the Azure FinOps Multitool - a PowerShell application that provides a comprehensive view of your Azure costs, tagging health, and optimization opportunities. Learn how this lightweight scanner can accelerate your FinOps journey and help you identify cost-saving opportunities quickly."
+excerpt: "Discover the Azure FinOps Multitool - a PowerShell application that provides a comprehensive view of your Azure costs, tagging health, and optimization opportunities. Deploy tags, policies, and budgets quickly, and export data to HTML, CSV, and Power BI templates for advanced visualization."
 ---
 
 # Azure FinOps Multitool: Your Fast Track to Cost Optimization
@@ -30,12 +30,20 @@ The tool provides deep visibility across your entire Azure estate:
 | **Cost Trends** | Cost Management API | 6-month historical spend analysis with visual charts |
 | **Cost Anomalies** | Trend Analysis | Subscriptions with significant month-over-month changes |
 | **Resource Costs** | Cost Management API | Per-resource spend breakdown with filtering |
+| **Tag Deploy** | ARM Tags API (PATCH merge/delete) | Inline Add/Remove buttons per tag in the recommendations grid; deploy or remove tags from subscriptions or RGs |
+| **Budget Status** | Consumption Budgets API | Budget vs actual per subscription, % used, risk level; deploy budgets with up to 4 custom thresholds (Actual/Forecasted) |
+| **Data Export** | Local File System | HTML reports, CSV exports, and Power BI templates for visualization |
 
 ### Tagging Health & Management
 - **Tag Inventory**: Complete view of all tags in use across your tenant
 - **Untagged Resources**: Identify resources missing critical tags
 - **Cost by Tag**: Spend analysis broken down by CAF allocation tags
-- **Tag Deployment**: Inline tag management with add/remove capabilities
+- **Tag Deployment**: Inline tag management with add/remove capabilities for subscriptions and resource groups
+
+### Management & Deployment
+- **Policy Management**: Deploy and manage Azure policies across subscriptions
+- **Budget Deployment**: Create and configure budgets with custom thresholds and alerts
+- **Bulk Operations**: Deploy tags, policies, and budgets across multiple subscriptions simultaneously
 
 ### Cost Optimization Opportunities
 - **Azure Hybrid Benefit (AHB)**: Identify Windows VMs, SQL VMs, and SQL DBs missing licensing optimizations
@@ -52,6 +60,11 @@ Get a per-subscription health assessment covering:
 - Orphaned resource cleanup potential
 - Budget adherence
 - Spend trend analysis
+
+### Data Export & Visualization
+- **HTML Reports**: Export comprehensive reports for sharing and documentation
+- **CSV Export**: Export data for analysis in Excel or other tools
+- **Power BI Templates**: Ready-to-use templates for advanced visualization and reporting
 
 ## Why Choose the Azure FinOps Multitool?
 
