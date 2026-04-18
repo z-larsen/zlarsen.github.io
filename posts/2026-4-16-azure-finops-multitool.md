@@ -3,7 +3,7 @@ layout: post.njk
 title: "Azure FinOps Multitool: Your Fast Track to Cost Optimization"
 date: 2026-04-16
 tags: [posts, azure, finops, cost-management, powershell, tools]
-excerpt: "Discover the Azure FinOps Multitool - a PowerShell application that provides a comprehensive view of your Azure costs, tagging health, and optimization opportunities. Deploy tags, policies, and budgets quickly, and export data to HTML, CSV, and Power BI templates for advanced visualization."
+excerpt: "Discover the Azure FinOps Multitool - a PowerShell application that provides a comprehensive view of your Azure costs, tagging health, and optimization opportunities. Deploy tags, policies, and budgets quickly, and export data to HTML, CSV, or Power BI templates with built-in security hardening."
 ---
 
 # Azure FinOps Multitool: Your Fast Track to Cost Optimization
@@ -30,7 +30,7 @@ The tool provides deep visibility across your entire Azure estate:
 | **Cost Trends** | Cost Management API | 6-month historical spend analysis with visual charts |
 | **Cost Anomalies** | Trend Analysis | Subscriptions with significant month-over-month changes |
 | **Resource Costs** | Cost Management API | Per-resource spend breakdown with filtering |
-| **Tag Deploy** | ARM Tags API (PATCH merge/delete) | Inline Add/Remove buttons per tag in the recommendations grid; deploy or remove tags from subscriptions or RGs |
+| **Tag Deploy** | ARM Tags API (PATCH merge/delete) | Inline Add/Remove buttons per tag in the recommendations grid; deploy or remove tags from subscriptions or RGs; improved tag removal with actual tag name handling |
 | **Budget Status** | Consumption Budgets API | Budget vs actual per subscription, % used, risk level; deploy budgets with up to 4 custom thresholds (Actual/Forecasted) |
 | **Data Export** | Local File System | HTML reports, CSV exports, and Power BI templates for visualization |
 
@@ -64,7 +64,10 @@ Get a per-subscription health assessment covering:
 ### Data Export & Visualization
 - **HTML Reports**: Export comprehensive reports for sharing and documentation
 - **CSV Export**: Export data for analysis in Excel or other tools
-- **Power BI Templates**: Ready-to-use templates for advanced visualization and reporting
+- **Power BI Support**: Choose between:
+  - **16 Structured CSVs**: Pre-formatted data files optimized for Power BI analysis covering costs, tags, policies, optimization opportunities, and more
+  - **Power BI Templates (.pbit)**: Ready-to-use Power BI template files with pre-built visualizations and reports for immediate analysis
+  - **Unified Export Dialog**: Single interface for all export formats with configurable options
 
 ## Why Choose the Azure FinOps Multitool?
 
@@ -110,6 +113,17 @@ The Multitool doesn't replace Azure Cost Management, FinOps Hubs, or Power BI re
 
 4. **Review results** in the intuitive WPF interface
 
+## Latest Enhancements
+
+### v1.9.18+ Updates
+The latest versions include significant improvements:
+
+- **Power BI Export Enhancement**: Export data as structured CSV sets optimized for Power BI dashboards, or use pre-built Power BI template files (.pbit) with visualizations ready to use
+- **Unified Export Dialog**: Streamlined export process with all format options in one unified interface
+- **Security Hardening**: Enhanced protection against KQL injection attacks, token redaction in diagnostics, and improved scope validation
+- **Improved Tag Management**: Better handling of tag removal operations with actual tag name processing
+- **Visual Refinements**: Custom cloud icon and improved UI responsiveness
+
 ## Use Cases & Scenarios
 
 ### Initial FinOps Assessment
@@ -134,6 +148,10 @@ After implementing cost-saving measures, use the tool to quantify the impact and
 - **No data storage** - all analysis happens locally
 - **Azure AD authentication** - uses your existing Azure credentials
 - **No external dependencies** - works entirely within your Azure tenant
+- **Advanced Security Hardening**:
+  - KQL injection escape protection for Resource Graph queries
+  - Token redaction in logs and diagnostics
+  - Scope validation to prevent unauthorized access
 
 ### Technical Architecture
 - **PowerShell 7.0+** with WPF GUI
