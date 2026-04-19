@@ -4,7 +4,11 @@ title: Blog
 ---
 
 <section class="section">
-  <h1 class="section-title">All Posts</h1>
+  <div class="section-header">
+    <h1 class="section-title">All Posts</h1>
+    <span id="post-count" class="post-count"></span>
+  </div>
+  <div id="tag-filters" class="tag-filter-bar"></div>
   <div class="post-grid">
     {%- for post in collections.posts | reverse -%}
       {%- if post.data.pinned -%}
@@ -60,3 +64,88 @@ title: Blog
     {%- endfor -%}
   </div>
 </section>
+
+<script>
+(function () {
+  const cards = Array.from(document.querySelectorAll('.post-card'));
+  const bar = document.getElementById('tag-filters');
+  const countEl = document.getElementById('post-count');
+
+  // Collect unique tags from rendered .tag spans
+  const tagSet = new Set();
+  cards.forEach(function (card) {
+    card.querySelectorAll('.tag').forEach(function (el) {
+      tagSet.add(el.textContent.trim());
+    });
+  });
+
+  const allTags = Array.from(tagSet).sort(function (a, b) {
+    return a.toLowerCase().localeCompare(b.toLowerCase());
+  });
+
+  function updateCount(visible) {
+    if (countEl) {
+      countEl.textContent = visible + ' of ' + cards.length + ' post' + (cards.length !== 1 ? 's' : '');
+    }
+  }
+
+  if (!bar || allTags.length === 0) {
+    updateCount(cards.length);
+    return;
+  }
+
+  // Build "All" button
+  var allBtn = document.createElement('button');
+  allBtn.className = 'tag-filter-btn tag-filter-btn--active';
+  allBtn.textContent = 'All';
+  allBtn.dataset.tag = '';
+  bar.appendChild(allBtn);
+
+  // Build one button per tag
+  allTags.forEach(function (tag) {
+    var btn = document.createElement('button');
+    btn.className = 'tag-filter-btn';
+    btn.textContent = tag;
+    btn.dataset.tag = tag;
+    bar.appendChild(btn);
+  });
+
+  updateCount(cards.length);
+
+  var activeTag = '';
+
+  bar.addEventListener('click', function (e) {
+    var btn = e.target.closest('.tag-filter-btn');
+    if (!btn) return;
+
+    var tag = btn.dataset.tag;
+
+    // Clicking the active filter again resets to All
+    activeTag = (activeTag === tag) ? '' : tag;
+
+    // Update button active states
+    bar.querySelectorAll('.tag-filter-btn').forEach(function (b) {
+      var isActive = (activeTag === '' && b.dataset.tag === '') || (b.dataset.tag === activeTag);
+      b.classList.toggle('tag-filter-btn--active', isActive);
+    });
+
+    // Filter cards
+    var visible = 0;
+    cards.forEach(function (card) {
+      if (!activeTag) {
+        card.style.display = '';
+        visible++;
+        return;
+      }
+      var cardTags = Array.from(card.querySelectorAll('.tag')).map(function (el) {
+        return el.textContent.trim();
+      });
+      var show = cardTags.includes(activeTag);
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    updateCount(visible);
+  });
+})();
+</script>

@@ -423,6 +423,65 @@ nav#main-nav a.active {
 }
 
 /* ========================================
+   Tag Filter Bar
+   ======================================== */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-header .section-title {
+  margin-bottom: 0;
+}
+
+.post-count {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text-subtle);
+  white-space: nowrap;
+}
+
+.tag-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag-filter-btn {
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.28rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition);
+  line-height: 1.5;
+}
+
+.tag-filter-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.tag-filter-btn--active {
+  background: var(--color-accent-subtle);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* ========================================
    Individual Post
    ======================================== */
 .post-header {
