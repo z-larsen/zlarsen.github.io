@@ -67,21 +67,9 @@ title: Blog
 
 <script>
 (function () {
-  const cards = Array.from(document.querySelectorAll('.post-card'));
-  const bar = document.getElementById('tag-filters');
-  const countEl = document.getElementById('post-count');
-
-  // Collect unique tags from rendered .tag spans (normalized to lowercase)
-  const tagSet = new Set();
-  cards.forEach(function (card) {
-    card.querySelectorAll('.tag').forEach(function (el) {
-      tagSet.add(el.textContent.trim().toLowerCase());
-    });
-  });
-
-  const allTags = Array.from(tagSet).sort(function (a, b) {
-    return a.localeCompare(b);
-  });
+  var cards = Array.from(document.querySelectorAll('.post-card'));
+  var bar = document.getElementById('tag-filters');
+  var countEl = document.getElementById('post-count');
 
   function updateCount(visible) {
     if (countEl) {
@@ -89,57 +77,32 @@ title: Blog
     }
   }
 
+  // Collect unique tags from rendered .tag spans (normalized to lowercase)
+  var tagSet = new Set();
+  cards.forEach(function (card) {
+    card.querySelectorAll('.tag').forEach(function (el) {
+      tagSet.add(el.textContent.trim().toLowerCase());
+    });
+  });
+
+  var allTags = Array.from(tagSet).sort(function (a, b) {
+    return a.localeCompare(b);
+  });
+
   if (!bar || allTags.length === 0) {
     updateCount(cards.length);
     return;
   }
 
-  // Build "All" button
-  var allBtn = document.createElement('button');
-  allBtn.className = 'tag-filter-btn tag-filter-btn--active';
-  allBtn.textContent = 'All';
-  allBtn.dataset.tag = '';
-  bar.appendChild(allBtn);
-
-  // Build one button per tag
-  allTags.forEach(function (tag) {
-    var btn = document.createElement('button');
-    btn.className = 'tag-filter-btn';
-    btn.textContent = tag;
-    btn.dataset.tag = tag;
-    bar.appendChild(btn);
-  });
-
-  updateCount(cards.length);
-
   var activeTag = '';
 
-  // Pre-select tag from ?tag= URL param (e.g. linked from home page)
-  var urlParams = new URLSearchParams(window.location.search);
-  var paramTag = urlParams.get('tag');
-  if (paramTag) {
-    var matchBtn = bar.querySelector('[data-tag="' + paramTag.toLowerCase() + '"]');
-    if (matchBtn) {
-      matchBtn.click();
-    }
-  }
-
-  bar.addEventListener('click', function (e) {
-    var btn = e.target.closest('.tag-filter-btn');
-    if (!btn) return;
-
-    var tag = btn.dataset.tag;
-
-    // Clicking the active filter again resets to All
-    activeTag = (activeTag === tag) ? '' : tag;
-
+  function applyFilter(tag) {
+    activeTag = tag;
     // Update button active states
     bar.querySelectorAll('.tag-filter-btn').forEach(function (b) {
-      var isActive = (activeTag === '' && b.dataset.tag === '') || (b.dataset.tag === activeTag);
-      b.classList.toggle('tag-filter-btn--active', isActive);
+      b.classList.toggle('tag-filter-btn--active', b.dataset.tag === activeTag);
     });
-
-    // Filter cards
+    // Show/hide cards
     var visible = 0;
     cards.forEach(function (card) {
       if (!activeTag) {
@@ -150,12 +113,44 @@ title: Blog
       var cardTags = Array.from(card.querySelectorAll('.tag')).map(function (el) {
         return el.textContent.trim().toLowerCase();
       });
-      var show = cardTags.includes(activeTag);
+      var show = cardTags.indexOf(activeTag) !== -1;
       card.style.display = show ? '' : 'none';
       if (show) visible++;
     });
-
     updateCount(visible);
+  }
+
+  function makeBtn(label, tag) {
+    var btn = document.createElement('button');
+    btn.className = 'tag-filter-btn' + (tag === '' ? ' tag-filter-btn--active' : '');
+    btn.textContent = label;
+    btn.dataset.tag = tag;
+    btn.addEventListener('click', function () {
+      // Clicking the active filter again resets to All
+      applyFilter(activeTag === tag && tag !== '' ? '' : tag);
+      if (activeTag === '') {
+        bar.querySelectorAll('.tag-filter-btn').forEach(function (b) {
+          b.classList.toggle('tag-filter-btn--active', b.dataset.tag === '');
+        });
+      }
+    });
+    return btn;
+  }
+
+  bar.appendChild(makeBtn('All', ''));
+  allTags.forEach(function (tag) {
+    bar.appendChild(makeBtn(tag, tag));
   });
+
+  updateCount(cards.length);
+
+  // Pre-select tag from ?tag= URL param (e.g. linked from home page sidebar)
+  var paramTag = new URLSearchParams(window.location.search).get('tag');
+  if (paramTag) {
+    var lc = paramTag.toLowerCase();
+    if (allTags.indexOf(lc) !== -1) {
+      applyFilter(lc);
+    }
+  }
 })();
 </script>
