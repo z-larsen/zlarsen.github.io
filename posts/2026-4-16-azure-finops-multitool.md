@@ -3,6 +3,7 @@ layout: post.njk
 title: "Azure FinOps Multitool: A Fast Track to Cost Optimization"
 date: 2026-04-16
 tags: [posts, azure, finops, cost-management, powershell, tools]
+tool: true
 excerpt: "Discover the Azure FinOps Multitool - a PowerShell application that provides a comprehensive view of your Azure costs, tagging health, and optimization opportunities. Deploy tags, policies, and budgets quickly, and export data to HTML, CSV, or Power BI templates."
 ---
 
