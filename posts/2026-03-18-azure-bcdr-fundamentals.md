@@ -7,7 +7,7 @@ excerpt: "Region pairs, backup concepts, Azure Site Recovery patterns, RTO/RPO d
 hidden: true
 ---
 
-This guide covers backup, disaster recovery, and business continuity in Azure. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
+This post covers backup, disaster recovery, and business continuity in Azure — how to protect your data and keep services recoverable when things go wrong. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
 
 ---
 

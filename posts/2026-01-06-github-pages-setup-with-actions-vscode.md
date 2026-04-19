@@ -6,7 +6,7 @@ tags: [posts, GitHub Actions, Pages, Eleventy, VSCode]
 excerpt: "Creating a personal website shouldn't require complicated tooling or expensive hosting. This post walks through exactly how I built this site using modern, free tools that work seamlessly together."
 ---
 
-Creating a personal website shouldn't require complicated tooling or expensive hosting. This post walks through exactly how I built this site using modern, free tools that work seamlessly together.
+Creating a personal website shouldn't require complicated tooling or expensive hosting. This post walks through exactly how I built this site — GitHub Pages for hosting, Eleventy to generate it, GitHub Actions to deploy it, and VS Code to write it.
 
 ```
    _____ _ _   _    _       _       ____                       

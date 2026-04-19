@@ -7,7 +7,7 @@ excerpt: "Logs, metrics, traces, diagnostic settings, Log Analytics, alerting, S
 hidden: true
 ---
 
-This guide covers monitoring, observability, and incident response in Azure. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
+This post covers monitoring, observability, and incident response in Azure — what data to collect, how to query it, and how to build alerts that are actually useful. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
 
 ---
 

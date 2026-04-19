@@ -7,7 +7,7 @@ excerpt: "Virtual Networks, subnets, private endpoints, NSGs, routing, VNet peer
 hidden: true
 ---
 
-This guide covers the foundational networking concepts you need to understand before deploying workloads in Azure. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
+Before you start deploying workloads in Azure, it helps to understand how the networking layer actually fits together. This post covers the key concepts — VNets, subnets, NSGs, routing, peering, and private endpoints. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
 
 ---
 

@@ -7,7 +7,7 @@ excerpt: "Storage redundancy, access tiers, blob/file/table/queue storage, SQL v
 hidden: true
 ---
 
-This guide covers how data storage and databases work in Azure. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
+This post covers how data storage and databases work in Azure — from storage accounts and access tiers to SQL vs NoSQL and when each service makes sense. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
 
 ---
 

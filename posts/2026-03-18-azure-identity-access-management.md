@@ -7,7 +7,7 @@ excerpt: "Authentication vs authorization, managed identities, RBAC scopes, leas
 hidden: true
 ---
 
-This guide covers how identity and access control work in Azure. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
+This post covers identity and access control in Azure — how authentication and authorization actually work, what managed identities are and why they matter, RBAC scopes, and how to handle the full identity lifecycle. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
 
 ---
 

@@ -7,7 +7,7 @@ excerpt: "A comprehensive guide to Azure fundamentals — covering the Cloud Ado
 pinned: true
 ---
 
-If you're just getting started with Azure — whether you're an individual, a small team, or an entire organization — the sheer number of services, acronyms, and design decisions can feel overwhelming. This guide breaks down the foundational concepts you need to understand before deploying your first workload.
+If you're just getting started with Azure — whether you're learning on your own, onboarding a team, or standing up a new environment — the sheer number of services, acronyms, and design decisions can feel overwhelming. This guide breaks down the foundational concepts you need to understand before deploying your first workload.
 
 ## Cloud Adoption Framework (CAF)
 

@@ -89,25 +89,13 @@ Get a per-subscription health assessment covering:
   - **Power BI Templates (.pbit)**: Ready-to-use Power BI template files with pre-built visualizations and reports for immediate analysis
   - **Unified Export Dialog**: Single interface for all export formats with configurable options
 
-## Why Choose the Azure FinOps Multitool?
+## Why Use It?
 
-### Fast Time to Value
-- **No Infrastructure Required**: Run from any machine with PowerShell 7.0+
-- **Read-Only Operations**: Safe to run in production environments
-- **Immediate Results**: Get comprehensive insights in minutes, not weeks
+No infrastructure to set up, no dashboards to build first. Run it once from any Windows machine with PowerShell and you'll have a real picture of your Azure environment in minutes — costs, tagging gaps, orphaned resources, and optimization opportunities all in one place.
 
-### Perfect for FinOps Beginners
-Most organizations know they have FinOps challenges but don't know where to start. This tool:
-- Identifies your biggest cost-saving opportunities
-- Validates assumptions about your current state
-- Provides actionable recommendations for next steps
-- Serves as the foundation for more advanced FinOps implementations
+If you're new to FinOps, it's a practical starting point before investing in more complex tooling. It shows you what to look at and gives you something concrete to act on. If you're already doing FinOps work, it's useful for quick cross-subscription spot checks or sizing up opportunities before a customer engagement.
 
-### Complements Existing Tools
-The Multitool doesn't replace Azure Cost Management, FinOps Hubs, or Power BI reports. Instead, it:
-- Accelerates conversations during FinOps workshops
-- Helps validate data before building complex dashboards
-- Provides quick wins to build momentum for larger initiatives
+It doesn't replace Azure Cost Management, FinOps Hubs, or Power BI — but it gets you answers faster when you need them.
 
 ## Getting Started
 
@@ -214,11 +202,9 @@ The Azure FinOps Multitool is an open-source project released under the MIT Lice
 
 ## Conclusion
 
-The Azure FinOps Multitool is the foundation for making FinOps accessible to organizations of all sizes. By providing immediate, actionable insights without requiring complex infrastructure or expertise, it lowers the barrier to entry for effective cloud cost management.
+FinOps doesn't have to start with a months-long implementation. The Multitool gives you a clear starting point — run it, see what it finds, and you'll know where to focus.
 
-Whether you're just starting your FinOps journey or looking to accelerate an existing program, this tool provides the foundation you need to understand your costs, quantify opportunities, and optimize your Azure spend.
-
-**Ready to optimize your Azure costs?** [Get started with the Azure FinOps Multitool today!](https://github.com/z-larsen/Azure-FinOps-Multitool)
+[Open source on GitHub](https://github.com/z-larsen/Azure-FinOps-Multitool) if you want to give it a try.
 
 ---
 

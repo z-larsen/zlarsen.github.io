@@ -7,7 +7,7 @@ excerpt: "Cost hierarchy, enterprise billing, cost drivers, Cost Management view
 hidden: true
 ---
 
-This guide covers how to govern Azure resources, control costs, and implement tagging strategies. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
+This post covers governance, cost management, and tagging in Azure — how to get real visibility into what's being spent, who's responsible for it, and how to enforce standards before things get out of hand. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
 
 ---
 

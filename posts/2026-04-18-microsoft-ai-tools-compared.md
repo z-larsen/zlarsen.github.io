@@ -175,7 +175,7 @@ These three tools are not mutually exclusive — Microsoft designed them to be l
 2. **Copilot Studio** is the builder interface. Analysts extend M365 Copilot or publish standalone agents without code, potentially backed by models deployed in Foundry.
 3. **M365 Copilot** is the end-user surface. Agents built in Copilot Studio or published from Foundry can surface here for licensed users.
 
-A realistic enterprise architecture might look like this: the security team builds a threat analysis agent in Foundry (Python SDK, custom fine-tuned model, complex multi-step tool calls), a business analyst wraps a simplified version of it into a Copilot Studio agent with guided conversation flows, and end users interact with it through M365 Copilot Chat in Teams.
+A realistic example: the security team builds a threat analysis agent in Foundry (Python SDK, fine-tuned model, multi-step tool calls). A business analyst wraps a simplified version in Copilot Studio with guided conversation flows. End users interact with it through M365 Copilot Chat in Teams — no code required on their end.
 
 ---
 

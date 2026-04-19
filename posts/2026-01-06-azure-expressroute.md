@@ -6,7 +6,7 @@ tags: [posts, ExpressRoute, Networking]
 excerpt: "A deep dive into Azure ExpressRoute — what it is, why enterprises use it, connectivity models, circuit SKUs, peering types, and key design considerations for hybrid connectivity."
 ---
 
-This guide covers Azure ExpressRoute: Microsoft's dedicated private connectivity service for extending on-premises networks into the Azure cloud. If you haven't already, check out the [Azure Networking Fundamentals](/posts/2026-03-18-azure-networking-fundamentals/) post first for foundational concepts like VNets, subnets, and routing.
+This post covers Azure ExpressRoute — Microsoft's dedicated private connectivity service for hybrid connectivity. If you haven't already, check out the [Azure Networking Fundamentals](/posts/2026-03-18-azure-networking-fundamentals/) post first for foundational concepts like VNets, subnets, and routing.
 
 ---
 

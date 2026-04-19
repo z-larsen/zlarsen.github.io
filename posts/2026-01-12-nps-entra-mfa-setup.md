@@ -361,12 +361,6 @@ Logs location: `C:\Program Files\Microsoft\AzureMfa\Logs\AzureMfaExtension.log`
 
 ## Conclusion
 
-Integrating Entra ID MFA with NPS RADIUS authentication significantly enhances your network security posture by requiring multi-factor authentication for critical access points. This solution works seamlessly with existing RADIUS-based infrastructure while leveraging cloud-based authentication.
+Adding Entra ID MFA to NPS means your VPN, wireless, and network device access all require a second factor — without replacing your existing RADIUS infrastructure. You get centralized MFA policy management in Entra ID, support for modern authentication methods (Authenticator app, FIDO2, biometrics), detailed sign-in logs in Azure, and no additional hardware to maintain.
 
-The setup provides:
-- Centralized MFA policy management in Entra ID
-- Support for modern MFA methods (Authenticator app, FIDO2, biometrics)
-- Detailed logging and monitoring through Azure
-- Scalability without additional hardware
-
-With this configuration, you've added a powerful security layer to protect VPN, wireless, and network device access across your organization.
+The end result is straightforward: a stolen password alone isn't enough to get in. For environments that rely on RADIUS authentication, that's a meaningful improvement in your overall security posture.
