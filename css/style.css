@@ -292,6 +292,68 @@ nav#main-nav a.active {
 }
 
 /* ========================================
+   Home Page Layout (posts + sidebar)
+   ======================================== */
+.home-layout {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.home-posts {
+  min-width: 0;
+}
+
+.home-sidebar {
+  position: sticky;
+  top: 1.5rem;
+}
+
+.home-sidebar-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-subtle);
+  margin-bottom: 0.65rem;
+}
+
+.home-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.home-tag-btn {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+}
+
+.home-tag-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-subtle);
+}
+
+@media (max-width: 700px) {
+  .home-layout {
+    grid-template-columns: 1fr;
+  }
+  .home-sidebar {
+    position: static;
+    order: -1;
+  }
+}
+
+/* ========================================
    Post Cards
    ======================================== */
 .post-grid {

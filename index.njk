@@ -14,56 +14,92 @@ title: Home
 </section>
 
 <section class="section">
-  <h2 class="section-title">Recent Posts</h2>
-  <div class="post-grid">
-    {%- for post in collections.posts | reverse -%}
-      {%- if post.data.pinned -%}
-    <article class="post-card post-card--pinned">
-      <div class="post-card-body">
-        <time class="post-card-date" datetime="{{ post.date | htmlDateString }}">
-          <span class="pin-badge" aria-label="Pinned post">📌 Pinned</span>
-          {{ post.date | readableDate }}
-        </time>
-        <h3 class="post-card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
-        {% if post.data.excerpt %}
-        <p class="post-card-excerpt">{{ post.data.excerpt }}</p>
-        {% endif %}
-        {% if post.data.tags %}
-        <div class="post-card-tags">
-          {% for tag in post.data.tags %}
-            {% if tag != "posts" %}
-            <span class="tag">{{ tag }}</span>
+  <div class="home-layout">
+    <div class="home-posts">
+      <h2 class="section-title">Recent Posts</h2>
+      <div class="post-grid" id="home-post-grid">
+        {%- for post in collections.posts | reverse -%}
+          {%- if post.data.pinned -%}
+        <article class="post-card post-card--pinned">
+          <div class="post-card-body">
+            <time class="post-card-date" datetime="{{ post.date | htmlDateString }}">
+              <span class="pin-badge" aria-label="Pinned post">📌 Pinned</span>
+              {{ post.date | readableDate }}
+            </time>
+            <h3 class="post-card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+            {% if post.data.excerpt %}
+            <p class="post-card-excerpt">{{ post.data.excerpt }}</p>
             {% endif %}
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      <a href="{{ post.url }}" class="post-card-link" aria-label="Read {{ post.data.title }}"></a>
-    </article>
-      {%- endif -%}
-    {%- endfor -%}
-    {%- for post in collections.posts | reverse -%}
-      {%- if not post.data.pinned -%}
-    <article class="post-card">
-      <div class="post-card-body">
-        <time class="post-card-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-        <h3 class="post-card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
-        {% if post.data.excerpt %}
-        <p class="post-card-excerpt">{{ post.data.excerpt }}</p>
-        {% endif %}
-        {% if post.data.tags %}
-        <div class="post-card-tags">
-          {% for tag in post.data.tags %}
-            {% if tag != "posts" %}
-            <span class="tag">{{ tag }}</span>
+            {% if post.data.tags %}
+            <div class="post-card-tags">
+              {% for tag in post.data.tags %}
+                {% if tag != "posts" %}
+                <span class="tag">{{ tag }}</span>
+                {% endif %}
+              {% endfor %}
+            </div>
             {% endif %}
-          {% endfor %}
-        </div>
-        {% endif %}
+          </div>
+          <a href="{{ post.url }}" class="post-card-link" aria-label="Read {{ post.data.title }}"></a>
+        </article>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- for post in collections.posts | reverse -%}
+          {%- if not post.data.pinned -%}
+        <article class="post-card{% if post.data.tool %} post-card--tool{% endif %}">
+          <div class="post-card-body">
+            <time class="post-card-date" datetime="{{ post.date | htmlDateString }}">
+              {% if post.data.tool %}<span class="tool-badge" aria-label="Tool">🛠️ Tool</span>{% endif %}
+              {{ post.date | readableDate }}
+            </time>
+            <h3 class="post-card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+            {% if post.data.excerpt %}
+            <p class="post-card-excerpt">{{ post.data.excerpt }}</p>
+            {% endif %}
+            {% if post.data.tags %}
+            <div class="post-card-tags">
+              {% for tag in post.data.tags %}
+                {% if tag != "posts" %}
+                <span class="tag">{{ tag }}</span>
+                {% endif %}
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          <a href="{{ post.url }}" class="post-card-link" aria-label="Read {{ post.data.title }}"></a>
+        </article>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
-      <a href="{{ post.url }}" class="post-card-link" aria-label="Read {{ post.data.title }}"></a>
-    </article>
-      {%- endif -%}
-    {%- endfor -%}
+    </div>
+    <aside class="home-sidebar">
+      <p class="home-sidebar-title">Browse by Tag</p>
+      <div id="home-tag-cloud" class="home-tag-cloud"></div>
+    </aside>
   </div>
 </section>
+
+<script>
+(function () {
+  var cards = Array.from(document.querySelectorAll('#home-post-grid .post-card'));
+  var cloud = document.getElementById('home-tag-cloud');
+  if (!cloud) return;
+
+  var tagSet = new Set();
+  cards.forEach(function (card) {
+    card.querySelectorAll('.tag').forEach(function (el) {
+      tagSet.add(el.textContent.trim());
+    });
+  });
+
+  Array.from(tagSet).sort(function (a, b) {
+    return a.toLowerCase().localeCompare(b.toLowerCase());
+  }).forEach(function (tag) {
+    var a = document.createElement('a');
+    a.className = 'home-tag-btn';
+    a.textContent = tag;
+    a.href = '/blog/?tag=' + encodeURIComponent(tag);
+    cloud.appendChild(a);
+  });
+})();
+</script>

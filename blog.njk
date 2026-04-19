@@ -114,6 +114,16 @@ title: Blog
 
   var activeTag = '';
 
+  // Pre-select tag from ?tag= URL param (e.g. linked from home page)
+  var urlParams = new URLSearchParams(window.location.search);
+  var paramTag = urlParams.get('tag');
+  if (paramTag) {
+    var matchBtn = bar.querySelector('[data-tag="' + paramTag + '"]');
+    if (matchBtn) {
+      matchBtn.click();
+    }
+  }
+
   bar.addEventListener('click', function (e) {
     var btn = e.target.closest('.tag-filter-btn');
     if (!btn) return;
