@@ -71,16 +71,16 @@ title: Blog
   const bar = document.getElementById('tag-filters');
   const countEl = document.getElementById('post-count');
 
-  // Collect unique tags from rendered .tag spans
+  // Collect unique tags from rendered .tag spans (normalized to lowercase)
   const tagSet = new Set();
   cards.forEach(function (card) {
     card.querySelectorAll('.tag').forEach(function (el) {
-      tagSet.add(el.textContent.trim());
+      tagSet.add(el.textContent.trim().toLowerCase());
     });
   });
 
   const allTags = Array.from(tagSet).sort(function (a, b) {
-    return a.toLowerCase().localeCompare(b.toLowerCase());
+    return a.localeCompare(b);
   });
 
   function updateCount(visible) {
@@ -118,7 +118,7 @@ title: Blog
   var urlParams = new URLSearchParams(window.location.search);
   var paramTag = urlParams.get('tag');
   if (paramTag) {
-    var matchBtn = bar.querySelector('[data-tag="' + paramTag + '"]');
+    var matchBtn = bar.querySelector('[data-tag="' + paramTag.toLowerCase() + '"]');
     if (matchBtn) {
       matchBtn.click();
     }
@@ -148,7 +148,7 @@ title: Blog
         return;
       }
       var cardTags = Array.from(card.querySelectorAll('.tag')).map(function (el) {
-        return el.textContent.trim();
+        return el.textContent.trim().toLowerCase();
       });
       var show = cardTags.includes(activeTag);
       card.style.display = show ? '' : 'none';

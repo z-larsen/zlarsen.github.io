@@ -88,12 +88,12 @@ title: Home
   var tagSet = new Set();
   cards.forEach(function (card) {
     card.querySelectorAll('.tag').forEach(function (el) {
-      tagSet.add(el.textContent.trim());
+      tagSet.add(el.textContent.trim().toLowerCase());
     });
   });
 
   Array.from(tagSet).sort(function (a, b) {
-    return a.toLowerCase().localeCompare(b.toLowerCase());
+    return a.localeCompare(b);
   }).forEach(function (tag) {
     var a = document.createElement('a');
     a.className = 'home-tag-btn';
