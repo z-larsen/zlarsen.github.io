@@ -146,7 +146,7 @@ After implementing cost-saving measures, use the tool to quantify the impact and
 ### Security First
 - **Read-only operations** - never modifies your Azure resources
 - **No data storage** - all analysis happens locally
-- **Azure AD authentication** - uses your existing Azure credentials
+- **Microsoft Entra authentication** - uses your existing Azure credentials
 - **No external dependencies** - works entirely within your Azure tenant
 - **Advanced Security Hardening**:
   - KQL injection escape protection for Resource Graph queries

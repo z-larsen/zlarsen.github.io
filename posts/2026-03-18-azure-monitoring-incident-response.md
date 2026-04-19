@@ -273,7 +273,7 @@ Monitoring and incident response is a shared responsibility between platform tea
 
 - Azure Service Health, subscription-level activity
 - Network security group changes, RBAC assignments
-- Security Center alerts, cost anomalies, compliance posture
+- Microsoft Defender for Cloud alerts, cost anomalies, compliance posture
 
 ### Business Units Monitor
 

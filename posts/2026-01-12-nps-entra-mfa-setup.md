@@ -3,10 +3,10 @@ layout: post.njk
 title: "Setting Up NPS with Entra ID MFA for RADIUS Authentication"
 date: 2026-01-12
 tags: [posts, azure, entra, mfa, nps, radius, authentication, security]
-excerpt: "Learn how to configure a Network Policy Server (NPS) with Entra ID (Azure AD) Multi-Factor Authentication to secure RADIUS-based authentication for VPNs, network switches, and wireless access points."
+excerpt: "Learn how to configure a Network Policy Server (NPS) with Microsoft Entra ID Multi-Factor Authentication to secure RADIUS-based authentication for VPNs, network switches, and wireless access points."
 ---
 
-Network Policy Server (NPS) is Microsoft's RADIUS server implementation that provides centralized authentication, authorization, and accounting for network access. By integrating with Entra ID (formerly Azure AD) Multi-Factor Authentication, you can add an additional security layer to protect access to VPNs, wireless networks, and network devices.
+Network Policy Server (NPS) is Microsoft's RADIUS server implementation that provides centralized authentication, authorization, and accounting for network access. By integrating with Microsoft Entra ID Multi-Factor Authentication, you can add an additional security layer to protect access to VPNs, wireless networks, and network devices.
 
 ```
     ____  ___    ____  ____  __  _______
@@ -21,7 +21,7 @@ Network Policy Server (NPS) is Microsoft's RADIUS server implementation that pro
 ## What You'll Need
 
 - Windows Server (2016 or later) with NPS role installed
-- Azure subscription with Entra ID (Azure AD Premium P1 or P2)
+- Azure subscription with Microsoft Entra ID (P1 or P2 license)
 - Administrator access to both the Windows Server and Azure portal
 - Network devices (VPN gateway, switches, or wireless access points) that support RADIUS
 
@@ -141,7 +141,7 @@ Before installing the extension:
 
 1. Ensure NPS server can reach the internet (required for Entra ID communication)
 2. The server must be domain-joined
-3. Users must be synced to Entra ID (via Azure AD Connect)
+3. Users must be synced to Entra ID (via Microsoft Entra Connect)
 4. Users must have MFA methods registered in Entra ID
 
 ### Download and Install the Extension
@@ -166,14 +166,14 @@ After installation, you must register the extension:
 
 1. Open **PowerShell as Administrator** on the NPS server
 
-2. Import the Azure AD module:
+2. Import the Microsoft Graph Authentication module:
    ```powershell
-   Import-Module AzureAD
+   Import-Module Microsoft.Graph.Authentication
    ```
 
-3. Connect to your Azure AD tenant:
+3. Connect to your Microsoft Entra tenant:
    ```powershell
-   Connect-AzureAD
+   Connect-MgGraph -Scopes "Directory.Read.All"
    ```
 
 4. Sign in with **Global Administrator** credentials
