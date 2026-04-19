@@ -9,7 +9,7 @@ excerpt: "Discover the Azure FinOps Multitool - a PowerShell application that pr
 
 # Azure FinOps Multitool: A Fast Track to Cost Optimization
 
-![Azure FinOps Multitool](https://img.shields.io/badge/PowerShell-7.0%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![Version 1.9.18](https://img.shields.io/badge/Version-1.9.18-brightgreen)
+![Azure FinOps Multitool](https://img.shields.io/badge/PowerShell-7.0%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![Version 2.0.0](https://img.shields.io/badge/Version-2.0.0-brightgreen)
 
 Managing cloud costs effectively is one of the biggest challenges organizations face with Azure. The Azure FinOps Multitool is designed to solve the "cold start problem" - helping you quickly understand your current FinOps posture and identify immediate opportunities for cost optimization.
 
