@@ -41,7 +41,7 @@ title: Blog
     <article class="post-card{% if post.data.tool %} post-card--tool{% endif %}">
       <div class="post-card-body">
         <time class="post-card-date" datetime="{{ post.date | htmlDateString }}">
-          {% if post.data.tool %}<span class="tool-badge" aria-label="Tool">&#9881; Tool</span>{% endif %}
+          {% if post.data.tool %}<span class="tool-badge" aria-label="Tool">🛠️ Tool</span>{% endif %}
           {{ post.date | readableDate }}
         </time>
         <h3 class="post-card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
