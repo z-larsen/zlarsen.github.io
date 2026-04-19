@@ -26,14 +26,33 @@ The tool provides deep visibility across your entire Azure estate:
 
 | Area | Data Source | What You Get |
 |------|-------------|--------------|
-| **Hierarchy** | Management Groups API | Full management group tree with subscriptions and inline costs |
+| **Hierarchy** | Management Groups API | Full MG tree with subscriptions and inline costs |
 | **Costs** | Cost Management API | Month-to-date actual costs + forecasts per subscription |
-| **Cost Trends** | Cost Management API | 6-month historical spend analysis with visual charts |
-| **Cost Anomalies** | Trend Analysis | Subscriptions with significant month-over-month changes |
-| **Resource Costs** | Cost Management API | Per-resource spend breakdown with filtering |
-| **Tag Deploy** | ARM Tags API (PATCH merge/delete) | Inline Add/Remove buttons per tag in the recommendations grid; deploy or remove tags from subscriptions or RGs; improved tag removal with actual tag name handling |
-| **Budget Status** | Consumption Budgets API | Budget vs actual per subscription, % used, risk level; deploy budgets with up to 4 custom thresholds (Actual/Forecasted) |
-| **Data Export** | Local File System | HTML reports, CSV exports, and Power BI templates for visualization |
+| **Cost Trend** | Cost Management API (6 months) | Bar chart showing monthly spend over the last 6 months |
+| **Cost Anomalies** | Trend analysis | Subscriptions with 25%+ month-over-month cost changes |
+| **Resource Costs** | Cost Management API (per sub) | Per-resource spend with type, RG, forecast, % of total |
+| **Contract** | Billing Accounts API + ARM quotaId | EA, MCA, PAYG, or CSP detection with quotaId fallback |
+| **Tag Inventory** | Azure Resource Graph | Every tag name/value in use, untagged resource count |
+| **Cost by Tag** | Cost Management API | Spend broken down by CAF allocation tags with auto-backfill |
+| **Tag Deploy** | ARM Tags API (PATCH merge/delete) | Inline Add/Remove buttons per tag; deploy or remove tags from subscriptions or RGs |
+| **Tag Recommendations** | CAF baseline | Gap analysis against 7 CAF allocation tags with deployment location |
+| **AHB** | Azure Resource Graph | Windows VMs, SQL VMs, and SQL DBs missing Hybrid Benefit |
+| **Commitments** | Reservation Summaries + Benefit Utilization API | RI and Savings Plan utilization %, underutilized commitments |
+| **Orphaned Resources** | Azure Resource Graph (6 KQL queries) | Orphaned disks, unattached IPs/NICs, deallocated VMs, empty ASPs, old snapshots — with MTD cost and estimated annual waste |
+| **RI / SP Recommendations** | Advisor + Reservation Recs API | RI and SP recs with Actual (MTD), Forecast, and savings |
+| **Advisor** | Azure Advisor (Cost category) | Rightsize, shutdown, delete, modernize recs with cost data |
+| **Budget Status** | Consumption Budgets API | Budget vs actual per subscription, % used, risk level; deploy budgets with up to 4 custom thresholds |
+| **Savings Realized** | Cost Management (ActualCost + AmortizedCost) | Monthly savings from existing RIs, Savings Plans, and AHB |
+| **Policy Inventory** | ARM Policy Assignment API + Resource Graph | All effective policy and initiative assignments including MG-inherited, with compliance state |
+| **Policy Recommendations** | CAF-aligned built-in policies | Missing cost, tagging, security, and monitoring policies with deploy-from-GUI capability |
+| **Policy Deploy / Unassign** | ARM Policy Assignment API | Inline Deploy/Unassign buttons per policy in the recommendations grid |
+| **Policy Remediation** | Policy Insights API | Trigger remediation tasks for DeployIfNotExists/Modify policy assignments |
+| **Budget Policy** | ARM Policy Assignment API | Deploy budget enforcement policies at subscription or MG scope |
+| **Billing** | Billing Accounts/Profiles API | Billing accounts, profiles, invoice sections, EA departments |
+| **Cost Allocation** | Cost Management Allocation API | Existing cost allocation rules with source/target counts |
+| **Scorecard** | All of the above | Per-subscription health: cost, tags, optimizations, orphan savings, budget, trend |
+| **FinOps Guidance** | All of the above | FinOps Maturity Score (0–100) with weighted category breakdown and actionable advice |
+| **Data Export** | Local File System | HTML reports, CSV exports, and Power BI template files (.pbit) |
 
 ### Tagging Health & Management
 - **Tag Inventory**: Complete view of all tags in use across your tenant
@@ -93,9 +112,14 @@ The Multitool doesn't replace Azure Cost Management, FinOps Hubs, or Power BI re
 ## Getting Started
 
 ### Prerequisites
-- **PowerShell 7.0+** (Windows, macOS, or Linux)
-- **Azure Az PowerShell modules**
-- **Azure subscription access** (Reader role minimum)
+- **Windows** with PowerShell 5.1+ (WPF requires Windows — macOS and Linux are not supported)
+- **Az PowerShell modules**: `Az.Accounts`, `Az.Resources`, `Az.ResourceGraph`, `Az.CostManagement`, `Az.Advisor`, `Az.Billing`
+- **Azure RBAC**: Reader + Cost Management Reader on target scope (minimum for scanning)
+
+Install modules if needed:
+```powershell
+Install-Module Az.Accounts, Az.Resources, Az.ResourceGraph, Az.CostManagement, Az.Advisor, Az.Billing -Scope CurrentUser
+```
 
 ### Installation & Usage
 
@@ -105,14 +129,32 @@ The Multitool doesn't replace Azure Cost Management, FinOps Hubs, or Power BI re
    cd Azure-FinOps-Multitool
    ```
 
-2. **Run the scanner**:
+2. **Unblock downloaded files** (required on Windows for files from the internet):
    ```powershell
-   .\Start-FinOpsMultitool.ps1
+   Get-ChildItem -Path .\AzureFinOpsMultitool -Recurse | Unblock-File
    ```
 
-3. **Connect to Azure** and select your tenant/subscriptions
+3. **Run the tool**:
+   ```powershell
+   .\Start-FinOpsMultitool.ps1
+   # Or bypass execution policy without changing system settings:
+   powershell -ExecutionPolicy Bypass -File .\Start-FinOpsMultitool.ps1
+   ```
 
-4. **Review results** in the intuitive WPF interface
+4. Click **Commercial Tenant** (or **Gov Tenant** for Azure Government) — a browser login opens, then a tenant picker dialog lists all accessible tenants
+
+5. Select a tenant and click **Scan** — the tool runs through 19 data-collection stages with a progress bar
+
+6. Browse the tabs when the scan completes:
+   - **Overview** — cost summary cards, savings realized, budget status, subscription cost table with orphan savings, top resources by spend, scorecard
+   - **Cost Analysis** — 6-month cost trend bar chart, cost anomaly flags (25%+ MoM change), spend by tag value
+   - **Tags** — tag inventory with coverage %, CAF compliance check, inline Add/Remove buttons to deploy or remove tags on subscriptions/RGs
+   - **Policy** — effective policy inventory with compliance %, CAF-recommended policies, inline Deploy/Unassign buttons, remediation tasks for DINE/Modify policies
+   - **Optimization** — RI/SP utilization, orphaned resources with cost data and estimated annual waste, AHB gaps, RI/SP recs, Advisor recs
+   - **Billing** — billing accounts, billing profiles (MCA), invoice sections, EA departments, cost allocation rules
+   - **FinOps Guidance** — FinOps Maturity Score (0–100) with pillar-by-pillar assessment and selectable references
+
+7. Click **Export Report** to save as HTML, CSV, or Power BI template (.pbit)
 
 ## Latest Enhancements
 
@@ -155,7 +197,7 @@ After implementing cost-saving measures, use the tool to quantify the impact and
   - Scope validation to prevent unauthorized access
 
 ### Technical Architecture
-- **PowerShell 7.0+** with WPF GUI
+- **PowerShell 5.1+** with WPF GUI (Windows only)
 - **Azure Resource Graph** for resource queries
 - **Cost Management APIs** for spend data
 - **Azure Advisor** for optimization recommendations
