@@ -3,15 +3,15 @@ layout: post.njk
 title: "New to Azure? Start Here"
 date: 2026-03-18
 tags: [posts, Azure, CAF, WAF, Landing Zones, Fundamentals]
-excerpt: "A comprehensive guide to Azure fundamentals — covering the Cloud Adoption Framework, Well-Architected Framework, landing zones, resource hierarchy, service models, shared responsibility, and regional design."
+excerpt: "A comprehensive guide to Azure fundamentals, covering the Cloud Adoption Framework, Well-Architected Framework, landing zones, resource hierarchy, service models, shared responsibility, and regional design."
 pinned: true
 ---
 
-If you're just getting started with Azure — whether you're learning on your own, onboarding a team, or standing up a new environment — the sheer number of services, acronyms, and design decisions can feel overwhelming. This guide breaks down the foundational concepts you need to understand before deploying your first workload.
+If you're just getting started with Azure, whether you're learning on your own, onboarding a team, or standing up a new environment, the sheer number of services, acronyms, and design decisions can feel overwhelming. This guide breaks down the foundational concepts you need to understand before deploying your first workload.
 
 ## Cloud Adoption Framework (CAF)
 
-The [Cloud Adoption Framework](https://learn.microsoft.com/azure/cloud-adoption-framework/) is Microsoft's proven guidance for cloud adoption. It isn't about specific Azure features — it's about the organizational processes and best practices that make cloud adoption successful.
+The [Cloud Adoption Framework](https://learn.microsoft.com/azure/cloud-adoption-framework/) is Microsoft's proven guidance for cloud adoption. It isn't about specific Azure features; it's about the organizational processes and best practices that make cloud adoption successful.
 
 ### CAF Phases
 
@@ -26,7 +26,7 @@ The [Cloud Adoption Framework](https://learn.microsoft.com/azure/cloud-adoption-
 6. **Manage** — Day-to-day operations and monitoring
 7. **Secure** — Continuously improve security posture across all phases
 
-> As of 2025, CAF distinguishes between Foundational methodologies (Strategy through Adopt, run sequentially) and Operational methodologies (Govern, Manage, Secure — run continuously throughout the cloud journey).
+> As of 2025, CAF distinguishes between Foundational methodologies (Strategy through Adopt, run sequentially) and Operational methodologies (Govern, Manage, Secure), which run continuously throughout the cloud journey.
 
 ### CAF Strategy Phase
 
@@ -58,14 +58,14 @@ For each workload, CAF provides a decision framework:
 |----------|-------------|
 | **Retire** | Decommission apps no longer needed |
 | **Retain** | Keep on-prem (too complex or not worth moving yet) |
-| **Rehost** | Lift and shift — move the VM as-is to Azure IaaS |
+| **Rehost** | Lift and shift, move the VM as-is to Azure IaaS |
 | **Replatform** | Minor optimizations (e.g., move to Azure SQL Managed Instance) |
 | **Refactor** | Code changes to use cloud-native capabilities |
 | **Rearchitect** | Redesign the app for cloud-native patterns |
 | **Rebuild** | Rewrite from scratch as a cloud-native app |
 | **Replace** | Swap for a SaaS product (e.g., move HR system to Workday) |
 
-### CAF Ready Phase — Landing Zones
+### CAF Ready Phase: Landing Zones
 
 A landing zone is a pre-configured, pre-secured Azure environment that includes:
 - **Networking** — Hub-spoke topology, firewall, private DNS
@@ -86,11 +86,11 @@ Landing zones prevent shadow IT, ensure compliance baselines are in place from d
 
 Before diving deeper, it helps to understand how organizations typically operate Azure:
 
-**Centralized** — A single IT team manages all Azure resources. Business units submit requests; the central team deploys. Consistent security and governance, but slower for teams needing agility.
+**Centralized**: A single IT team manages all Azure resources. Business units submit requests; the central team deploys. Consistent security and governance, but slower for teams needing agility.
 
-**Decentralized** — Each department manages their own Azure environment with no central guardrails. Fast and autonomous, but risks inconsistent security and cost sprawl.
+**Decentralized**: Each department manages their own Azure environment with no central guardrails. Fast and autonomous, but risks inconsistent security and cost sprawl.
 
-**Shared Management (Recommended by CAF)** — The platform team owns core networking, identity, and security guardrails. Business units own application deployments within those guardrails. This is self-service with guardrails — and landing zones are what enable it.
+**Shared Management (Recommended by CAF):** The platform team owns core networking, identity, and security guardrails. Business units own application deployments within those guardrails. Landing zones are what make this model work.
 
 ---
 
@@ -134,11 +134,11 @@ While CAF guides your cloud *adoption journey*, the [Well-Architected Framework]
 
 ## CapEx vs. OpEx and the Consumption-Based Model
 
-**Capital Expenditure (CapEx)** — Upfront spending on physical infrastructure. Buy servers, storage, and networking equipment. Value depreciates over time on a 3–5 year hardware lifecycle.
+**Capital Expenditure (CapEx)**: Upfront spending on physical infrastructure. Buy servers, storage, and networking equipment. Value depreciates over time on a 3–5 year hardware lifecycle.
 
-**Operational Expenditure (OpEx)** — Spending on services as you consume them. No upfront hardware costs. Costs scale with usage — use more, pay more; use less, pay less.
+**Operational Expenditure (OpEx)**: Spending on services as you consume them. No upfront hardware costs. Costs scale with usage: use more, pay more; use less, pay less.
 
-**Consumption-Based Model** — You only pay for cloud resources you actually use. Billing is based on consumption metrics: VM running hours, storage GBs used, database DTUs consumed, and so on.
+**Consumption-Based Model**: You only pay for cloud resources you actually use. Billing is based on consumption metrics: VM running hours, storage GBs used, database DTUs consumed, and so on.
 
 > Reference: [Cost Model](https://learn.microsoft.com/azure/architecture/framework/cost/cost-model)
 
@@ -251,7 +251,7 @@ Policies and role assignments applied at a higher scope flow down to all childre
 - A policy at the Management Group level is inherited by all subscriptions below it
 - An RBAC role assigned at the subscription level applies to all resource groups inside
 
-**Best practice:** Assign roles at the lowest scope that works — this is the principle of least privilege.
+**Best practice:** Assign roles at the lowest scope that works. This is the principle of least privilege.
 
 ### Resource Naming Conventions
 
@@ -319,7 +319,7 @@ Fully managed applications. You just use the software.
 
 ## Shared Responsibility Model
 
-In traditional on-premises, you manage everything. In Azure, responsibilities are shared — and the dividing line depends on the service model.
+In traditional on-premises, you manage everything. In Azure, responsibilities are shared and the dividing line depends on the service model.
 
 ### Full Responsibility Matrix
 
@@ -395,9 +395,9 @@ Benefits of paired regions:
 
 Azure operates special isolated cloud instances for specific regulatory needs:
 
-**Azure Government** — A physically separate instance of Azure located in US-only datacenters. Accessible only to screened, authorized US government personnel. Meets FedRAMP High, CJIS, DoD IL2/4/5/6, and ITAR compliance. Has its own portal at `portal.azure.us`.
+**Azure Government**: A physically separate instance of Azure located in US-only datacenters. Accessible only to screened, authorized US government personnel. Meets FedRAMP High, CJIS, DoD IL2/4/5/6, and ITAR compliance. Has its own portal at `portal.azure.us`.
 
-**Azure China (21Vianet)** — A physically separated instance operated by 21Vianet. All data stays within China to comply with Chinese data regulations.
+**Azure China (21Vianet)**: A physically separated instance operated by 21Vianet. All data stays within China to comply with Chinese data regulations.
 
 ### SLA Tiers
 
@@ -441,7 +441,7 @@ Azure operates special isolated cloud instances for specific regulatory needs:
 
 ## Ready to Explore the Next Fundamental Topic?
 
-This post covered the Azure platform foundations. The series continues with deep dives into each core area — pick whichever topic is most relevant to you:
+This post covered the Azure platform foundations. The series continues with deep dives into each core area. Pick whichever topic is most relevant to you:
 
 - [**Networking Fundamentals**](/posts/2026-03-18-azure-networking-fundamentals/) — VNets, subnets, private endpoints, NSGs, routing, peering, and firewall concepts
 - [**Identity & Access Management**](/posts/2026-03-18-azure-identity-access-management/) — Authentication vs authorization, managed identities, RBAC, least privilege, and identity lifecycle

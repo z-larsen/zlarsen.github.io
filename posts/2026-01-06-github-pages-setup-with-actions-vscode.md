@@ -6,7 +6,7 @@ tags: [posts, GitHub Actions, Pages, Eleventy, VSCode]
 excerpt: "Creating a personal website shouldn't require complicated tooling or expensive hosting. This post walks through exactly how I built this site using modern, free tools that work seamlessly together."
 ---
 
-Creating a personal website shouldn't require complicated tooling or expensive hosting. This post walks through exactly how I built this site — GitHub Pages for hosting, Eleventy to generate it, GitHub Actions to deploy it, and VS Code to write it.
+Creating a personal website shouldn't require complicated tooling or expensive hosting. This post walks through exactly how I built this site, GitHub Pages for hosting, Eleventy to generate it, GitHub Actions to deploy it, and VS Code to write it.
 
 ```
    _____ _ _   _    _       _       ____                       
@@ -194,7 +194,7 @@ In `package.json`, add:
 
 ### Templates
 
-Eleventy uses Nunjucks (`.njk`) templates. The base layout in `_includes/base.njk` defines the HTML shell — header, nav, main content area, and footer. Individual pages set `layout: base.njk` in their front matter.
+Eleventy uses Nunjucks (`.njk`) templates. The base layout in `_includes/base.njk` defines the HTML shell, header, nav, main content area, and footer. Individual pages set `layout: base.njk` in their front matter.
 
 Blog posts use Markdown with a `post.njk` layout that wraps the content with a header, date, tags, and a back-link.
 

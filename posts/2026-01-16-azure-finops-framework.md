@@ -394,7 +394,7 @@ Getting FinOps working in Azure takes work across three areas:
 2. **Process** — Regular reviews, optimization cadence, governance
 3. **Cultural** — Shared accountability, data-driven decisions, continuous improvement
 
-Azure's billing constructs (billing profiles, invoice sections, subscriptions) map well to the FinOps framework when you design them intentionally. The hard part is rarely the technology — it's getting the right people looking at the same numbers and actually doing something about it.
+Azure's billing constructs (billing profiles, invoice sections, subscriptions) map well to the FinOps framework when you design them intentionally. The hard part is rarely the technology; it's getting the right people looking at the same numbers and actually doing something about it.
 
 ## Additional Resources
 

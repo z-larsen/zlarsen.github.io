@@ -3,11 +3,11 @@ layout: post.njk
 title: "Azure Networking Fundamentals"
 date: 2026-03-18
 tags: [posts, Azure, Networking, VNet, NSG, Fundamentals]
-excerpt: "Virtual Networks, subnets, private endpoints, NSGs, routing, VNet peering, and firewall concepts — everything you need to understand Azure networking."
+excerpt: "Virtual Networks, subnets, private endpoints, NSGs, routing, VNet peering, and firewall concepts. Everything you need to understand Azure networking."
 hidden: true
 ---
 
-Before you start deploying workloads in Azure, it helps to understand how the networking layer actually fits together. This post covers the key concepts — VNets, subnets, NSGs, routing, peering, and private endpoints. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
+Before you start deploying workloads in Azure, it helps to understand how the networking layer actually fits together. This post covers the key concepts: VNets, subnets, NSGs, routing, peering, and private endpoints. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
 
 ---
 
@@ -27,7 +27,7 @@ Key characteristics:
 
 ### What Is a Subnet?
 
-A subnet is a subdivision of a VNet — think of it as a "room" within the "house."
+A subnet is a subdivision of a VNet; think of it as a "room" within the "house."
 
 **Why use subnets?**
 1. **Security** — Apply different security rules to different subnets
@@ -146,7 +146,7 @@ Azure creates default rules with very high priority numbers (65000+):
 - **AllowAzureLoadBalancerInBound** — Allow health probes
 - **DenyAllInBound** — Block everything else
 
-**Key takeaway:** NSGs are "deny by default" — you must explicitly allow traffic.
+**Key takeaway:** NSGs are "deny by default"; you must explicitly allow traffic.
 
 ### Layered Security Pattern
 

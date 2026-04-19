@@ -3,14 +3,14 @@ layout: post.njk
 title: "Microsoft AI Tools Compared: M365 Copilot vs Copilot Studio vs Microsoft Foundry"
 date: 2026-04-18
 tags: [posts, azure, ai, copilot, architecture, microsoft-365]
-excerpt: "Microsoft now has three distinct AI platforms and knowing which one to reach for can save you weeks of wasted effort. This guide breaks down Microsoft 365 Copilot, Copilot Studio, and Microsoft Foundry — what they are, how they work, and when to use each."
+excerpt: "Microsoft now has three distinct AI platforms and knowing which one to reach for can save you weeks of wasted effort. This guide breaks down Microsoft 365 Copilot, Copilot Studio, and Microsoft Foundry: what they are, how they work, and when to use each."
 ---
 
 # Microsoft AI Tools Compared: M365 Copilot vs Copilot Studio vs Microsoft Foundry
 
 Microsoft's AI ecosystem has matured rapidly and it can be genuinely confusing to map the right tool to the right problem. Three platforms come up constantly in enterprise conversations: **Microsoft 365 Copilot**, **Microsoft Copilot Studio**, and **Microsoft Foundry** (formerly Azure AI Foundry / Azure AI Studio). They sound similar and overlap in places, but they serve fundamentally different audiences and use cases.
 
-This post cuts through the marketing and gives you a practical, accurate picture of each — grounded in the latest Microsoft documentation as of April 2026.
+This post cuts through the marketing and gives you a practical, accurate picture of each, grounded in the latest Microsoft documentation as of April 2026.
 
 ---
 
@@ -19,7 +19,7 @@ This post cuts through the marketing and gives you a practical, accurate picture
 | Tool | For Who | What It Does |
 |------|---------|-------------|
 | **Microsoft 365 Copilot** | End users + IT admins | AI assistant embedded in M365 apps (Teams, Word, Outlook, etc.) grounded in your org's data |
-| **Microsoft Copilot Studio** | Business analysts + low-code developers | Graphical tool for building custom agents and chatbots — no deep coding required |
+| **Microsoft Copilot Studio** | Business analysts + low-code developers | Graphical tool for building custom agents and chatbots, no deep coding required |
 | **Microsoft Foundry** | Pro developers + ML engineers | Full Azure platform for building, fine-tuning, and deploying production AI applications with code |
 
 ---
@@ -28,9 +28,9 @@ This post cuts through the marketing and gives you a practical, accurate picture
 
 ### What It Is
 
-Microsoft 365 Copilot is an AI-powered assistant that lives inside the Microsoft 365 apps your organization already uses — Word, Excel, PowerPoint, Outlook, Teams, Loop, OneNote, and Whiteboard. It is not a standalone product; it is a layer of intelligence on top of your existing M365 investment.
+Microsoft 365 Copilot is an AI-powered assistant that lives inside the Microsoft 365 apps your organization already uses, Word, Excel, PowerPoint, Outlook, Teams, Loop, OneNote, and Whiteboard. It is not a standalone product; it is a layer of intelligence on top of your existing M365 investment.
 
-Under the hood, Copilot combines large language models (LLMs) with **Microsoft Graph** — the data layer that connects all of your org's emails, chats, meetings, calendar events, and documents. This means when you ask Copilot "catch me up on what happened with Project X last week," it searches across your actual organizational data (subject to your existing permissions) rather than just the open internet.
+Under the hood, Copilot combines large language models (LLMs) with **Microsoft Graph**, the data layer that connects all of your org's emails, chats, meetings, calendar events, and documents. This means when you ask Copilot "catch me up on what happened with Project X last week," it searches across your actual organizational data (subject to your existing permissions) rather than just the open internet.
 
 ### Key Capabilities
 
@@ -69,7 +69,7 @@ Use Microsoft 365 Copilot when:
 
 Copilot Studio is a **low-code, graphical platform** for building custom AI agents (formerly called chatbots). It is part of the Microsoft Power Platform family and is designed to be accessible to business analysts, IT pros, and developers who do not need or want to write full application code.
 
-You describe the agent you want in plain language. Copilot Studio lets you define instructions, knowledge sources, topics (conversation flows), tools (external connectors and APIs), and triggers — then test and publish across multiple channels.
+You describe the agent you want in plain language. Copilot Studio lets you define instructions, knowledge sources, topics (conversation flows), tools (external connectors and APIs), and triggers, then test and publish across multiple channels.
 
 ### Key Capabilities
 
@@ -114,7 +114,7 @@ Use Copilot Studio when:
 
 ### What It Is
 
-Microsoft Foundry (rebranded from Azure AI Foundry / Azure AI Studio in early 2026) is Microsoft's **unified Azure platform for enterprise AI development**. It is the full-stack developer and data scientist platform — not a low-code tool, not an end-user product.
+Microsoft Foundry (rebranded from Azure AI Foundry / Azure AI Studio in early 2026) is Microsoft's **unified Azure platform for enterprise AI development**. It is the full-stack developer and data scientist platform, not a low-code tool, not an end-user product.
 
 Foundry consolidates what were previously separate services (Azure OpenAI Service, Azure AI Services, Azure Machine Learning, the old Azure AI Studio) into a single platform with a unified resource model, a single project endpoint, and a unified SDK (`azure-ai-projects` 2.x).
 
@@ -169,13 +169,13 @@ Use Microsoft Foundry when:
 
 ## How They Work Together
 
-These three tools are not mutually exclusive — Microsoft designed them to be layered:
+These three tools are not mutually exclusive, Microsoft designed them to be layered:
 
 1. **Foundry** is the engine. Developers build agents and fine-tuned models here.
 2. **Copilot Studio** is the builder interface. Analysts extend M365 Copilot or publish standalone agents without code, potentially backed by models deployed in Foundry.
 3. **M365 Copilot** is the end-user surface. Agents built in Copilot Studio or published from Foundry can surface here for licensed users.
 
-A realistic example: the security team builds a threat analysis agent in Foundry (Python SDK, fine-tuned model, multi-step tool calls). A business analyst wraps a simplified version in Copilot Studio with guided conversation flows. End users interact with it through M365 Copilot Chat in Teams — no code required on their end.
+A realistic example: the security team builds a threat analysis agent in Foundry (Python SDK, fine-tuned model, multi-step tool calls). A business analyst wraps a simplified version in Copilot Studio with guided conversation flows. End users interact with it through M365 Copilot Chat in Teams, no code required on their end.
 
 ---
 

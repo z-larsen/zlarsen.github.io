@@ -7,7 +7,7 @@ excerpt: "Storage redundancy, access tiers, blob/file/table/queue storage, SQL v
 hidden: true
 ---
 
-This post covers how data storage and databases work in Azure — from storage accounts and access tiers to SQL vs NoSQL and when each service makes sense. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
+This post covers how data storage and databases work in Azure: from storage accounts and access tiers to SQL vs NoSQL and when each service makes sense. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
 
 ---
 
@@ -188,7 +188,7 @@ Message queue for asynchronous communication. Stores millions of messages, each 
 
 ## Managed vs Self-Managed Databases
 
-### Self-Managed (IaaS) — SQL Server on Azure VM
+### Self-Managed (IaaS): SQL Server on Azure VM
 
 - **You manage:** Patching, backups, high availability, scaling, security
 - **Azure manages:** Physical hardware, hypervisor
@@ -197,7 +197,7 @@ Message queue for asynchronous communication. Stores millions of messages, each 
 
 > Like owning a house: full control, full responsibility.
 
-### Managed (PaaS) — Azure SQL Database
+### Managed (PaaS): Azure SQL Database
 
 - **Azure manages:** Patching, backups, high availability, scaling
 - **You manage:** Database schema, queries, data
@@ -206,7 +206,7 @@ Message queue for asynchronous communication. Stores millions of messages, each 
 
 > Like renting an apartment: less control, less responsibility.
 
-### Hybrid — Azure SQL Managed Instance
+### Hybrid: Azure SQL Managed Instance
 
 - Near 100% SQL Server compatibility in a managed service
 - Automatic patching and backups

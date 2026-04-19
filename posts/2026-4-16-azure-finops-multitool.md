@@ -11,7 +11,7 @@ excerpt: "Discover the Azure FinOps Multitool - a PowerShell application that pr
 
 ![Azure FinOps Multitool](https://img.shields.io/badge/PowerShell-7.0%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![Version 2.0.0](https://img.shields.io/badge/Version-2.0.0-brightgreen)
 
-I built this tool out of a recurring pattern I kept seeing while working with customers across industries — organizations knew they had Azure cost challenges but had no quick way to get a clear picture of where they stood. Every engagement started with the same manual effort: piecing together cost data, chasing down tagging gaps, and trying to size optimization opportunities across subscriptions. The Azure FinOps Multitool is my answer to that problem, built to solve the "cold start" — helping teams quickly understand their current FinOps posture and identify immediate optimization opportunities without the usual setup overhead.
+I built this tool out of a recurring pattern I kept seeing while working with customers across industries; organizations knew they had Azure cost challenges but had no quick way to get a clear picture of where they stood. Every engagement started with the same manual effort: piecing together cost data, chasing down tagging gaps, and trying to size optimization opportunities across subscriptions. The Azure FinOps Multitool is my answer to that problem, built to solve the "cold start", helping teams quickly understand their current FinOps posture and identify immediate optimization opportunities without the usual setup overhead.
 
 ## What is the Azure FinOps Multitool?
 
@@ -38,7 +38,7 @@ The tool provides deep visibility across your entire Azure estate:
 | **Tag Recommendations** | CAF baseline | Gap analysis against 7 CAF allocation tags with deployment location |
 | **AHB** | Azure Resource Graph | Windows VMs, SQL VMs, and SQL DBs missing Hybrid Benefit |
 | **Commitments** | Reservation Summaries + Benefit Utilization API | RI and Savings Plan utilization %, underutilized commitments |
-| **Orphaned Resources** | Azure Resource Graph (6 KQL queries) | Orphaned disks, unattached IPs/NICs, deallocated VMs, empty ASPs, old snapshots — with MTD cost and estimated annual waste |
+| **Orphaned Resources** | Azure Resource Graph (6 KQL queries) | Orphaned disks, unattached IPs/NICs, deallocated VMs, empty ASPs, old snapshots, with MTD cost and estimated annual waste |
 | **RI / SP Recommendations** | Advisor + Reservation Recs API | RI and SP recs with Actual (MTD), Forecast, and savings |
 | **Advisor** | Azure Advisor (Cost category) | Rightsize, shutdown, delete, modernize recs with cost data |
 | **Budget Status** | Consumption Budgets API | Budget vs actual per subscription, % used, risk level; deploy budgets with up to 4 custom thresholds |
@@ -91,11 +91,11 @@ Get a per-subscription health assessment covering:
 
 ## Why Use It?
 
-No infrastructure to set up, no dashboards to build first. Run it once from any Windows machine with PowerShell and you'll have a real picture of your Azure environment in minutes — costs, tagging gaps, orphaned resources, and optimization opportunities all in one place.
+No infrastructure to set up, no dashboards to build first. Run it once from any Windows machine with PowerShell and you'll have a real picture of your Azure environment in minutes, costs, tagging gaps, orphaned resources, and optimization opportunities all in one place.
 
 If you're new to FinOps, it's a practical starting point before investing in more complex tooling. It shows you what to look at and gives you something concrete to act on. If you're already doing FinOps work, it's useful for quick cross-subscription spot checks or sizing up opportunities before a customer engagement.
 
-It doesn't replace Azure Cost Management, FinOps Hubs, or Power BI — but it gets you answers faster when you need them.
+It doesn't replace Azure Cost Management, FinOps Hubs, or Power BI, but it gets you answers faster when you need them.
 
 ## Getting Started
 
@@ -202,7 +202,7 @@ The Azure FinOps Multitool is an open-source project released under the MIT Lice
 
 ## Conclusion
 
-FinOps doesn't have to start with a months-long implementation. The Multitool gives you a clear starting point — run it, see what it finds, and you'll know where to focus.
+FinOps doesn't have to start with a months-long implementation. The Multitool gives you a clear starting point, run it, see what it finds, and you'll know where to focus.
 
 [Open source on GitHub](https://github.com/z-larsen/Azure-FinOps-Multitool) if you want to give it a try.
 

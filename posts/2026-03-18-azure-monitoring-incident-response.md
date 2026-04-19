@@ -7,7 +7,7 @@ excerpt: "Logs, metrics, traces, diagnostic settings, Log Analytics, alerting, S
 hidden: true
 ---
 
-This post covers monitoring, observability, and incident response in Azure — what data to collect, how to query it, and how to build alerts that are actually useful. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
+This post covers monitoring, observability, and incident response in Azure: what data to collect, how to query it, and how to build alerts that are actually useful. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
 
 ---
 
@@ -15,7 +15,7 @@ This post covers monitoring, observability, and incident response in Azure — w
 
 To understand what's happening in Azure, you need three types of data.
 
-### Metrics — What Is Happening Right Now?
+### Metrics: What Is Happening Right Now?
 
 - **Time-series numerical data** collected automatically at regular intervals
 - Lightweight, near real-time (often 1-minute granularity)
@@ -28,7 +28,7 @@ To understand what's happening in Azure, you need three types of data.
 
 > Reference: [Azure Monitor Metrics](https://learn.microsoft.com/azure/azure-monitor/essentials/data-platform-metrics)
 
-### Logs — What Happened and Why?
+### Logs: What Happened and Why?
 
 - **Detailed event records** (text/JSON) collected on-demand or on events
 - Rich contextual information for troubleshooting
@@ -42,7 +42,7 @@ To understand what's happening in Azure, you need three types of data.
 
 > Reference: [Azure Monitor Logs](https://learn.microsoft.com/azure/azure-monitor/logs/data-platform-logs)
 
-### Traces — How Did a Request Flow?
+### Traces: How Did a Request Flow?
 
 - **Distributed tracing** across multiple services
 - Shows request path with timing: Web → API → Database
@@ -167,13 +167,13 @@ Alerts automatically notify teams when conditions are met, enabling faster incid
 
 ### Alert Components
 
-**1. Alert Rule** — What to monitor and when to alert
+**1. Alert Rule**: What to monitor and when to alert
 - Target resource, signal (metric or log query), condition/threshold, evaluation frequency
 
-**2. Action Group** — Who to notify and how
+**2. Action Group**: Who to notify and how
 - Email, SMS, voice call, webhook (PagerDuty, Teams), Azure Function, Logic App, ITSM connector
 
-**3. Alert Lifecycle** — State progression
+**3. Alert Lifecycle**: State progression
 1. **Fired** — Condition met, notification sent
 2. **Acknowledged** — Team is working on it
 3. **Resolved** — Condition no longer met (auto or manual)
@@ -198,7 +198,7 @@ Alerts automatically notify teams when conditions are met, enabling faster incid
 
 ---
 
-## SIEM Basics — Microsoft Sentinel
+## SIEM Basics: Microsoft Sentinel
 
 A SIEM collects security logs from multiple sources, correlates events, and detects threats.
 

@@ -7,13 +7,13 @@ excerpt: "Cost hierarchy, enterprise billing, cost drivers, Cost Management view
 hidden: true
 ---
 
-This post covers governance, cost management, and tagging in Azure — how to get real visibility into what's being spent, who's responsible for it, and how to enforce standards before things get out of hand. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
+This post covers governance, cost management, and tagging in Azure: how to get real visibility into what's being spent, who's responsible for it, and how to enforce standards before things get out of hand. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
 
 ---
 
 ## Why Governance Matters
 
-Governance is not just about saving money — it's about:
+Governance is not just about saving money; it's about:
 - **Visibility** — Knowing who is spending what and where
 - **Accountability** — Charging costs back to the right teams
 - **Control** — Preventing overspending and enforcing standards
@@ -40,7 +40,7 @@ Billing Account ($100K/month)
 | Level | Description |
 |-------|------------|
 | **Billing Account** | Top-level contract with Microsoft |
-| **Subscription** | Primary billing boundary — each gets its own bill |
+| **Subscription** | Primary billing boundary, each gets its own bill |
 | **Resource Group** | Logical container (free), resources accumulate costs |
 | **Resource** | The actual service that costs money (VM, storage, database) |
 | **Meters** | How usage is measured: compute hours, GB stored, GB transferred, API calls |
@@ -215,7 +215,7 @@ Subscription-NonProd-Finance
 
 ### Resource Group Best Practice
 
-Group resources by lifecycle — things deployed, updated, and deleted together:
+Group resources by lifecycle (things deployed, updated, and deleted together):
 
 **Good:** `rg-marketing-website-prod` contains App Service, SQL Database, Storage Account, Application Insights (all deployed together).
 
@@ -253,10 +253,10 @@ Tags are key-value pairs attached to resources for organization, cost tracking, 
 
 ### Tag Enforcement Strategies
 
-**1. Require tags at creation (Azure Policy — Deny):**
+**1. Require tags at creation (deny effect):**
 Deny resource creation unless required tags are present. Ensures compliance from day one, but can slow deployments.
 
-**2. Auto-tag with defaults (Azure Policy — Modify):**
+**2. Auto-tag with defaults (modify effect):**
 Automatically add missing tags with default values (e.g., CostCenter = "Unknown"). Doesn't block deployments but needs cleanup.
 
 **3. Inherit tags from Resource Group (Azure Policy):**

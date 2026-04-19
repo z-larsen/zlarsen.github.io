@@ -3,10 +3,10 @@ layout: post.njk
 title: "Azure ExpressRoute Overview"
 date: 2026-01-06
 tags: [posts, ExpressRoute, Networking]
-excerpt: "A deep dive into Azure ExpressRoute — what it is, why enterprises use it, connectivity models, circuit SKUs, peering types, and key design considerations for hybrid connectivity."
+excerpt: "A deep dive into Azure ExpressRoute: what it is, why enterprises use it, connectivity models, circuit SKUs, peering types, and key design considerations for hybrid connectivity."
 ---
 
-This post covers Azure ExpressRoute — Microsoft's dedicated private connectivity service for hybrid connectivity. If you haven't already, check out the [Azure Networking Fundamentals](/posts/2026-03-18-azure-networking-fundamentals/) post first for foundational concepts like VNets, subnets, and routing.
+This post covers Azure ExpressRoute, Microsoft's dedicated private connectivity service for hybrid connectivity. If you haven't already, check out the [Azure Networking Fundamentals](/posts/2026-03-18-azure-networking-fundamentals/) post first for foundational concepts like VNets, subnets, and routing.
 
 ---
 
@@ -73,7 +73,7 @@ Integrate your existing WAN (typically MPLS-based) with Microsoft cloud. The Mic
 
 ### 4. ExpressRoute Direct
 
-Connect directly into Microsoft's global network at a peering location — no third-party provider in the middle. Supports dual **10 Gbps**, **100 Gbps**, or **400 Gbps** connections in Active/Active configuration.
+Connect directly into Microsoft's global network at a peering location, no third-party provider in the middle. Supports dual **10 Gbps**, **100 Gbps**, or **400 Gbps** connections in Active/Active configuration.
 
 **Best for:** massive data ingestion, regulated industries requiring physical isolation, or granular per-business-unit circuit control.
 
@@ -107,7 +107,7 @@ Each ExpressRoute circuit has a SKU tier that determines its geographic reach an
 
 ## Supported Bandwidth Options
 
-ExpressRoute circuits are available at the following bandwidths. Your connectivity provider may not support all options — confirm with them before ordering.
+ExpressRoute circuits are available at the following bandwidths. Your connectivity provider may not support all options, confirm with them before ordering.
 
 ```
 50 Mbps | 100 Mbps | 200 Mbps | 500 Mbps
@@ -150,7 +150,7 @@ Each circuit supports up to **two peering types**:
 | Max IPv6 prefixes | 100 | 200 |
 | BGP sessions | Redundant pair per peering | Redundant pair per peering |
 
-Each peering uses a **pair of redundant BGP sessions** — one to each MSEE — for high availability.
+Each peering uses a **pair of redundant BGP sessions**, one to each MSEE, for high availability.
 
 > Reference: [ExpressRoute circuits and peering](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-circuit-peerings)
 
@@ -175,7 +175,7 @@ Each peering uses a **pair of redundant BGP sessions** — one to each MSEE — 
 
 ### Global Reach
 
-ExpressRoute **Global Reach** lets you connect two on-premises sites through Microsoft's backbone — useful for linking data centers in different regions without backhauling through your own WAN.
+ExpressRoute **Global Reach** lets you connect two on-premises sites through Microsoft's backbone, useful for linking data centers in different regions without backhauling through your own WAN.
 
 ```
 [Data Center - California] ── ExpressRoute ── [Microsoft Backbone] ── ExpressRoute ── [Data Center - Texas]
@@ -183,7 +183,7 @@ ExpressRoute **Global Reach** lets you connect two on-premises sites through Mic
 
 ### VNet Gateway Requirements
 
-To connect a VNet to an ExpressRoute circuit, you need an **ExpressRoute Virtual Network Gateway** in a `GatewaySubnet`. Different gateway SKUs support different throughput limits — ensure the gateway SKU matches your circuit bandwidth expectations.
+To connect a VNet to an ExpressRoute circuit, you need an **ExpressRoute Virtual Network Gateway** in a `GatewaySubnet`. Different gateway SKUs support different throughput limits, ensure the gateway SKU matches your circuit bandwidth expectations.
 
 ### Routing
 

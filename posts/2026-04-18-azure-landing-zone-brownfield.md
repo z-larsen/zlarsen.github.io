@@ -3,10 +3,10 @@ layout: post.njk
 title: "Azure Landing Zone: Brownfield Transition Guide"
 date: 2026-04-18
 tags: [posts, Azure, Landing Zone, Governance, CAF, Architecture]
-excerpt: "Already in Azure but not aligned with best practices? This guide walks through how to transition an existing brownfield environment to the Azure Landing Zone reference architecture — step by step, without disrupting production uptime."
+excerpt: "Already in Azure but not aligned with best practices? This guide walks through how to transition an existing brownfield environment to the Azure Landing Zone reference architecture, step by step, without disrupting production uptime."
 ---
 
-Many organizations land in the same place: they started in Azure fast, got workloads running, and now have a sprawl of subscriptions, ad-hoc resource groups, inconsistent policies, and no clear governance structure. The good news is that Microsoft has a well-defined path to align brownfield environments with the Azure Landing Zone (ALZ) reference architecture — and it can be done incrementally, without tearing everything down.
+Many organizations land in the same place: they started in Azure fast, got workloads running, and now have a sprawl of subscriptions, ad-hoc resource groups, inconsistent policies, and no clear governance structure. The good news is that Microsoft has a well-defined path to align brownfield environments with the Azure Landing Zone (ALZ) reference architecture, and it can be done incrementally without tearing everything down.
 
 ---
 
@@ -21,7 +21,7 @@ A **brownfield** Azure environment is any existing deployment that was not built
 - No centralized hub network or inconsistent connectivity design
 - No separation of platform (identity, connectivity, management) from application workloads
 
-This is not a failure — it is the normal evolution of most Azure tenants. The goal of alignment is not to start over, but to **progressively improve** governance, security, and operational consistency.
+This is not a failure; it is the normal evolution of most Azure tenants. The goal of alignment is not to start over, but to **progressively improve** governance, security, and operational consistency.
 
 > Reference: [Transition an existing Azure environment to the Azure landing zone reference architecture](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/transition)
 
@@ -78,7 +78,7 @@ This approach guarantees:
 
 ---
 
-## Phase 1 — Assess Your Current State
+## Phase 1: Assess Your Current State
 
 Before moving anything, document what you have.
 
@@ -120,11 +120,11 @@ PolicyResources
 | project name, properties.scope, properties.policyDefinitionId, properties.enforcementMode
 ```
 
-This will be critical input for the transition — you need to know what guardrails already exist before adding new ones.
+This will be critical input for the transition; you need to know what guardrails already exist before adding new ones.
 
 ---
 
-## Phase 2 — Deploy the Target Structure (Parallel, Not Replacing)
+## Phase 2: Deploy the Target Structure (Parallel, Not Replacing)
 
 ### Step 2.1: Deploy the ALZ Management Group Hierarchy
 
@@ -176,11 +176,11 @@ Create new, clean subscriptions for platform functions:
 | Identity | Domain controllers, Entra ID Connect, AD DS |
 | Management | Log Analytics workspace, Automation Account, Defender for Cloud |
 
-Place each under the appropriate Platform management group. These subscriptions start fresh — no legacy resources — and are built to ALZ standards from day one.
+Place each under the appropriate Platform management group. These subscriptions start fresh with no legacy resources and are built to ALZ standards from day one.
 
 ---
 
-## Phase 3 — Remediate and Migrate Workloads
+## Phase 3: Remediate and Migrate Workloads
 
 ### Step 3.1: Assess Policy Compliance in Audit Mode
 
@@ -234,7 +234,7 @@ If a subscription is too messy to clean up in place, or if you need to redistrib
 
 ---
 
-## Phase 4 — Enable Policy Enforcement Incrementally
+## Phase 4: Enable Policy Enforcement Incrementally
 
 Once application teams have addressed compliance findings for their workloads:
 
@@ -251,7 +251,7 @@ The team remediates findings in `Brownfield-Corp`, then the subscription moves t
 
 ### Step 4.2: Handle Non-Compliant Existing Resources
 
-For resources that were deployed before a policy was assigned, you must manually remediate them. Non-compliant resources are not automatically fixed by `DeployIfNotExists` policies — you must trigger a remediation task:
+For resources that were deployed before a policy was assigned, you must manually remediate them. Non-compliant resources are not automatically fixed by `DeployIfNotExists` policies, you must trigger a remediation task:
 
 1. Go to Azure Policy > Compliance
 2. Find the non-compliant policy assignment
@@ -271,7 +271,7 @@ Once all workloads are moved and compliance is confirmed:
 
 ---
 
-## Phase 5 — Rebuild Platform Services in the New Hub
+## Phase 5: Rebuild Platform Services in the New Hub
 
 For organizations with existing hybrid connectivity (VPN Gateway, ExpressRoute), the existing infrastructure may need to be migrated to the new Connectivity subscription. This is the most disruptive phase and requires careful coordination.
 

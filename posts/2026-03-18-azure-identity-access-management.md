@@ -7,7 +7,7 @@ excerpt: "Authentication vs authorization, managed identities, RBAC scopes, leas
 hidden: true
 ---
 
-This post covers identity and access control in Azure — how authentication and authorization actually work, what managed identities are and why they matter, RBAC scopes, and how to handle the full identity lifecycle. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
+This post covers identity and access control in Azure: how authentication and authorization actually work, what managed identities are and why they matter, RBAC scopes, and how to handle the full identity lifecycle. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
 
 ---
 
@@ -53,7 +53,7 @@ Common roles: Subscription Owner, Contributor, Reader, or custom roles.
 
 **Old way (bad practice):** Store username/password in application code, hard-coded connection strings, credentials in config files.
 
-**Modern way (best practice):** Use Managed Identities — no credentials in code, Azure handles authentication automatically.
+**Modern way (best practice):** Use Managed Identities. No credentials in code; Azure handles authentication automatically.
 
 ### Comparison
 

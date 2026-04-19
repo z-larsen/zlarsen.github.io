@@ -7,13 +7,13 @@ excerpt: "Region pairs, backup concepts, Azure Site Recovery patterns, RTO/RPO d
 hidden: true
 ---
 
-This post covers backup, disaster recovery, and business continuity in Azure — how to protect your data and keep services recoverable when things go wrong. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
+This post covers backup, disaster recovery, and business continuity in Azure: how to protect your data and keep services recoverable when things go wrong. If you haven't already, start with the [Azure Platform Fundamentals](/posts/2026-03-18-new-to-azure-start-here/) overview first.
 
 ---
 
 ## Why BCDR Matters
 
-Business Continuity and Disaster Recovery is not just an IT concern — it's a business requirement.
+Business Continuity and Disaster Recovery is not just an IT concern; it's a business requirement.
 
 Every organization must answer:
 - How long can we be down before it severely impacts the business? (**RTO**)
@@ -60,7 +60,7 @@ Two Azure regions within the same geography paired for disaster recovery.
 | Failover | Automatic (seconds–minutes) | Manual or semi-automated (minutes–hours) |
 | Cost | Minimal increase | Data transfer costs |
 
-**Best practice:** Use **both** — deploy across zones in the primary region, and replicate to a paired region for disaster recovery.
+**Best practice:** Use **both**: deploy across zones in the primary region, and replicate to a paired region for disaster recovery.
 
 ---
 
@@ -187,7 +187,7 @@ Total RTO:             1.5 hours
 
 Measured as the time between the last good backup and the disaster.
 
-**Example:** Last backup at 2:00 AM, disaster at 2:37 AM → 37 minutes of data lost. If the business requires RPO < 30 minutes, daily backups are insufficient — you need continuous replication.
+**Example:** Last backup at 2:00 AM, disaster at 2:37 AM → 37 minutes of data lost. If the business requires RPO < 30 minutes, daily backups are insufficient; you need continuous replication.
 
 ### RTO/RPO by Business Impact
 
