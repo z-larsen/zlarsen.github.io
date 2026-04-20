@@ -199,7 +199,7 @@ To connect a VNet to an ExpressRoute circuit, you need an **ExpressRoute Virtual
 
 ### QoS
 
-If you use Skype for Business / Microsoft Teams, QoS is required to differentiate voice, video, and text traffic. Confirm QoS support with your connectivity provider.
+If you use Microsoft Teams, QoS is required to differentiate voice, video, and text traffic. Confirm QoS support with your connectivity provider.
 
 ---
 
@@ -212,7 +212,7 @@ Before provisioning an ExpressRoute circuit:
 - [ ] Redundant BGP sessions planned for each peering location
 - [ ] IP address plan confirmed (no overlap with existing on-premises or Azure ranges)
 - [ ] NAT strategy defined if using Microsoft peering
-- [ ] QoS plan if using Microsoft Teams / Skype
+- [ ] QoS plan if using Microsoft Teams
 - [ ] For ExpressRoute Direct: subscription pre-enrolled via PowerShell before provisioning
 
 > Reference: [ExpressRoute prerequisites & checklist](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-prerequisites)
