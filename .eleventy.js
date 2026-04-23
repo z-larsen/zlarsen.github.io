@@ -18,6 +18,7 @@ module.exports = function (eleventyConfig) {
 
   // Group posts by category (excludes pinned posts — handled separately in template)
   eleventyConfig.addFilter('groupByCategory', function (collection) {
+    const catOrder = ['Tools', 'FinOps', 'Architecture', 'AI', 'Networking', 'Security & Identity', 'Tutorials', 'Other'];
     const groups = {};
     for (const item of collection) {
       if (item.data.pinned) continue;
@@ -25,7 +26,9 @@ module.exports = function (eleventyConfig) {
       if (!groups[cat]) groups[cat] = [];
       groups[cat].push(item);
     }
-    return groups;
+    return catOrder
+      .filter(cat => groups[cat] && groups[cat].length > 0)
+      .map(cat => ({ name: cat, posts: groups[cat] }));
   });
 
   // Collections — visible posts only (excludes hidden: true)

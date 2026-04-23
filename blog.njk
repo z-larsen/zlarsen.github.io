@@ -4,7 +4,6 @@ title: Blog
 ---
 
 {% set grouped = collections.posts | groupByCategory %}
-{% set catOrder = ["Tools", "FinOps", "Architecture", "AI", "Networking", "Security & Identity", "Tutorials"] %}
 
 <section class="section">
   <div class="section-header">
@@ -38,12 +37,11 @@ title: Blog
   </div>
 
   {# Category sections #}
-  {%- for cat in catOrder -%}
-    {%- if grouped[cat] -%}
-  <div class="post-section" data-section="{{ cat }}">
-    <h2 class="post-section-label">{{ cat }}</h2>
+  {%- for group in grouped -%}
+  <div class="post-section" data-section="{{ group.name }}">
+    <h2 class="post-section-label">{{ group.name }}</h2>
     <div class="post-grid">
-      {%- for post in grouped[cat] -%}
+      {%- for post in group.posts -%}
       <article class="post-card{% if post.data.tool %} post-card--tool{% endif %}">
         <div class="post-card-body">
           <time class="post-card-date" datetime="{{ post.date | htmlDateString }}">
@@ -63,7 +61,6 @@ title: Blog
       {%- endfor -%}
     </div>
   </div>
-    {%- endif -%}
   {%- endfor -%}
 
 </section>
