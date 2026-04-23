@@ -3,6 +3,7 @@ layout: post.njk
 title: "Azure FinOps: Implementing the FinOps Framework for Cloud Cost Management"
 date: 2026-01-16
 tags: [posts, azure, finops, cost-management, billing, optimization, cloud, governance]
+category: FinOps
 excerpt: "Learn how to implement the FinOps framework in Azure, including billing hierarchy, cost allocation, optimization strategies, and best practices for cloud financial management."
 ---
 

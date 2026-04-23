@@ -3,6 +3,7 @@ layout: post.njk
 title: "Azure ExpressRoute Overview"
 date: 2026-01-06
 tags: [posts, ExpressRoute, Networking]
+category: Networking
 excerpt: "A deep dive into Azure ExpressRoute: what it is, why enterprises use it, connectivity models, circuit SKUs, peering types, and key design considerations for hybrid connectivity."
 ---
 

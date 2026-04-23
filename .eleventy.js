@@ -16,6 +16,18 @@ module.exports = function (eleventyConfig) {
     return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('yyyy-LL-dd');
   });
 
+  // Group posts by category (excludes pinned posts — handled separately in template)
+  eleventyConfig.addFilter('groupByCategory', function (collection) {
+    const groups = {};
+    for (const item of collection) {
+      if (item.data.pinned) continue;
+      const cat = item.data.category || 'Other';
+      if (!groups[cat]) groups[cat] = [];
+      groups[cat].push(item);
+    }
+    return groups;
+  });
+
   // Collections — visible posts only (excludes hidden: true)
   eleventyConfig.addCollection('posts', function (collectionApi) {
     return collectionApi

@@ -3,6 +3,7 @@ layout: post.njk
 title: "Microsoft AI Tools Compared: M365 Copilot vs Copilot Studio vs Microsoft Foundry"
 date: 2026-04-18
 tags: [posts, azure, ai, copilot, architecture, microsoft-365]
+category: AI
 excerpt: "Microsoft now has three distinct AI platforms and knowing which one to reach for can save you weeks of wasted effort. This guide breaks down Microsoft 365 Copilot, Copilot Studio, and Microsoft Foundry: what they are, how they work, and when to use each."
 ---
 

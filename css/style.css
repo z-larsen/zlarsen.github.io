@@ -355,6 +355,32 @@ nav#main-nav a.active {
 }
 
 /* ========================================
+   Category Sections
+   ======================================== */
+.post-section {
+  margin-top: 2rem;
+}
+
+.post-section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-subtle);
+  margin-bottom: 1rem;
+}
+
+.post-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ========================================
    Post Cards
    ======================================== */
 .post-grid {

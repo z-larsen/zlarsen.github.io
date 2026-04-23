@@ -3,6 +3,7 @@ layout: post.njk
 title: "Setting Up NPS with Entra ID MFA for RADIUS Authentication"
 date: 2026-01-12
 tags: [posts, azure, entra, mfa, nps, radius, authentication, security]
+category: Security & Identity
 excerpt: "Learn how to configure a Network Policy Server (NPS) with Microsoft Entra ID Multi-Factor Authentication to secure RADIUS-based authentication for VPNs, network switches, and wireless access points."
 ---
 

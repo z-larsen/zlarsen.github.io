@@ -3,6 +3,7 @@ layout: post.njk
 title: "New to Azure? Start Here"
 date: 2026-03-18
 tags: [posts, Azure, CAF, WAF, Landing Zones, Fundamentals]
+category: Architecture
 excerpt: "A comprehensive guide to Azure fundamentals, covering the Cloud Adoption Framework, Well-Architected Framework, landing zones, resource hierarchy, service models, shared responsibility, and regional design."
 pinned: true
 ---

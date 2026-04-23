@@ -3,6 +3,7 @@ layout: post.njk
 title: "Azure Landing Zone: Brownfield Transition Guide"
 date: 2026-04-18
 tags: [posts, Azure, Landing Zone, Governance, CAF, Architecture]
+category: Architecture
 excerpt: "Already in Azure but not aligned with best practices? This guide walks through how to transition an existing brownfield environment to the Azure Landing Zone reference architecture, step by step, without disrupting production uptime."
 ---
 

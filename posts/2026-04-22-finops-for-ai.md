@@ -3,6 +3,7 @@ layout: post.njk
 title: "Why AI Cost Optimization Is Different from Traditional FinOps"
 date: 2026-04-22
 tags: [posts, azure, finops, ai, cost-management, optimization, azure-openai]
+category: FinOps
 excerpt: "AI spending doesn't follow the same rules as traditional cloud infrastructure. Here's what changes, what stays the same, and how to apply FinOps to Azure AI workloads before your token bill surprises you."
 ---
 

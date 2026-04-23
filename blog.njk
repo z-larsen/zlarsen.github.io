@@ -3,14 +3,19 @@ layout: base.njk
 title: Blog
 ---
 
+{% set grouped = collections.posts | groupByCategory %}
+{% set catOrder = ["Tools", "FinOps", "Architecture", "AI", "Networking", "Security & Identity", "Tutorials"] %}
+
 <section class="section">
   <div class="section-header">
     <h1 class="section-title">All Posts</h1>
     <span id="post-count" class="post-count"></span>
   </div>
   <div id="tag-filters" class="tag-filter-bar"></div>
+
+  {# Pinned posts — shown above sections, no section label #}
   <div class="post-grid">
-    {%- for post in collections.posts | reverse -%}
+    {%- for post in collections.posts -%}
       {%- if post.data.pinned -%}
     <article class="post-card post-card--pinned">
       <div class="post-card-body">
@@ -19,42 +24,10 @@ title: Blog
           {{ post.date | readableDate }}
         </time>
         <h3 class="post-card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
-        {% if post.data.excerpt %}
-        <p class="post-card-excerpt">{{ post.data.excerpt }}</p>
-        {% endif %}
+        {% if post.data.excerpt %}<p class="post-card-excerpt">{{ post.data.excerpt }}</p>{% endif %}
         {% if post.data.tags %}
         <div class="post-card-tags">
-          {% for tag in post.data.tags %}
-            {% if tag != "posts" %}
-            <span class="tag">{{ tag }}</span>
-            {% endif %}
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      <a href="{{ post.url }}" class="post-card-link" aria-label="Read {{ post.data.title }}"></a>
-    </article>
-      {%- endif -%}
-    {%- endfor -%}
-    {%- for post in collections.posts | reverse -%}
-      {%- if not post.data.pinned -%}
-    <article class="post-card{% if post.data.tool %} post-card--tool{% endif %}">
-      <div class="post-card-body">
-        <time class="post-card-date" datetime="{{ post.date | htmlDateString }}">
-          {% if post.data.tool %}<span class="tool-badge" aria-label="Tool">🛠️ Tool</span>{% endif %}
-          {{ post.date | readableDate }}
-        </time>
-        <h3 class="post-card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
-        {% if post.data.excerpt %}
-        <p class="post-card-excerpt">{{ post.data.excerpt }}</p>
-        {% endif %}
-        {% if post.data.tags %}
-        <div class="post-card-tags">
-          {% for tag in post.data.tags %}
-            {% if tag != "posts" %}
-            <span class="tag">{{ tag }}</span>
-            {% endif %}
-          {% endfor %}
+          {% for tag in post.data.tags %}{% if tag != "posts" %}<span class="tag">{{ tag }}</span>{% endif %}{% endfor %}
         </div>
         {% endif %}
       </div>
@@ -63,7 +36,139 @@ title: Blog
       {%- endif -%}
     {%- endfor -%}
   </div>
+
+  {# Category sections #}
+  {%- for cat in catOrder -%}
+    {%- if grouped[cat] -%}
+  <div class="post-section" data-section="{{ cat }}">
+    <h2 class="post-section-label">{{ cat }}</h2>
+    <div class="post-grid">
+      {%- for post in grouped[cat] -%}
+      <article class="post-card{% if post.data.tool %} post-card--tool{% endif %}">
+        <div class="post-card-body">
+          <time class="post-card-date" datetime="{{ post.date | htmlDateString }}">
+            {% if post.data.tool %}<span class="tool-badge" aria-label="Tool">🛠️ Tool</span>{% endif %}
+            {{ post.date | readableDate }}
+          </time>
+          <h3 class="post-card-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+          {% if post.data.excerpt %}<p class="post-card-excerpt">{{ post.data.excerpt }}</p>{% endif %}
+          {% if post.data.tags %}
+          <div class="post-card-tags">
+            {% for tag in post.data.tags %}{% if tag != "posts" %}<span class="tag">{{ tag }}</span>{% endif %}{% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        <a href="{{ post.url }}" class="post-card-link" aria-label="Read {{ post.data.title }}"></a>
+      </article>
+      {%- endfor -%}
+    </div>
+  </div>
+    {%- endif -%}
+  {%- endfor -%}
+
 </section>
+
+<script>
+(function () {
+  var cards = Array.from(document.querySelectorAll('.post-card'));
+  var sections = Array.from(document.querySelectorAll('.post-section'));
+  var bar = document.getElementById('tag-filters');
+  var countEl = document.getElementById('post-count');
+
+  function updateCount(visible) {
+    if (countEl) {
+      countEl.textContent = visible + ' of ' + cards.length + ' post' + (cards.length !== 1 ? 's' : '');
+    }
+  }
+
+  // Collect unique tags from rendered .tag spans (normalized to lowercase)
+  var tagSet = new Set();
+  cards.forEach(function (card) {
+    card.querySelectorAll('.tag').forEach(function (el) {
+      tagSet.add(el.textContent.trim().toLowerCase());
+    });
+  });
+
+  var allTags = Array.from(tagSet).sort(function (a, b) {
+    return a.localeCompare(b);
+  });
+
+  if (!bar || allTags.length === 0) {
+    updateCount(cards.length);
+    return;
+  }
+
+  var activeTag = '';
+
+  function applyFilter(tag) {
+    activeTag = tag;
+    // Update button active states
+    bar.querySelectorAll('.tag-filter-btn').forEach(function (b) {
+      b.classList.toggle('tag-filter-btn--active', b.dataset.tag === activeTag);
+    });
+    // Show/hide cards
+    var visible = 0;
+    cards.forEach(function (card) {
+      if (!activeTag) {
+        card.style.display = '';
+        visible++;
+        return;
+      }
+      var cardTags = Array.from(card.querySelectorAll('.tag')).map(function (el) {
+        return el.textContent.trim().toLowerCase();
+      });
+      var show = cardTags.indexOf(activeTag) !== -1;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    // Hide sections where no cards are visible
+    sections.forEach(function (section) {
+      if (!activeTag) {
+        section.style.display = '';
+        return;
+      }
+      var sectionCards = section.querySelectorAll('.post-card');
+      var anyVisible = Array.from(sectionCards).some(function (c) {
+        return c.style.display !== 'none';
+      });
+      section.style.display = anyVisible ? '' : 'none';
+    });
+    updateCount(visible);
+  }
+
+  function makeBtn(label, tag) {
+    var btn = document.createElement('button');
+    btn.className = 'tag-filter-btn' + (tag === '' ? ' tag-filter-btn--active' : '');
+    btn.textContent = label;
+    btn.dataset.tag = tag;
+    btn.addEventListener('click', function () {
+      applyFilter(activeTag === tag && tag !== '' ? '' : tag);
+      if (activeTag === '') {
+        bar.querySelectorAll('.tag-filter-btn').forEach(function (b) {
+          b.classList.toggle('tag-filter-btn--active', b.dataset.tag === '');
+        });
+      }
+    });
+    return btn;
+  }
+
+  bar.appendChild(makeBtn('All', ''));
+  allTags.forEach(function (tag) {
+    bar.appendChild(makeBtn(tag, tag));
+  });
+
+  updateCount(cards.length);
+
+  // Pre-select tag from ?tag= URL param (e.g. linked from home page sidebar)
+  var paramTag = new URLSearchParams(window.location.search).get('tag');
+  if (paramTag) {
+    var lc = paramTag.toLowerCase();
+    if (allTags.indexOf(lc) !== -1) {
+      applyFilter(lc);
+    }
+  }
+})();
+</script>
 
 <script>
 (function () {
