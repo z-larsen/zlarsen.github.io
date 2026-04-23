@@ -8,7 +8,7 @@ permalink: /about/
 
 ## About Me
 
-I'm a Cloud Solution Architect with a passion for Azure. I enjoy helping organizations navigate their cloud journey and optimize their Azure environments.
+I'm a Cloud Solution Architect focused on Azure. Most of my work is with state, local government, and education customers, though not exclusively. That means a lot of conversations about governance, cost control, and getting Azure right in environments where resources are tight and the margin for error is low.
 
 <div class="focus-areas">
   <span class="focus-tag">Cloud Architecture</span>
@@ -23,7 +23,9 @@ I'm a Cloud Solution Architect with a passion for Azure. I enjoy helping organiz
 
 ## What is this blog about?
 
-I started this blog to share what I've learned navigating the complex cloud landscape. My aim is simple: take intricate cloud concepts and break them down into practical, easy-to-follow guides for all audiences.
+Working across a lot of different customers, you start to notice patterns: the same questions come up, the same things trip people up, the same areas where good documentation is hard to find. This site is my way of tracking those threads.
+
+Over the years I've run into plenty of blog posts buried deep in search results that had exactly what I needed. Someone took the time to write something useful and put it out there, and it saved me hours. This is me returning the favor. If something here helps you, that's the point.
 
 ---
 
