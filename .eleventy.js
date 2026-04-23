@@ -28,7 +28,7 @@ module.exports = function (eleventyConfig) {
     }
     return catOrder
       .filter(cat => groups[cat] && groups[cat].length > 0)
-      .map(cat => ({ name: cat, posts: groups[cat] }));
+      .map(cat => ({ name: cat, items: groups[cat] }));
   });
 
   // Collections — visible posts only (excludes hidden: true)

@@ -41,7 +41,7 @@ title: Blog
   <div class="post-section" data-section="{{ group.name }}">
     <h2 class="post-section-label">{{ group.name }}</h2>
     <div class="post-grid">
-      {%- for post in group.posts -%}
+      {%- for post in group.items -%}
       <article class="post-card{% if post.data.tool %} post-card--tool{% endif %}">
         <div class="post-card-body">
           <time class="post-card-date" datetime="{{ post.date | htmlDateString }}">
