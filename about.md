@@ -25,7 +25,7 @@ I'm a Cloud Solution Architect focused on Azure. Most of my work is with state, 
 
 Working across a lot of different customers, you start to notice patterns: the same questions come up, the same things trip people up, the same areas where good documentation is hard to find. This site is my way of tracking those threads.
 
-Over the years I've run into plenty of blog posts buried deep in search results that had exactly what I needed. Someone took the time to write something useful and put it out there, and it saved me hours. This is me returning the favor. If something here helps you, that's the point.
+Over the years I've run into plenty of blog posts buried deep in search results that had exactly what I needed. Someone took the time to write something useful and put it out there, and it saved me hours. So this is me returning the favor.
 
 ---
 
