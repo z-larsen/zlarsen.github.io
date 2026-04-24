@@ -1,44 +1,40 @@
-# Chirpy Starter
+# zlarsen.cloud
 
-[![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)][gem]&nbsp;
-[![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
+Personal site and blog covering Azure architecture, FinOps, governance, and open-source tooling.
 
-When installing the [**Chirpy**][chirpy] theme through [RubyGems.org][gem], Jekyll can only read files in the folders
-`_data`, `_layouts`, `_includes`, `_sass` and `assets`, as well as a small part of options of the `_config.yml` file
-from the theme's gem. If you have ever installed this theme gem, you can use the command
-`bundle info --path jekyll-theme-chirpy` to locate these files.
+**Live at:** [zlarsen.cloud](https://zlarsen.cloud)
 
-The Jekyll team claims that this is to leave the ball in the user’s court, but this also results in users not being
-able to enjoy the out-of-the-box experience when using feature-rich themes.
+## Posts
 
-To fully use all the features of **Chirpy**, you need to copy the other critical files from the theme's gem to your
-Jekyll site. The following is a list of targets:
+| Date | Title |
+|------|-------|
+| 2026-04-23 | [Azure Resource Tagger: Bulk Tagging Before Policy Enforcement](posts/2026-4-23-azure-resource-tagger.md) |
+| 2026-04-22 | [FinOps for AI](posts/2026-04-22-finops-for-ai.md) |
+| 2026-04-18 | [Azure Landing Zone Brownfield](posts/2026-04-18-azure-landing-zone-brownfield.md) |
+| 2026-04-18 | [Microsoft AI Tools Compared](posts/2026-04-18-microsoft-ai-tools-compared.md) |
+| 2026-04-16 | [Azure FinOps Multitool: A Fast Track to Cost Optimization](posts/2026-4-16-azure-finops-multitool.md) |
+| 2026-03-18 | [New to Azure? Start Here](posts/2026-03-18-new-to-azure-start-here.md) |
+| 2026-03-18 | [Azure Networking Fundamentals](posts/2026-03-18-azure-networking-fundamentals.md) |
+| 2026-03-18 | [Azure Storage & Database Fundamentals](posts/2026-03-18-azure-storage-database-fundamentals.md) |
+| 2026-03-18 | [Azure Identity & Access Management](posts/2026-03-18-azure-identity-access-management.md) |
+| 2026-03-18 | [Azure Monitoring & Incident Response](posts/2026-03-18-azure-monitoring-incident-response.md) |
+| 2026-03-18 | [Azure BCDR Fundamentals](posts/2026-03-18-azure-bcdr-fundamentals.md) |
+| 2026-03-18 | [Azure Governance, Cost & Tagging](posts/2026-03-18-azure-governance-cost-tagging.md) |
+| 2026-01-16 | [Azure FinOps: Implementing the FinOps Framework](posts/2026-01-16-azure-finops-framework.md) |
+| 2026-01-12 | [NPS + Entra MFA Setup](posts/2026-01-12-nps-entra-mfa-setup.md) |
+| 2026-01-10 | [Azure DNS 101](posts/2026-1-10-2026-azure-dns-101.md) |
+| 2026-01-06 | [Azure ExpressRoute](posts/2026-01-06-azure-expressroute.md) |
+| 2026-01-06 | [GitHub Pages Setup with Actions & VS Code](posts/2026-01-06-github-pages-setup-with-actions-vscode.md) |
 
-```shell
-.
-├── _config.yml
-├── _plugins
-├── _tabs
-└── index.html
-```
+## Tools
 
-To save you time, and also in case you lose some files while copying, we extract those files/configurations of the
-latest version of the **Chirpy** theme and the [CD][CD] workflow to here, so that you can start writing in minutes.
+| Tool | Description |
+|------|-------------|
+| [Azure FinOps Multitool](https://github.com/z-larsen/Azure-FinOps-Multitool) | Tenant-wide FinOps scanner -- costs, tags, optimization, policy, and maturity scoring |
+| [Azure Resource Tagger](https://github.com/z-larsen/AzureResourceTagger) | Bulk tag scanning, gap analysis, and application for Azure subscriptions |
 
-## Usage
+## Stack
 
-Check out the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki).
-
-## Contributing
-
-This repository is automatically updated with new releases from the theme repository. If you encounter any issues or want to contribute to its improvement, please visit the [theme repository][chirpy] to provide feedback.
-
-## License
-
-This work is published under [MIT][mit] License.
-
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
-[CD]: https://en.wikipedia.org/wiki/Continuous_deployment
-[mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
-# Temporary rebuild trigger
+- [Eleventy](https://www.11ty.dev/) static site generator
+- Deployed via GitHub Actions to GitHub Pages
+- Custom domain: zlarsen.cloud
