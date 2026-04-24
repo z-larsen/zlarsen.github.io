@@ -14,7 +14,9 @@ excerpt: "A PowerShell WPF tool that scans your Azure subscription for tagging g
 
 This one came out of a real problem. Azure Policy can enforce tags going forward, but it won't backfill what's already deployed. So when you switch a "require tag" policy from audit to deny, every resource group that's missing that tag starts breaking deployments. I kept running into this same gap at customer sites -- policy enforcement was ready to go, but hundreds of existing resources hadn't been tagged yet and nobody wanted to do it manually in the portal.
 
-The Azure Resource Tagger is a focused tool for that specific moment: scan what exists, find the gaps, and bulk-apply the missing tags before turning on enforcement.
+If you're managing your infrastructure through Bicep or Terraform, you can handle this in code -- define your tags in your templates, run a deployment, and you're done. But not every organization is there yet. Plenty of environments have resources that were deployed through the portal, through CLI one-liners, or through templates that didn't include tags at the time. In those cases, backfilling tags means either clicking through the portal one resource at a time, scripting it yourself with `az tag update` loops, or writing throwaway IaC just to patch metadata. None of those options are great when you're staring at 200 resource groups that need five tags each.
+
+The Azure Resource Tagger is a focused tool for that specific gap: scan what exists, see what's missing, and bulk-apply or remove tags without writing a single line of code or template.
 
 ## What It Does
 
@@ -47,11 +49,15 @@ This is where the actual work happens. Define tags (name + value), queue them up
 ### Remove Tags
 Added in v1.1.0. Select a tag key from a dropdown populated from your scan data (or type one manually), optionally filter by value, choose scope (all RGs, all resources, or both), and remove. Same dry-run-first workflow as Apply Tags. Uses `Update-AzTag -Operation Delete`, which surgically removes just that key without touching other tags.
 
-## Why Not Just Use the Portal?
+## Why Not Just Use the Portal (or IaC)?
 
-You could tag resources one at a time in the Azure portal. For 5 resource groups, that's fine. For 200 resource groups across 15 tag keys, it's not.
+If your resources are fully managed by Bicep or Terraform, add the tags to your templates and redeploy. That's the right answer when it's available. But for resources that were created outside of IaC -- or in environments where IaC adoption is still in progress -- you're left with manual options:
 
-The Resource Tagger gives you the scan-then-act workflow: see everything that's missing, define your tags once, and apply them across all targets in a single operation. The dry run step means you can verify before committing. And the gap analysis against a required-tag list tells you exactly which resources will fail policy enforcement before you enable it.
+- **Azure Portal**: Open each resource, click Tags, type each key/value, save. Repeat. For every resource. It works, but it doesn't scale.
+- **Azure CLI / PowerShell loops**: Write a script to query resources and pipe them through `az tag update` or `Update-AzTag`. Effective, but you're writing and testing throwaway code every time.
+- **One-off Bicep/Terraform**: Write a template solely to patch tags onto existing resources. Works, but feels like using a sledgehammer on a thumbtack, and you're still figuring out which resources need which tags.
+
+The Resource Tagger handles the discovery and application together. Scan first to see what's missing, then apply in bulk with a dry-run preview. No scripting, no templates, no clicking through 200 resource blades.
 
 ## Getting Started
 
