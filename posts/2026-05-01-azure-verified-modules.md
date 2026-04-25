@@ -49,7 +49,7 @@ The word "verified" carries a specific definition in AVM. A module earns it by m
 
 The WAF-alignment is worth understanding in more depth. AVM modules default to security and reliability best practices where they can be expressed as a simple parameter value. For example, a Key Vault module defaults to enabling purge protection and using RBAC for authorization instead of access policies. But for configurations that require additional resources (like private endpoints, which need a VNet, subnet, and DNS zone), AVM does not force those onto you; it just makes the module flexible enough to support them when you bring your own infrastructure.
 
-## Why This Matters
+## The Problem AVM Solves
 
 Before AVM, if you went looking for a reusable Bicep module for an Azure Storage Account, you might find five different implementations across different repos. Some had good testing. Some had role assignments. Some didn't. None had a clear support path. And if you were on a customer engagement and something broke in your IaC, you were on your own to debug a community module.
 
