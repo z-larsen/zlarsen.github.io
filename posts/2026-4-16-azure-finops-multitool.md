@@ -10,7 +10,7 @@ excerpt: "Discover the Azure FinOps Multitool - a PowerShell application that pr
 
 # Azure FinOps Multitool: A Fast Track to Cost Optimization
 
-![Azure FinOps Multitool](https://img.shields.io/badge/PowerShell-7.0%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![Version 2.0.0](https://img.shields.io/badge/Version-2.0.0-brightgreen)
+![Azure FinOps Multitool](https://img.shields.io/badge/PowerShell-7.0%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![Version 2.0.1](https://img.shields.io/badge/Version-2.0.1-brightgreen)
 
 I built this tool out of a recurring pattern I kept seeing while working with customers across industries; organizations knew they had Azure cost challenges but had no quick way to get a clear picture of where they stood. Every engagement started with the same manual effort: piecing together cost data, chasing down tagging gaps, and trying to size optimization opportunities across subscriptions. The Azure FinOps Multitool is my answer to that problem, built to solve the "cold start", helping teams quickly understand their current FinOps posture and identify immediate optimization opportunities without the usual setup overhead.
 
@@ -51,9 +51,12 @@ The tool provides deep visibility across your entire Azure estate:
 | **Budget Policy** | ARM Policy Assignment API | Deploy budget enforcement policies at subscription or MG scope |
 | **Billing** | Billing Accounts/Profiles API | Billing accounts, profiles, invoice sections, EA departments |
 | **Cost Allocation** | Cost Management Allocation API | Existing cost allocation rules with source/target counts |
+| **Idle VMs** | Azure Monitor Metrics (14-day) | Running VMs with <5% CPU and minimal network activity — optimization candidates Advisor may miss |
+| **Storage Tiers** | Azure Monitor Metrics (30-day) | Hot-tier storage accounts with low transaction activity — candidates for Cool or Archive migration |
 | **Scorecard** | All of the above | Per-subscription health: cost, tags, optimizations, orphan savings, budget, trend |
 | **FinOps Guidance** | All of the above | FinOps Maturity Score (0–100) with weighted category breakdown and actionable advice |
-| **Data Export** | Local File System | HTML reports, CSV exports, and Power BI template files (.pbit) |
+| **Resources** | Curated links | FinOps Framework, Cost Management docs, Azure Workbooks, orphaned resources workbook |
+| **Data Export** | Local File System | HTML reports, CSV exports, and Power BI template files (.pbit) with pre-built 4-page dashboard |
 
 ### Tagging Health & Management
 - **Tag Inventory**: Complete view of all tags in use across your tenant
@@ -73,6 +76,8 @@ The tool provides deep visibility across your entire Azure estate:
 - **Azure Hybrid Benefit (AHB)**: Identify Windows VMs, SQL VMs, and SQL DBs missing licensing optimizations
 - **Reservations & Savings Plans**: Utilization analysis and underutilized commitments
 - **Orphaned Resources**: Find and quantify waste from unused disks, IPs, NICs, VMs, and snapshots
+- **Idle VM Detection**: 14-day Azure Monitor metrics flag running VMs with <5% CPU that Advisor missed
+- **Storage Tier Optimization**: Hot-tier storage accounts with low activity flagged for Cool/Archive migration (50–90% savings)
 - **Rightsizing Recommendations**: Advisor-driven suggestions for better resource sizing
 - **Budget Monitoring**: Budget vs. actual analysis with custom threshold alerts
 
@@ -135,18 +140,21 @@ Install-Module Az.Accounts, Az.Resources, Az.ResourceGraph, Az.CostManagement, A
 
 4. Click **Commercial Tenant** (or **Gov Tenant** for Azure Government) — a browser login opens, then a tenant picker dialog lists all accessible tenants
 
-5. Select a tenant and click **Scan** — the tool runs through 19 data-collection stages with a progress bar
+4. If your tenant has more than 5 subscriptions, a **subscription selector dialog** appears — choose which subscriptions to scan or select all, then click OK
+
+5. Click **Scan** — the tool runs through 23 data-collection stages with a progress bar
 
 6. Browse the tabs when the scan completes:
    - **Overview** — cost summary cards, savings realized, budget status, subscription cost table with orphan savings, top resources by spend, scorecard
    - **Cost Analysis** — 6-month cost trend bar chart, cost anomaly flags (25%+ MoM change), spend by tag value
-   - **Tags** — tag inventory with coverage %, CAF compliance check, inline Add/Remove buttons to deploy or remove tags on subscriptions/RGs
+   - **Tags** — tag inventory with coverage %, CAF compliance check, inline Add/Remove buttons to deploy or remove tags on subscriptions/RGs/individual resources
    - **Policy** — effective policy inventory with compliance %, CAF-recommended policies, inline Deploy/Unassign buttons, remediation tasks for DINE/Modify policies
-   - **Optimization** — RI/SP utilization, orphaned resources with cost data and estimated annual waste, AHB gaps, RI/SP recs, Advisor recs
+   - **Optimization** — RI/SP utilization, orphaned resources with cost and estimated annual waste, idle VM detection (14-day metrics), storage tier advice, AHB gaps, RI/SP recs, Advisor recs
    - **Billing** — billing accounts, billing profiles (MCA), invoice sections, EA departments, cost allocation rules
-   - **FinOps Guidance** — FinOps Maturity Score (0–100) with pillar-by-pillar assessment and selectable references
+   - **FinOps Guidance** — FinOps Maturity Score (0–100) with pillar-by-pillar assessment
+   - **Resources** — curated links to FinOps Framework, Cost Management, Azure Workbooks, and more
 
-7. Click **Export Report** to save as HTML, CSV, or Power BI template (.pbit)
+7. Click **Export Scan Results** to save as HTML, CSV, or Power BI template (.pbit)
 
 ## Latest Enhancements
 
@@ -180,6 +188,25 @@ Install-Module Az.Accounts, Az.Resources, Az.ResourceGraph, Az.CostManagement, A
 - **Polished header bar**: Gradient header with icon badge and version label (v1.9.7)
 - **Custom cloud icon**: Application-level cloud icon added (v1.9.17)
 - **Responsive DataGrid columns**: Columns scale with window width; oversized row height fixed (v1.9.9 – v1.9.10)
+
+### v2.0.0 — Major Release
+The v2.0.0 bump was driven by the Power BI template export, which shifts the tool from a one-time scanner into a reusable reporting platform.
+
+- **Power BI template (.pbit)**: Generates a `.pbit` alongside exported CSVs with a pre-built 4-page report layout (Cost Overview, Subscriptions, Optimization, Governance) — open directly in Power BI Desktop with all tables and relationships pre-configured via a `CsvFolderPath` parameter
+- **Idle & underutilized VM detection**: 14-day Azure Monitor metrics (CPU + network) flag running VMs that Advisor missed, adding a second opinion beyond what Advisor surfaces
+- **Storage tier optimization**: Hot-tier storage accounts with low transaction activity flagged for Cool/Archive migration (30-day metrics)
+- **Resources tab**: Curated links organized into 5 categories — FinOps Framework, Cost Management, Rate Optimization, Governance, and Workbooks & Tools
+- **Tag Inventory Remove button**: Delete any tag directly from the Tag Inventory grid
+- **Session action log in HTML export**: Exported reports include an "Actions Taken" section showing all tags deployed/removed and policies assigned/unassigned during the session
+- **Tag removal case handling**: Resource Graph queries use `tolower()` for key lookup, and the tool reads actual tag casing via GET before DELETE to prevent silent failures
+- **Tag removal includes subscription/RG scope**: KQL queries union `resourcecontainers` so tags on subscriptions and resource groups are found and removed correctly
+
+### v2.0.1 — Subscription Selector + Billing Fixes
+- **Subscription selector**: WPF popup after tenant login lets you choose which subscriptions to scan; auto-skips for tenants with 5 or fewer subscriptions; Select All / Select None buttons; cancelling defaults to scanning everything
+- **Cross-tenant billing fix**: Queries all scanned subscriptions for billing account IDs (not just the first 5) and normalizes account IDs by extracting the name segment
+- **MCA commitment utilization**: Resolves billing profiles for MCA agreements so RI and Savings Plan queries use the correct profile scope
+- **Granular progress indicators**: 7 scan modules now update status at ~10% intervals instead of every 25th subscription — noticeably smoother feedback on large tenants
+- **Idle VM and Savings Realized progress**: Both modules now report per-item progress during metric queries (previously had no updates on large tenants)
 
 ## Use Cases & Scenarios
 
