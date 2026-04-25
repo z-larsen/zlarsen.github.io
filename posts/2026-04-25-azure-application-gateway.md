@@ -221,6 +221,62 @@ Repeat with `-VMName myVM2`.
 
 ---
 
+## Migrating from NetScaler (Citrix ADC)
+
+If you're moving workloads off a Citrix ADC or NetScaler appliance, Application Gateway covers most of the core ADC functionality for HTTP(S) traffic. The conceptual model is similar, but the terminology is different and a few NetScaler capabilities don't have a direct equivalent.
+
+### Terminology Mapping
+
+| NetScaler Concept | Application Gateway Equivalent | Notes |
+|-------------------|-------------------------------|-------|
+| **Virtual Server (vServer)** | **Listener** | A listener defines the frontend protocol, port, and certificate |
+| **Service / Service Group** | **Backend Pool** | A backend pool holds your servers, VMs, FQDNs, or IPs |
+| **Load Balancing Policy** | **Routing Rule + HTTP Settings** | Rules bind listeners to backend pools; HTTP settings control probe and timeout behavior |
+| **Content Switching vServer** | **Path-based or multi-site routing rule** | Use path maps for URL routing, multi-site listeners for hostname-based routing |
+| **SSL Offload** | **TLS Termination** | Terminate HTTPS at the listener; backends communicate over HTTP; upload cert to listener or reference Key Vault |
+| **Rewrite / Responder Policies** | **Header & URL Rewrite Rules** | App Gateway supports conditional rewrite of request/response headers and URL path/query string. See [Rewrite HTTP headers and URL](https://learn.microsoft.com/en-us/azure/application-gateway/rewrite-http-headers-url) |
+| **AppFirewall** | **WAF (WAF_v2 SKU)** | OWASP core rule sets, custom rules, bot protection, DDoS. Uses WAF Policy resource rather than inline config |
+| **Persistence Group** | **Cookie-based Session Affinity** | App Gateway sticky sessions use a gateway-managed cookie per listener, not cross-app groups |
+| **LDNS / Health Monitor** | **Health Probe** | Custom probes on App Gateway let you specify path, expected status codes, and interval |
+| **GSLB** | **Azure Front Door or Traffic Manager** | App Gateway is regional only; for global load balancing, put Front Door upstream or use Traffic Manager |
+
+### What NetScaler Does That App Gateway Handles Differently
+
+**Source IP visibility**: NetScaler can preserve the original client IP at Layer 4. Application Gateway, as a terminating proxy, replaces it. The original IP is forwarded in the `X-Forwarded-For` header, so your backend applications need to read that header instead of the TCP source. If your app or backend firewall relies on source IP matching, plan for this.
+
+**TLS policy and cipher suites**: NetScaler supports a broad range of cipher suite configurations including legacy suites for older clients. Application Gateway enforces a minimum TLS policy of TLS 1.0 by default but the recommended production setting is TLS 1.2+. If you're serving legacy clients that can only negotiate older ciphers, review the App Gateway [SSL policy options](https://learn.microsoft.com/en-us/azure/application-gateway/application-gateway-ssl-policy-overview) before cutting over.
+
+**Authentication offload**: This is the biggest gap. Citrix ADC supports nFactor authentication, SAML, LDAP, RADIUS, and client cert auth natively at the ADC level. Application Gateway does not offload authentication. If your NetScaler is handling SSO or protecting apps with AAA policies, you'll need to replace that capability with [Microsoft Entra ID Application Proxy](https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy) (for internal apps) or integrate auth directly into the application. This is often the longest part of a NetScaler-to-Azure migration.
+
+**TCP/UDP load balancing**: NetScaler handles both HTTP and non-HTTP protocols on the same appliance. Application Gateway is primarily HTTP(S), though the v2 SKU includes a TCP/TLS proxy in preview. For non-HTTP workloads, you'll need Azure Load Balancer in parallel.
+
+**Compression and caching**: NetScaler supports HTTP response compression and caching. Application Gateway does not. If you're relying on ADC-level compression, move that to the application tier or use Azure CDN/Front Door in front.
+
+### Migration Approach
+
+The safest path is a parallel deployment with DNS-based traffic shifting rather than a hard cutover.
+
+1. **Audit the current NetScaler config**. Export all vServer definitions, content switching policies, SSL certificates, persistence settings, and health monitors. Tools like `show running config` on the CLI or Citrix ADM can export this to a readable format. Map each vServer to a planned App Gateway listener.
+
+2. **Export SSL certificates**. For each certificate bound to a vServer, export the private key and certificate chain as a PFX. You'll upload these to App Gateway listeners or store them in Azure Key Vault and reference them from the listener.
+
+3. **Build the App Gateway config in parallel**. Create the gateway, configure listeners to match your existing hostnames and ports, create backend pools pointing to the same servers, and set up routing rules, rewrite rules, and health probes to match what NetScaler was doing. At this stage, no traffic touches it yet.
+
+4. **Test against the new gateway directly**. Update a single hosts file entry (or a test DNS record) to point at the new gateway's IP and run through your application manually. Validate HTTP-to-HTTPS redirects, session behavior, and header values.
+
+5. **Shift traffic incrementally**. Update DNS TTL to a low value (60 seconds) a few hours before cutover. When ready, update the DNS A record or CNAME to point at the Application Gateway public IP or DNS name. Monitor backend health in the Azure portal and watch for 502/504 errors in Application Gateway access logs.
+
+6. **Burn-in and decommission**. Leave the NetScaler in place with the old IP until you're confident traffic is stable. Once you're satisfied, decommission it.
+
+### Things to Check Before Cutover
+
+- Verify that all backends return healthy probe responses through the new gateway (check **Backend health** under the App Gateway resource)
+- Confirm `X-Forwarded-For` is being read correctly by applications that depend on client IP
+- Test certificate chain validity; App Gateway validates the full chain for end-to-end TLS backends
+- If the NetScaler was doing any TCP-level connection multiplexing or keep-alive pooling your app depended on, test connection behavior carefully since App Gateway manages backend connections independently
+
+---
+
 ## What to Do Next
 
 A working gateway over plain HTTP is a starting point, not a production configuration. Here's what to layer on:
@@ -241,4 +297,4 @@ To avoid ongoing charges, delete the resource group when you're done testing:
 
 ---
 
-*Sources: [Azure Application Gateway overview](https://learn.microsoft.com/en-us/azure/application-gateway/overview), [Application Gateway features](https://learn.microsoft.com/en-us/azure/application-gateway/features), [Load balancing options](https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/load-balancing-overview), [Quickstart: Direct web traffic with Azure Application Gateway](https://learn.microsoft.com/en-us/azure/application-gateway/quick-create-portal)*
+*Sources: [Azure Application Gateway overview](https://learn.microsoft.com/en-us/azure/application-gateway/overview), [Application Gateway features](https://learn.microsoft.com/en-us/azure/application-gateway/features), [Load balancing options](https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/load-balancing-overview), [Quickstart: Direct web traffic with Azure Application Gateway](https://learn.microsoft.com/en-us/azure/application-gateway/quick-create-portal), [Rewrite HTTP headers and URL](https://learn.microsoft.com/en-us/azure/application-gateway/rewrite-http-headers-url), [Application Gateway SSL policy overview](https://learn.microsoft.com/en-us/azure/application-gateway/application-gateway-ssl-policy-overview)*
