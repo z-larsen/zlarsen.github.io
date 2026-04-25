@@ -58,12 +58,15 @@ The tool provides deep visibility across your entire Azure estate:
 ### Tagging Health & Management
 - **Tag Inventory**: Complete view of all tags in use across your tenant
 - **Untagged Resources**: Identify resources missing critical tags
-- **Cost by Tag**: Spend analysis broken down by CAF allocation tags
-- **Tag Deployment**: Inline tag management with add/remove capabilities for subscriptions and resource groups
+- **Cost by Tag**: Spend analysis broken down by CAF allocation tags with auto-backfill and last-month fallback
+- **Tag Deployment**: Inline tag management with add/remove capabilities for subscriptions, resource groups, and individual resources
+- **Mass Tag Removal**: Remove a tag from a subscription and all its resource groups in a single click; scope extended to individual resources via Resource Graph
+- **Tag Removal Value Filter**: Filters removal candidates by actual tag value to prevent accidental deletions
 
 ### Management & Deployment
-- **Policy Management**: Deploy and manage Azure policies across subscriptions
-- **Budget Deployment**: Create and configure budgets with custom thresholds and alerts
+- **Policy Management**: Deploy and manage Azure policies across subscriptions; unassign individual policies or mass-unassign all assignments of the same policy in one action
+- **Policy Remediation**: Trigger remediation tasks for DeployIfNotExists and Modify policy assignments directly from the GUI
+- **Budget Deployment**: Create and configure budgets with up to 4 custom thresholds (Actual and Forecasted), with Action Group integration for alert routing
 - **Bulk Operations**: Deploy tags, policies, and budgets across multiple subscriptions simultaneously
 
 ### Cost Optimization Opportunities
@@ -147,14 +150,36 @@ Install-Module Az.Accounts, Az.Resources, Az.ResourceGraph, Az.CostManagement, A
 
 ## Latest Enhancements
 
-### v1.9.18+ Updates
-The latest versions include significant improvements:
+### Tag Management (v1.9.4 – v1.9.18)
+- **Mass tag removal**: Remove a tag from a subscription and all its resource groups simultaneously with one click (v1.9.4)
+- **Individual resource scope**: Mass tag removal extended to individual resources discovered via Resource Graph (v1.9.8)
+- **Tag removal value filter**: Removal operations now filter by actual tag value, not just tag name, preventing accidental removals (v1.9.13)
+- **Tag name fix**: Removal now uses the actual tag name on the resource rather than the CAF recommended name (v1.9.18)
+- **Resource Graph pagination**: Large tenants no longer hit truncation limits during tag scans (v1.9.13)
 
-- **Power BI Export Enhancement**: Export data as structured CSV sets optimized for Power BI dashboards, or use pre-built Power BI template files (.pbit) with visualizations ready to use
-- **Unified Export Dialog**: Streamlined export process with all format options in one unified interface
-- **Security Hardening**: Enhanced protection against KQL injection attacks, token redaction in diagnostics, and improved scope validation
-- **Improved Tag Management**: Better handling of tag removal operations with actual tag name processing
-- **Visual Refinements**: Custom cloud icon and improved UI responsiveness
+### Policy Management (v1.9.2 – v1.9.5)
+- **Unassign from inventory**: Policies can be unassigned directly from the Policy Inventory grid without navigating elsewhere (v1.9.2)
+- **Mass policy unassign**: Remove all assignments of the same policy across scopes in a single action (v1.9.5)
+
+### Budget Improvements (v1.9.3 – v1.9.12)
+- **Action Group selector**: Budget alerts now support selecting an Action Group at deployment time for proper alert routing (v1.9.12)
+- **Subscription name display**: Budget deploy scope picker shows actual subscription names instead of IDs (v1.9.3)
+
+### Export & Reporting (v1.9.14 – v1.9.16)
+- **Power BI CSV export**: 16 structured CSVs pre-formatted for Power BI covering costs, tags, policies, and optimization opportunities (v1.9.14)
+- **Power BI templates (.pbit)**: Ready-to-use template files with pre-built visualizations (v1.9.16)
+- **Unified export dialog**: All export formats — HTML, CSV, Power BI CSVs, .pbit — available from a single interface (v1.9.16)
+
+### Security & Stability (v1.9.6 – v1.9.15)
+- **KQL injection protection**: All Resource Graph queries escape user-controlled input (v1.9.15)
+- **Token redaction**: Access tokens are redacted in diagnostics and log output (v1.9.15)
+- **Scope validation**: Input validation prevents unauthorized or malformed scope requests (v1.9.15)
+- **Background MG hierarchy**: Management Group scan runs in a background runspace with a 60s timeout to prevent UI freezes on large tenants (v1.9.6)
+
+### Visual & UI Refinements (v1.9.7 – v1.9.17)
+- **Polished header bar**: Gradient header with icon badge and version label (v1.9.7)
+- **Custom cloud icon**: Application-level cloud icon added (v1.9.17)
+- **Responsive DataGrid columns**: Columns scale with window width; oversized row height fixed (v1.9.9 – v1.9.10)
 
 ## Use Cases & Scenarios
 
