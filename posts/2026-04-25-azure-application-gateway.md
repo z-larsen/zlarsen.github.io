@@ -15,9 +15,9 @@ Azure has five load balancing services and choosing the wrong one is a common so
 
 Application Gateway is a web traffic load balancer that operates at OSI Layer 7 (the application layer). Unlike Azure Load Balancer, which routes based on IP address and port, Application Gateway makes routing decisions based on HTTP request attributes: URL paths, host headers, cookies, and more.
 
-It acts as a **terminating proxy** — the client connects to the gateway, and the gateway opens a separate connection to the backend. This is what enables SSL offload, WAF inspection, and header rewriting. The backend never needs to see the raw internet traffic.
+It acts as a **terminating proxy**: the client connects to the gateway, and the gateway opens a separate connection to the backend. That's what makes SSL offload, WAF inspection, and header rewriting possible. Your backend servers never touch raw internet traffic.
 
-Key capabilities, sourced from [Azure Application Gateway features](https://learn.microsoft.com/en-us/azure/application-gateway/features):
+Here's what it gives you, per the [Azure Application Gateway features docs](https://learn.microsoft.com/en-us/azure/application-gateway/features):
 
 | Feature | What It Does |
 |---------|-------------|
@@ -25,14 +25,14 @@ Key capabilities, sourced from [Azure Application Gateway features](https://lear
 | **Web Application Firewall (WAF)** | OWASP core rule sets (3.1, 3.0, 2.2.9), bot protection via Microsoft Threat Intelligence, DDoS application-layer protection. |
 | **URL-Based Routing** | Route `/images/*` to one backend pool and `/video/*` to another based on path. |
 | **Multi-Site Hosting** | Host 100+ websites on a single gateway, each routing to its own backend pool by hostname or domain. |
-| **Autoscaling** | Standard_v2 SKU scales up and down based on traffic automatically — no instance count tuning. |
+| **Autoscaling** | Standard_v2 scales with traffic automatically. No instance count to tune during provisioning. |
 | **Zone Redundancy** | Standard_v2 spans availability zones; no need to deploy separate gateways per zone. |
 | **Session Affinity** | Cookie-based sticky sessions keep a user on the same backend server. |
-| **HTTP Redirection** | Global or path-based HTTP-to-HTTPS redirection built in — no dedicated redirect pool needed. |
+| **HTTP Redirection** | Global or path-based HTTP-to-HTTPS redirection built in; no dedicated redirect pool needed. |
 | **Header & URL Rewriting** | Add, remove, or modify HTTP headers and URLs; supports conditional rewrites. |
 | **AKS Ingress (AGIC)** | Application Gateway Ingress Controller lets AKS use Application Gateway as the cluster ingress. |
 | **WebSocket / HTTP/2** | Native support for both protocols with no extra configuration. |
-| **Connection Draining** | Gracefully removes backend pool members during updates — in-flight requests complete before the node is pulled. |
+| **Connection Draining** | Gracefully removes backend pool members during updates; in-flight requests finish before the node is pulled. |
 | **Private Link** | Connect to backends privately; fully private-only deployment (public preview). |
 
 ## When to Use Application Gateway vs. the Alternatives
@@ -58,9 +58,9 @@ Azure's load balancing decision tree ([Load balancing options](https://learn.mic
 - You're running multi-tenant or multi-app deployments on shared infrastructure
 
 **Don't use Application Gateway when:**
-- You need global load balancing — use Front Door instead (or Front Door in front of Application Gateway)
-- Your workload is TCP/UDP with no HTTP involvement — use Load Balancer
-- You only need DNS-level routing without traffic proxying — use Traffic Manager
+- You need global load balancing. Use Front Door instead (or Front Door in front of Application Gateway).
+- Your workload is TCP/UDP with no HTTP involvement. Use Load Balancer.
+- You only need DNS-level routing without traffic proxying. Use Traffic Manager.
 
 ## SKU Comparison
 
@@ -77,7 +77,7 @@ For production internet-facing workloads, use **WAF_v2**. For internal apps that
 
 ## Setup Guide
 
-This walkthrough follows the [official Microsoft quickstart](https://learn.microsoft.com/en-us/azure/application-gateway/quick-create-portal). It deploys a Standard_v2 Application Gateway with two backend VMs and a basic HTTP listener.
+Everything below follows the [official Microsoft quickstart](https://learn.microsoft.com/en-us/azure/application-gateway/quick-create-portal). By the end you'll have a working Standard_v2 gateway with two backend VMs, a routing rule, and a public endpoint you can hit from a browser.
 
 ### Prerequisites
 - An Azure subscription ([create a free account](https://azure.microsoft.com/pricing/purchase-options/azure-account))
@@ -131,14 +131,14 @@ Application Gateway requires its own dedicated subnet separate from backend targ
 
    > Standard_v2 is zone-redundant by default in regions with multiple availability zones.
 
-3. **Frontends tab** — verify **Frontend IP address type** is set to **Public**, then select **Add new** for the public IP and name it `myAGPublicIPAddress`
+3. **Frontends tab**: verify **Frontend IP address type** is set to **Public**, then select **Add new** for the public IP and name it `myAGPublicIPAddress`
 
-4. **Backends tab** — select **Add a backend pool**:
+4. **Backends tab**: select **Add a backend pool**:
    - **Name**: `myBackendPool`
    - **Add backend pool without targets**: `Yes` (you'll add VMs after creating the gateway)
    - Select **Add**
 
-5. **Configuration tab** — select **Add a routing rule**:
+5. **Configuration tab**: select **Add a routing rule**:
    - **Rule name**: `myRoutingRule`
    - **Priority**: `100` (range: 1 = highest, 20000 = lowest)
    - On the **Listener** sub-tab:
@@ -216,20 +216,20 @@ Repeat with `-VMName myVM2`.
 ### Step 4: Test
 
 1. Go to **myAppGateway > Overview** and copy the public IP address (or search for `myAGPublicIPAddress` in All resources)
-2. Paste the IP into a browser — you should see the hostname of one of your VMs
+2. Paste the IP into a browser. You should see the hostname of one of your VMs.
 3. Refresh several times to see connections round-robin between `myVM` and `myVM2`
 
 ---
 
 ## What to Do Next
 
-With a working gateway in place, the typical next steps are:
+A working gateway over plain HTTP is a starting point, not a production configuration. Here's what to layer on:
 
-- **Enable WAF**: switch from Standard_v2 to WAF_v2 and configure OWASP rules, bot protection, and custom rules
-- **Add TLS**: follow the [TLS termination tutorial](https://learn.microsoft.com/en-us/azure/application-gateway/create-ssl-portal) to add an HTTPS listener and certificate
-- **URL-based routing**: create path-based rules to route different URL paths to different backend pools
-- **Multi-site hosting**: add host-based listeners to serve multiple domains from one gateway
-- **Front Door in front**: for global reach, put Azure Front Door in front of Application Gateway — Front Door handles global routing and CDN, App Gateway handles regional WAF and routing
+- **Enable WAF**: upgrade to WAF_v2 and turn on OWASP rule sets, bot protection, and custom rules. If your app is internet-facing, this isn't optional.
+- **Add TLS**: follow the [TLS termination tutorial](https://learn.microsoft.com/en-us/azure/application-gateway/create-ssl-portal) to add an HTTPS listener and offload certificate management to the gateway instead of every backend.
+- **URL-based routing**: split traffic by path so `/api/*` goes to one backend pool and `/static/*` goes to another. Cleaner than trying to do this in application code.
+- **Multi-site hosting**: one gateway can serve 100+ domains, each with its own backend. Much cheaper than a gateway per app.
+- **Front Door in front**: if you need global reach, put Front Door upstream. Front Door handles global routing, CDN, and anycast; Application Gateway handles per-region WAF and Layer 7 inspection behind it.
 
 ## Clean Up
 
