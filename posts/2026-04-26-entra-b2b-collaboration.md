@@ -60,8 +60,8 @@ This is the first configuration surface most admins touch. Find it at:
 **Microsoft Entra admin center > Identity > External Identities > External collaboration settings**
 
 <figure>
-  <img src="https://learn.microsoft.com/en-us/entra/external-id/media/external-collaboration-settings-configure/external-collaboration-settings.png" alt="External Collaboration Settings page in the Microsoft Entra admin center">
-  <figcaption>External Collaboration Settings in the Microsoft Entra admin center. Source: Microsoft Learn</figcaption>
+  <img src="https://learn.microsoft.com/en-us/entra/external-id/media/external-collaboration-settings-configure/guest-user-access.png" alt="Guest user access settings in the Microsoft Entra admin center External Collaboration Settings page">
+  <figcaption>Guest user access options in External Collaboration Settings — controls how much of your directory guests can browse. Source: Microsoft Learn</figcaption>
 </figure>
 
 ### Guest User Access Levels
