@@ -48,11 +48,21 @@ Microsoft updated the redemption flow in 2025. Guest users are now redirected to
 
 You can customize the order in which identity providers are tried during redemption under **Cross-tenant access settings > Default settings > Edit inbound defaults > B2B collaboration > Redemption order**. You can also disable the Microsoft account (MSA) fallback if your organization doesn't want guests signing in with personal Microsoft accounts -- just note that if you do that, you must keep OTP enabled since you need at least one fallback.
 
+<figure>
+  <img src="https://learn.microsoft.com/en-us/entra/external-id/media/authentication-conditional-access/cross-tenant-auth.png" alt="Diagram showing how a guest user authenticates across tenant boundaries">
+  <figcaption>Authentication flow when a Microsoft Entra guest user accesses a resource in your tenant. Source: Microsoft Learn</figcaption>
+</figure>
+
 ## External Collaboration Settings
 
 This is the first configuration surface most admins touch. Find it at:
 
 **Microsoft Entra admin center > Identity > External Identities > External collaboration settings**
+
+<figure>
+  <img src="https://learn.microsoft.com/en-us/entra/external-id/media/external-collaboration-settings-configure/external-collaboration-settings.png" alt="External Collaboration Settings page in the Microsoft Entra admin center">
+  <figcaption>External Collaboration Settings in the Microsoft Entra admin center. Source: Microsoft Learn</figcaption>
+</figure>
 
 ### Guest User Access Levels
 
@@ -100,6 +110,11 @@ This is the deeper configuration layer that controls collaboration with specific
 
 There are two tabs: **Default settings** (applies to all external orgs you haven't specifically configured) and **Organizational settings** (per-org overrides).
 
+<figure>
+  <img src="https://learn.microsoft.com/en-us/entra/external-id/media/cross-tenant-access-settings-b2b-collaboration/cross-tenant-defaults.png" alt="Cross-tenant access settings default configuration tab in the Entra admin center">
+  <figcaption>Cross-tenant access settings — Default settings tab showing inbound and outbound defaults. Source: Microsoft Learn</figcaption>
+</figure>
+
 ### Inbound Access Settings
 
 Controls what external users from other Microsoft Entra orgs can access in your tenant.
@@ -125,6 +140,11 @@ This is where things get interesting from a Conditional Access perspective. Trus
 **Trust compliant devices** -- if enabled, device compliance claims from the guest's home tenant are accepted. This is the only practical way to enforce "require compliant device" on guests, since external users can't enroll devices in your tenant.
 
 **Trust Microsoft Entra hybrid joined devices** -- same idea for hybrid join claims.
+
+<figure>
+  <img src="https://learn.microsoft.com/en-us/entra/external-id/media/cross-tenant-access-settings-b2b-collaboration/inbound-trust-settings.png" alt="Inbound trust settings showing MFA, compliant device, and hybrid join trust options">
+  <figcaption>Inbound trust settings — configure whether to accept MFA, compliant device, and hybrid join claims from partner tenants. Source: Microsoft Learn</figcaption>
+</figure>
 
 ### Automatic Redemption
 

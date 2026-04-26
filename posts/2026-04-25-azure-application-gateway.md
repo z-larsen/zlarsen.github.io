@@ -17,6 +17,11 @@ Application Gateway is a web traffic load balancer that operates at OSI Layer 7 
 
 It acts as a **terminating proxy**: the client connects to the gateway, and the gateway opens a separate connection to the backend. That's what makes SSL offload, WAF inspection, and header rewriting possible. Your backend servers never touch raw internet traffic.
 
+<figure>
+  <img src="https://learn.microsoft.com/en-us/azure/application-gateway/media/how-application-gateway-works/how-application-gateway-works.png" alt="Diagram showing how Azure Application Gateway accepts a request and routes it to a backend pool">
+  <figcaption>How Azure Application Gateway accepts client requests and routes them to backend pool members. Source: Microsoft Learn</figcaption>
+</figure>
+
 Here's what it gives you, per the [Azure Application Gateway features docs](https://learn.microsoft.com/en-us/azure/application-gateway/features):
 
 | Feature | What It Does |
@@ -34,6 +39,11 @@ Here's what it gives you, per the [Azure Application Gateway features docs](http
 | **WebSocket / HTTP/2** | Native support for both protocols with no extra configuration. |
 | **Connection Draining** | Gracefully removes backend pool members during updates; in-flight requests finish before the node is pulled. |
 | **Private Link** | Connect to backends privately; fully private-only deployment (public preview). |
+
+<figure>
+  <img src="https://learn.microsoft.com/en-us/azure/application-gateway/media/application-gateway-url-route-overview/figure1-720.png" alt="URL path-based routing diagram showing traffic directed to different backend pools based on URL path">
+  <figcaption>URL path-based routing — requests to /images/* route to one backend pool while /video/* routes to another. Source: Microsoft Learn</figcaption>
+</figure>
 
 ## When to Use Application Gateway vs. the Alternatives
 

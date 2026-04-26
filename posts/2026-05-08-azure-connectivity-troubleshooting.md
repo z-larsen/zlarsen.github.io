@@ -29,6 +29,11 @@ The two questions to carry through every step: Is traffic reaching this layer? A
 
 [Azure Network Watcher](https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-overview) is the first place to go for anything involving VMs, virtual networks, NSGs, or routing. It's a suite of tools, not a single thing, and each one answers a different question.
 
+<figure>
+  <img src="https://learn.microsoft.com/en-us/azure/network-watcher/media/network-watcher-overview/network-watcher-capabilities.png" alt="Diagram of Azure Network Watcher capabilities grouped into monitoring, diagnostic tools, and traffic categories">
+  <figcaption>Azure Network Watcher capability groups: monitoring tools, diagnostic tools, and traffic analysis. Source: Microsoft Learn</figcaption>
+</figure>
+
 ### IP Flow Verify
 
 This is your NSG debugger. You give it a VM, a direction (inbound or outbound), source IP, destination IP, and port. It tells you whether the current NSG rules would allow or deny that traffic, and which specific rule is responsible.
@@ -102,6 +107,11 @@ AzureNetworkAnalytics_CL
 ```
 
 Traffic Analytics also builds a visual map in the portal under Network Watcher showing traffic patterns, top-talking VMs, and geo-distribution of traffic. For an environment you've never seen before, that map is worth opening before diving into queries.
+
+<figure>
+  <img src="https://learn.microsoft.com/en-us/azure/network-watcher/media/network-watcher-overview/traffic-analytics.png" alt="Traffic Analytics dashboard in Azure portal showing a network topology map with flow data">
+  <figcaption>Traffic Analytics dashboard — visual map of flow patterns across your virtual networks, with top talkers and geo-distribution. Source: Microsoft Learn</figcaption>
+</figure>
 
 ## Azure Firewall
 

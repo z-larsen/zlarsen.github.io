@@ -21,6 +21,11 @@ A workspace is a single logical container for log data. Everything you send ther
 
 One workspace per environment (dev, staging, prod) is a reasonable starting layout. Don't build one workspace per resource unless you have a specific reason. Cross-workspace queries are possible but add complexity, and having too many workspaces fragments your data and makes alerts harder to manage.
 
+<figure>
+  <img src="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/media/log-analytics-overview/start-log-analytics.png" alt="Log Analytics opening screen in the Azure portal showing the example queries dialog">
+  <figcaption>When you first open Log Analytics, an example queries dialog appears — a good starting point for exploring what's available. Source: Microsoft Learn</figcaption>
+</figure>
+
 ## Connecting Resources to a Workspace
 
 Resources don't automatically send logs to a workspace. You have to configure diagnostic settings for each resource, or use Azure Policy to push the configuration at scale.
@@ -34,6 +39,11 @@ For VMs, logs and metrics flow through the Azure Monitor Agent (AMA). You create
 ## KQL Basics
 
 KQL is a pipe-based query language. You start with a table, apply filters and transformations, and each step is separated by a pipe character. If you've used PowerShell's pipeline or Unix command chaining, the mental model is similar.
+
+<figure>
+  <img src="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/media/log-analytics-overview/logs-simple-overview.png" alt="Log Analytics interface in simple mode showing the top action bar, left sidebar, and results window">
+  <figcaption>The Log Analytics interface: top action bar (1), left sidebar with tables and queries (2), results window (3), and more tools (4). Source: Microsoft Learn</figcaption>
+</figure>
 
 A basic query looks like this:
 
@@ -82,6 +92,11 @@ AZFWNetworkRule
 ## Tables Worth Knowing
 
 These are the tables you'll use most often. Some require specific diagnostic settings to be enabled, which is noted:
+
+<figure>
+  <img src="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/media/log-analytics-explorer/log-analytics-left-sidebar.png" alt="Log Analytics left sidebar showing the Tables, Queries, Functions, and Query history panels">
+  <figcaption>The Log Analytics left sidebar — browse available tables, saved/example queries, functions, and your query history. Source: Microsoft Learn</figcaption>
+</figure>
 
 | Table | What's in it | Requires |
 |-------|-------------|---------|
