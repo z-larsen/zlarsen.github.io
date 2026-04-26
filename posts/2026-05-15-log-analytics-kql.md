@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Azure Log Analytics and KQL: A Practical Guide with Real Queries"
-date: 2026-05-15
+date: 2026-04-26
 tags: [posts, azure, log-analytics, kql, azure-monitor, diagnostics, monitoring, kusto]
 category: Tutorials
 excerpt: "Log Analytics is where Azure's diagnostic data lands. KQL is how you actually get answers out of it. This post covers the workspace model, the tables that matter most, and a set of practical queries you can use right now."

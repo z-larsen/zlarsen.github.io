@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Azure Verified Modules: Microsoft's Official IaC Module Library"
-date: 2026-05-01
+date: 2026-04-26
 tags: [posts, azure, bicep, terraform, iac, infrastructure-as-code, avm]
 category: Tools
 excerpt: "Azure Verified Modules (AVM) is Microsoft's answer to the fragmented IaC module landscape. Learn what AVM is, why it matters, how the module types work, and how to start using it in your Bicep or Terraform deployments today."
