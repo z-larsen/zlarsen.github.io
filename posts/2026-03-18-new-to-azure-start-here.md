@@ -81,6 +81,11 @@ Landing zones prevent shadow IT, ensure compliance baselines are in place from d
 
 > Reference: [Landing Zone Architecture](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/)
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/media/azure-landing-zone-architecture-diagram-hub-spoke.svg" alt="Azure Landing Zone reference architecture showing hub and spoke networking topology with platform and application landing zones">
+<figcaption>The Azure Landing Zone reference architecture uses a hub-spoke topology: a central platform landing zone provides shared services (networking, identity, management) that spoke application landing zones connect to. Source: Microsoft Learn</figcaption>
+</figure>
+
 ---
 
 ## CAF Operating Models
@@ -237,6 +242,11 @@ Optional organizational folders for subscriptions. Useful when you have 10+ subs
 
 Reference: [Management Groups](https://learn.microsoft.com/azure/governance/management-groups/overview)
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/governance/media/mg-org.png" alt="Azure management group hierarchy showing tenant root, management groups, subscriptions, and resource groups in a tree structure">
+<figcaption>The Azure resource hierarchy: management groups organize subscriptions, which contain resource groups, which contain the actual resources. Policies and RBAC applied at higher scopes cascade down. Source: Microsoft Learn</figcaption>
+</figure>
+
 ### Resource Groups
 Logical containers for resources that share the same lifecycle. When you delete a resource group, all resources inside are deleted. A resource can only belong to one resource group at a time.
 
@@ -321,6 +331,11 @@ Fully managed applications. You just use the software.
 ## Shared Responsibility Model
 
 In traditional on-premises, you manage everything. In Azure, responsibilities are shared and the dividing line depends on the service model.
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/security/fundamentals/media/shared-responsibility/shared-responsibility.svg" alt="Shared responsibility model matrix showing division of security responsibilities between customer and Microsoft across IaaS, PaaS, and SaaS">
+<figcaption>The shared responsibility model: as you move from IaaS to PaaS to SaaS, Microsoft takes on more of the security stack. You always own your data and identities. Source: Microsoft Learn</figcaption>
+</figure>
 
 ### Full Responsibility Matrix
 

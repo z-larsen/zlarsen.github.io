@@ -240,6 +240,11 @@ Benefits:
 
 A managed, cloud-native firewall service providing network and application-level filtering.
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/firewall/media/overview/firewall-standard.png" alt="Azure Firewall Standard deployment diagram showing L3-L7 packet filtering, threat intelligence, and centralized logging">
+<figcaption>Azure Firewall Standard provides stateful L3–L7 packet filtering with built-in threat intelligence, enabling centralized egress control for all traffic leaving your VNet. Source: Microsoft Learn</figcaption>
+</figure>
+
 Key features:
 - Centralized logging and analytics
 - Threat intelligence filtering

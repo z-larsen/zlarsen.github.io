@@ -62,6 +62,11 @@ To understand what's happening in Azure, you need three types of data.
 | Logs | Event records | On event | 30–730 days | Troubleshooting | Medium |
 | Traces | Request flows | On request | Varies | Performance tuning | Medium |
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/media/overview/overview.png" alt="Azure Monitor architecture overview showing data sources feeding into metrics and logs stores with analysis and visualization tools">
+<figcaption>Azure Monitor is the unified observability platform for Azure: it collects metrics, logs, and traces from resources and provides analysis through dashboards, alerts, and Log Analytics. Source: Microsoft Learn</figcaption>
+</figure>
+
 ---
 
 ## Diagnostic Settings
@@ -209,6 +214,11 @@ A SIEM collects security logs from multiple sources, correlates events, and dete
 - Provides pre-built threat detection rules
 - Automates incident response (SOAR capabilities)
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/sentinel/media/overview/map-timeline.png" alt="Microsoft Sentinel incident investigation map showing entity relationships and timeline for a security incident">
+<figcaption>Microsoft Sentinel's incident investigation map visualizes entity relationships (users, hosts, IPs) and a timeline of events, helping analysts understand the full scope of a security incident. Source: Microsoft Learn</figcaption>
+</figure>
+
 ### Architecture
 
 ```
@@ -226,6 +236,11 @@ Azure Resources → Diagnostic Settings → Log Analytics Workspace
 - Firewall logs (network threats)
 - Office 365 logs (email phishing)
 - Windows Security Events (endpoint threats)
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/sentinel/media/overview/data-connector-list-defender.png" alt="Microsoft Sentinel data connectors page showing available integration sources including Microsoft Defender and Azure services">
+<figcaption>Microsoft Sentinel's data connectors page: hundreds of built-in connectors pull logs from Azure, Microsoft 365, Defender, and third-party sources into a single workspace for unified threat detection. Source: Microsoft Learn</figcaption>
+</figure>
 
 ### Pre-Built Detections
 

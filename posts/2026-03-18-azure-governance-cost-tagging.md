@@ -49,6 +49,11 @@ Costs start at the resource level and roll up through the hierarchy.
 
 > Reference: [Understand Cost Management Data](https://learn.microsoft.com/azure/cost-management-billing/costs/understand-cost-mgt-data)
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/governance/media/mg-org.png" alt="Sample Azure management group hierarchy with subscriptions organized under management groups below the tenant root">
+<figcaption>Azure management group hierarchy: subscriptions roll up to management groups, which provide a scope for applying governance policies and RBAC across multiple subscriptions. Source: Microsoft Learn</figcaption>
+</figure>
+
 ---
 
 ## Enterprise Billing Concepts
@@ -143,6 +148,11 @@ Understanding what makes Azure expensive helps you optimize spending.
 ### Cost Analysis
 
 Interactive charts showing spending over time. Filter by subscription, resource group, resource type, location, or tag. Group by service name, resource, or tag value.
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/media/quick-acm-cost-analysis/accumulated-costs-view.png" alt="Azure Cost Analysis accumulated costs view showing customizable spending charts filtered by subscription and resource group">
+<figcaption>Azure Cost Analysis provides interactive charts to explore spending by subscription, resource group, resource type, or tag — essential for governance and chargeback reporting. Source: Microsoft Learn</figcaption>
+</figure>
 
 **Example queries:**
 1. "Show all compute costs in Production subscriptions"

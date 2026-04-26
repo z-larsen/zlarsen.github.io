@@ -37,6 +37,11 @@ The solution works as follows:
 5. User completes MFA on their registered device
 6. Upon successful MFA, NPS grants access
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/entra/identity/authentication/media/howto-mfa-nps-extension/auth-flow.png" alt="Authentication flow diagram showing VPN server sending RADIUS request to NPS, which then triggers Microsoft Entra multifactor authentication">
+<figcaption>The NPS extension authentication flow: the VPN/NAS server sends a RADIUS request to NPS, which validates credentials then triggers a cloud-based MFA challenge via Microsoft Entra ID. Source: Microsoft Learn</figcaption>
+</figure>
+
 ## Real-World Use Cases
 
 ### Use Case 1: Securing Remote VPN Access
@@ -135,6 +140,11 @@ If you're using multiple NPS servers for redundancy:
 5. Click **OK**
 
 ## Part 2: Install Entra MFA NPS Extension
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/entra/identity/authentication/media/howto-mfa-nps-extension/radius-flow.png" alt="RADIUS packet flow diagram showing UDP authentication requests between VPN server and NPS with MFA extension">
+<figcaption>RADIUS UDP packet flow: the NPS MFA extension intercepts authentication requests and performs a secondary verification with Microsoft Entra ID before granting or denying access. Source: Microsoft Learn</figcaption>
+</figure>
 
 ### Prerequisites
 

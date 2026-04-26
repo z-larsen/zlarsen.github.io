@@ -21,6 +21,11 @@ The fundamental cost equation is still Price × Quantity = Cost. You can still r
 
 If your organization already has a functioning FinOps practice, you're not starting from scratch. You're extending what you have into new territory.
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/media/quick-acm-cost-analysis/accumulated-costs-view.png" alt="Azure Cost Analysis accumulated costs view showing spending trends for all Azure workloads including AI services">
+<figcaption>AI service costs appear in Azure Cost Analysis just like any other workload — use filters and grouping by service name or resource tag to isolate and track AI spending. Source: Microsoft Learn</figcaption>
+</figure>
+
 ---
 
 ## Where AI Costs Break from Traditional FinOps
@@ -88,6 +93,11 @@ The FinOps Foundation's guidance is to shorten your forecast revision cycle for 
 ---
 
 ## Azure-Specific: What You're Working With
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/media/quick-acm-cost-analysis/see-insights.png" alt="Azure Cost Analysis intelligent insights panel highlighting unusual spending patterns and cost anomalies">
+<figcaption>Azure Cost Analysis intelligent insights automatically flag anomalies in spending — especially important for AI workloads where token costs can spike rapidly due to increased usage or prompt design changes. Source: Microsoft Learn</figcaption>
+</figure>
 
 ### Azure OpenAI Service
 

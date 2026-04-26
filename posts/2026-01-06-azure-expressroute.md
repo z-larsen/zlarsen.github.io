@@ -30,6 +30,11 @@ ExpressRoute connections offer:
 
 > Reference: [What is Azure ExpressRoute?](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction)
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/expressroute/media/expressroute-introduction/expressroute-connection-overview.png" alt="ExpressRoute connection overview diagram showing private connectivity from on-premises networks to Azure and Microsoft 365">
+<figcaption>ExpressRoute provides private, dedicated connectivity from on-premises networks to Azure and Microsoft 365, bypassing the public internet. Source: Microsoft Learn</figcaption>
+</figure>
+
 ---
 
 ## When to Use ExpressRoute (vs. VPN Gateway)
@@ -79,6 +84,11 @@ Connect directly into Microsoft's global network at a peering location, no third
 **Best for:** massive data ingestion, regulated industries requiring physical isolation, or granular per-business-unit circuit control.
 
 > Reference: [ExpressRoute connectivity models](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-connectivity-models)
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/expressroute/media/expressroute-connectivity-models/expressroute-connectivity-models-diagram.png" alt="ExpressRoute connectivity models diagram showing colocated, point-to-point Ethernet, IPVPN, and ExpressRoute Direct options">
+<figcaption>The four ExpressRoute connectivity models: CloudExchange Colocation, Point-to-Point Ethernet, Any-to-Any (IPVPN), and ExpressRoute Direct. Source: Microsoft Learn</figcaption>
+</figure>
 
 ---
 
@@ -217,6 +227,11 @@ Before provisioning an ExpressRoute circuit:
 - [ ] For ExpressRoute Direct: subscription pre-enrolled via PowerShell before provisioning
 
 > Reference: [ExpressRoute prerequisites & checklist](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-prerequisites)
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/expressroute/media/expressroute-howto-circuit-portal-resource-manager/maximum-resiliency.png" alt="ExpressRoute maximum resiliency configuration with two circuits in two different peering locations">
+<figcaption>Maximum resiliency requires two ExpressRoute circuits in two separate peering locations, providing protection against single provider or location failures. Source: Microsoft Learn</figcaption>
+</figure>
 
 ---
 

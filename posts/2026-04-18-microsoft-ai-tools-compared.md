@@ -70,6 +70,11 @@ Use Microsoft 365 Copilot when:
 
 Copilot Studio is a **low-code, graphical platform** for building custom AI agents (formerly called chatbots). It is part of the Microsoft Power Platform family and is designed to be accessible to business analysts, IT pros, and developers who do not need or want to write full application code.
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/microsoft-copilot-studio/media/fundamentals-what-is-copilot-studio/home-page.png" alt="Microsoft Copilot Studio home page showing the low-code agent builder interface with canvas and configuration panels">
+<figcaption>Microsoft Copilot Studio's home page: a low-code platform where you define agent instructions, knowledge sources, topics, and publishing channels without writing application code. Source: Microsoft Learn</figcaption>
+</figure>
+
 You describe the agent you want in plain language. Copilot Studio lets you define instructions, knowledge sources, topics (conversation flows), tools (external connectors and APIs), and triggers, then test and publish across multiple channels.
 
 ### Key Capabilities

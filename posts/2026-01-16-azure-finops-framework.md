@@ -130,6 +130,11 @@ Azure Cost Management supports cost allocation rules for shared costs:
 
 ## Phase 1: Inform - Visibility & Reporting
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/media/quick-acm-cost-analysis/accumulated-costs-view.png" alt="Azure Cost Analysis accumulated costs view showing spending trends over time">
+<figcaption>Azure Cost Analysis: the accumulated costs view provides a running total of spending for the selected period, customizable by subscription, resource group, or tag. Source: Microsoft Learn</figcaption>
+</figure>
+
 ### Azure Cost Management + Billing
 
 Configure comprehensive cost visibility:
@@ -181,6 +186,11 @@ az consumption budget create \
 ```
 
 ## Phase 2: Optimize - Cost Reduction
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/media/quick-acm-cost-analysis/table-show-cost-contributors.png" alt="Azure Cost Analysis table view showing cost contributors broken down by subscription">
+<figcaption>The Cost Analysis table view identifies your top cost contributors — drill down by subscription, resource group, or service to find optimization opportunities. Source: Microsoft Learn</figcaption>
+</figure>
 
 ### Azure Advisor Recommendations
 
@@ -249,6 +259,11 @@ az vm list \
 ```
 
 ## Phase 3: Operate - Governance & Continuous Improvement
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/media/quick-acm-cost-analysis/see-insights.png" alt="Azure Cost Analysis intelligent insights panel highlighting cost anomalies and patterns">
+<figcaption>Azure Cost Analysis intelligent insights surface cost anomalies and unusual patterns automatically, helping FinOps teams respond quickly to unexpected spending. Source: Microsoft Learn</figcaption>
+</figure>
 
 ### FinOps Governance Model
 

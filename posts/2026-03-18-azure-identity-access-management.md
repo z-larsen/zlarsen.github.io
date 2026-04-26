@@ -129,6 +129,11 @@ az storage blob list --account-name mystorageaccount --container mycontainer
 
 RBAC is Azure's authorization system. It determines who can do what on which resources.
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/role-based-access-control/media/overview/rbac-overview.png" alt="Azure RBAC overview diagram showing how security principals, role definitions, and scope combine into role assignments">
+<figcaption>Azure RBAC combines a security principal (who), a role definition (what they can do), and a scope (where) into a role assignment — the fundamental building block of Azure authorization. Source: Microsoft Learn</figcaption>
+</figure>
+
 **RBAC formula:**
 
 > Security Principal + Role Definition + Scope = Role Assignment
@@ -139,6 +144,11 @@ RBAC is Azure's authorization system. It determines who can do what on which res
 - **Group** — Finance-Team-Group
 - **Service Principal** — App registration
 - **Managed Identity** — MI assigned to a VM
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/role-based-access-control/media/shared/rbac-security-principal.png" alt="Azure RBAC security principal types: user, group, service principal, and managed identity">
+<figcaption>The four types of RBAC security principals: individual users, groups (for assigning roles to teams), service principals (app identities), and managed identities (Azure-native service accounts). Source: Microsoft Learn</figcaption>
+</figure>
 
 ### Role Definition (What can they do?)
 
@@ -170,6 +180,11 @@ Management Group
 **Most permissive wins:** If a user has Reader at subscription level and Contributor at a specific RG, they are Contributor in that RG and Reader everywhere else.
 
 > Reference: [RBAC Scope](https://learn.microsoft.com/azure/role-based-access-control/scope-overview)
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/role-based-access-control/media/shared/rbac-scope.png" alt="Azure RBAC scope hierarchy showing management group, subscription, resource group, and resource levels">
+<figcaption>RBAC scope levels: permissions assigned at a higher scope (e.g., subscription) are inherited by all lower scopes (resource groups, resources). Apply roles at the lowest scope needed. Source: Microsoft Learn</figcaption>
+</figure>
 
 ### Example Assignment
 

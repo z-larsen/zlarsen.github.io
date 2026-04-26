@@ -63,6 +63,21 @@ Azure stores multiple copies of your data for durability. You choose the redunda
 
 > Reference: [Storage Redundancy](https://learn.microsoft.com/azure/storage/common/storage-redundancy)
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/storage/common/media/storage-redundancy/locally-redundant-storage.png" alt="Locally Redundant Storage diagram showing data replicated three times within a single datacenter">
+<figcaption>LRS replicates data three times within a single datacenter. Low cost but no protection against a datacenter-level outage. Source: Microsoft Learn</figcaption>
+</figure>
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/storage/common/media/storage-redundancy/zone-redundant-storage.png" alt="Zone-Redundant Storage diagram showing data replicated across three availability zones within a primary region">
+<figcaption>ZRS replicates data synchronously across three availability zones in the primary region, protecting against datacenter failures without sacrificing read performance. Source: Microsoft Learn</figcaption>
+</figure>
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/storage/common/media/storage-redundancy/geo-redundant-storage.png" alt="Geo-Redundant Storage diagram showing data replicated to a secondary region hundreds of miles away from the primary region">
+<figcaption>GRS replicates data asynchronously to a secondary region hundreds of miles away, providing protection against regional disasters. Source: Microsoft Learn</figcaption>
+</figure>
+
 ---
 
 ## Storage Access Tiers

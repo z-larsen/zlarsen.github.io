@@ -63,6 +63,11 @@ Workload subscriptions live under **Corp** or **Online** depending on whether th
 
 > Reference: [Azure landing zone design areas](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-areas)
 
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise-scale/media/azure-landing-zone-architecture-diagram-hub-spoke.svg" alt="Azure Landing Zone reference architecture showing hub and spoke networking topology with platform landing zones and application landing zones">
+<figcaption>The Azure Landing Zone reference architecture: a central platform landing zone provides shared services (hub VNet, firewall, identity, management) connected via hub-spoke topology to application landing zones. This is the target architecture for brownfield migrations. Source: Microsoft Learn</figcaption>
+</figure>
+
 ---
 
 ## The Golden Rule: Build in Parallel, Migrate Incrementally
@@ -126,6 +131,11 @@ This will be critical input for the transition; you need to know what guardrails
 ---
 
 ## Phase 2: Deploy the Target Structure (Parallel, Not Replacing)
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/media/alz-application-platform.svg" alt="Azure Landing Zone architecture showing platform landing zone and application landing zones with subscription structure">
+<figcaption>The ALZ architecture separates platform services (connectivity, identity, management) in Platform Landing Zones from application workloads in Application Landing Zones — each gets its own subscription for clear billing and governance boundaries. Source: Microsoft Learn</figcaption>
+</figure>
 
 ### Step 2.1: Deploy the ALZ Management Group Hierarchy
 
