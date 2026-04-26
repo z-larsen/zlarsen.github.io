@@ -2,12 +2,15 @@
 layout: base.njk
 ---
 
+<div class="reading-progress" id="reading-progress"></div>
+
 <article class="post">
   <header class="post-header">
     <a href="/blog/" class="post-back">&larr; Back to all posts</a>
     <h1>{{ title }}</h1>
     <div class="post-meta">
       <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time>
+      <span class="reading-time">{{ content | readingTime }}</span>
       {% if tags %}
       <div class="tags">
         {% for tag in tags %}
@@ -19,7 +22,14 @@ layout: base.njk
       {% endif %}
     </div>
   </header>
-  
+
+  <div class="toc-wrapper" id="toc-wrapper">
+    <details class="toc" open>
+      <summary class="toc-summary">In this article</summary>
+      <nav id="toc"></nav>
+    </details>
+  </div>
+
   <div class="post-content">
     {{ content | safe }}
   </div>
@@ -28,3 +38,55 @@ layout: base.njk
 <nav class="post-nav">
   <a href="/blog/" class="btn btn-outline">&larr; Back to all posts</a>
 </nav>
+
+<script>
+// Reading progress bar
+(function () {
+  var bar = document.getElementById('reading-progress');
+  var article = document.querySelector('.post-content');
+  if (!bar || !article) return;
+  function update() {
+    var top = article.getBoundingClientRect().top + window.scrollY;
+    var pct = Math.max(0, Math.min(100, ((window.scrollY - top) / article.offsetHeight) * 100));
+    bar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+// Table of contents
+(function () {
+  var content = document.querySelector('.post-content');
+  var tocNav = document.getElementById('toc');
+  var tocWrapper = document.getElementById('toc-wrapper');
+  if (!content || !tocNav) return;
+  var headings = Array.from(content.querySelectorAll('h2, h3'));
+  if (headings.length < 3) {
+    if (tocWrapper) tocWrapper.style.display = 'none';
+    return;
+  }
+  var ul = document.createElement('ul');
+  headings.forEach(function (h, i) {
+    if (!h.id) h.id = 'h-' + i;
+    var li = document.createElement('li');
+    if (h.tagName === 'H3') li.className = 'toc-sub';
+    var a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent;
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
+  tocNav.appendChild(ul);
+  var links = Array.from(tocNav.querySelectorAll('a'));
+  function setActive() {
+    var fromTop = window.scrollY + 110;
+    var current = '';
+    headings.forEach(function (h) { if (h.offsetTop <= fromTop) current = h.id; });
+    links.forEach(function (a) {
+      a.classList.toggle('toc-active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+})();
+</script>
