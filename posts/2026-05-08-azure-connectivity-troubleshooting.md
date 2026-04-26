@@ -83,11 +83,13 @@ When you need to see the actual packets, Network Watcher can start a capture ses
 
 This is a last resort tool for most issues, but when you genuinely can't tell whether traffic is arriving at a VM at all, packet capture settles the question definitively.
 
-## NSG Flow Logs and Traffic Analytics
+## VNet Flow Logs and Traffic Analytics
 
-NSG flow logs are the foundation of network traffic visibility in Azure. With them enabled, Azure logs every flow going through an NSG and records whether it was allowed or denied, how many packets and bytes, and in which direction.
+Virtual network (VNet) flow logs are the current Microsoft-recommended way to capture network traffic visibility in Azure. They replaced NSG flow logs as the standard approach: after June 30, 2025, you can no longer create new NSG flow logs, and NSG flow logs are set to be fully retired on September 30, 2027. If you have existing NSG flow logs, [Microsoft recommends migrating to VNet flow logs](https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-migrate).
 
-By default they write to a storage account. If you want to query them, enable [Traffic Analytics](https://learn.microsoft.com/en-us/azure/network-watcher/traffic-analytics), which processes the flow data and sends it to a Log Analytics workspace. That's where it becomes actually useful.
+VNet flow logs are more capable than NSG flow logs. They operate at the virtual network level rather than requiring configuration at each NSG, they capture traffic at the VNet scope rather than just the NSG boundary, and they also record encryption state for VNets using virtual network encryption. You enable them through Network Watcher by creating a flow log resource targeting a VNet rather than an NSG.
+
+By default, flow logs write raw data to a storage account. To actually query them, enable [Traffic Analytics](https://learn.microsoft.com/en-us/azure/network-watcher/traffic-analytics), which processes the flow data and sends it to a Log Analytics workspace. Traffic Analytics works with both VNet flow logs and NSG flow logs.
 
 Once in Log Analytics, you can query the `AzureNetworkAnalytics_CL` table. Here's a simple query to find denied flows in the last hour:
 
@@ -221,7 +223,7 @@ FrontDoorAccessLog
 
 For **classic Front Door**, both log types land in `AzureDiagnostics` with `Category == "FrontdoorAccessLog"` and `"FrontdoorWebApplicationFirewallLog"`.
 
-One health probe issue worth knowing: Front Door health probes come from a specific IP range (`147.243.0.0/16` is the known Front Door probe range), and if those IPs are blocked by an NSG or Azure Firewall on the origin side, Front Door will mark the origin as unhealthy even though real traffic would work fine. Check your NSG rules if origins show unhealthy but manual requests to the backend succeed.
+One health probe issue worth knowing: Front Door health probes originate from Azure's edge infrastructure, and if your origin's NSG or Azure Firewall is blocking them, Front Door will mark the origin as unhealthy even though real traffic would work fine. Microsoft's current guidance is to use the `AzureFrontDoor.Backend` [service tag](https://learn.microsoft.com/en-us/azure/virtual-network/service-tags-overview) in your NSG inbound rules to allow health probe traffic from Front Door without having to manage specific IP ranges. Check your NSG rules and firewall rules if origins show unhealthy but manual requests to the backend succeed.
 
 ## KQL as the Connective Tissue
 
@@ -241,7 +243,7 @@ Here is how I actually work through a connectivity problem, in order:
 
 **Step 4: If a firewall is in the path, check firewall logs.** Query `AZFWNetworkRule` or `AZFWApplicationRule` for denies in the time window you're troubleshooting. If the traffic isn't showing up in the logs at all, it may not be reaching the firewall (routing issue, back to Step 2).
 
-**Step 5: Check NSG flow logs.** If traffic is getting to the right place but still not making it, NSG flow logs and Traffic Analytics will show denies at the NSG layer. IP Flow Verify can also confirm this instantly without needing to query logs.
+**Step 5: Check flow logs.** If traffic is getting to the right place but still not making it, VNet flow logs with Traffic Analytics will show denies at the network layer. IP Flow Verify can also confirm NSG-level denies instantly without needing to query logs.
 
 **Step 6: Check the receiving end.** If traffic is allowed through the network layer, is the backend actually responding? App Gateway backend health, health probe logs, and finally a direct test to the backend IP confirm whether the problem is in the network or the application.
 

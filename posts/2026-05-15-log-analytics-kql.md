@@ -91,7 +91,7 @@ These are the tables you'll use most often. Some require specific diagnostic set
 | `AZFWApplicationRule` | Azure Firewall application rule evaluations | Firewall structured logs enabled |
 | `AZFWThreatIntel` | Azure Firewall threat intelligence matches | Firewall structured logs enabled |
 | `AZFWIdpsSignature` | Azure Firewall IDPS matches | Firewall IDPS + structured logs |
-| `AzureNetworkAnalytics_CL` | NSG flow log data processed by Traffic Analytics | NSG flow logs + Traffic Analytics |
+| `AzureNetworkAnalytics_CL` | Flow log data processed by Traffic Analytics (supports VNet and NSG flow logs; NSG flow logs retiring 2027) | VNet or NSG flow logs + Traffic Analytics |
 | `FrontDoorAccessLog` | Azure Front Door Standard/Premium request logs | Front Door diagnostic settings |
 | `FrontDoorWebApplicationFirewallLog` | Front Door WAF rule evaluations | Front Door WAF diagnostic settings |
 | `Heartbeat` | VM availability heartbeats from AMA/MMA | Azure Monitor Agent on VMs |
@@ -210,9 +210,9 @@ FrontDoorWebApplicationFirewallLog
 | order by Count desc
 ```
 
-### NSG Flow Logs: Denied Flows (Traffic Analytics)
+### VNet Flow Logs: Denied Flows (Traffic Analytics)
 
-Requires NSG flow logs enabled with Traffic Analytics configured. This finds traffic that was denied at the NSG level:
+Requires [VNet flow logs](https://learn.microsoft.com/en-us/azure/network-watcher/vnet-flow-logs-overview) enabled with Traffic Analytics configured. NSG flow logs are being retired (no new NSG flow logs can be created after June 30, 2025; full retirement September 30, 2027), so VNet flow logs are now the recommended path. Both feed into the same `AzureNetworkAnalytics_CL` table. This query finds traffic that was denied at the network layer:
 
 ```kql
 AzureNetworkAnalytics_CL
@@ -222,7 +222,7 @@ AzureNetworkAnalytics_CL
 | order by DeniedFlows desc
 ```
 
-### NSG Flow Logs: Top Talkers by Bytes
+### VNet Flow Logs: Top Talkers by Bytes
 
 Useful for spotting unexpected data transfer or identifying which VMs are responsible for most outbound traffic:
 
