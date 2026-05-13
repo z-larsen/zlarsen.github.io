@@ -5,18 +5,18 @@ date: 2026-05-13
 tags: [posts, azure, ai, copilot, mcp, architecture, tools]
 category: Tools
 tool: true
-excerpt: "How I built an AI-powered Azure Cloud Solution Architect agent that runs live infrastructure assessments using MCP servers, Azure Resource Graph, and GitHub Copilot. Includes how to deploy your own and how MCP ties it all together."
+excerpt: "An open-source AI agent that runs live Azure infrastructure assessments using MCP servers, Azure Resource Graph, and GitHub Copilot. Learn how it works, how to deploy it, and how to build your own MCP-powered agent for any domain."
 ---
 
 # Building an Azure CSA Agent with MCP Servers and GitHub Copilot
 
 ![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue?logo=python&logoColor=white) ![Azure Resource Graph](https://img.shields.io/badge/Azure-Resource%20Graph-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green)
 
-I spend a lot of my time assessing Azure environments. Whether it's a FinOps review, a landing zone alignment check, a network audit, or a Well-Architected engagement, the pattern is always the same: run a bunch of Azure Resource Graph queries, pull the results together, cross-reference against best practices, and write up findings with recommendations. It's valuable work, but the mechanical parts of it are repetitive.
+Azure infrastructure assessments follow a predictable pattern: run Azure Resource Graph queries across subscriptions, pull the results together, cross-reference against Well-Architected best practices, and write up findings with recommendations. Whether it's a FinOps review, a landing zone alignment check, a network audit, or a WAF engagement, the mechanical parts are the same every time.
 
-I wanted to see if I could take that workflow and turn it into something that could assist in real time, grounded in live Azure data and official Microsoft documentation, without deploying any infrastructure into the customer's environment. The result is the Azure CSA Agent, a tool that runs inside VS Code as a GitHub Copilot chat mode and also works as a standalone CLI. It uses MCP (Model Context Protocol) servers to connect AI models to real Azure data sources.
+The Azure CSA Agent automates that pattern. It runs inside VS Code as a GitHub Copilot chat mode and also works as a standalone CLI, grounded in live Azure data and official Microsoft documentation, without deploying anything into the target environment. It uses MCP (Model Context Protocol) servers to connect AI models to real Azure data sources.
 
-This post walks through what the agent does, how MCP servers make it possible, and how to set up something similar for your own Azure work.
+This post walks through what the agent does, how MCP servers make it work, and how to set up something similar for your own Azure workflows.
 
 ## What the Agent Actually Does
 
