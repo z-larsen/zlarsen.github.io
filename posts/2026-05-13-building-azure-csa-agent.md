@@ -25,7 +25,7 @@ This post walks through what the agent does, how MCP servers make it work, and h
 
 ## What the Agent Actually Does
 
-At its core, the agent is a senior Azure Cloud Solution Architect persona that can query live Azure environments and cross-reference findings against Microsoft documentation. It operates in advisory mode only. It reads data through Azure Resource Graph but never modifies, creates, or deletes resources.
+At its core, the agent is a Cloud Solution Architect persona that can query live Azure environments and cross-reference findings against Microsoft documentation. It operates in advisory mode only. It reads data through Azure Resource Graph but never modifies, creates, or deletes resources.
 
 There are three ways to use it:
 
