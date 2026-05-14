@@ -13,6 +13,11 @@ If you've read the [Application Gateway overview post](/posts/2026-04-25-azure-a
 
 ## What WAF Actually Does
 
+<figure>
+  <img src="https://learn.microsoft.com/en-us/azure/web-application-firewall/media/ag-overview/waf1.png" alt="Diagram showing how Azure Web Application Firewall integrates with Application Gateway to inspect traffic before it reaches backend pools">
+  <figcaption>WAF on Application Gateway — all inbound traffic passes through the WAF engine before reaching backend pools. Source: Microsoft Learn</figcaption>
+</figure>
+
 Azure WAF on Application Gateway is a reverse proxy firewall that inspects every HTTP/HTTPS request before it reaches your backend. It sits inline — every request passes through it, gets evaluated against a set of rules, and is either forwarded to the backend or blocked.
 
 The WAF evaluates requests using two types of rules:
@@ -321,6 +326,11 @@ AzureDiagnostics
 | order by count_ desc
 | take 20
 ```
+
+<figure>
+  <img src="https://learn.microsoft.com/en-us/azure/web-application-firewall/media/ag-overview/diagnostics.png" alt="Diagram showing Application Gateway WAF diagnostics flow to Azure Monitor, Log Analytics, and Microsoft Defender for Cloud">
+  <figcaption>WAF diagnostics flow — logs route to Azure Monitor, Log Analytics, Sentinel, and Defender for Cloud. Source: Microsoft Learn</figcaption>
+</figure>
 
 ### Integration with Sentinel and Defender for Cloud
 
