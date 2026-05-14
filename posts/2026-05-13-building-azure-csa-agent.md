@@ -169,6 +169,31 @@ This gives you the interactive REPL with pre-built assessments. Run `azure-csa a
 
 For the natural language path, you'll need an Azure OpenAI resource with a GPT-4o deployment. The README has the full setup commands for creating the resource, deploying the model, and assigning RBAC. It uses `DefaultAzureCredential` so you don't need to manage API keys.
 
+Once your Azure OpenAI resource is deployed, set the environment variables so the CLI knows where to send requests:
+
+```powershell
+# Windows (PowerShell) — set for this session
+$env:AZURE_OPENAI_ENDPOINT = "https://<your-openai-name>.openai.azure.com"
+$env:AZURE_OPENAI_DEPLOYMENT = "gpt-4o"
+```
+
+Those only last for the current terminal. To persist them so every new terminal picks them up automatically:
+
+```powershell
+# Windows — persist to user environment (one-time)
+[Environment]::SetEnvironmentVariable("AZURE_OPENAI_ENDPOINT", "https://<your-openai-name>.openai.azure.com", "User")
+[Environment]::SetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT", "gpt-4o", "User")
+```
+
+```bash
+# Linux/macOS — add to your shell profile (one-time)
+echo 'export AZURE_OPENAI_ENDPOINT=https://<your-openai-name>.openai.azure.com' >> ~/.bashrc
+echo 'export AZURE_OPENAI_DEPLOYMENT=gpt-4o' >> ~/.bashrc
+source ~/.bashrc
+```
+
+After persisting, open a new terminal and run `azure-csa`. The LLM backend line at startup will confirm the connection.
+
 ## What MCP Changes About Agent Development
 
 The broader point here is not really about this specific agent. It's about what MCP servers enable for any domain-specific AI tooling.
