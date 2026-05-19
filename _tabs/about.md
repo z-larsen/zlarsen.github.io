@@ -34,7 +34,7 @@ permalink: /about/
   flex-wrap: wrap;
   gap: 3rem;
   margin: 2rem 0;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
 }
 
