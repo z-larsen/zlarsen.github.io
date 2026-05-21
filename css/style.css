@@ -242,30 +242,12 @@ nav#main-nav a.active {
 }
 
 .hero-logo {
-  position: absolute;
-  top: -20%;
-  left: -20%;
-  width: 140%;
-  height: 140%;
+  display: block;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  object-fit: cover;
-  transition: opacity 0.3s ease;
-}
-
-.hero-logo--dark {
-  opacity: 1;
-}
-
-.hero-logo--light {
-  opacity: 0;
-}
-
-[data-theme='light'] .hero-logo--dark {
-  opacity: 0;
-}
-
-[data-theme='light'] .hero-logo--light {
-  opacity: 1;
+  object-fit: contain;
+  padding: 20px;
 }
 
 [data-theme='light'] .hero-logo-wrap {
@@ -283,10 +265,6 @@ nav#main-nav a.active {
     0 20px 70px rgba(37, 99, 235, 0.25),
     0 0 100px rgba(37, 99, 235, 0.2),
     0 0 150px rgba(37, 99, 235, 0.1);
-}
-
-[data-theme='light'] .hero-logo--light {
-  opacity: 1;
 }
 
 .hero-title {
