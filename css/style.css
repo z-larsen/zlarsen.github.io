@@ -222,6 +222,7 @@ nav#main-nav a.active {
   height: 220px;
   border-radius: 50%;
   margin-bottom: 1.5rem;
+  background: #1a1a2e;
   box-shadow:
     0 6px 20px rgba(37, 99, 235, 0.25),
     0 12px 40px rgba(37, 99, 235, 0.15),
@@ -268,6 +269,7 @@ nav#main-nav a.active {
 }
 
 [data-theme='light'] .hero-logo-wrap {
+  background: #ffffff;
   box-shadow:
     0 6px 24px rgba(37, 99, 235, 0.3),
     0 12px 48px rgba(37, 99, 235, 0.2),
