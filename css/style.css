@@ -243,8 +243,8 @@ nav#main-nav a.active {
 
 .hero-logo {
   flex-shrink: 0;
-  width: 170%;
-  height: 170%;
+  width: 112%;
+  height: 112%;
   border-radius: 50%;
   object-fit: cover;
 }
