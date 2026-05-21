@@ -1134,6 +1134,20 @@ footer a:hover {
   display: none;
 }
 
+[data-theme='light'] .hero-logo-wrap {
+  box-shadow:
+    0 6px 20px rgba(37, 99, 235, 0.15),
+    0 12px 40px rgba(37, 99, 235, 0.1),
+    0 0 60px rgba(37, 99, 235, 0.08);
+}
+
+[data-theme='light'] .hero-logo-wrap:hover {
+  box-shadow:
+    0 10px 30px rgba(37, 99, 235, 0.2),
+    0 20px 60px rgba(37, 99, 235, 0.15),
+    0 0 80px rgba(37, 99, 235, 0.12);
+}
+
 /* ========================================
    Scroll-to-Top Button
    ======================================== */
