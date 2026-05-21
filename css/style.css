@@ -194,6 +194,16 @@ nav#main-nav a.active {
   padding: 3rem 0 2.5rem;
   border-bottom: 1px solid var(--color-border);
   margin-bottom: 3rem;
+  text-align: center;
+}
+
+.hero .hero-subtitle {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero .hero-actions {
+  justify-content: center;
 }
 
 .hero-tagline {
@@ -203,6 +213,17 @@ nav#main-nav a.active {
   text-transform: uppercase;
   color: var(--color-accent);
   margin-bottom: 0.75rem;
+}
+
+.hero-logo {
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 4px 24px rgba(99, 102, 241, 0.25));
+  transition: transform var(--transition);
+}
+
+.hero-logo:hover {
+  transform: scale(1.05);
 }
 
 .hero-title {
@@ -335,7 +356,9 @@ nav#main-nav a.active {
   font-weight: 500;
   color: var(--color-accent);
   text-decoration: none;
-  transition: border-color var(--transition), background var(--transition);
+  transition:
+    border-color var(--transition),
+    background var(--transition);
 }
 
 .home-tag-btn:hover {
@@ -1026,7 +1049,7 @@ footer a:hover {
 /* ========================================
    Light Mode
    ======================================== */
-[data-theme="light"] {
+[data-theme='light'] {
   --color-bg: #ffffff;
   --color-surface: #f6f8fa;
   --color-surface-hover: #eaeef2;
@@ -1043,12 +1066,12 @@ footer a:hover {
   --color-code-text: #e36209;
 }
 
-[data-theme="light"] header {
+[data-theme='light'] header {
   background: rgba(255, 255, 255, 0.85);
 }
 
 @media (max-width: 640px) {
-  [data-theme="light"] nav#main-nav {
+  [data-theme='light'] nav#main-nav {
     background: rgba(255, 255, 255, 0.97);
   }
 }
@@ -1066,7 +1089,10 @@ footer a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color var(--transition), border-color var(--transition), background var(--transition);
+  transition:
+    color var(--transition),
+    border-color var(--transition),
+    background var(--transition);
   margin-left: 0.25rem;
   flex-shrink: 0;
 }
@@ -1077,10 +1103,18 @@ footer a:hover {
   background: var(--color-surface);
 }
 
-.theme-toggle .icon-sun { display: none; }
-.theme-toggle .icon-moon { display: block; }
-[data-theme="light"] .theme-toggle .icon-sun { display: block; }
-[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+.theme-toggle .icon-sun {
+  display: none;
+}
+.theme-toggle .icon-moon {
+  display: block;
+}
+[data-theme='light'] .theme-toggle .icon-sun {
+  display: block;
+}
+[data-theme='light'] .theme-toggle .icon-moon {
+  display: none;
+}
 
 /* ========================================
    Scroll-to-Top Button
@@ -1102,8 +1136,12 @@ footer a:hover {
   cursor: pointer;
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity var(--transition), transform var(--transition),
-    background var(--transition), color var(--transition), border-color var(--transition);
+  transition:
+    opacity var(--transition),
+    transform var(--transition),
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition);
   pointer-events: none;
 }
 
@@ -1177,8 +1215,12 @@ details.toc {
   transition: background var(--transition);
 }
 
-.toc-summary::-webkit-details-marker { display: none; }
-.toc-summary::marker { display: none; }
+.toc-summary::-webkit-details-marker {
+  display: none;
+}
+.toc-summary::marker {
+  display: none;
+}
 
 .toc-summary:hover {
   background: var(--color-surface-hover);
@@ -1210,7 +1252,9 @@ details.toc[open] .toc-summary {
   padding: 0;
 }
 
-#toc li { margin: 0; }
+#toc li {
+  margin: 0;
+}
 
 #toc a {
   font-size: 0.875rem;
@@ -1237,8 +1281,14 @@ details.toc[open] .toc-summary {
    Hero Animations
    ======================================== */
 @keyframes heroFadeUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-tagline {
