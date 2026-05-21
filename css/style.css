@@ -215,15 +215,33 @@ nav#main-nav a.active {
   margin-bottom: 0.75rem;
 }
 
-.hero-logo {
+.hero-logo-wrap {
+  display: inline-block;
   border-radius: 50%;
   margin-bottom: 1.5rem;
-  filter: drop-shadow(0 4px 24px rgba(99, 102, 241, 0.25));
-  transition: transform var(--transition);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    0 12px 40px rgba(0, 0, 0, 0.25),
+    0 0 60px rgba(99, 102, 241, 0.2),
+    0 0 100px rgba(99, 102, 241, 0.1);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
 }
 
-.hero-logo:hover {
-  transform: scale(1.05);
+.hero-logo-wrap:hover {
+  transform: scale(1.06) translateY(-4px);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 80px rgba(99, 102, 241, 0.3),
+    0 0 120px rgba(99, 102, 241, 0.15);
+}
+
+.hero-logo {
+  display: block;
+  border-radius: 50%;
+  clip-path: circle(50%);
 }
 
 .hero-title {
