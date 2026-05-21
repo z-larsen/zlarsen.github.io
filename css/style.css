@@ -222,7 +222,7 @@ nav#main-nav a.active {
   width: 220px;
   height: 220px;
   border-radius: 50%;
-  margin-bottom: 1.5rem;
+  margin: 0 auto 1.5rem;
   box-shadow:
     0 6px 20px rgba(37, 99, 235, 0.25),
     0 12px 40px rgba(37, 99, 235, 0.15),
