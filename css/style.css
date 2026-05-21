@@ -244,6 +244,18 @@ nav#main-nav a.active {
   clip-path: circle(50%);
 }
 
+.hero-logo--light {
+  display: none;
+}
+
+[data-theme='light'] .hero-logo--dark {
+  display: none;
+}
+
+[data-theme='light'] .hero-logo--light {
+  display: block;
+}
+
 .hero-title {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
