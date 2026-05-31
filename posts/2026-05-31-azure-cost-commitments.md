@@ -52,7 +52,7 @@ When you deploy a Windows Server VM without AHB, the hourly rate bundles two com
 That's roughly a 37% reduction on that VM's cost — by flipping a switch.
 
 <figure>
-<img src="https://learn.microsoft.com/en-us/azure/virtual-machines/media/azure-hybrid-benefit-linux/azure-hybrid-benefit-linux.png" alt="Azure Hybrid Benefit configuration option in the Azure portal VM creation blade">
+<img src="https://learn.microsoft.com/en-us/azure/virtual-machines/linux/media/azure-hybrid-benefit/azure-hybrid-benefit.png" alt="Azure Hybrid Benefit configuration pane in the Azure portal VM Operating System blade showing the licensing toggle">
 <figcaption>Azure Hybrid Benefit is enabled per VM during creation or afterward in the VM's configuration blade under "Operating system" — toggle it on to apply your existing license. Source: Microsoft Learn</figcaption>
 </figure>
 
@@ -139,7 +139,7 @@ If you run more instances than your reservation covers, the overage bills at PAY
 This is why **utilization monitoring is essential**. In Azure Cost Management → Reservations → Utilization, there's a report showing what percentage of each reservation is being consumed. A healthy reservation should be at or near 100%. Persistent utilization below ~70% is a signal to consider exchanging or partially refunding.
 
 <figure>
-<img src="https://learn.microsoft.com/en-us/azure/cost-management-billing/reservations/media/reservation-utilization/reservation-utilization.png" alt="Azure Cost Management reservation utilization report showing utilization percentage over time">
+<img src="https://learn.microsoft.com/en-us/azure/cost-management-billing/reservations/media/manage-reserved-vm-instance/reservation-utilization-trend.png" alt="Azure reservation utilization trend in the Azure portal showing utilization percentage over time">
 <figcaption>The Reservation Utilization report in Azure Cost Management shows how much of each reservation is being consumed over time — utilization consistently below 70% is a signal to act. Source: Microsoft Learn</figcaption>
 </figure>
 
