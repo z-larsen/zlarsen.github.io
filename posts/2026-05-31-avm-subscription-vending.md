@@ -32,8 +32,13 @@ The result: app teams get a subscription that's already placed in the right mana
 Microsoft's Cloud Adoption Framework defines subscription vending as a progression of [subscription democratization](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-principles#subscription-democratization): the principle that subscriptions (not resource groups) are the primary unit of workload management and scale.
 
 <figure>
+<img src="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/media/subscription-vending-high-res.png" alt="Diagram showing the four phases of subscription vending: create platform subscriptions, create the platform, establish subscription vending (overlapping platform and application landing zone), and deploy workloads">
+<figcaption>Where subscription vending fits in the platform and workload lifecycle. Subscription vending sits at the boundary between platform engineering and application landing zones. Source: Microsoft CAF</figcaption>
+</figure>
+
+<figure>
 <img src="https://learn.microsoft.com/en-us/azure/architecture/landing-zones/images/subscription-vending-components.png" alt="Diagram showing the subscription vending automation workflow: data collection tool triggers request pipeline which commits to source control which triggers deployment pipeline that uses IaC modules to create the subscription">
-<figcaption>The subscription vending automation workflow: a data collection tool captures the request, a request pipeline creates the parameter file and opens a PR, and a deployment pipeline applies the IaC module to create and configure the subscription. Source: Microsoft Learn</figcaption>
+<figcaption>The automation pipeline: a data collection tool captures the subscription request, a request pipeline creates the parameter file and opens a pull request, and a deployment pipeline applies the IaC module to create and configure the subscription. Source: Azure Architecture Center</figcaption>
 </figure>
 
 ---
@@ -49,6 +54,11 @@ The CAF model for subscription vending involves three distinct teams:
 | **Application Team** | Submits subscription requests; receives and operates the subscription after handoff |
 
 The platform team builds and maintains the automation. The CCoE defines what data to collect and what the approval process looks like. The app team is the consumer — they fill out a form (or submit a YAML/TFVARS file) and receive a ready-to-use subscription.
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/media/subscription-vending-process.png" alt="Diagram showing the subscription vending process across three teams: the CCoE establishes the approval process, application teams make subscription requests, and the platform team creates and configures subscriptions before handing them off">
+<figcaption>The subscription vending process across the three teams. The CCoE and platform team own the automation infrastructure; the app team submits a request and receives a ready-to-use subscription. Source: Microsoft CAF</figcaption>
+</figure>
 
 ---
 
@@ -322,7 +332,17 @@ az ad app federated-credential create \
 
 ### Step 4: Add GitHub Secrets
 
-In your GitHub repository → Settings → Secrets and variables → Actions, create three secrets:
+In your GitHub repository → Settings → Secrets and variables → Actions, create three secrets.
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/developer/github/media/github-repo-settings.png" alt="GitHub repository settings tab highlighted in the repository navigation bar">
+<figcaption>Navigate to Settings in your GitHub repository. Source: Microsoft Learn</figcaption>
+</figure>
+
+<figure>
+<img src="https://learn.microsoft.com/en-us/azure/developer/github/media/github-repo-secrets.png" alt="GitHub Security menu expanded showing Secrets and variables option with Actions selected">
+<figcaption>Go to Security > Secrets and variables > Actions to add the three OIDC secrets. Source: Microsoft Learn</figcaption>
+</figure>
 
 | Secret name | Value |
 |---|---|
