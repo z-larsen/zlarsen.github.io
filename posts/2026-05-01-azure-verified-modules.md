@@ -195,6 +195,8 @@ Pattern modules are being built on top of resource modules for common architectu
 
 Landing Zone Accelerators (like the ALZ Bicep or Terraform solutions) are not being forced onto AVM immediately, but over time components are being migrated. The [ALZ Bicep subscription vending solution](https://github.com/Azure/bicep-lz-vending) has already migrated to use AVM resource modules. If you're building landing zone automation today, using AVM resource modules as your building blocks is the right direction.
 
+For a full walkthrough of implementing subscription vending with the AVM Terraform module, including OIDC authentication with GitHub Actions and remote state configuration, see **[AVM Deep Dive: Getting Started with Subscription Vending](/posts/2026-05-31-avm-subscription-vending/)**.
+
 The AVM team is also experimenting with AI-assisted development workflows. The [AI-Assisted IaC Solution Development](https://azure.github.io/Azure-Verified-Modules/experimental/ai-assisted-sol-dev/) section of the AVM docs covers using GitHub Copilot with a spec-driven approach to scaffold AVM-based solutions, including end-to-end examples for both Bicep and Terraform.
 
 ## When AVM Is the Right Choice
