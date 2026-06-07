@@ -41,14 +41,18 @@ Same scans, no GUI. It runs in any terminal on Windows, macOS, or Linux, which m
 This is the one that changes how you interact with the data. The MCP server exposes every scan as an AI-callable tool over the Model Context Protocol, so Copilot, Claude, or a custom agent can run them and reason over the results. It also ships remediation tools (deallocate an idle VM, enable Hybrid Benefit, delete an orphaned resource) that sit behind a write-safety gate. If you want to ask "where am I wasting money" in plain language and have an agent answer it, or wire FinOps checks into an agentic workflow, this is the one.
 
 ### Automated Function
-Headless and scheduled. The automated edition runs as an Azure Function on a timer, scans unattended, and hands off the results with no human in the loop. If you want continuous monitoring, a recurring posture report, or drift detection rather than a point-in-time look, automate it.
+Headless and scheduled, and for a lot of organizations this is the natural next step after the GUI. You start with the GUI to see where you stand and fix the obvious stuff by hand. Once you know the scan is giving you the right picture, you stop running it manually and let it run itself. The automated edition deploys as an Azure Function on a timer, scans unattended, and hands off the results with no human in the loop.
+
+There are two reasons it tends to run faster than a manual scan. First, it's built to lean on your **FinOps Hub or Cost Management exports**, so it reads conformed data straight from storage instead of waiting on live Cost Management Query API calls that throttle. Second, it skips all the interactive overhead: no browser login, no tenant or subscription picker, no UI rendering. It authenticates with its own managed identity and goes straight to work, which also makes it more reliable run over run.
+
+The part I want to call out: this is a great fit for organizations that don't use AI tooling, or that don't allow MCP servers in their environment. You get continuous, hands-off FinOps monitoring with nothing but an Azure Function and your existing RBAC. No agents, no external model calls, no new attack surface to review. If you want a recurring posture report or drift detection but the MCP route is off the table, this is the one to deploy.
 
 | If you want to...                                           | Run the            |
 | ----------------------------------------------------------- | ------------------ |
 | Sit down and work through findings, fixing as you go        | GUI                |
 | Run a quick scan from a shell, a Mac, or Cloud Shell        | TUI                |
 | Ask questions in natural language or drive it from an agent | MCP server         |
-| Scan on a schedule with nobody watching                     | Automated function |
+| Scan on a schedule with nobody watching (no AI required)    | Automated function |
 
 ## Where the Data Comes From
 
@@ -283,7 +287,7 @@ The classic cold start. A new practitioner, or a consultant joining an engagemen
 Use the trend analysis and anomaly detection to spot cost changes and chase down root causes. If you've got a hub or exports, the trend reads straight from the data model, so you get real history without API throttling. The **GUI** shines here for the visuals and the Power BI export.
 
 ### Continuous Monitoring
-Don't wait for the quarterly review to find a problem. Point the **automated function** at your tenant on a schedule and let it catch cost drift, new orphaned resources, and budget risk between reviews.
+Don't wait for the quarterly review to find a problem. Once you've used the **GUI** to confirm the scan tells you what you need, deploy the **automated function** as the next step: point it at your tenant on a schedule and let it catch cost drift, new orphaned resources, and budget risk between reviews. It runs faster than a manual scan because it reads from your hub or exports and skips all the interactive login and UI overhead, and because it's just a Function with a managed identity, it's a clean fit for organizations that don't use AI tooling or don't allow MCP servers in their environment.
 
 ### Agent-Driven FinOps
 Wire the **MCP server** into Copilot or your own agent and ask in plain language: "what's my cost per vCPU this month," "where are my biggest orphans," "which VMs are idle." The agent runs the scan and, if you let it, remediates behind the safety gate.
