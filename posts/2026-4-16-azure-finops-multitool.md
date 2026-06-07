@@ -42,6 +42,8 @@ Same scans, no GUI. It runs in any terminal on Windows, macOS, or Linux, which m
 ### MCP Server
 This is the one that changes how you interact with the data. The MCP server exposes every scan as an AI-callable tool over the Model Context Protocol, so Copilot, Claude, or a custom agent can run them and reason over the results. It also ships remediation tools (deallocate an idle VM, enable Hybrid Benefit, delete an orphaned resource) that sit behind a write-safety gate. If you want to ask "where am I wasting money" in plain language and have an agent answer it, or wire FinOps checks into an agentic workflow, this is the one.
 
+![FinOps Multitool MCP server tool catalog](/assets/img/finops-multitool-mcp.png)
+
 ### Automated Function
 Headless and scheduled, and for a lot of organizations this is the natural next step after the GUI. You start with the GUI to see where you stand and fix the obvious stuff by hand. Once you know the scan is giving you the right picture, you stop running it manually and let it run itself. The automated edition deploys as an Azure Function on a timer, scans unattended, and hands off the results with no human in the loop.
 
