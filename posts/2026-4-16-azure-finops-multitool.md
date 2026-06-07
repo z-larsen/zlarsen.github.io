@@ -44,6 +44,8 @@ This is the one that changes how you interact with the data. The MCP server expo
 
 ![FinOps Multitool MCP server tool catalog](/assets/img/finops-multitool-mcp.png)
 
+One thing I added recently that I'm pretty happy with: FinOps KPI insights. Most people don't know the [FinOps Foundation KPI catalog](https://www.finops.org/finops-kpis/) by name, so the server surfaces it for them. Every scan automatically tags its results with the industry KPIs they map to, like Cost per GB Stored, Commitment Utilization Score, or Percentage of Untagged Costs, and computes the value when the data supports it. There's also an `explore_finops_kpis` tool to browse the KPIs grouped by FinOps domain. The point is to meet people where they are: you run a normal scan, and the tool quietly connects what it found to the metrics the FinOps community actually tracks, so you can learn the framework as you go instead of having to know it first. It never makes up a number; if it can't compute a KPI from your data, it flags the correlation and points you at the scan that would.
+
 ### Automated Function
 Headless and scheduled, and for a lot of organizations this is the natural next step after the GUI. You start with the GUI to see where you stand and fix the obvious stuff by hand. Once you know the scan is giving you the right picture, you stop running it manually and let it run itself. The automated edition deploys as an Azure Function on a timer, scans unattended, and hands off the results with no human in the loop.
 
@@ -327,6 +329,7 @@ The scan engine is in a good place. Most of the roadmap now is about meeting peo
 
 - **Hosted MCP with Entra sign-in.** Today the MCP server runs as a local process. The plan is a hosted version any user can reach from any platform, signing in with their own Entra identity and their own RBAC, so a team can share one secure endpoint instead of everyone running it locally. The write-safety gate comes along for the ride.
 - **More remediation, same guardrails.** The MCP already deallocates idle VMs, enables Hybrid Benefit, and removes orphaned resources behind the safety gate. Expect more one-click and one-prompt fixes added the same careful way: reversible first, irreversible only with explicit confirmation.
+- **Broader KPI coverage.** The first wave of FinOps KPI insights covers the metrics the tool can compute from Azure data today. Next is the rest of the catalog, including the ones that need a little outside context (revenue, general ledger, license counts) so you can fill those in and unlock KPIs like cloud spend as a percentage of revenue.
 - **Deeper data-model coverage.** More scans reading from the hub or export instead of live APIs, so large tenants get faster, fuller results with less throttling.
 - **TUI and MCP catching up to the GUI.** Export parity and more of the remediation surface in the terminal and for agents, so the form factor you pick doesn't cost you features.
 
