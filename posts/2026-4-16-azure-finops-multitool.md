@@ -37,6 +37,8 @@ The original. A WPF desktop app with a single-pane-of-glass layout, click-to-dep
 ### Terminal UI (TUI)
 Same scans, no GUI. It runs in any terminal on Windows, macOS, or Linux, which means it works in Cloud Shell, over SSH, or anywhere you can't (or don't want to) launch a desktop app. If you live in a terminal, or you're scanning from a Mac or a build agent, the TUI gets you the same picture without the Windows dependency.
 
+![FinOps Multitool TUI](/assets/img/finops-multitool-tui.png)
+
 ### MCP Server
 This is the one that changes how you interact with the data. The MCP server exposes every scan as an AI-callable tool over the Model Context Protocol, so Copilot, Claude, or a custom agent can run them and reason over the results. It also ships remediation tools (deallocate an idle VM, enable Hybrid Benefit, delete an orphaned resource) that sit behind a write-safety gate. If you want to ask "where am I wasting money" in plain language and have an agent answer it, or wire FinOps checks into an agentic workflow, this is the one.
 
