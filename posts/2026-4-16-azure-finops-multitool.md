@@ -2,28 +2,70 @@
 layout: post.njk
 title: "Azure FinOps Multitool: A Fast Track to Cost Optimization"
 date: 2026-04-16
-tags: [posts, azure, finops, cost-management, powershell, tools]
+tags: [posts, azure, finops, cost-management, powershell, tools, mcp, cli]
 category: Tools
 tool: true
-excerpt: "Discover the Azure FinOps Multitool - a PowerShell application that provides a comprehensive view of your Azure costs, tagging health, and optimization opportunities. Deploy tags, policies, and budgets quickly, and export data to HTML, CSV, or Power BI templates."
+excerpt: "The Azure FinOps Multitool now comes in four flavors: a Windows GUI, a cross-platform terminal UI, an MCP server for AI agents, and an automated function for scheduled scans. It reads from your FinOps Hub or Cost Management exports first and falls back to live APIs when it needs to, giving you a fast, accurate picture of your Azure costs, tagging health, and optimization opportunities."
 ---
 
 # Azure FinOps Multitool: A Fast Track to Cost Optimization
 
-![Azure FinOps Multitool](https://img.shields.io/badge/PowerShell-7.0%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![Version 2.4.0](https://img.shields.io/badge/Version-2.4.0-brightgreen)
+![PowerShell 7.0+](https://img.shields.io/badge/PowerShell-7.0%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![GUI v2.15.1](https://img.shields.io/badge/GUI-v2.15.1-brightgreen) ![MCP v1.1.0](https://img.shields.io/badge/MCP-v1.1.0-brightgreen)
 
 I built this tool out of a recurring pattern I kept seeing while working with customers across industries; organizations knew they had Azure cost challenges but had no quick way to get a clear picture of where they stood. Every engagement started with the same manual effort: piecing together cost data, chasing down tagging gaps, and trying to size optimization opportunities across subscriptions. The Azure FinOps Multitool is my answer to that problem, built to solve the "cold start", helping teams quickly understand their current FinOps posture and identify immediate optimization opportunities without the usual setup overhead.
 
 ## What is the Azure FinOps Multitool?
 
-The Azure FinOps Multitool is a PowerShell WPF application that scans your entire Azure tenant and provides a **single-pane-of-glass view** of your costs, tagging health, optimization opportunities, and FinOps maturity. It's organized around the three core FinOps pillars: **Understand**, **Quantify**, and **Optimize**.
+The Azure FinOps Multitool scans your Azure estate and gives you a clear view of your costs, tagging health, optimization opportunities, and FinOps maturity, all organized around the three core FinOps pillars: **Understand**, **Quantify**, and **Optimize**.
 
-Unlike complex FinOps implementations that require infrastructure deployment and dashboard setup, this tool gives you immediate insights with just one script execution. It's designed as the perfect on-ramp for organizations beginning their FinOps journey.
+It started as a single Windows desktop app. Since then it has grown into a family of four tools that share the same scan engine, so you can run the exact same analysis whichever way fits your workflow:
+
+- A **Windows GUI** for hands-on, interactive reviews
+- A **terminal UI (TUI)** that runs anywhere PowerShell 7 does, including macOS and Linux
+- An **MCP server** that lets AI agents run the scans and act on what they find
+- An **automated function** for scheduled, unattended scans
+
+Whichever one you pick, there's no platform to stand up first. You point it at a tenant, it scans, and you get answers in minutes. It's built to beat the cold start, that first-day problem of not knowing where you actually stand.
+
+## Four Ways to Run It
+
+The four form factors aren't four different tools doing four different things. They're four front doors to the same scan engine. Here's how I think about choosing one.
+
+### Windows GUI
+The original. A WPF desktop app with a single-pane-of-glass layout, click-to-deploy buttons for tags, policies, and budgets, and one-click export to HTML, CSV, or a ready-to-open Power BI template. This is the one I reach for during a customer review or when I want to fix something on the spot. If you want to see everything at once and click your way through remediation, run the GUI.
+
+### Terminal UI (TUI)
+Same scans, no GUI. It runs in any terminal on Windows, macOS, or Linux, which means it works in Cloud Shell, over SSH, or anywhere you can't (or don't want to) launch a desktop app. If you live in a terminal, or you're scanning from a Mac or a build agent, the TUI gets you the same picture without the Windows dependency.
+
+### MCP Server
+This is the one that changes how you interact with the data. The MCP server exposes every scan as an AI-callable tool over the Model Context Protocol, so Copilot, Claude, or a custom agent can run them and reason over the results. It also ships remediation tools (deallocate an idle VM, enable Hybrid Benefit, delete an orphaned resource) that sit behind a write-safety gate. If you want to ask "where am I wasting money" in plain language and have an agent answer it, or wire FinOps checks into an agentic workflow, this is the one.
+
+### Automated Function
+Headless and scheduled. The automated edition runs as an Azure Function on a timer, scans unattended, and hands off the results with no human in the loop. If you want continuous monitoring, a recurring posture report, or drift detection rather than a point-in-time look, automate it.
+
+| If you want to...                                           | Run the            |
+| ----------------------------------------------------------- | ------------------ |
+| Sit down and work through findings, fixing as you go        | GUI                |
+| Run a quick scan from a shell, a Mac, or Cloud Shell        | TUI                |
+| Ask questions in natural language or drive it from an agent | MCP server         |
+| Scan on a schedule with nobody watching                     | Automated function |
+
+## Where the Data Comes From
+
+This is the biggest change under the hood, and it matters for both speed and accuracy.
+
+By default, the tool now reads cost data from your **FinOps Hub data model or Cost Management exports** when one is in scope. Exported data is already conformed, deduplicated, and sitting in storage, so reading it is faster, cheaper, and gives you real history without hammering the Cost Management Query API (which throttles hard and only reaches back so far). If you've invested in a hub or set up exports, the Multitool takes advantage of it automatically.
+
+When there's no hub or export to read, it **falls back to the live Cost Management APIs**. You still get a complete scan, it just queries Azure directly instead of reading the data model. There's nothing to configure. It detects what's available and picks the better source.
+
+And some things always come from live APIs because they aren't in the export at all. **Forecasting** is the clearest example: the forecast comes straight from the Cost Management forecast endpoint. The same goes for current-state inventory like orphaned resources, idle VM metrics, tag coverage, and Advisor recommendations. So even when the bulk of your cost data is coming from an export, the tool still reaches out to the APIs to complement it and round out the picture.
+
+The short version: export or hub first for cost history, live APIs to fill the gaps and add things like forecasting. You get the depth of the data model with the freshness of live queries where it counts.
 
 ## Key Features and Capabilities
 
 ### Comprehensive Tenant Scanning
-The tool provides deep visibility across your entire Azure estate:
+The tool provides deep visibility across your entire Azure estate. Cost data reads from your FinOps Hub or Cost Management exports by default and falls back to the live APIs listed below when no export is in scope (more on that further down):
 
 | Area                         | Data Source                                     | What You Get                                                                                                              |
 | ---------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -102,16 +144,18 @@ Get a per-subscription health assessment covering:
 
 ## Why Use It?
 
-No infrastructure to set up, no dashboards to build first. Run it once from any Windows machine with PowerShell and you'll have a real picture of your Azure environment in minutes, costs, tagging gaps, orphaned resources, and optimization opportunities all in one place.
+No platform to set up, no dashboards to build first. Run it once and you'll have a real picture of your Azure environment in minutes: costs, tagging gaps, orphaned resources, and optimization opportunities all in one place. Run the GUI on Windows, the TUI from a Mac or Cloud Shell, point an agent at the MCP server, or schedule the function. Same answers, your choice of door.
 
-If you're new to FinOps, it's a practical starting point before investing in more complex tooling. It shows you what to look at and gives you something concrete to act on. If you're already doing FinOps work, it's useful for quick cross-subscription spot checks or sizing up opportunities before a customer engagement.
+If you're new to FinOps, it's a practical starting point before investing in heavier tooling. It shows you what to look at and gives you something concrete to act on. If you're already doing FinOps work, it's useful for quick cross-subscription spot checks, sizing up opportunities before an engagement, or wiring recurring checks into automation.
 
-It doesn't replace Azure Cost Management, FinOps Hubs, or Power BI, but it gets you answers faster when you need them.
+It doesn't replace Azure Cost Management, FinOps Hubs, or Power BI. It reads from them where it can and gets you answers faster when you need them.
 
-## Getting Started
+## Getting Started with the GUI
+
+The walkthrough below covers the Windows GUI, since that's the most hands-on edition. The TUI runs the same scans from any PowerShell 7 terminal (including macOS and Linux), the MCP server is launched as a tool endpoint for your agent, and the automated function runs on a timer once deployed.
 
 ### Prerequisites
-- **Windows** with PowerShell 5.1+ (WPF requires Windows; macOS and Linux are not supported)
+- **Windows** with PowerShell 5.1+ for the GUI (the TUI runs cross-platform on PowerShell 7)
 - **Az PowerShell modules**: `Az.Accounts`, `Az.Resources`, `Az.ResourceGraph`, `Az.CostManagement`, `Az.Advisor`, `Az.Billing`
 - **Azure RBAC**: Reader + Cost Management Reader on target scope (minimum for scanning)
 
@@ -159,6 +203,9 @@ Install-Module Az.Accounts, Az.Resources, Az.ResourceGraph, Az.CostManagement, A
 8. Click **Export Scan Results** to save as HTML, CSV, or Power BI template (.pbit)
 
 ## Latest Enhancements
+
+### Multiple Editions and a Smarter Data Source
+The two biggest recent shifts aren't single features, they're direction. First, the Multitool grew from a Windows-only GUI into four editions (GUI, TUI, MCP server, and an automated function) that all run the same scan engine. Second, the scan engine now reads cost data from your FinOps Hub or Cost Management exports by default and only calls the live Cost Management APIs when there's no export to read or when it needs something the export doesn't carry, like forecasting. That means faster, fuller scans on large tenants and far less API throttling, without giving up the live forecast. Unit economics also got sharper: exact vCPU and RAM from the compute SKU catalog, and storage that counts both managed disks and Storage account used capacity.
 
 ### Tag Management (v1.9.4 – v1.9.18)
 - **Mass tag removal**: Remove a tag from a subscription and all its resource groups simultaneously with one click (v1.9.4)
@@ -211,13 +258,13 @@ The v2.0.0 bump was driven by the Power BI template export, which shifts the too
 - **Idle VM and Savings Realized progress**: Both modules now report per-item progress during metric queries, which previously gave no status updates on large tenants.
 
 ### v2.1.0: Cost Management Alerts and Tag-Scoped Budgets
-- **Cost Management Alerts**: A new module pulls triggered anomaly, budget, and forecast alerts from the Cost Management Alerts API, plus any configured anomaly alert rules from Scheduled Actions. Both show up on the Cost Analysis tab — one grid for what's already fired, one for the rules you have in place.
+- **Cost Management Alerts**: A new module pulls triggered anomaly, budget, and forecast alerts from the Cost Management Alerts API, plus any configured anomaly alert rules from Scheduled Actions. Both show up on the Cost Analysis tab, one grid for what's already fired, one for the rules you have in place.
 - **Tag-scoped budget deploy**: The budget deploy form now has a Tag Name dropdown (populated from your scan inventory) and a Tag Value field, so you can create a budget that only tracks spend for matching resources.
 - **Budget visibility**: Existing budgets with tag filters now surface in the detail grid with a Tag Filter column, and notification contacts (emails and roles) are extracted into both budget grids alongside new Category, % Forecast, and Thresholds columns.
 
 ### v2.2.0 – v2.2.1: Accuracy and Reliability Fixes
 - **Forecast accuracy**: The forecast call now uses the `Usage` request type the `/forecast` endpoint actually expects, and response parsing sums all forecast rows per subscription instead of double-counting actuals.
-- **Cost-by-tag coverage**: Dropped the 5-tag cap on the cost-by-tag dropdown — every non-system tag is queryable now, broken down by tag value rather than key.
+- **Cost-by-tag coverage**: Dropped the 5-tag cap on the cost-by-tag dropdown, every non-system tag is queryable now, broken down by tag value rather than key.
 - **Pagination**: Untagged-resource queries page through everything with SkipToken instead of stopping at 500 rows, so large tenants get a complete picture.
 - **Tenant handling**: The current session tenant always appears in the picker now (even when `Get-AzTenant` won't enumerate it under conditional access), and a closure-scoping bug that caused every subscription to be scanned regardless of your selection is fixed.
 
@@ -225,43 +272,53 @@ The v2.0.0 bump was driven by the Power BI template export, which shifts the too
 - **Deduplicated savings**: The Est. Annual Savings card groups recommendations by resource and keeps only the highest-savings action per resource, so overlapping Advisor recs (RI + right-size + shutdown on the same VM) no longer inflate the total. A detail label and tooltip show the raw-vs-deduped numbers.
 
 ### v2.4.0: MACC Consumption Tracking
-The Billing tab now shows your **Microsoft Azure Consumption Commitment** (MACC) at a glance: commitment, consumed, remaining, percent burned, and status for the current agreement period. It's backed by a new `Get-MaccCommitment` module that queries the Consumption Lots API at billing-account scope and filters for consumption-commitment lots. Works for both Enterprise Agreement and Microsoft Customer Agreement, and degrades gracefully — if MACC doesn't apply to your billing account or isn't reachable, it says so rather than failing the scan.
+The Billing tab now shows your **Microsoft Azure Consumption Commitment** (MACC) at a glance: commitment, consumed, remaining, percent burned, and status for the current agreement period. It's backed by a new `Get-MaccCommitment` module that queries the Consumption Lots API at billing-account scope and filters for consumption-commitment lots. Works for both Enterprise Agreement and Microsoft Customer Agreement, and degrades gracefully: if MACC doesn't apply to your billing account or isn't reachable, it says so rather than failing the scan.
 
 ## Use Cases & Scenarios
 
 ### Initial FinOps Assessment
-Perfect for new FinOps practitioners or consultants joining an engagement. Get a complete picture of the current state in one comprehensive scan.
+The classic cold start. A new practitioner, or a consultant joining an engagement, needs the full picture fast. Run the **GUI** for an interactive walkthrough, or the **TUI** if you're on a Mac or in Cloud Shell. One scan and you know where to focus.
 
 ### Quarterly Cost Reviews
-Use the trend analysis and anomaly detection to identify cost changes and investigate root causes.
+Use the trend analysis and anomaly detection to spot cost changes and chase down root causes. If you've got a hub or exports, the trend reads straight from the data model, so you get real history without API throttling. The **GUI** shines here for the visuals and the Power BI export.
 
-### Migration Planning
-Before migrating workloads to Azure, understand your current cost baseline and optimization opportunities.
+### Continuous Monitoring
+Don't wait for the quarterly review to find a problem. Point the **automated function** at your tenant on a schedule and let it catch cost drift, new orphaned resources, and budget risk between reviews.
 
-### Budget Planning
-Leverage the budget monitoring and forecasting features to set realistic budgets and track adherence.
+### Agent-Driven FinOps
+Wire the **MCP server** into Copilot or your own agent and ask in plain language: "what's my cost per vCPU this month," "where are my biggest orphans," "which VMs are idle." The agent runs the scan and, if you let it, remediates behind the safety gate.
+
+### Migration and Budget Planning
+Before you move workloads or set next year's budget, get a clean baseline and a forecast. The tool pulls current spend from your export or hub and layers the live forecast on top, so the numbers reflect both where you've been and where you're heading.
 
 ### Optimization Validation
-After implementing cost-saving measures, use the tool to quantify the impact and identify next opportunities.
+After you've made cost-saving changes, scan again to quantify the impact and surface the next round of opportunities. Run it interactively in the **GUI**, or schedule the **function** to track savings over time.
 
 ## Architecture & Security
 
 ### Security First
-- **Read-only operations** - never modifies your Azure resources
-- **No data storage** - all analysis happens locally
-- **Microsoft Entra authentication** - uses your existing Azure credentials
-- **No external dependencies** - works entirely within your Azure tenant
-- **Advanced Security Hardening**:
-  - KQL injection escape protection for Resource Graph queries
-  - Token redaction in logs and diagnostics
-  - Scope validation to prevent unauthorized access
+- **Scanning is read-only.** Any change (deploying a tag, policy, or budget, or remediating a resource) is explicit and user-initiated.
+- **Write-safety gate on the MCP server.** Remediation tools run behind guardrails: write modes (read-only, interactive, enforced), protected tags, resource groups, and subscriptions, blast-radius limits, and an audit log. Reversible actions come first; irreversible ones need explicit confirmation.
+- **No data storage.** Analysis runs against your tenant and the results stay with you.
+- **Microsoft Entra authentication.** It uses your existing Azure credentials and honors your RBAC.
+- **Security hardening.** KQL injection escaping on Resource Graph queries, token redaction in logs and diagnostics, and scope validation.
 
 ### Technical Architecture
-- **PowerShell 5.1+** with WPF GUI (Windows only)
-- **Azure Resource Graph** for resource queries
-- **Cost Management APIs** for spend data
-- **Azure Advisor** for optimization recommendations
-- **Management Group APIs** for hierarchy analysis
+- **Shared PowerShell scan engine** across all four editions
+- **WPF** for the Windows GUI; the **TUI** runs cross-platform on PowerShell 7
+- **MCP server** over stdio JSON-RPC for AI agents
+- **Azure Function** host for scheduled, unattended runs
+- **FinOps Hub and Cost Management exports** as the default cost data source, with the live **Cost Management APIs** as fallback and for forecasting
+- **Azure Resource Graph** for inventory, **Azure Advisor** for recommendations, **Azure Monitor** for idle and usage metrics, and **Management Group APIs** for hierarchy
+
+## Where It's Headed
+
+The scan engine is in a good place. Most of the roadmap now is about meeting people where they work and going further on action, not just analysis.
+
+- **Hosted MCP with Entra sign-in.** Today the MCP server runs as a local process. The plan is a hosted version any user can reach from any platform, signing in with their own Entra identity and their own RBAC, so a team can share one secure endpoint instead of everyone running it locally. The write-safety gate comes along for the ride.
+- **More remediation, same guardrails.** The MCP already deallocates idle VMs, enables Hybrid Benefit, and removes orphaned resources behind the safety gate. Expect more one-click and one-prompt fixes added the same careful way: reversible first, irreversible only with explicit confirmation.
+- **Deeper data-model coverage.** More scans reading from the hub or export instead of live APIs, so large tenants get faster, fuller results with less throttling.
+- **TUI and MCP catching up to the GUI.** Export parity and more of the remediation surface in the terminal and for agents, so the form factor you pick doesn't cost you features.
 
 ## Community & Support
 
