@@ -160,7 +160,7 @@ No platform to set up, no dashboards to build first. Run it once and you'll have
 
 If you're new to FinOps, it's a practical starting point before investing in heavier tooling. It shows you what to look at and gives you something concrete to act on. If you're already doing FinOps work, it's useful for quick cross-subscription spot checks, sizing up opportunities before an engagement, or wiring recurring checks into automation.
 
-It doesn't replace Azure Cost Management, FinOps Hubs, or Power BI. It reads from them where it can and gets you answers faster when you need them.
+It doesn't replace Azure Cost Management, FinOps Toolkit, or Power BI. It reads from them where it can and gets you answers faster when you need them.
 
 ## Getting Started with the GUI
 
