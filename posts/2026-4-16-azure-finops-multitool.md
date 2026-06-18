@@ -10,7 +10,7 @@ excerpt: "The Azure FinOps Multitool now comes in four flavors: a Windows GUI, a
 
 # Azure FinOps Multitool: A Fast Track to Cost Optimization
 
-![PowerShell 7.0+](https://img.shields.io/badge/PowerShell-7.0%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![GUI v2.20.2](https://img.shields.io/badge/GUI-v2.20.2-brightgreen) ![MCP v1.3.0](https://img.shields.io/badge/MCP-v1.3.0-brightgreen)
+![PowerShell 7.0+](https://img.shields.io/badge/PowerShell-7.0%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![GUI v2.15.1](https://img.shields.io/badge/GUI-v2.15.1-brightgreen) ![MCP v1.1.0](https://img.shields.io/badge/MCP-v1.1.0-brightgreen)
 
 I built this tool out of a recurring pattern I kept seeing while working with customers across industries; organizations knew they had Azure cost challenges but had no quick way to get a clear picture of where they stood. Every engagement started with the same manual effort: piecing together cost data, chasing down tagging gaps, and trying to size optimization opportunities across subscriptions. The Azure FinOps Multitool is my answer to that problem, built to solve the "cold start", helping teams quickly understand their current FinOps posture and identify immediate optimization opportunities without the usual setup overhead.
 
@@ -33,11 +33,6 @@ The four form factors aren't four different tools doing four different things. T
 
 ### Windows GUI
 The original. A WPF desktop app with a single-pane-of-glass layout, click-to-deploy buttons for tags, policies, and budgets, and one-click export to HTML, CSV, or a ready-to-open Power BI template. This is the one I reach for during a customer review or when I want to fix something on the spot. If you want to see everything at once and click your way through remediation, run the GUI.
-
-<figure>
-  <img src="/assets/img/finops-multitool-gui.png" alt="FinOps Multitool Windows GUI Overview tab showing cost summary cards, budget status, subscription costs, and the resources-by-spend table">
-  <figcaption>The GUI Overview tab: cost summary cards, budget coverage, per-subscription spend, and a resource-by-resource cost table, all from a single scan.</figcaption>
-</figure>
 
 ### Terminal UI (TUI)
 Same scans, no GUI. It runs in any terminal on Windows, macOS, or Linux, which means it works in Cloud Shell, over SSH, or anywhere you can't (or don't want to) launch a desktop app. If you live in a terminal, or you're scanning from a Mac or a build agent, the TUI gets you the same picture without the Windows dependency.
@@ -142,11 +137,6 @@ The tool provides deep visibility across your entire Azure estate. Cost data rea
 - **Rightsizing Recommendations**: Advisor-driven suggestions for better resource sizing
 - **Budget Monitoring**: Budget vs. actual analysis with custom threshold alerts
 
-<figure>
-  <img src="/assets/img/finops-multitool-optimization.png" alt="FinOps Multitool Optimization tab showing orphaned resources, idle VMs, storage tier advice, Azure Hybrid Benefit gaps, and reservation recommendations with estimated annual waste">
-  <figcaption>The Optimization tab surfaces orphaned resources, idle VMs, storage-tier candidates, AHB gaps, and RI/SP recommendations, each with the cost and estimated annual waste attached.</figcaption>
-</figure>
-
 ### FinOps Maturity Scorecard
 Get a per-subscription health assessment covering:
 - Cost management effectiveness
@@ -155,11 +145,6 @@ Get a per-subscription health assessment covering:
 - Orphaned resource cleanup potential
 - Budget adherence
 - Spend trend analysis
-
-<figure>
-  <img src="/assets/img/finops-multitool-guidance.png" alt="FinOps Multitool FinOps Guidance tab showing the FinOps Maturity Score out of 100 with a weighted category breakdown and actionable advice">
-  <figcaption>The FinOps Guidance tab rolls the whole scan into a 0–100 maturity score with a weighted category breakdown and concrete next steps.</figcaption>
-</figure>
 
 ### Data Export & Visualization
 - **HTML Reports**: Export comprehensive reports for sharing and documentation
