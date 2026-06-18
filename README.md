@@ -8,6 +8,7 @@ Personal site and blog covering Azure architecture, FinOps, governance, and open
 
 | Date       | Title                                                                                                        |
 | ---------- | ------------------------------------------------------------------------------------------------------------ |
+| 2026-06-18 | [Git for Teams: A Practical Breakdown Before You Add GitHub Copilot](posts/2026-06-18-git-for-teams-github-copilot.md) |
 | 2026-06-18 | [Setting Up a FinOps Hub: Components, Benefits, and Querying the Data](posts/2026-06-18-finops-hub-setup.md) |
 | 2026-06-18 | [Azure VPN Gateway: Setup and Best Practices](posts/2026-06-18-azure-vpn-gateway.md)                         |
 | 2026-04-23 | [Azure Resource Tagger: Bulk Tagging Before Policy Enforcement](posts/2026-4-23-azure-resource-tagger.md)    |
