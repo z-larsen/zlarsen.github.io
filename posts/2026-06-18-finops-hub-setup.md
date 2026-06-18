@@ -162,17 +162,7 @@ Costs
 
 This is where it comes full circle for me. The [Azure FinOps Multitool](/posts/2026-4-16-azure-finops-multitool/) I built reads cost data from a FinOps hub or Cost Management export **by default**, and only falls back to the live Cost Management APIs when no hub is in scope. Pointing it at a tenant that has a hub means faster, cheaper scans with real history, because it's reading the conformed parquet data model instead of hammering the throttled Query API.
 
-<figure>
-  <img src="/assets/img/finops-multitool-gui.png" alt="Azure FinOps Multitool GUI Overview tab showing cost summary cards, subscription costs, and a resource-by-resource spend table sourced from FinOps hub data">
-  <figcaption>The FinOps Multitool reading cost data from a hub: the same conformed data model, surfaced as cost cards, per-subscription spend, and a resource cost table, in minutes.</figcaption>
-</figure>
-
 The Multitool's **MCP server** is the agentic version of the same idea, and it lines up with the hub's own AI story. The FinOps hub benefits explicitly call out an MCP server that "understands FinOps and seamlessly connects to your data", so you can ask GitHub Copilot or a custom agent plain-language questions and have it reason over your actual cost data. Between the hub's data model and an MCP layer on top, "where am I wasting money this month" becomes a question you can just ask.
-
-<figure>
-  <img src="/assets/img/finops-multitool-billing.png" alt="Azure FinOps Multitool Billing tab showing billing accounts, profiles, invoice sections, and Microsoft Azure Consumption Commitment readout">
-  <figcaption>The Multitool's Billing tab pulls billing structure and MACC commitment burn-down alongside the hub's cost data, the kind of consolidated view a raw export can't give you on its own.</figcaption>
-</figure>
 
 ## Conclusion
 
