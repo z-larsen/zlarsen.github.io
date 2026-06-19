@@ -48,21 +48,21 @@ The reason Git is "distributed" is that every developer has the **full history**
 
 Here's the working set. Not every flag, just the commands you'll use daily and the reason each one matters.
 
-| Command | What it does | Why you use it |
-|---|---|---|
-| `git clone <url>` | Copies a remote repo to your machine | Your starting point for any existing project |
-| `git status` | Shows what's changed, staged, and untracked | Your "where am I" command, run it constantly |
-| `git add <file>` | Stages changes for the next commit | Lets you choose precisely what goes in a commit |
-| `git commit -m "msg"` | Records staged changes to local history | Creates a save point with a description of *why* |
-| `git push` | Sends local commits to the remote | Shares your work with the team |
-| `git pull` | Fetches remote changes and merges them in | Keeps you up to date with everyone else |
-| `git fetch` | Downloads remote changes without merging | Lets you inspect before integrating |
-| `git branch` | Lists, creates, or deletes branches | Manages parallel lines of work |
-| `git checkout <branch>` / `git switch` | Moves you to another branch | Switch contexts between features |
-| `git merge <branch>` | Combines another branch into yours | Brings a finished feature back into main |
-| `git log` | Shows commit history | Understand what happened and when |
-| `git diff` | Shows line-by-line changes | Review before you stage or commit |
-| `git stash` | Shelves uncommitted changes temporarily | Park work to handle something urgent |
+| Command                                | What it does                                | Why you use it                                   |
+| -------------------------------------- | ------------------------------------------- | ------------------------------------------------ |
+| `git clone <url>`                      | Copies a remote repo to your machine        | Your starting point for any existing project     |
+| `git status`                           | Shows what's changed, staged, and untracked | Your "where am I" command, run it constantly     |
+| `git add <file>`                       | Stages changes for the next commit          | Lets you choose precisely what goes in a commit  |
+| `git commit -m "msg"`                  | Records staged changes to local history     | Creates a save point with a description of *why* |
+| `git push`                             | Sends local commits to the remote           | Shares your work with the team                   |
+| `git pull`                             | Fetches remote changes and merges them in   | Keeps you up to date with everyone else          |
+| `git fetch`                            | Downloads remote changes without merging    | Lets you inspect before integrating              |
+| `git branch`                           | Lists, creates, or deletes branches         | Manages parallel lines of work                   |
+| `git checkout <branch>` / `git switch` | Moves you to another branch                 | Switch contexts between features                 |
+| `git merge <branch>`                   | Combines another branch into yours          | Brings a finished feature back into main         |
+| `git log`                              | Shows commit history                        | Understand what happened and when                |
+| `git diff`                             | Shows line-by-line changes                  | Review before you stage or commit                |
+| `git stash`                            | Shelves uncommitted changes temporarily     | Park work to handle something urgent             |
 
 ### Configure Git once, first
 
@@ -226,12 +226,12 @@ Here's where I want to be direct: **learn the above first.** GitHub Copilot is a
 
 With that said, once your fundamentals are solid, Copilot is a genuine force multiplier. It comes in a few surfaces inside VS Code and Visual Studio:
 
-| Surface | What it does | Where it helps with the Git workflow |
-|---|---|---|
-| **Code completions** | Inline "ghost text" suggestions as you type | Writes the boilerplate so your commits are about logic, not typing |
-| **Chat (Ask mode)** | Ask questions in natural language | "What does this `git rebase` command do?" without leaving the editor |
-| **Edit mode** | Apply targeted edits across files you pick | Make a reviewed change a reviewer asked for, fast |
-| **Agent mode** | Autonomously plans and runs multi-step tasks | Larger changes across many files, with you approving each step |
+| Surface              | What it does                                 | Where it helps with the Git workflow                                 |
+| -------------------- | -------------------------------------------- | -------------------------------------------------------------------- |
+| **Code completions** | Inline "ghost text" suggestions as you type  | Writes the boilerplate so your commits are about logic, not typing   |
+| **Chat (Ask mode)**  | Ask questions in natural language            | "What does this `git rebase` command do?" without leaving the editor |
+| **Edit mode**        | Apply targeted edits across files you pick   | Make a reviewed change a reviewer asked for, fast                    |
+| **Agent mode**       | Autonomously plans and runs multi-step tasks | Larger changes across many files, with you approving each step       |
 
 A few ways it plugs directly into the team workflow from this post:
 
@@ -241,15 +241,15 @@ A few ways it plugs directly into the team workflow from this post:
 - **Writing tests and `.gitignore` files.** Routine, well-understood artifacts Copilot generates reliably so you can focus on the real work.
 
 <figure>
-  <img src="https://learn.microsoft.com/en-us/visualstudio/ide/media/visualstudio/copilot-agent-mode/copilot-agent-dropdown.png?view=vs-2017" alt="GitHub Copilot Chat window showing the mode selector with Ask and Agent options">
-  <figcaption>Copilot's chat modes, Ask for questions, Agent for autonomous multi-step work. Start with Ask to understand your code and commands before delegating changes. Source: Microsoft Learn</figcaption>
+  <img src="https://code.visualstudio.com/assets/docs/chat/review-code-edits/copilot-edits-file-review-controls.png" alt="VS Code editor showing AI-proposed code edits as an inline diff with Keep and Undo review controls">
+  <figcaption>VS Code surfaces Copilot's edits as a reviewable diff with Keep/Undo controls, the same review-before-you-commit discipline Git teaches, applied to AI-generated changes. Source: Visual Studio Code docs</figcaption>
 </figure>
 
 Agent mode is the most powerful surface and the one that most rewards understanding Git first. It can make changes across many files and even run terminal commands, asking your approval before each one. That approval step only protects you if you can read what it's about to do:
 
 <figure>
-  <img src="https://learn.microsoft.com/en-us/visualstudio/ide/media/visualstudio/copilot-agent-mode/copilot-agent-command-approval.png?view=vs-2017" alt="GitHub Copilot agent mode requesting approval before running a terminal command">
-  <figcaption>Agent mode asks for confirmation before running a command. Knowing what a Git command does is what makes that approval meaningful rather than a rubber stamp. Source: Microsoft Learn</figcaption>
+  <img src="https://code.visualstudio.com/assets/docs/agents/approvals/chat-approve-tool.png" alt="VS Code Copilot agent mode tool confirmation dialog showing tool details and approval options before the action runs">
+  <figcaption>Agent mode asks for confirmation before it runs a tool or command. Knowing what a Git command does is what makes that approval meaningful rather than a rubber stamp. Source: Visual Studio Code docs</figcaption>
 </figure>
 
 To set it up, install the **GitHub Copilot** and **GitHub Copilot Chat** extensions in VS Code and sign in with a GitHub account that has a Copilot plan. Microsoft's [Copilot in VS Code docs](https://code.visualstudio.com/docs/copilot/setup) walk through the install, and GitHub's [Copilot plans](https://docs.github.com/en/copilot/about-github-copilot/plans-for-github-copilot) cover the free and paid tiers.
