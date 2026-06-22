@@ -130,13 +130,13 @@ The **GatewaySubnet** has rules of its own:
 
 - It must be named `GatewaySubnet` exactly, Azure looks for that name.
 - Don't deploy anything else into it, and don't attach a network security group or custom route table that could break the control-plane traffic the gateway needs.
-- Size it `/27` or larger. The minimum is `/29`, but `/27` leaves room for active-active, BGP, and future ExpressRoute coexistence without renumbering.
+- Size it `/26` (recommended), with `/27` as the practical minimum. A `/26` leaves room for active-active, BGP, and future ExpressRoute coexistence without renumbering.
 
 ## Setting Up a Site-to-Site VPN
 
 The walkthrough below follows the [official Microsoft tutorial](https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-site-to-site-portal). By the end you'll have a route-based, active-active, zone-redundant gateway connected to an on-premises device.
 
-1. **Create or pick a virtual network**, then add the gateway subnet. In the VNet, go to **Subnets** > **+ Gateway subnet**, and give it a `/27` range. There's only ever one gateway subnet per VNet, and it must be named `GatewaySubnet`.
+1. **Create or pick a virtual network**, then add the gateway subnet. In the VNet, go to **Subnets** > **+ Gateway subnet**, and give it a `/26` range. There's only ever one gateway subnet per VNet, and it must be named `GatewaySubnet`.
 
 2. **Create the virtual network gateway.** Search the portal for **Virtual network gateways** > **+ Create**, then set:
    - **Gateway type**: VPN
@@ -168,7 +168,7 @@ These are the choices that separate a tunnel that quietly works from one you're 
 - **Deploy an AZ SKU with zone redundancy.** Production gateways should survive a zonal failure. The AZ family is where Azure is investing, and the legacy Standard/High Performance SKUs retire on June 30, 2026.
 - **Enable active-active mode.** It removes the failover gap, keeps point-to-site clients connected during maintenance, and raises throughput. Make sure your on-premises device can terminate two tunnels.
 - **Use Standard, zone-redundant public IPs.** Basic public IPs are being retired; Standard zone-redundant IPs are the supported, resilient choice and a prerequisite for the AZ SKUs.
-- **Right-size the gateway subnet at `/27` or larger.** It costs you nothing extra and saves a painful renumbering exercise when you later add BGP or ExpressRoute coexistence.
+- **Right-size the gateway subnet at `/26` (recommended), `/27` minimum.** It costs you nothing extra and saves a painful renumbering exercise when you later add BGP or ExpressRoute coexistence.
 - **Use BGP for multi-connection and failover designs.** Dynamic routing automatically learns and withdraws routes, which is far cleaner than maintaining static address lists across many sites, and it's required for some highly available topologies.
 - **Prefer GCMAES256 for IPsec.** It delivers the best measured throughput and strong security; match a custom IPsec/IKE policy on both ends if you need to lock down the cipher suite.
 - **Monitor the gateway with Azure Monitor.** Track tunnel ingress/egress, bandwidth, and tunnel connectivity, and alert on tunnel drops so you hear about a problem before your users do. Watch for SKU-level throughput ceilings as traffic grows.
