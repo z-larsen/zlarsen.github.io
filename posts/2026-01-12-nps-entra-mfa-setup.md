@@ -319,7 +319,7 @@ aaa authorization exec default group AZURE-MFA local
 ### Common Issues
 
 **MFA Not Triggering:**
-- Verify user is synced to Entra ID: `Get-AzureADUser -ObjectId user@domain.com`
+- Verify user is synced to Entra ID: `Get-MgUser -UserId user@domain.com` (Microsoft Graph PowerShell — the legacy AzureAD module was retired in 2025)
 - Check user has MFA enabled in Azure Portal
 - Review NPS logs: `%SystemRoot%\System32\LogFiles\`
 
