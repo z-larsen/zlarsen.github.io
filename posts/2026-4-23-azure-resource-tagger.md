@@ -10,7 +10,7 @@ excerpt: "A PowerShell WPF tool that scans your Azure subscription for tagging g
 
 # Azure Resource Tagger: Bulk Tagging Before Policy Enforcement
 
-![PowerShell 5.1+](https://img.shields.io/badge/PowerShell-5.1%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![Version 1.1.0](https://img.shields.io/badge/Version-1.1.0-brightgreen)
+![PowerShell 5.1+](https://img.shields.io/badge/PowerShell-5.1%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![Version 1.2.2](https://img.shields.io/badge/Version-1.2.2-brightgreen)
 
 This one came out of a real problem. Azure Policy can enforce tags going forward, but it won't backfill what's already deployed. So when you switch a "require tag" policy from audit to deny, every resource group that's missing that tag starts breaking deployments. I see this often in Azure tenants. Policy enforcement was ready to go, but hundreds of existing resources hadn't been tagged yet and nobody wanted to do it manually in the portal.
 

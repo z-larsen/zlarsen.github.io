@@ -10,7 +10,7 @@ excerpt: "The Azure FinOps Multitool now comes in four flavors: a Windows GUI, a
 
 # Azure FinOps Multitool: A Fast Track to Cost Optimization
 
-![PowerShell 7.0+](https://img.shields.io/badge/PowerShell-7.0%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![GUI v2.15.1](https://img.shields.io/badge/GUI-v2.15.1-brightgreen) ![MCP v1.1.0](https://img.shields.io/badge/MCP-v1.1.0-brightgreen)
+![PowerShell 7.0+](https://img.shields.io/badge/PowerShell-7.0%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![Version 2.20.2](https://img.shields.io/badge/Version-2.20.2-brightgreen)
 
 I built this tool out of a recurring pattern I kept seeing while working with customers across industries; organizations knew they had Azure cost challenges but had no quick way to get a clear picture of where they stood. Every engagement started with the same manual effort: piecing together cost data, chasing down tagging gaps, and trying to size optimization opportunities across subscriptions. The Azure FinOps Multitool is my answer to that problem, built to solve the "cold start", helping teams quickly understand their current FinOps posture and identify immediate optimization opportunities without the usual setup overhead.
 

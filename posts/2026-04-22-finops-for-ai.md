@@ -105,7 +105,7 @@ Azure OpenAI is the primary Azure surface for LLM inference. It offers two billi
 
 **Token-based (consumption/pay-as-you-go):** You pay per 1,000 input and output tokens. No upfront commitment. Costs vary by model. Good for workloads with unpredictable or low volume.
 
-**Provisioned Throughput Units (PTU):** You purchase a block of throughput capacity (measured in PTUs) and reserve it for your exclusive use. Pricing is predictable. Latency is consistent. As of late 2024, PTU is available on monthly commitments in addition to the original annual commitment. Good for high-volume, latency-sensitive workloads with predictable traffic.
+**Provisioned Throughput Units (PTU):** You purchase a block of throughput capacity (measured in PTUs) and reserve it for your exclusive use. Pricing is predictable. Latency is consistent. PTU capacity can be reserved on one-month or one-year terms for additional discounts over the hourly rate. Good for high-volume, latency-sensitive workloads with predictable traffic.
 
 | | Token-Based | PTU |
 |---|---|---|

@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Azure Connectivity Troubleshooting: Tools, Logs, and How to Actually Diagnose Problems"
-date: 2026-04-26
+date: 2026-05-08
 tags: [posts, azure, networking, troubleshooting, firewall, udr, app-gateway, front-door, kql, network-watcher]
 category: Networking
 excerpt: "Connectivity problems in Azure are rarely straightforward. Traffic passes through NSGs, UDRs, firewalls, App Gateways, and Front Door before it ever reaches your app. This post walks through the tools and logs you need to actually find where things are breaking."
