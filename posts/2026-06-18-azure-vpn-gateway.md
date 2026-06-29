@@ -150,6 +150,16 @@ The walkthrough below follows the [official Microsoft tutorial](https://learn.mi
 
    Deploying the gateway takes a while, often 30–45 minutes. This is normal.
 
+   <figure>
+     <img src="/assets/img/posts/vpn-gateway/create-gateway-basics-1.png" alt="Azure portal Create virtual network gateway Basics tab showing project details, instance name and region, gateway type set to VPN, SKU VpnGw3AZ, virtual network selection, and the public IP address section with active-active mode enabled">
+     <figcaption>The Basics tab of Create virtual network gateway: project details, instance details, gateway configuration, and the first public IP. Active-active mode is enabled, which reveals the second public IP section.</figcaption>
+   </figure>
+
+   <figure>
+     <img src="/assets/img/posts/vpn-gateway/create-gateway-basics-2.png" alt="Lower half of the Create virtual network gateway Basics tab showing the second public IP name, Configure BGP enabled with autonomous system number 65515, custom APIPA BGP peer address fields, and Key Vault access authentication option disabled">
+     <figcaption>Scrolling down the same tab: the second public IP, BGP configuration with the default ASN 65515, optional custom APIPA addresses, and the preview Key Vault access option.</figcaption>
+   </figure>
+
 3. **Create the local network gateway.** This object represents your on-premises VPN device. Provide its **public IP address** and the **on-premises address space(s)** you want to reach from Azure. If you're using BGP, enter the peer's ASN and BGP IP instead of static routes.
 
 4. **Create the connection.** From the virtual network gateway, go to **Connections** > **+ Add**, choose **Site-to-site (IPsec)**, select the local network gateway, and set a **shared key (PSK)**. This same key goes on your on-premises device.
