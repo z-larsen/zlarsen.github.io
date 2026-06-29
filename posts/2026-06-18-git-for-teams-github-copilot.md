@@ -9,13 +9,13 @@ excerpt: "Git is the foundation everything else in modern development sits on, i
 
 # Git for Teams: A Practical Breakdown Before You Add GitHub Copilot
 
-Almost every modern development workflow runs on Git, and almost everyone learns just enough of it to get by, then gets stuck the first time something goes sideways. This post is the foundation: what Git actually is, the commands that matter, why each one exists, and how they fit together when more than one person is touching the same code. At the end I'll bring in GitHub Copilot, but deliberately last, because Copilot is far more useful when you already understand what it's doing on your behalf.
+Almost every modern development workflow runs on Git, and almost everyone learns just enough of it to get by, then gets stuck the first time something goes sideways. This post will help you with the foundation: what Git actually is, the commands that matter, why each one exists, and how they fit together when more than one person is touching the same code. At the end I'll bring in GitHub Copilot. Copilot is more useful when you already understand what it's doing on your behalf.
 
 This is meant to be a practical introduction I can build on in later posts. If you're brand new, start here. If you've been copy-pasting Git commands from Stack Overflow and hoping, this should fill in the *why*.
 
 ## What Is Git (and What Is GitHub)?
 
-People use these interchangeably and they shouldn't.
+People will often use these interchangeably.
 
 - **Git** is a **distributed version control system**. It runs locally on your machine, tracks every change to your files over time, and lets you branch, merge, and roll back. It needs no network and no account. It was created by Linus Torvalds in 2005 to manage Linux kernel development.
 - **GitHub** is a **hosting platform** for Git repositories. It adds collaboration on top of Git: a place to store the shared copy, pull requests, code review, issues, CI/CD via Actions, and access control. GitLab and Azure DevOps are alternatives that do the same job.
@@ -66,7 +66,7 @@ Here's the working set. Not every flag, just the commands you'll use daily and t
 
 ### Configure Git once, first
 
-Before your first commit, tell Git who you are. This stamps every commit with your identity:
+Before your first commit, tell Git who you are. This will track every commit with your identity:
 
 ```bash
 git config --global user.name "Your Name"
@@ -222,7 +222,7 @@ git revert <commit>               # make a NEW commit that undoes an old one
 
 ## Now Add GitHub Copilot
 
-Here's where I want to be direct: **learn the above first.** GitHub Copilot is an AI pair programmer that accelerates everything we just covered, but it doesn't replace understanding it. Copilot will happily suggest a `git reset` or generate code that resolves a conflict, and if you don't understand what those do, you can't tell when it's wrong. The developers who get the most out of Copilot are the ones who already know what *should* happen and use AI to get there faster. Treat it as an accelerator on a foundation you can evaluate, not a substitute for the foundation.
+Here's the key takeaway: **learn the above first.** GitHub Copilot is an AI pair programmer that accelerates everything we just covered, but it doesn't replace understanding it. Copilot will happily suggest a `git reset` or generate code that resolves a conflict, and if you don't understand what those do, you can't tell when it's wrong. The developers who get the most out of Copilot are the ones who already know what *should* happen and use AI to get there faster. Always treat it as an accelerator on top of a foundation that you can evaluate, not a substitute for that foundation.
 
 With that said, once your fundamentals are solid, Copilot is a genuine force multiplier. It comes in a few surfaces inside VS Code and Visual Studio:
 
@@ -245,19 +245,19 @@ A few ways it plugs directly into the team workflow from this post:
   <figcaption>VS Code surfaces Copilot's edits as a reviewable diff with Keep/Undo controls, the same review-before-you-commit discipline Git teaches, applied to AI-generated changes. Source: Visual Studio Code docs</figcaption>
 </figure>
 
-Agent mode is the most powerful surface and the one that most rewards understanding Git first. It can make changes across many files and even run terminal commands, asking your approval before each one. That approval step only protects you if you can read what it's about to do:
+Agent mode is the most powerful option and the one that truly rewards understanding Git first. It can make changes across many files and even run your terminal commands, asking for your approval before each one but that approval step only protects you if you can read and understand what it's about to do:
 
 <figure>
   <img src="https://code.visualstudio.com/assets/docs/agents/approvals/chat-approve-tool.png" alt="VS Code Copilot agent mode tool confirmation dialog showing tool details and approval options before the action runs">
-  <figcaption>Agent mode asks for confirmation before it runs a tool or command. Knowing what a Git command does is what makes that approval meaningful rather than a rubber stamp. Source: Visual Studio Code docs</figcaption>
+  <figcaption>Agent mode asks for confirmation before it runs a tool or command. Knowing what a Git command does is what makes that approval useful rather than rubber stamping it. Source: Visual Studio Code docs</figcaption>
 </figure>
 
 To set it up, install the **GitHub Copilot** and **GitHub Copilot Chat** extensions in VS Code and sign in with a GitHub account that has a Copilot plan. Microsoft's [Copilot in VS Code docs](https://code.visualstudio.com/docs/copilot/setup) walk through the install, and GitHub's [Copilot plans](https://docs.github.com/en/copilot/about-github-copilot/plans-for-github-copilot) cover the free and paid tiers.
 
 ## Where This Goes Next
 
-This post is the foundation on purpose. Git is the substrate everything else, pull requests, CI/CD, and AI assistance, sits on top of. Get comfortable with the daily loop, branching, and the team scenarios above, and the rest builds naturally.
+This post is the foundation. Git is what everything else, pull requests, CI/CD, and AI assistance, sits on top of. Get comfortable with the daily process, branching, and the team scenarios above, and the rest builds naturally.
 
-I'll be going deeper on GitHub Copilot in future posts, custom instructions, agent workflows, MCP servers, and how to wire it into a real team's process. But the advice stays the same: understand the tool first, then let the AI make you faster at using it.
+I'll be going deeper on GitHub Copilot in future posts, custom instructions, agent workflows, MCP servers, and how to work it into a real team's process. Understand the tool first, then let the AI make you faster at using it.
 
 For the canonical references, GitHub's [Git documentation](https://docs.github.com/en/get-started/using-git/about-git) and the free [Pro Git book](https://git-scm.com/book/en/v2) are the best places to go deeper on Git itself.
