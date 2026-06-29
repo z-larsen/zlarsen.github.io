@@ -13,7 +13,7 @@ excerpt: "An open-source AI agent that runs live Azure infrastructure assessment
 ![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue?logo=python&logoColor=white) ![Azure Resource Graph](https://img.shields.io/badge/Azure-Resource%20Graph-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green)
 
 <figure>
-  <img src="/assets/img/csaagent2.png" alt="Azure CSA Agent CLI showing the interactive REPL with ASCII art banner, sample natural language prompts, and rotating greeting">
+  <img src="/assets/img/posts/building-azure-csa-agent/csaagent2.png" alt="Azure CSA Agent CLI showing the interactive REPL with ASCII art banner, sample natural language prompts, and rotating greeting">
   <figcaption>The Azure CSA Agent interactive CLI — pre-built assessments for FinOps, networking, landing zones, and WAF, plus natural language ARG queries.</figcaption>
 </figure>
 

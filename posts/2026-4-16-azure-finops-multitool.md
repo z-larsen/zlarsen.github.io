@@ -37,12 +37,12 @@ The original. A WPF desktop app with a single-pane-of-glass layout, click-to-dep
 ### Terminal UI (TUI)
 Same scans, no GUI. It runs in any terminal on Windows, macOS, or Linux, which means it works in Cloud Shell, over SSH, or anywhere you can't (or don't want to) launch a desktop app. If you live in a terminal, or you're scanning from a Mac or a build agent, the TUI gets you the same picture without the Windows dependency.
 
-![FinOps Multitool TUI](/assets/img/finops-multitool-tui.png)
+![FinOps Multitool TUI](/assets/img/posts/azure-finops-multitool/finops-multitool-tui.png)
 
 ### MCP Server
 This is the one that changes how you interact with the data. The MCP server exposes every scan as an AI-callable tool over the Model Context Protocol, so Copilot, Claude, or a custom agent can run them and reason over the results. It also ships remediation tools (deallocate an idle VM, enable Hybrid Benefit, delete an orphaned resource) that sit behind a write-safety gate. If you want to ask "where am I wasting money" in plain language and have an agent answer it, or wire FinOps checks into an agentic workflow, this is the one.
 
-![FinOps Multitool MCP server tool catalog](/assets/img/finops-multitool-mcp.png)
+![FinOps Multitool MCP server tool catalog](/assets/img/posts/azure-finops-multitool/finops-multitool-mcp.png)
 
 One thing I added recently that I'm pretty happy with: FinOps KPI insights. Most people don't know the [FinOps Foundation KPI catalog](https://www.finops.org/finops-kpis/) by name, so the server surfaces it for them. Every scan automatically tags its results with the industry KPIs they map to, like Cost per GB Stored, Commitment Utilization Score, or Percentage of Untagged Costs, and computes the value when the data supports it. There's also an `explore_finops_kpis` tool to browse the KPIs grouped by FinOps domain. The point is to meet people where they are: you run a normal scan, and the tool quietly connects what it found to the metrics the FinOps community actually tracks, so you can learn the framework as you go instead of having to know it first. It never makes up a number; if it can't compute a KPI from your data, it flags the correlation and points you at the scan that would.
 
