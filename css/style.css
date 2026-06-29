@@ -907,8 +907,13 @@ nav#main-nav a.active {
 }
 
 .azure-badge {
-  max-width: 280px !important;
-  max-height: 140px !important;
+  max-width: 200px !important;
+  max-height: 120px !important;
+}
+
+.mct-badge {
+  max-width: 150px !important;
+  max-height: 150px !important;
 }
 
 .cert-name {
@@ -1018,9 +1023,9 @@ footer {
 .cert-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 3rem;
+  gap: 2rem;
   margin: 2rem 0;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
 }
 

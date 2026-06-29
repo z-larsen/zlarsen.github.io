@@ -3,6 +3,7 @@ layout: base.njk
 title: About
 permalink: /about/
 ---
+<!-- markdownlint-disable -->
 
 <div class="post-content">
 
@@ -23,9 +24,9 @@ I'm a Cloud Solution Architect focused on Azure. Most of my work is with state, 
 
 ## What is this blog about?
 
-Working across a lot of different customers, you start to notice patterns: the same questions come up, the same things trip people up, the same areas where good documentation is hard to find. This site is my way of tracking those threads.
+Working across a lot of different customers, I've started to notice patterns. Many of the same questions come up, the same things tend to trip people up and good documentation is everywhere but scattered across many sources. This site is my way of ruminating on and explaining the most common topics. I also like to stay current on new trends within Azure so you'll see posts from time to time that help others keep up on, so they, too, can keep up with emerging trends.
 
-Over the years I've run into plenty of blog posts buried deep in search results that had exactly what I needed. Someone took the time to write something useful and put it out there, and it saved me hours. So this is me returning the favor.
+Over the years I've run into plenty of blog posts buried deep, deep in my search results that had exactly what I needed in that moment. Someone took the time to write something useful and put it out there and it saved me hours. So this is me returning the favor.
 
 ---
 
@@ -40,6 +41,11 @@ Over the years I've run into plenty of blog posts buried deep in search results 
   <div class="cert-card">
     <img src="/assets/img/finops-certified-practitioner.3.png" alt="FinOps Certified Practitioner Badge" class="finops-badge" />
     <a href="https://verify.skilljar.com/c/gfo2icfsodda" target="_blank" rel="noopener noreferrer" class="cert-name">FinOps Certified Practitioner</a>
+  </div>
+
+  <div class="cert-card">
+    <img src="/assets/img/microsoft-certified-trainer-mct-2026.png" alt="Microsoft Certified Trainer (MCT) 2026 Badge" class="mct-badge" />
+    <a href="https://www.credly.com/badges/d78b5d81-778a-4197-afb5-afafebdc611c/public_url" target="_blank" rel="noopener noreferrer" class="cert-name">Microsoft Certified Trainer</a>
   </div>
 </div>
 
