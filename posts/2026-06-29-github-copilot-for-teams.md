@@ -12,11 +12,11 @@ excerpt: "Now that the Git fundamentals are in place, this post adds GitHub Copi
 
 In the [Git for Teams post](/posts/2026-06-18-git-for-teams-github-copilot/) I made a point of putting Copilot last, because it's far more useful once you understand the workflow it's accelerating. This post picks up exactly there. You know the commit-branch-PR loop now, so let's add the AI on top of it: what Copilot actually is, which plan to pick, how the billing works after the June 2026 change, and how to wire it into the work you're already doing.
 
-One warning up front. This is the corner of the toolchain that changes faster than anything else I write about. Models, plan names, and billing all shift on a near-monthly cadence. Everything here is current as of **June 2026**, and where a number is likely to move I'll say so and point you at the source of truth.
+One warning up front. This is the topic that changes faster than anything else I write about. Models, plan names, and billing all shift on a near-monthly cadence. Everything here is current as of **June 2026**.
 
 ## What GitHub Copilot Actually Is
 
-Copilot is an AI assistant that lives inside your editor and a few other surfaces. It isn't one feature, it's a handful of them that share a subscription, and the difference between them matters for both how you work and what you pay.
+Copilot is an AI assistant that lives inside your editor and a few other tools. It's a handful of features that share a subscription, and the difference between them matters for both how you work and what you pay.
 
 | Surface                   | What it does                                                                     | Where it fits the Git workflow                                |
 | ------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------- |
@@ -29,9 +29,9 @@ Copilot is an AI assistant that lives inside your editor and a few other surface
 | **Code review**           | Reviews a PR or a selection in your IDE                                          | A first pass before a human reviewer                          |
 | **Cloud agent**           | Runs a task on GitHub's infrastructure and opens a PR                            | Hand off a scoped task and review the result                  |
 
-The two things to anchor on: **completions** are the passive, type-and-accept experience, and **agent mode** is the active, give-it-a-task experience. Most of the cost conversation later comes down to that distinction.
+The two things to remember: **completions** are the passive, type-and-accept experience, and **agent mode** is the active, give-it-a-task experience. Most of the cost conversation later comes down to that distinction.
 
-Under all of these is a catalog of models from OpenAI, Anthropic, and Google, plus an **auto model selection** option that picks one for you. I'm deliberately not listing specific model names here, because that list turns over faster than any other part of Copilot and anything I print will be stale within weeks. Pick a model per chat from the model picker, or leave it on auto and let Copilot choose.
+Under all of these is a catalog of models from OpenAI, Anthropic, and Google, plus an **auto model selection** option that picks one for you. I'm not going to list specific model names here, because that list turns over faster than any other part of Copilot and anything I print will be outdated within weeks. Pick a model per chat from the model picker, or leave it on auto and let Copilot choose.
 
 ## Picking a Plan
 
@@ -54,15 +54,15 @@ A few things worth knowing before you pick:
 - **There's a temporary sign-up pause.** As of April 22, 2026, new self-serve sign-ups for Copilot Business on organizations using GitHub Free and GitHub Team plans are paused. If that's you, you'll be routed to sales rather than self-serve.
 - **Enterprise Server is out.** Copilot isn't available for GitHub Enterprise Server, only the cloud.
 
-For a verified student, the Student plan is the obvious starting point. For most working developers paying their own way, Pro at $10 is the right first move. For a team, this is a conversation with whoever owns your GitHub org, not an individual purchase.
+For a verified student, the Student plan is the obvious starting point. For most working developers paying their own way, Pro at $10 is the move. For a team, this should be a conversation with whoever owns your GitHub org, not an individual purchase.
 
 ## How Billing Works: GitHub AI Credits
 
-This is the part that changed, so read it even if you think you already know how Copilot bills.
+This is the part that changed recently.
 
 As of **June 1, 2026**, Copilot usage is measured in **GitHub AI Credits**. The old "premium requests" model, where each prompt counted as one request against a monthly quota, is now legacy. It only still applies to Pro and Pro+ subscribers on an existing *annual* plan who chose to stay on it. Everyone else is on credits.
 
-Here's the model in plain terms.
+Here's the model in simplified terms.
 
 **Every interaction consumes tokens**, the input you send, the output the model generates, and cached context it reuses. Those tokens are priced per model, and the total is converted into credits at a fixed rate:
 
@@ -87,7 +87,7 @@ At one cent per credit, Pro's 1,500 credits is about $15 of model usage included
 
 ### What's free and what isn't
 
-This is the single most useful thing to internalize, because it changes how you work:
+This is useful to understand, because it changes how you will work:
 
 - **Code completions and next edit suggestions are not billed in credits.** They're unlimited on every paid plan. The type-and-accept experience that you use all day, every day, costs you nothing against your allowance.
 - **Credits are spent by the AI-heavy features:** Copilot Chat (ask, edit, and agent modes), Copilot CLI, the cloud agent, Spaces, and Spark.
@@ -96,7 +96,7 @@ In other words, the passive autocomplete you lean on constantly is free, and you
 
 ### What happens when you run out
 
-Three options, no surprises:
+Three options available to you:
 
 1. **Upgrade.** As you approach your limit, Copilot prompts you to move up a tier. You only pay the *difference* between plans, and your earlier usage counts against the new, larger allowance, so the extra credits are available immediately.
 2. **Pay for more usage.** Set a dollar budget for additional credits at the same $0.01 rate. A $10 budget buys 1,000 more credits.
@@ -106,7 +106,7 @@ One nice detail: if you're on a paid plan and use **auto model selection** in ch
 
 ## Keeping Credit Usage Sane
 
-You don't need to babysit this, but a few habits stretch the allowance a long way:
+You don't need to babysit this, but a few habits stretch the allowance out:
 
 - **Lean on completions, they're free.** The more of your day is type-and-accept autocomplete, the less of your allowance you touch. Reserve chat and agent mode for the things that genuinely need reasoning.
 - **Match the model to the task.** A quick "explain this function" doesn't need a frontier reasoning model. Auto selection handles this for you, and gives you the 10% discount on top.
@@ -114,21 +114,21 @@ You don't need to babysit this, but a few habits stretch the allowance a long wa
 - **Don't re-run a giant prompt hoping for a better answer.** Rephrase or narrow it instead. Resubmitting a long, complex prompt repeatedly is one of the easiest ways to burn credits with nothing to show for it.
 - **Watch the meter.** In VS Code, click the Copilot icon in the status bar to see your usage and reset date. You can also see a full breakdown under **Billing and licensing** on GitHub.com. Make sure your editor is current, too: VS Code 1.120 or later is needed to display pricing and usage correctly.
 
-## Working It Into the Daily Loop
+## Working It Into the Daily Process
 
-This is where it connects back to the Git workflow from the last post. Copilot is most valuable at the exact friction points that post walked through.
+This is where it connects back to the Git workflow from the last post.
 
 **Commit messages.** In the Source Control panel, Copilot can draft a message from your staged diff. You still read and adjust it, but it turns the blank box into edit-and-go. This costs credits (it's a chat interaction), but it's a cheap one.
 
 **Reviewing a PR.** When you're reviewing a teammate's pull request and hit a pattern you don't recognize, ask Copilot Chat to explain the diff in plain language before you approve. The same goes the other way: Copilot code review can take a first pass over your own PR before a human looks at it, catching the obvious stuff so the human review is about substance.
 
-**Resolving a merge conflict.** Copilot can propose a merged version of a conflicted block. This is the spot where the last post's lesson really lands, you have to actually know whether its suggestion is correct. Copilot resolving a conflict you don't understand is how wrong code reaches `main`.
+**Resolving a merge conflict.** Copilot can propose a merged version of a conflicted block. This is the part where the last post's material comes in clutch, you have to know whether its suggestion is correct. Copilot resolving a conflict you don't understand is how bad code reaches `main`.
 
 **The routine artifacts.** Tests, a `.gitignore`, a bit of boilerplate config, these are well-understood, low-risk things Copilot generates reliably so you can spend your attention on the real work.
 
 **Agent mode for the bigger jobs.** When a change spans many files, agent mode can plan it, make the edits, and run terminal commands, asking your approval before each step. That approval step is only protection if you can read what it's about to do, which is the whole reason the Git post came first. Treat each approval as a real review, not a rubber stamp.
 
-A realistic loop looks like this:
+A realistic process looks like this:
 
 ```
 1. Pull latest, branch for the feature        (you)
@@ -141,11 +141,11 @@ A realistic loop looks like this:
 8. Merge
 ```
 
-The pattern: completions carry the typing for free all day, and you spend credits deliberately at the few points where reasoning actually helps.
+Completions carry the typing for free all day, and you spend credits deliberately at a few points where reasoning actually helps you. 
 
 ## Setting It Up
 
-The install is short:
+The install:
 
 1. In VS Code, install the **GitHub Copilot** and **GitHub Copilot Chat** extensions.
 2. Sign in with a GitHub account that has a Copilot plan (Free works to start).
@@ -154,9 +154,9 @@ The install is short:
 
 Microsoft's [Copilot in VS Code docs](https://code.visualstudio.com/docs/copilot/setup) cover the install in detail, and GitHub's [plans page](https://docs.github.com/en/copilot/get-started/plans) is the authoritative, always-current source for pricing and what each tier includes.
 
-## Where This Goes Next
+## To Sum it up
 
-The mental model to leave with is simple. Completions are the free, always-on layer you'll use constantly. Chat and the agent are the deliberate layer you reach for when you need reasoning or action, and that's what draws down your credits. Pick the plan that matches how much of the second layer you actually use, and let free completions do the heavy lifting the rest of the time.
+Completions are the free, always-on aspect to take advantage of. Chat and the agent are the approach you take when you need reasoning or action, and that's what draws down your credits. Pick the plan that matches how much of the latter you actually use, and let free completions do the heavy lifting the rest of the time.
 
 From here the interesting work is customization: custom instructions, prompt files, agent workflows, and MCP servers that connect Copilot to your real tools. That's where it stops being autocomplete and starts being a genuine part of the team's process. More on that in the next posts.
 
