@@ -93,7 +93,7 @@ A few things to know:
 
 - **The Basic SKU is for dev/test only.** It doesn't support active-active, BGP, IKEv2 route-based with all features, or zone redundancy, and it can't be resized to a production SKU without a rebuild.
 - **Pick an AZ SKU for anything production.** Zone redundancy means the gateway survives a datacenter failure within a region, and it's the family Azure is steering everyone toward.
-- **The old Standard and High Performance legacy SKUs are being deprecated on June 30, 2026.** If you're still on one, migrate. The Basic public IP migration tool moves Standard to VpnGw1AZ and High Performance to VpnGw2AZ automatically.
+- **The old Standard and High Performance legacy SKUs were deprecated on June 30, 2026.** If you're still on one, migrate now. The Basic public IP migration tool moves Standard to VpnGw1AZ and High Performance to VpnGw2AZ automatically, and upgrades the gateway to the current generation (Generation 2) with no downtime.
 - **Throughput is per tunnel and per instance.** It's a rough ceiling measured under ideal conditions, not a guaranteed cross-internet rate. Real throughput depends on your on-premises device, the encryption algorithm, and internet quality. GCMAES256 gives the best performance.
 
 For exact pricing, see the [VPN Gateway pricing page](https://azure.microsoft.com/pricing/details/vpn-gateway/) — you pay an hourly rate for the gateway plus egress data transfer.
