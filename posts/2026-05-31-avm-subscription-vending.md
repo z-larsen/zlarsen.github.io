@@ -13,14 +13,6 @@ This is the first post in a deep dive series on Azure Verified Modules. We're st
 
 This post covers where to start, what the Microsoft-recommended model looks like, how to wire the AVM Terraform module into a GitHub Actions pipeline with OIDC authentication, and what decisions you'll need to make before writing any code.
 
-```
-  ____  __  _______  _    ____________   _   _______   ___  ________________  _   ______
- / __ \/ / / / __ )| |  / / ____/ __ \ / | / / __ \ /  _// | / / ____  /  |/ / / ____/
-/ /_/ / / / / __  || | / / __/ / / / //  |/ / / / / / / /  |/ / / __  / /|  / / / __  
-\__, / /_/ / /_/ / | |/ / /___/ /_/ // /|  / /_/ /_/ // /|  / /_/ / / /   / /_/ /   
- /_/  \____/_____/  |___/_____/_____//_/ |_/_____//___/_/ |_/\____/_/_/|_/ \____/    
-```
-
 ---
 
 ## What Is Subscription Vending?
@@ -47,11 +39,11 @@ Microsoft's Cloud Adoption Framework defines subscription vending as a progressi
 
 The CAF model for subscription vending involves three distinct teams:
 
-| Team | Responsibilities |
-|---|---|
-| **Cloud Center of Excellence (CCoE)** | Establishes business logic, approval gates, and data collection process |
-| **Platform Team** | Owns and maintains the IaC automation, pipeline, and governance enforcement |
-| **Application Team** | Submits subscription requests; receives and operates the subscription after handoff |
+| Team                                  | Responsibilities                                                                    |
+| ------------------------------------- | ----------------------------------------------------------------------------------- |
+| **Cloud Center of Excellence (CCoE)** | Establishes business logic, approval gates, and data collection process             |
+| **Platform Team**                     | Owns and maintains the IaC automation, pipeline, and governance enforcement         |
+| **Application Team**                  | Submits subscription requests; receives and operates the subscription after handoff |
 
 The platform team builds and maintains the automation. The CCoE defines what data to collect and what the approval process looks like. The app team is the consumer — they fill out a form (or submit a YAML/TFVARS file) and receive a ready-to-use subscription.
 
@@ -110,12 +102,12 @@ This module uses the [AzAPI provider](https://registry.terraform.io/providers/az
 
 ### Module Requirements
 
-| Requirement | Version |
-|---|---|
-| Terraform | `~> 1.10` |
-| azapi provider | `~> 2.5` |
-| modtm provider | `~> 0.3` |
-| random provider | `~> 3.5` |
+| Requirement     | Version   |
+| --------------- | --------- |
+| Terraform       | `~> 1.10` |
+| azapi provider  | `~> 2.5`  |
+| modtm provider  | `~> 0.3`  |
+| random provider | `~> 3.5`  |
 
 ### What the Module Handles
 
@@ -229,11 +221,11 @@ module "lz_vending" {
 
 Before you can run `terraform apply`, you need the correct billing scope. The format differs by agreement type:
 
-| Agreement | Billing scope format |
-|---|---|
-| **EA (Enterprise Agreement)** | `/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}` |
+| Agreement                              | Billing scope format                                                                                                                          |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **EA (Enterprise Agreement)**          | `/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}`                                |
 | **MCA (Microsoft Customer Agreement)** | `/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}` |
-| **MPA (Microsoft Partner Agreement)** | `/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}` |
+| **MPA (Microsoft Partner Agreement)**  | `/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}`                                                  |
 
 > If you don't have a commercial agreement, you cannot create subscriptions programmatically. You can still automate all subscription *configuration* (networking, RBAC, policies, budgets) — you just need to introduce a manual step to create the subscription first, then pass the `subscription_id` variable to the module with `subscription_alias_enabled = false`.
 
@@ -344,10 +336,10 @@ In your GitHub repository → Settings → Secrets and variables → Actions, cr
 <figcaption>Go to Security > Secrets and variables > Actions to add the three OIDC secrets. Source: Microsoft Learn</figcaption>
 </figure>
 
-| Secret name | Value |
-|---|---|
-| `AZURE_CLIENT_ID` | The App ID (client ID) of your app registration |
-| `AZURE_TENANT_ID` | Your Azure tenant ID |
+| Secret name             | Value                                                               |
+| ----------------------- | ------------------------------------------------------------------- |
+| `AZURE_CLIENT_ID`       | The App ID (client ID) of your app registration                     |
+| `AZURE_TENANT_ID`       | Your Azure tenant ID                                                |
 | `AZURE_SUBSCRIPTION_ID` | The subscription ID where the Terraform state storage account lives |
 
 > Use repository secrets for internal repos. For public repos, use [environment secrets](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#environment-secrets) with a required reviewer approval gate.

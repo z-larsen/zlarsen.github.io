@@ -6,17 +6,9 @@ tags: [posts, azure, finops, cost-management, billing, optimization, cloud, gove
 category: FinOps
 excerpt: "Learn how to implement the FinOps framework in Azure, including billing hierarchy, cost allocation, optimization strategies, and best practices for cloud financial management."
 ---
+<!-- markdownlint-disable -->
 
 FinOps is a cloud financial management discipline that brings financial accountability to cloud spending. When it works well, engineering, finance, and business teams stop working from separate spreadsheets and start making decisions from the same data.
-
-```
-    ___                          ______ _       ____            
-   /   |____  __  __________    / ____/(_)___  / __ \____  _____
-  / /| /_  / / / / / ___/ _ \  / /_   / / __ \/ / / / __ \/ ___/
- / ___ |/ /_/ /_/ / /  /  __/ / __/  / / / / / /_/ / /_/ (__  ) 
-/_/  |_/___/\__,_/_/   \___/ /_/    /_/_/ /_/\____/ .___/____/  
-                                                 /_/            
-```
 
 ## What is FinOps?
 
@@ -32,14 +24,14 @@ The FinOps Foundation defines three core phases:
 
 The FinOps framework organizes capabilities into domains that align with organizational functions:
 
-| Domain | Focus Area |
-|--------|------------|
-| **Understanding Cloud Usage & Cost** | Visibility, allocation, and reporting |
-| **Performance Tracking & Benchmarking** | KPIs, metrics, and trend analysis |
-| **Real-Time Decision Making** | Anomaly detection and alerts |
-| **Cloud Rate Optimization** | Reservations, savings plans, and discounts |
-| **Cloud Usage Optimization** | Right-sizing and waste elimination |
-| **Organizational Alignment** | Governance, policies, and culture |
+| Domain                                  | Focus Area                                 |
+| --------------------------------------- | ------------------------------------------ |
+| **Understanding Cloud Usage & Cost**    | Visibility, allocation, and reporting      |
+| **Performance Tracking & Benchmarking** | KPIs, metrics, and trend analysis          |
+| **Real-Time Decision Making**           | Anomaly detection and alerts               |
+| **Cloud Rate Optimization**             | Reservations, savings plans, and discounts |
+| **Cloud Usage Optimization**            | Right-sizing and waste elimination         |
+| **Organizational Alignment**            | Governance, policies, and culture          |
 
 ## Azure Billing Hierarchy
 
@@ -49,12 +41,12 @@ Understanding Azure's billing structure is foundational to implementing FinOps. 
 
 The top-level container for your Azure billing relationship. There are several types:
 
-| Account Type | Description |
-|--------------|-------------|
-| **Microsoft Online Services Program (MOSP)** | Pay-as-you-go accounts |
-| **Enterprise Agreement (EA)** | Volume licensing for large organizations |
-| **Microsoft Customer Agreement (MCA)** | Modern agreement replacing MOSP and some EA scenarios |
-| **Microsoft Partner Agreement (MPA)** | For Cloud Solution Providers (CSP) |
+| Account Type                                 | Description                                           |
+| -------------------------------------------- | ----------------------------------------------------- |
+| **Microsoft Online Services Program (MOSP)** | Pay-as-you-go accounts                                |
+| **Enterprise Agreement (EA)**                | Volume licensing for large organizations              |
+| **Microsoft Customer Agreement (MCA)**       | Modern agreement replacing MOSP and some EA scenarios |
+| **Microsoft Partner Agreement (MPA)**        | For Cloud Solution Providers (CSP)                    |
 
 ### Billing Profiles (MCA)
 
@@ -102,14 +94,14 @@ Effective cost allocation requires a comprehensive tagging strategy aligned with
 
 ### Required Tags for FinOps
 
-| Tag | Purpose | Example |
-|-----|---------|--------|
-| **CostCenter** | Financial tracking | CC-12345 |
-| **Environment** | Lifecycle stage | Production, Development, Test |
-| **Owner** | Accountability | team-platform@contoso.com |
-| **Application** | Workload identification | ERP-System |
-| **BusinessUnit** | Organizational mapping | Finance, Sales, Engineering |
-| **Project** | Initiative tracking | Digital-Transformation |
+| Tag              | Purpose                 | Example                       |
+| ---------------- | ----------------------- | ----------------------------- |
+| **CostCenter**   | Financial tracking      | CC-12345                      |
+| **Environment**  | Lifecycle stage         | Production, Development, Test |
+| **Owner**        | Accountability          | team-platform@contoso.com     |
+| **Application**  | Workload identification | ERP-System                    |
+| **BusinessUnit** | Organizational mapping  | Finance, Sales, Engineering   |
+| **Project**      | Initiative tracking     | Digital-Transformation        |
 
 ### Implementing Tag Governance
 
@@ -153,12 +145,12 @@ az costmanagement export create \
 
 ### Cost Views by FinOps Persona
 
-| Persona | View Configuration | Metrics |
-|---------|-------------------|---------|
-| **Executive** | Monthly trend by business unit | Total spend, MoM change, forecast |
-| **Finance** | Invoice section breakdown | Actual vs budget, chargeback totals |
-| **Engineering** | Resource-level by subscription | Utilization, waste, optimization |
-| **Platform Team** | Shared services allocation | Cost per workload, unit economics |
+| Persona           | View Configuration             | Metrics                             |
+| ----------------- | ------------------------------ | ----------------------------------- |
+| **Executive**     | Monthly trend by business unit | Total spend, MoM change, forecast   |
+| **Finance**       | Invoice section breakdown      | Actual vs budget, chargeback totals |
+| **Engineering**   | Resource-level by subscription | Utilization, waste, optimization    |
+| **Platform Team** | Shared services allocation     | Cost per workload, unit economics   |
 
 ### Budget Alerts
 
@@ -196,12 +188,12 @@ az consumption budget create \
 
 Azure Advisor provides optimization recommendations across categories:
 
-| Category | Examples |
-|----------|----------|
-| **Cost** | Shut down unused VMs, right-size resources, purchase reservations |
-| **Security** | Enable encryption, configure firewalls |
-| **Reliability** | Add redundancy, enable backups |
-| **Performance** | Upgrade SKUs, optimize queries |
+| Category        | Examples                                                          |
+| --------------- | ----------------------------------------------------------------- |
+| **Cost**        | Shut down unused VMs, right-size resources, purchase reservations |
+| **Security**    | Enable encryption, configure firewalls                            |
+| **Reliability** | Add redundancy, enable backups                                    |
+| **Performance** | Upgrade SKUs, optimize queries                                    |
 
 **Automate recommendation exports:**
 ```bash
@@ -214,11 +206,11 @@ az advisor recommendation list \
 
 **Reservations** provide up to 72% discount for committed usage:
 
-| Commitment Type | Flexibility | Discount |
-|----------------|-------------|----------|
-| **Reserved Instances** | Specific SKU/Region | Up to 72% |
-| **Savings Plans (Compute)** | Any VM across regions | Up to 65% |
-| **Savings Plans (Azure)** | Broader service coverage | Variable |
+| Commitment Type             | Flexibility              | Discount  |
+| --------------------------- | ------------------------ | --------- |
+| **Reserved Instances**      | Specific SKU/Region      | Up to 72% |
+| **Savings Plans (Compute)** | Any VM across regions    | Up to 65% |
+| **Savings Plans (Azure)**   | Broader service coverage | Variable  |
 
 **Reservation Purchase Strategy:**
 1. Analyze 30-60 days of usage patterns
@@ -277,13 +269,13 @@ Establish clear ownership and accountability with a tiered structure:
 
 Track FinOps maturity with these metrics:
 
-| KPI | Target | Measurement |
-|-----|--------|-------------|
-| **Tagging Compliance** | >95% | % resources with required tags |
-| **Budget Variance** | <10% | Actual vs forecast |
-| **Reservation Utilization** | >80% | Used vs purchased |
-| **Waste Reduction** | Monthly | Idle/orphaned resources eliminated |
-| **Unit Cost Trend** | Decreasing | Cost per transaction/user/workload |
+| KPI                         | Target     | Measurement                        |
+| --------------------------- | ---------- | ---------------------------------- |
+| **Tagging Compliance**      | >95%       | % resources with required tags     |
+| **Budget Variance**         | <10%       | Actual vs forecast                 |
+| **Reservation Utilization** | >80%       | Used vs purchased                  |
+| **Waste Reduction**         | Monthly    | Idle/orphaned resources eliminated |
+| **Unit Cost Trend**         | Decreasing | Cost per transaction/user/workload |
 
 ### Anomaly Detection
 
@@ -347,15 +339,15 @@ Enterprise Agreement
 
 **Tagging Standard:**
 
-| Tag | Required | Allowed Values |
-|-----|----------|----------------|
-| BusinessUnit | Yes | DivA, DivB, DivC, Corporate |
-| Environment | Yes | Production, Development, Test |
-| CostCenter | Yes | CC-XXXXX format |
-| Owner | Yes | Email address |
-| Application | Yes | Application name |
-| Project | No | Project code |
-| DataClassification | No | Public, Internal, Confidential |
+| Tag                | Required | Allowed Values                 |
+| ------------------ | -------- | ------------------------------ |
+| BusinessUnit       | Yes      | DivA, DivB, DivC, Corporate    |
+| Environment        | Yes      | Production, Development, Test  |
+| CostCenter         | Yes      | CC-XXXXX format                |
+| Owner              | Yes      | Email address                  |
+| Application        | Yes      | Application name               |
+| Project            | No       | Project code                   |
+| DataClassification | No       | Public, Internal, Confidential |
 
 ## Tools & Integrations
 

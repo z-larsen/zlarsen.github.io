@@ -6,18 +6,9 @@ tags: [posts, azure, entra, mfa, nps, radius, authentication, security]
 category: Security & Identity
 excerpt: "Learn how to configure a Network Policy Server (NPS) with Microsoft Entra ID Multi-Factor Authentication to secure RADIUS-based authentication for VPNs, network switches, and wireless access points."
 ---
+<!-- markdownlint-disable -->
 
 Network Policy Server (NPS) is Microsoft's RADIUS server implementation that provides centralized authentication, authorization, and accounting for network access. By integrating with Microsoft Entra ID Multi-Factor Authentication, you can add an additional security layer to protect access to VPNs, wireless networks, and network devices.
-
-```
-    ____  ___    ____  ____  __  _______
-   / __ \/   |  / __ \/  _/ / / / / ___/
-  / /_/ / /| | / / / // /  / / / /\__ \ 
- / _, _/ ___ |/ /_/ // /  / /_/ /___/ / 
-/_/ |_/_/  |_/_____/___/  \____//____/  
-```
-
-
 
 ## What You'll Need
 

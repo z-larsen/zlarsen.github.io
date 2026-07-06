@@ -10,17 +10,6 @@ eleventyExcludeFromCollections: true
 
 Creating a personal website shouldn't require complicated tooling or expensive hosting. This post walks through exactly how I built this site, GitHub Pages for hosting, Eleventy to generate it, GitHub Actions to deploy it, and VS Code to write it.
 
-```
-   _____ _ _   _    _       _       ____                       
-  / ____(_) | | |  | |     | |     |  _ \ __ _  __ _  ___  ___ 
- | |  __ _| |_| |__| |_   _| |__   | |_) / _` |/ _` |/ _ \/ __|
- | | |_ | | __|  __  | | | | '_ \  |  __/ (_| | (_| |  __/\__ \
- | |__| | | |_| |  | | |_| | |_) | | |   \__,_|\__, |\___||___/
-  \_____|_|\__|_|  |_|\__,_|_.__/  |_|          |___/           
-```
-
-
-
 ## Overview
 
 This guide covers:

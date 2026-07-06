@@ -6,21 +6,15 @@ tags: [posts, azure, finops, cost-management, reservations, savings-plans, hybri
 category: FinOps
 excerpt: "Azure offers three commitment-based tools to cut your cloud bill — Azure Hybrid Benefit, Reservations, and Savings Plans. Here's how each one works, where they overlap, and how to stack them for maximum savings."
 ---
+<!-- markdownlint-disable -->
 
 Azure's pay-as-you-go pricing is convenient, but it's the most expensive way to run a workload you already know you'll keep running. Before reaching for architectural changes or right-sizing exercises, there are three commitment-based tools that can reduce your bill with no changes to how your resources are deployed. They answer different questions, operate at different billing layers, and can be combined on the same workload.
 
-```
-  ____  _________  ______  __  ____ __________________  _   _______
- / __ \/ ____/ _ \/ ____/ / / / / //_/  _/  _/ ____/ / | | / / ___/
-/ /_/ / __/ /  __/ __/   / / / / ,<  / / / // __/ / /  | |/ /\__ \ 
-\____/____/ \___/_/     / /_/ / /| |/ / / // /___/_/   |___//____/ 
-```
-
-| Tool | Core Question | Commitment | Flexibility |
-|---|---|---|---|
-| **Azure Hybrid Benefit** | Do you own existing Microsoft licenses? | None | Toggle on/off anytime |
-| **Reservations** | Do you know exactly what you'll run for 1–3 years? | Specific SKU + Region | Low |
-| **Savings Plans** | Do you know how much you'll spend per hour for 1–3 years? | $/hr spend amount | High |
+| Tool                     | Core Question                                             | Commitment            | Flexibility           |
+| ------------------------ | --------------------------------------------------------- | --------------------- | --------------------- |
+| **Azure Hybrid Benefit** | Do you own existing Microsoft licenses?                   | None                  | Toggle on/off anytime |
+| **Reservations**         | Do you know exactly what you'll run for 1–3 years?        | Specific SKU + Region | Low                   |
+| **Savings Plans**        | Do you know how much you'll spend per hour for 1–3 years? | $/hr spend amount     | High                  |
 
 These are **billing constructs only**. None of them change how your resources run, where they run, or how they're managed. Only your bill changes.
 
@@ -43,11 +37,11 @@ When you deploy a Windows Server VM without AHB, the hourly rate bundles two com
 
 **Example — Standard_D4s_v5, East US:**
 
-| Configuration | Approx. Hourly Rate |
-|---|---|
-| Windows VM (PAYG, no AHB) | ~$0.304/hr |
-| Same VM with AHB applied | ~$0.192/hr |
-| Linux VM (baseline) | ~$0.192/hr |
+| Configuration             | Approx. Hourly Rate |
+| ------------------------- | ------------------- |
+| Windows VM (PAYG, no AHB) | ~$0.304/hr          |
+| Same VM with AHB applied  | ~$0.192/hr          |
+| Linux VM (baseline)       | ~$0.192/hr          |
 
 That's roughly a 37% reduction on that VM's cost — by flipping a switch.
 
@@ -114,11 +108,11 @@ The same pattern applies to SQL reservations — compute is covered, not storage
 
 When you purchase a reservation, you choose a **scope** that determines where the discount applies:
 
-| Scope | What it covers |
-|---|---|
-| **Single subscription** | Applies only to resources in one subscription |
-| **Shared** | Applies across all subscriptions in the same billing account (EA enrollment or MCA billing profile) |
-| **Management group** | Applies across subscriptions within a management group |
+| Scope                   | What it covers                                                                                      |
+| ----------------------- | --------------------------------------------------------------------------------------------------- |
+| **Single subscription** | Applies only to resources in one subscription                                                       |
+| **Shared**              | Applies across all subscriptions in the same billing account (EA enrollment or MCA billing profile) |
+| **Management group**    | Applies across subscriptions within a management group                                              |
 
 Shared scope is almost always preferable in enterprise environments — it maximizes utilization even if workloads move between subscriptions. Scope can be changed after purchase at no cost.
 
@@ -170,15 +164,15 @@ Each hour, Azure applies savings plan discounts to your eligible usage — start
 
 ### Savings Plans vs. Reservations
 
-| | Savings Plans | Reservations |
-|---|---|---|
-| Commitment unit | $/hr spend | Specific SKU + Region |
-| Applies across regions | Yes | No (per region) |
-| Applies across VM sizes | Yes | Only within family (ISF) |
-| Discount depth | ~65% off PAYG | Up to 72% off PAYG |
-| Best for | Dynamic/variable workloads | Stable, predictable workloads |
-| Refundable | **No** | Yes (within limits) |
-| Can stack on same resource | No (reservations take priority) | Yes (AHB stacks on top) |
+|                            | Savings Plans                   | Reservations                  |
+| -------------------------- | ------------------------------- | ----------------------------- |
+| Commitment unit            | $/hr spend                      | Specific SKU + Region         |
+| Applies across regions     | Yes                             | No (per region)               |
+| Applies across VM sizes    | Yes                             | Only within family (ISF)      |
+| Discount depth             | ~65% off PAYG                   | Up to 72% off PAYG            |
+| Best for                   | Dynamic/variable workloads      | Stable, predictable workloads |
+| Refundable                 | **No**                          | Yes (within limits)           |
+| Can stack on same resource | No (reservations take priority) | Yes (AHB stacks on top)       |
 
 The trade-off is simple: **more flexibility = slightly less discount**. Savings Plans give up a few percentage points compared to reservations in exchange for not being locked to a specific SKU or region.
 
@@ -246,13 +240,13 @@ AHB is not a toggle to flip and forget. If your Software Assurance expires, you'
 
 ## Where to Monitor in Azure
 
-| Task | Location |
-|---|---|
-| View reservation utilization | Cost Management → Reservations → Utilization |
-| View savings plan utilization | Cost Management → Savings Plans |
-| Get purchase recommendations | Azure Advisor → Cost tab |
-| Identify AHB-enabled VMs | Azure Portal → Virtual Machines → filter by "License type" |
-| Analyze what AHB is saving | Cost Management → Cost Analysis → filter by meter category |
+| Task                             | Location                                                    |
+| -------------------------------- | ----------------------------------------------------------- |
+| View reservation utilization     | Cost Management → Reservations → Utilization                |
+| View savings plan utilization    | Cost Management → Savings Plans                             |
+| Get purchase recommendations     | Azure Advisor → Cost tab                                    |
+| Identify AHB-enabled VMs         | Azure Portal → Virtual Machines → filter by "License type"  |
+| Analyze what AHB is saving       | Cost Management → Cost Analysis → filter by meter category  |
 | Exchange or refund a reservation | Cost Management → Reservations → select → Exchange / Refund |
 
 <figure>
