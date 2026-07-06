@@ -115,7 +115,7 @@ The full walkthrough is in the [official deploy tutorial](https://learn.microsof
    - **`storageSku`** — `Premium_LRS` (cheapest) or `Premium_ZRS` (zone-redundant).
    - **`scopesToMonitor`** — the subscriptions or billing scopes to ingest.
 
-4. **Wire up the exports.** With managed exports enabled, the hub creates the Cost Management exports for you; otherwise create them manually pointing at the `msexports` container.
+4. **Set up the exports.** With managed exports enabled, the hub creates the Cost Management exports for you; otherwise create them manually pointing at the `msexports` container.
 
 5. **Connect a report or dashboard.** Set up the Data Explorer dashboard or the toolkit's Power BI reports.
 

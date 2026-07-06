@@ -143,7 +143,7 @@ For the VS Code chat mode, the data flow is: your Azure credentials query ARG (r
 
 For the CLI with Azure OpenAI, the query results go to your own Azure OpenAI deployment in your own subscription. Microsoft's data processing terms apply. Nothing goes to OpenAI Inc.
 
-In both cases, the agent never writes to the customer's environment. All operations go through Azure Resource Graph, which is a read-only query surface. Assessment reports save locally to an `outputs/` directory that is excluded from version control via `.gitignore`.
+In both cases, the agent never writes to the customer's environment. All operations go through Azure Resource Graph, which is a read-only query interface. Assessment reports save locally to an `outputs/` directory that is excluded from version control via `.gitignore`.
 
 ## Deploying the Azure CSA Agent
 
@@ -199,7 +199,7 @@ After persisting, open a new terminal and run `azure-csa`. The LLM backend line 
 
 The broader point here is not really about this specific agent. It's about what MCP servers enable for any domain-specific AI tooling.
 
-Before MCP, building an AI tool that could interact with Azure meant writing custom API integrations, managing authentication flows, handling pagination, parsing response schemas, and wiring all of that into whatever LLM framework you were using. It was a significant amount of plumbing for every new data source.
+Before MCP, building an AI tool that could interact with Azure meant writing custom API integrations, managing authentication flows, handling pagination, parsing response schemas, and connecting all of that into whatever LLM framework you were using. It was a significant amount of plumbing for every new data source.
 
 MCP changes that by standardizing the interface. An MCP server exposes a set of tools with defined inputs and outputs. Any MCP-compatible client (VS Code, Claude Desktop, custom applications) can discover and use those tools without writing integration code. The Azure MCP Server handles all of the ARG API complexity, authentication, query parsing, pagination, and error handling. The Microsoft Learn MCP server handles documentation search, ranking, and content extraction. The agent just calls tools and works with results.
 

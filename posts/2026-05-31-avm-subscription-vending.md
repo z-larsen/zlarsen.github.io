@@ -11,7 +11,7 @@ eleventyExcludeFromCollections: true
 
 This is the first post in a deep dive series on Azure Verified Modules. We're starting with subscription vending because it's where platform engineering work in Azure usually begins — before workloads, before networking, before any resource gets deployed. If you're building a landing zone practice, subscription vending is the foundation.
 
-This post covers where to start, what the Microsoft-recommended model looks like, how to wire the AVM Terraform module into a GitHub Actions pipeline with OIDC authentication, and what decisions you'll need to make before writing any code.
+This post covers where to start, what the Microsoft-recommended model looks like, how to connect the AVM Terraform module into a GitHub Actions pipeline with OIDC authentication, and what decisions you'll need to make before writing any code.
 
 ---
 

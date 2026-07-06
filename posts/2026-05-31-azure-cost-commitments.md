@@ -251,7 +251,7 @@ AHB is not a toggle to flip and forget. If your Software Assurance expires, you'
 
 <figure>
 <img src="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/media/quick-acm-cost-analysis/accumulated-costs-view.png" alt="Azure Cost Analysis showing accumulated costs view with filter options for analyzing commitment-based savings">
-<figcaption>Use Azure Cost Analysis to compare amortized vs. actual costs — the difference surfaces how much your reservations and savings plans are saving each month. Source: Microsoft Learn</figcaption>
+<figcaption>Use Azure Cost Analysis to compare amortized vs. actual costs — the difference reveals how much your reservations and savings plans are saving each month. Source: Microsoft Learn</figcaption>
 </figure>
 
 ---

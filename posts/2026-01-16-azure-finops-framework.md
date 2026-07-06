@@ -254,7 +254,7 @@ az vm list \
 
 <figure>
 <img src="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/media/quick-acm-cost-analysis/see-insights.png" alt="Azure Cost Analysis intelligent insights panel highlighting cost anomalies and patterns">
-<figcaption>Azure Cost Analysis intelligent insights surface cost anomalies and unusual patterns automatically, helping FinOps teams respond quickly to unexpected spending. Source: Microsoft Learn</figcaption>
+<figcaption>Azure Cost Analysis intelligent insights flag cost anomalies and unusual patterns automatically, helping FinOps teams respond quickly to unexpected spending. Source: Microsoft Learn</figcaption>
 </figure>
 
 ### FinOps Governance Model

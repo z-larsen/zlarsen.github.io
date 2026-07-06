@@ -335,7 +335,7 @@ AzureDiagnostics
 ### Integration with Sentinel and Defender for Cloud
 
 - **Microsoft Sentinel**: Connect the Log Analytics workspace to Sentinel for automated threat detection and response. Use the built-in Azure WAF workbook for dashboards.
-- **Defender for Cloud**: Automatically detects unprotected web applications and recommends WAF deployment. Once WAF is deployed, Defender surfaces WAF alerts alongside other security findings.
+- **Defender for Cloud**: Automatically detects unprotected web applications and recommends WAF deployment. Once WAF is deployed, Defender shows WAF alerts alongside other security findings.
 
 ## Cost
 

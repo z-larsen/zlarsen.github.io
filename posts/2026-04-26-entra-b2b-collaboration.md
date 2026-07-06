@@ -7,7 +7,7 @@ category: Security & Identity
 excerpt: "A practitioner's guide to Microsoft Entra B2B collaboration covering what it is, how guest accounts work, external collaboration settings, cross-tenant access settings, Conditional Access for guests, M365 sharing controls, and monitoring."
 ---
 
-External collaboration is something almost every organization deals with at some point. A partner needs access to a shared SharePoint site. A vendor needs to join a Teams channel. A contractor needs to review documents in OneDrive. Microsoft Entra B2B collaboration is the identity framework that handles all of this, and it has a lot more configuration surface than most people realize when they first dig into it.
+External collaboration is something almost every organization deals with at some point. A partner needs access to a shared SharePoint site. A vendor needs to join a Teams channel. A contractor needs to review documents in OneDrive. Microsoft Entra B2B collaboration is the identity framework that handles all of this, and there's a lot more to configure than most people realize when they first dig into it.
 
 This post covers what B2B is, how it works under the hood, and every major configuration option you need to know -- from the basics of inviting guests all the way to Conditional Access policies, MFA trust, and Microsoft 365 sharing settings.
 
@@ -32,7 +32,7 @@ These three things get confused regularly:
 
 **B2B direct connect** -- a mutual, two-way trust between two specific Microsoft Entra tenants that enables limited collaboration without creating guest user objects. Currently this only works for Microsoft Teams Connect shared channels. Both organizations have to configure it. Users from the external org can participate in shared channels from within their own Teams instance, without switching tenants.
 
-**External ID for customer tenants** -- a completely separate product for consumer-facing apps where you want customers to sign up and sign in with social or email identities. Different tenant type, different configuration surface, out of scope for this post.
+**External ID for customer tenants** -- a completely separate product for consumer-facing apps where you want customers to sign up and sign in with social or email identities. Different tenant type, different configuration model, out of scope for this post.
 
 ## How the Invitation and Redemption Flow Works
 
@@ -55,7 +55,7 @@ You can customize the order in which identity providers are tried during redempt
 
 ## External Collaboration Settings
 
-This is the first configuration surface most admins touch. Find it at:
+This is the first configuration screen most admins touch. Find it at:
 
 **Microsoft Entra admin center > Identity > External Identities > External collaboration settings**
 
@@ -260,7 +260,7 @@ At the individual site level, site admins can further restrict sharing permissio
 
 ## Microsoft 365 Copilot and Guest Users
 
-Copilot respects the exact same permissions that govern everything else in Microsoft 365. Guests who have a Copilot license can use Copilot, but Copilot only surfaces data that the guest user has permission to access. If a guest is a member of a SharePoint site, Copilot can help them work with documents on that site. It cannot reach data in sites they don't have access to.
+Copilot respects the exact same permissions that govern everything else in Microsoft 365. Guests who have a Copilot license can use Copilot, but Copilot only shows data that the guest user has permission to access. If a guest is a member of a SharePoint site, Copilot can help them work with documents on that site. It cannot reach data in sites they don't have access to.
 
 This matters for cross-tenant scenarios with shared channels in Teams. If you've configured B2B direct connect and a guest is participating in a shared channel, their access to resources shared in that channel is determined by the shared channel's policies -- and Copilot honors those boundaries.
 

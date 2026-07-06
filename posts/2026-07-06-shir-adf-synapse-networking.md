@@ -4,7 +4,7 @@ title: "SHIR, ADF, and Synapse: Networking a Hybrid Data Pipeline (and Where Fab
 date: 2026-07-06
 tags: [posts, azure, networking, data-factory, synapse, fabric, private-endpoint, hybrid-connectivity, shir]
 category: Data & Analytics
-excerpt: "A self-hosted integration runtime lets you pull data from private on-premises and other-cloud sources into Azure without opening a single inbound port. This post covers how the SHIR works, the difference between Azure Data Factory and Synapse pipelines, the private endpoint and DNS wiring that trips most people up, how Power BI reaches the data, real use cases, and where Microsoft Fabric takes all of this next."
+excerpt: "A self-hosted integration runtime lets you pull data from private on-premises and other-cloud sources into Azure without opening a single inbound port. This post covers how the SHIR works, the difference between Azure Data Factory and Synapse pipelines, the private endpoint and DNS setup that trips most people up, how Power BI reaches the data, real use cases, and where Microsoft Fabric takes all of this next."
 ---
 <!-- markdownlint-disable -->
 
@@ -60,9 +60,9 @@ There are a few real feature differences worth knowing. Standalone ADF has some 
 
 For a hybrid pipeline, the IR-sharing difference is the practical one. A SHIR registers to one factory or one Synapse workspace. ADF lets you share that SHIR across factories; Synapse does not support IR sharing. So a design that uses both ADF and Synapse often means two SHIR installs, which is one more reason to pick a single orchestrator and stick with it.
 
-## The Networking Considerations (This Is the Hard Part)
+## Networking Considerations
 
-Moving the bytes is easy. The reason these projects stall is the network wiring around private endpoints and DNS. Here is what actually matters, in the order it tends to bite you.
+Moving the bytes is easy. The reason these projects stall is the network setup around private endpoints and DNS. Here is what actually matters, in the order it tends to bite you.
 
 ### Private Endpoints Give Your PaaS a Private IP
 
@@ -91,7 +91,7 @@ You need both. Build only the first set and your Synapse pipelines still cannot 
 
 ### Data Exfiltration Protection Is a One-Way Door
 
-When you create a Synapse workspace, you can turn on data exfiltration protection (DEP). With it on, Synapse can only send data to approved tenants and to targets you explicitly wire up with a managed private endpoint. It is a strong control for regulated data, with two consequences to plan for: every source and sink needs a managed private endpoint, and public package installs from places like PyPI are blocked. The important part is that you cannot change the managed-VNet and DEP settings after the workspace is created, so decide before you build. The details are in the [data exfiltration protection docs](https://learn.microsoft.com/azure/synapse-analytics/security/workspace-data-exfiltration-protection).
+When you create a Synapse workspace, you can turn on data exfiltration protection (DEP). With it on, Synapse can only send data to approved tenants and to targets you explicitly connect with a managed private endpoint. It is a strong control for regulated data, with two consequences to plan for: every source and sink needs a managed private endpoint, and public package installs from places like PyPI are blocked. The important part is that you cannot change the managed-VNet and DEP settings after the workspace is created, so decide before you build. The details are in the [data exfiltration protection docs](https://learn.microsoft.com/azure/synapse-analytics/security/workspace-data-exfiltration-protection).
 
 ### Egress Control With Azure Firewall
 
@@ -171,7 +171,7 @@ If you are about to build this, the sequence that avoids the most pain looks lik
 3. Prove raw network reachability to your private sources before involving any Azure service.
 4. Build the hybrid DNS chain and validate it with `nslookup` from the SHIR.
 5. Create the private endpoints, both the customer set and the Synapse managed set.
-6. Wire egress through the firewall.
+6. Route egress through the firewall.
 7. Add the Power BI gateway and test a query end to end.
 
 Notice that DNS comes before the private endpoints in that order. That is deliberate. DNS is the thing most likely to be quietly wrong, so you want it proven before you start troubleshooting anything downstream.

@@ -89,7 +89,7 @@ A few properties make it genuinely useful rather than a gimmick:
 
 - **Entra ID auth.** It authenticates with your existing Azure identity through the Azure Identity library, so it respects the permissions you already have. It cannot see what you cannot see.
 - **Real tools, not guesses.** It runs actual Azure operations and Resource Graph queries, so answers are grounded in your live environment rather than the model's training data.
-- **Broad service coverage.** Dozens of Azure services are already wired up, with more added regularly.
+- **Broad service coverage.** Dozens of Azure services are already connected, with more added regularly.
 
 <figure>
   <img src="https://learn.microsoft.com/en-us/azure/developer/azure-mcp-server/media/github-copilot-integration.png" alt="Screenshot showing the Azure MCP Server available as a tool in GitHub Copilot agent mode in Visual Studio Code">
@@ -134,7 +134,7 @@ The use cases fall into a few recognizable buckets:
 - **Domain knowledge.** Serve your own docs, architecture decisions, or standards as resources so the assistant answers in line with how your org actually does things.
 - **Composed workflows.** Chain several internal systems (ticketing, deployment, notifications) behind one tool so a single request drives a multi-step process.
 
-The design principle across all of these: expose the smallest, most specific set of tools that does the job, describe them clearly, and keep a human in the loop for anything that writes or deletes. A tightly scoped server is safer, easier to reason about, and cheaper to run, because every tool definition you expose is also context the model has to read on every turn.
+The design principle across all of these: expose the smallest, most specific set of tools that does the job, describe them clearly, and require a human to approve anything that writes or deletes. A tightly scoped server is safer, easier to reason about, and cheaper to run, because every tool definition you expose is also context the model has to read on every turn.
 
 ## Where to Start
 
@@ -142,9 +142,9 @@ If you want to try this today:
 
 1. Install the [Azure MCP Server](https://learn.microsoft.com/azure/developer/azure-mcp-server/get-started/tools/visual-studio-code) in VS Code and use it from Copilot agent mode against a non-production subscription.
 2. Add one more server from the `@mcp` gallery (the GitHub or Playwright servers are good first picks) to see how multiple servers coexist.
-3. When you hit something MCP does not cover yet, build a small custom server around one internal tool and wire it into `.vscode/mcp.json`.
+3. When you hit something MCP does not cover yet, build a small custom server around one internal tool and add it to `.vscode/mcp.json`.
 
-MCP is still young, and the surface is moving quickly, but the core idea is stable and worth learning now: a common protocol that lets AI assistants safely use the tools and data you already have.
+MCP is still young, and the ecosystem is moving quickly, but the core idea is stable and worth learning now: a common protocol that lets AI assistants safely use the tools and data you already have.
 
 ---
 

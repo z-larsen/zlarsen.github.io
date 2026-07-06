@@ -156,7 +156,7 @@ For the full treatment, the FinOps Foundation's [Token Economics: The Atomic Uni
 
 ### Azure OpenAI Service
 
-Azure OpenAI is the primary Azure surface for LLM inference. It offers two billing models:
+Azure OpenAI is the primary Azure service for LLM inference. It offers two billing models:
 
 **Token-based (consumption/pay-as-you-go):** You pay per 1,000 input and output tokens. No upfront commitment. Costs vary by model. Good for workloads with unpredictable or low volume.
 

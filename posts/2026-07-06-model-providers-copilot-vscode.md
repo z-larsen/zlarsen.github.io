@@ -121,7 +121,7 @@ Reference: [AI language models in VS Code](https://code.visualstudio.com/docs/co
 Bringing your own provider is not just a preference knob. It changes who bills you and gives you levers that matter at scale:
 
 - **Cost visibility.** Usage lands on your provider's bill, tagged to your account, so you can actually see and attribute it rather than having it disappear into a flat Copilot seat fee.
-- **Model tiering.** You can wire up a cheap local or small model for routine work and reserve a frontier model for the hard tasks, which is exactly the model-routing discipline that keeps AI spend under control.
+- **Model tiering.** You can set up a cheap local or small model for routine work and reserve a frontier model for the hard tasks, which is exactly the model-routing discipline that keeps AI spend under control.
 - **Data residency.** Routing through your own Azure OpenAI deployment keeps traffic inside your tenant and region, which matters for regulated workloads.
 
 That last point connects to a broader theme: as more of your tooling becomes a token meter behind a subscription, controlling where the tokens go is part of governing the spend. I covered that dynamic in [Why AI Cost Optimization Is Different from Traditional FinOps](/posts/2026-04-22-finops-for-ai/).

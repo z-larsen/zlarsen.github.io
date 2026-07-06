@@ -90,7 +90,7 @@ You describe the agent you want in plain language. Copilot Studio lets you defin
 
 Copilot Studio supports two distinct paths:
 
-1. **Extend M365 Copilot** — Declare instructions, tools, and knowledge to customize the M365 Copilot experience for a specific domain (e.g., an IT helpdesk agent). Best when you want to leverage the existing M365 Copilot orchestrator and surface the result to licensed M365 Copilot users.
+1. **Extend M365 Copilot** — Declare instructions, tools, and knowledge to customize the M365 Copilot experience for a specific domain (e.g., an IT helpdesk agent). Best when you want to leverage the existing M365 Copilot orchestrator and show the result to licensed M365 Copilot users.
 
 2. **Create a standalone agent** — Build a full custom agent with complete control over branding, conversation logic, model behavior, and deployment targets. Best for customer-facing bots or internal tools where you need something beyond M365 Copilot's scope.
 
@@ -180,7 +180,7 @@ These three tools are not mutually exclusive, Microsoft designed them to be laye
 
 1. **Foundry** is the engine. Developers build agents and fine-tuned models here.
 2. **Copilot Studio** is the builder interface. Analysts extend M365 Copilot or publish standalone agents without code, potentially backed by models deployed in Foundry.
-3. **M365 Copilot** is the end-user surface. Agents built in Copilot Studio or published from Foundry can surface here for licensed users.
+3. **M365 Copilot** is the end-user layer. Agents built in Copilot Studio or published from Foundry can appear here for licensed users.
 
 A realistic example: the security team builds a threat analysis agent in Foundry (Python SDK, fine-tuned model, multi-step tool calls). A business analyst wraps a simplified version in Copilot Studio with guided conversation flows. End users interact with it through M365 Copilot Chat in Teams, no code required on their end.
 

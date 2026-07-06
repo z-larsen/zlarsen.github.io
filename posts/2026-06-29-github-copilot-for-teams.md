@@ -4,13 +4,13 @@ title: "GitHub Copilot for Teams: What It Is, How to License It, and How It Bill
 date: 2026-06-29
 tags: [posts, github, github-copilot, ai, developer-tools, vs-code, productivity]
 category: AI
-excerpt: "Now that the Git fundamentals are in place, this post adds GitHub Copilot on top: what it actually is, how the plans differ, how the new AI Credits billing works as of June 2026, and how to fold it into the daily commit-branch-PR loop without burning through your allowance."
+excerpt: "Now that the Git fundamentals are in place, this post adds GitHub Copilot on top: what it actually is, how the plans differ, how the new AI Credits billing works as of June 2026, and how to fold it into the daily commit-branch-PR process without burning through your allowance."
 ---
 <!-- markdownlint-disable -->
 
 # GitHub Copilot for Teams: What It Is, How to License It, and How It Bills
 
-In the [Git for Teams post](/posts/2026-06-18-git-for-teams-github-copilot/) I made a point of putting Copilot last, because it's far more useful once you understand the workflow it's accelerating. This post picks up exactly there. You know the commit-branch-PR loop now, so let's add the AI on top of it: what Copilot actually is, which plan to pick, how the billing works after the June 2026 change, and how to wire it into the work you're already doing.
+In the [Git for Teams post](/posts/2026-06-18-git-for-teams-github-copilot/) I made a point of putting Copilot last, because it's far more useful once you understand the workflow it's accelerating. This post picks up exactly there. You know the commit-branch-PR process now, so let's add the AI on top of it: what Copilot actually is, which plan to pick, how the billing works after the June 2026 change, and how to connect it to the work you're already doing.
 
 One warning up front. This is the topic that changes faster than anything else I write about. Models, plan names, and billing all shift on a near-monthly cadence. Everything here is current as of **June 2026**.
 
@@ -18,7 +18,7 @@ One warning up front. This is the topic that changes faster than anything else I
 
 Copilot is an AI assistant that lives inside your editor and a few other tools. It's a handful of features that share a subscription, and the difference between them matters for both how you work and what you pay.
 
-| Surface                   | What it does                                                                     | Where it fits the Git workflow                                |
+| Feature                   | What it does                                                                     | Where it fits the Git workflow                                |
 | ------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------- |
 | **Code completions**      | Inline "ghost text" as you type                                                  | Writes the boilerplate so commits are about logic, not typing |
 | **Next edit suggestions** | Predicts your *next* change after the current one                                | Keeps a refactor moving across a file                         |

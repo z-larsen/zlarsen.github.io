@@ -73,7 +73,7 @@ git config --global user.name "Your Name"
 git config --global user.email "you@example.com"
 ```
 
-### The daily loop
+### The daily process
 
 Ninety percent of your Git usage is this cycle:
 
@@ -132,7 +132,7 @@ She works, committing in small logical chunks as she goes (not one giant commit 
 git add src/search.js
 git commit -m "Add search input component"
 git add src/api/search.js
-git commit -m "Wire search to the query endpoint"
+git commit -m "Connect search to the query endpoint"
 git push -u origin feature/search-box
 ```
 
@@ -224,9 +224,9 @@ git revert <commit>               # make a NEW commit that undoes an old one
 
 Here's the key takeaway: **learn the above first.** GitHub Copilot is an AI pair programmer that accelerates everything we just covered, but it doesn't replace understanding it. Copilot will happily suggest a `git reset` or generate code that resolves a conflict, and if you don't understand what those do, you can't tell when it's wrong. The developers who get the most out of Copilot are the ones who already know what *should* happen and use AI to get there faster. Always treat it as an accelerator on top of a foundation that you can evaluate, not a substitute for that foundation.
 
-With that said, once your fundamentals are solid, Copilot is a genuine force multiplier. It comes in a few surfaces inside VS Code and Visual Studio:
+With that said, once your fundamentals are solid, Copilot is a genuine force multiplier. It comes in a few forms inside VS Code and Visual Studio:
 
-| Surface              | What it does                                 | Where it helps with the Git workflow                                 |
+| Feature              | What it does                                 | Where it helps with the Git workflow                                 |
 | -------------------- | -------------------------------------------- | -------------------------------------------------------------------- |
 | **Code completions** | Inline "ghost text" suggestions as you type  | Writes the boilerplate so your commits are about logic, not typing   |
 | **Chat (Ask mode)**  | Ask questions in natural language            | "What does this `git rebase` command do?" without leaving the editor |
@@ -242,7 +242,7 @@ A few ways it plugs directly into the team workflow from this post:
 
 <figure>
   <img src="https://code.visualstudio.com/assets/docs/chat/review-code-edits/copilot-edits-file-review-controls.png" alt="VS Code editor showing AI-proposed code edits as an inline diff with Keep and Undo review controls">
-  <figcaption>VS Code surfaces Copilot's edits as a reviewable diff with Keep/Undo controls, the same review-before-you-commit discipline Git teaches, applied to AI-generated changes. Source: Visual Studio Code docs</figcaption>
+  <figcaption>VS Code shows Copilot's edits as a reviewable diff with Keep/Undo controls, the same review-before-you-commit discipline Git teaches, applied to AI-generated changes. Source: Visual Studio Code docs</figcaption>
 </figure>
 
 Agent mode is the most powerful option and the one that truly rewards understanding Git first. It can make changes across many files and even run your terminal commands, asking for your approval before each one but that approval step only protects you if you can read and understand what it's about to do:
