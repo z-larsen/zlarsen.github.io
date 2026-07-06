@@ -25,9 +25,27 @@ module.exports = function (eleventyConfig) {
     return `${mins} min read`;
   });
 
-  // Group posts by category (excludes pinned posts — handled separately in template)
+  // Group posts by category (excludes pinned posts — handled separately in template).
+  // Known categories render in a curated order; any other category is appended
+  // alphabetically so no post is ever hidden. 'Other' always sorts last.
+  const CATEGORY_ORDER = [
+    'AI',
+    'FinOps',
+    'Networking',
+    'Architecture',
+    'IaC',
+    'Security & Identity',
+    'Data & Analytics',
+    'Tutorials',
+    'Tools',
+  ];
+  const categorySlug = (name) =>
+    String(name)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  eleventyConfig.addFilter('categorySlug', categorySlug);
   eleventyConfig.addFilter('groupByCategory', function (collection) {
-    const catOrder = ['Tools', 'FinOps', 'Architecture', 'AI', 'Networking', 'Security & Identity', 'Tutorials', 'Other'];
     const groups = {};
     for (const item of collection) {
       if (item.data.pinned) continue;
@@ -35,9 +53,19 @@ module.exports = function (eleventyConfig) {
       if (!groups[cat]) groups[cat] = [];
       groups[cat].push(item);
     }
-    return catOrder
-      .filter(cat => groups[cat] && groups[cat].length > 0)
-      .map(cat => ({ name: cat, items: groups[cat] }));
+    const present = Object.keys(groups);
+    const ordered = [
+      ...CATEGORY_ORDER.filter((cat) => groups[cat]),
+      ...present
+        .filter((cat) => !CATEGORY_ORDER.includes(cat) && cat !== 'Other')
+        .sort(),
+      ...(groups['Other'] ? ['Other'] : []),
+    ];
+    return ordered.map((cat) => ({
+      name: cat,
+      slug: categorySlug(cat),
+      items: groups[cat],
+    }));
   });
 
   // Collections — visible posts only (excludes hidden: true)

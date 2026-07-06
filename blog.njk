@@ -39,7 +39,7 @@ title: Blog
 
   {# Category sections #}
   {%- for group in grouped -%}
-  <div class="post-section" data-section="{{ group.name }}">
+  <div class="post-section" id="topic-{{ group.slug }}" data-section="{{ group.name }}">
     <h2 class="post-section-label">{{ group.name }}</h2>
     <div class="post-grid">
       {%- for post in group.items -%}

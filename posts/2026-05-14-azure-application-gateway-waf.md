@@ -3,7 +3,7 @@ layout: post.njk
 title: "Azure Application Gateway WAF: Configuring Web Application Firewall for External Traffic"
 date: 2026-05-14
 tags: [posts, azure, networking, waf, application-gateway, security]
-category: Security
+category: Security & Identity
 excerpt: "A deep dive into Azure Web Application Firewall on Application Gateway — what it replaces from the on-prem world, how to configure WAF policies with managed and custom rules, and how it protects external traffic entering your Azure environment."
 ---
 

@@ -2,10 +2,11 @@
 layout: post.njk
 title: "Why AI Cost Optimization Is Different from Traditional FinOps"
 date: 2026-04-22
-tags: [posts, azure, finops, ai, cost-management, optimization, azure-openai]
+tags: [posts, azure, finops, ai, cost-management, optimization, azure-openai, tokenomics]
 category: FinOps
 excerpt: "AI spending doesn't follow the same rules as traditional cloud infrastructure. Here's what changes, what stays the same, and how to apply FinOps to Azure AI workloads before your token bill surprises you."
 ---
+<!-- markdownlint-disable -->
 
 Most organizations that have a working Azure FinOps practice feel reasonably confident they understand their cloud costs. They have tagging policies, Cost Management dashboards, reservation coverage targets, and a process for reviewing the monthly bill. Then an AI workload shows up and none of the usual signals make sense.
 
@@ -36,12 +37,12 @@ In traditional Azure FinOps, you're tracking VM hours, storage GBs, and data tra
 
 AI services introduce billing units that behave very differently:
 
-| Traditional Azure | AI / Azure OpenAI |
-|---|---|
-| VM-hours (hourly, predictable) | Tokens per request (per-call, variable) |
-| Storage GB (scales linearly) | Provisioned Throughput Units (PTUs, block capacity) |
-| Data transfer (volume-based) | Training compute hours (burst, unpredictable) |
-| DTUs / vCores (fixed tiers) | GPU-hours (scarce, volatile pricing) |
+| Traditional Azure              | AI / Azure OpenAI                                   |
+| ------------------------------ | --------------------------------------------------- |
+| VM-hours (hourly, predictable) | Tokens per request (per-call, variable)             |
+| Storage GB (scales linearly)   | Provisioned Throughput Units (PTUs, block capacity) |
+| Data transfer (volume-based)   | Training compute hours (burst, unpredictable)       |
+| DTUs / vCores (fixed tiers)    | GPU-hours (scarce, volatile pricing)                |
 
 **Tokens** are the core billing unit for most language model APIs. A token is roughly four characters of text. Every input and output in a model call is metered in tokens. The cost depends on which model you're calling: GPT-4o is more expensive per token than GPT-4o mini, which is more expensive than GPT-3.5. A prompt that seems short to a human can still carry a large token count if the system prompt is long, conversation history is included, or the response is verbose.
 
@@ -92,6 +93,60 @@ The FinOps Foundation's guidance is to shorten your forecast revision cycle for 
 
 ---
 
+## Tokenomics: The Atomic Unit of AI Value
+
+The FinOps Foundation has a name for the discipline forming around all of this: **tokenomics**, or token economics. In simplified terms, it is FinOps applied to AI, where the metered resource is not compute hours or storage but the token itself. (This has nothing to do with the crypto usage of the word. Here a token is a unit of computation, not a unit of ownership.)
+
+### Input and output tokens, priced separately
+
+Every call to a generative model decomposes into input tokens (the prompt, the retrieved context, the system instructions, the conversation history) and output tokens (the generated response, tool calls, reasoning). Providers price these two flows separately, often at different rates. The FinOps Foundation identifies five variables that drive how many tokens a single request burns:
+
+1. System prompt overhead, the standing instructions appended to every call.
+2. Context and memory, retrieved documents, history, and tool definitions.
+3. Model selection, since larger and reasoning-class models spend more tokens per equivalent task.
+4. Output length.
+5. Retry and orchestration overhead, from failed calls, validation passes, and agent-to-agent chatter.
+
+These compound. A single query routed through a retrieval pipeline with a reasoning model and a few tool calls can consume one to two orders of magnitude more tokens than a direct prompt to a small model. That non-linearity is the main reason traditional forecasts keep missing on AI.
+
+### Not all tokens are equal
+
+A token-count view assumes tokens are interchangeable. They are not. The concept that matters is **goodput**: output that meets a service-level objective, usually a time-to-first-token threshold and a sustained tokens-per-second rate. Enterprises buy goodput, not raw throughput. Token supply breaks into tiers worth knowing:
+
+- **Bulk tokens.** High throughput, low per-user speed. Fine for batch summarization and embeddings, unsuitable for interactive use.
+- **Goldilocks zone.** Moderate interactivity at near-optimal throughput. The sweet spot for chat and most enterprise apps.
+- **Premium low-latency tokens.** High per-user speed, needed for voice agents and anything where response time gates productivity. Higher cost.
+- **Reasoning tokens.** Reasoning models generate many internal tokens per externally returned token. The visible call may look Goldilocks-priced, but the consumption profile is very different, and reasoning workloads are the main source of recent spend growth.
+
+The takeaway for FinOps: track token quality alongside token quantity. An organization that measures only volume will misattribute cost.
+
+### The 2026 price environment
+
+The early narrative was simple, per-token prices were falling fast. That was true and is no longer the whole story. Two things changed. The subsidy phase ended, where frontier providers priced below cost to grow, and Anthropic's April 2026 enterprise pricing move, from bundled token allowances to a seat fee plus pre-committed token consumption, reframed procurement from "how many seats" to "how much compute will you forecast and pre-pay." Per-token list prices still drift down, but the declines are concentrated in commodity tiers, while reasoning and agentic workloads consume five to thirty times more tokens per task. The defensible summary: a token at a fixed tier may get cheaper, but the tokens an enterprise actually consumes, weighted by tier and volume, are not.
+
+### Tokens are only one layer of the cost
+
+A common conflation treats "AI cost" and "token cost" as the same thing. They are not. Tokens are the most visible layer, but a complete accounting spans several: foundation-model inference (the token layer), cloud compute and storage, data-center infrastructure for self-hosted deployments, networking and egress, SaaS embedding where the token meter is hidden, engineering and MLOps, data licensing, and shadow AI. A token-only view captures the marginal cost of inference and omits the fixed and semi-fixed costs that decide whether an initiative is viable at scale.
+
+That SaaS-embedding layer deserves a specific warning. AI-native developer tools increasingly present as flat monthly subscriptions but are token aggregators underneath. Effective spend at a fixed tier can jump by an order of magnitude for heavy agentic use. The seat fee is the floor, not the budget.
+
+### Connecting tokens to value
+
+The point of tokenomics is not to minimize tokens. It is to connect tokens to value. A model that spends ten times the tokens but produces an outcome worth a hundred times more is the right choice. A model that spends a tenth of the tokens and produces something unusable is not a saving. The metrics that keep this honest include cost per inference, cost per token, and **token yield rate**, the share of generated tokens that contributed to a real business action after retries, abandoned sessions, and low-quality outputs.
+
+### The engineering levers
+
+The encouraging part is that reducing tokens-per-outcome is increasingly an engineering discipline, not just a finance one. The levers with the biggest reported impact:
+
+- **Model routing and cascading.** Route each query to the cheapest model that can answer it. Published work (FrugalGPT, RouteLLM) reports cost reductions well north of 80 percent, and this is exactly what [bringing your own model providers](/posts/2026-07-06-model-providers-copilot-vscode/) lets you do in your own tooling.
+- **Leaner tool exposure.** The [MCP](/posts/2026-07-06-model-context-protocol-azure/) pattern of loading every tool definition into context on every turn scales poorly. The "code mode" alternative, where the agent writes code that calls tools, has been reported to cut token usage dramatically for tool-heavy workflows.
+- **Context compression and structured output.** Filtering retrieved context down to what matters, and using compact serialization instead of verbose JSON, both recover tokens the model would otherwise pay for.
+- **Caching and tiering.** Semantic caching of equivalent queries returns answers without invoking the model, and reserving frontier capability for the hard queries addresses the cost-versus-capability mismatch that single-model deployments create.
+
+For the full treatment, the FinOps Foundation's [Token Economics: The Atomic Unit of AI Value](https://www.finops.org/insights/token-economics-the-atomic-unit-of-ai-value/) is the reference this section draws on, and in June 2026 the Linux Foundation announced its intent to form a Tokenomics Foundation to standardize AI cost management.
+
+---
+
 ## Azure-Specific: What You're Working With
 
 <figure>
@@ -107,13 +162,13 @@ Azure OpenAI is the primary Azure surface for LLM inference. It offers two billi
 
 **Provisioned Throughput Units (PTU):** You purchase a block of throughput capacity (measured in PTUs) and reserve it for your exclusive use. Pricing is predictable. Latency is consistent. PTU capacity can be reserved on one-month or one-year terms for additional discounts over the hourly rate. Good for high-volume, latency-sensitive workloads with predictable traffic.
 
-| | Token-Based | PTU |
-|---|---|---|
-| Cost model | Per-token, variable | Fixed block capacity |
-| Latency | Subject to shared capacity limits | Consistent, dedicated |
-| Good for | Low/unpredictable volume, experimentation | Production, high-volume, SLA-driven |
-| Underutilization risk | Low (pay for what you use) | High (you pay whether or not you use the capacity) |
-| Commitment | None | Monthly or annual |
+|                       | Token-Based                               | PTU                                                |
+| --------------------- | ----------------------------------------- | -------------------------------------------------- |
+| Cost model            | Per-token, variable                       | Fixed block capacity                               |
+| Latency               | Subject to shared capacity limits         | Consistent, dedicated                              |
+| Good for              | Low/unpredictable volume, experimentation | Production, high-volume, SLA-driven                |
+| Underutilization risk | Low (pay for what you use)                | High (you pay whether or not you use the capacity) |
+| Commitment            | None                                      | Monthly or annual                                  |
 
 The PTU vs token-based decision is the Azure OpenAI equivalent of the on-demand vs reserved instance decision in compute FinOps. The math is similar: if your utilization is high and predictable, PTU wins on cost. If it's unpredictable, token-based keeps you from paying for idle capacity.
 
@@ -169,14 +224,14 @@ Response caching is relevant when your application makes semantically identical 
 
 Traditional FinOps KPIs still apply at the infrastructure level (reservation coverage, rightsizing recommendations, budget adherence). AI workloads add a layer of new metrics:
 
-| KPI | What It Measures | Why It Matters |
-|---|---|---|
-| **Cost per inference** | Total inference cost / number of requests | Core efficiency metric for deployed models |
-| **Cost per token** | Total cost / tokens consumed | Tracks token-level spend across models |
-| **Training cost efficiency** | Training cost / model accuracy improvement | Prevents spending on diminishing returns in training |
-| **GPU utilization** | Actual GPU hours / provisioned capacity | Identifies idle capacity and over-provisioning |
-| **PTU utilization** | Actual throughput used / purchased PTU capacity | Same logic as RI utilization in compute FinOps |
-| **Token anomaly rate** | Sudden spikes in token consumption | Catches runaway jobs, prompt injection issues, or bugs |
+| KPI                          | What It Measures                                | Why It Matters                                         |
+| ---------------------------- | ----------------------------------------------- | ------------------------------------------------------ |
+| **Cost per inference**       | Total inference cost / number of requests       | Core efficiency metric for deployed models             |
+| **Cost per token**           | Total cost / tokens consumed                    | Tracks token-level spend across models                 |
+| **Training cost efficiency** | Training cost / model accuracy improvement      | Prevents spending on diminishing returns in training   |
+| **GPU utilization**          | Actual GPU hours / provisioned capacity         | Identifies idle capacity and over-provisioning         |
+| **PTU utilization**          | Actual throughput used / purchased PTU capacity | Same logic as RI utilization in compute FinOps         |
+| **Token anomaly rate**       | Sudden spikes in token consumption              | Catches runaway jobs, prompt injection issues, or bugs |
 
 The most useful early metric is cost per inference. Once you have that baseline, you can track whether optimization efforts (model selection, prompt tuning, caching) are actually moving it.
 
@@ -207,3 +262,14 @@ If you're early in this, the highest-value actions are:
 The FinOps Foundation published its [FinOps for AI overview](https://www.finops.org/wg/finops-for-ai/) in early 2026 with detailed guidance across the full framework. If you're building out a formal practice, that's the right reference point alongside Microsoft's own Azure OpenAI documentation.
 
 AI costs are not going to simplify. The number of stakeholders, services, and pricing models will grow. Getting the foundational practices in place now, even imperfectly, puts you in a better position than trying to retrofit governance after the spend is already flowing.
+
+---
+
+## Related reading
+
+Part of an ongoing thread on AI for Azure practitioners:
+
+- [Model Context Protocol (MCP): What It Is and Why Azure Users Should Care](/posts/2026-07-06-model-context-protocol-azure/)
+- [Adding Model Providers to GitHub Copilot and VS Code](/posts/2026-07-06-model-providers-copilot-vscode/)
+- [Microsoft AI Tools Compared: M365 Copilot vs Copilot Studio vs Microsoft Foundry](/posts/2026-04-18-microsoft-ai-tools-compared/)
+- [Building an Azure CSA Agent with MCP Servers and GitHub Copilot](/posts/2026-05-13-building-azure-csa-agent/)

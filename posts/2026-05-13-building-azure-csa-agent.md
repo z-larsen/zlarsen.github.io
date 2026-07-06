@@ -7,6 +7,7 @@ category: Tools
 tool: true
 excerpt: "An open-source AI agent that runs live Azure infrastructure assessments using MCP servers, Azure Resource Graph, and GitHub Copilot. Learn how it works, how to deploy it, and how to build your own MCP-powered agent for any domain."
 ---
+<!-- markdownlint-disable -->
 
 # Building an Azure CSA Agent with MCP Servers and GitHub Copilot
 
@@ -209,3 +210,14 @@ The [MCP specification](https://modelcontextprotocol.io/) is open and the ecosys
 ## Source Code
 
 The full source is available at [github.com/z-larsen/AzureCSAAgent](https://github.com/z-larsen/AzureCSAAgent). It includes the VS Code chat mode definitions, CLI source, pre-built assessment skills, and setup instructions for all three usage paths.
+
+---
+
+## Related reading
+
+Part of an ongoing thread on AI for Azure practitioners:
+
+- [Model Context Protocol (MCP): What It Is and Why Azure Users Should Care](/posts/2026-07-06-model-context-protocol-azure/)
+- [Adding Model Providers to GitHub Copilot and VS Code](/posts/2026-07-06-model-providers-copilot-vscode/)
+- [Microsoft AI Tools Compared: M365 Copilot vs Copilot Studio vs Microsoft Foundry](/posts/2026-04-18-microsoft-ai-tools-compared/)
+- [Why AI Cost Optimization Is Different from Traditional FinOps](/posts/2026-04-22-finops-for-ai/)

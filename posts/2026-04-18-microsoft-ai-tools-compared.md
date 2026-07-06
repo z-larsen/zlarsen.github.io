@@ -6,6 +6,7 @@ tags: [posts, azure, ai, copilot, architecture, microsoft-365]
 category: AI
 excerpt: "Microsoft now has three distinct AI platforms and knowing which one to reach for can save you weeks of wasted effort. This guide breaks down Microsoft 365 Copilot, Copilot Studio, and Microsoft Foundry: what they are, how they work, and when to use each."
 ---
+<!-- markdownlint-disable -->
 
 # Microsoft AI Tools Compared: M365 Copilot vs Copilot Studio vs Microsoft Foundry
 
@@ -17,11 +18,11 @@ This post cuts through the marketing and gives you a practical, accurate picture
 
 ## The One-Line Summary
 
-| Tool | For Who | What It Does |
-|------|---------|-------------|
-| **Microsoft 365 Copilot** | End users + IT admins | AI assistant embedded in M365 apps (Teams, Word, Outlook, etc.) grounded in your org's data |
-| **Microsoft Copilot Studio** | Business analysts + low-code developers | Graphical tool for building custom agents and chatbots, no deep coding required |
-| **Microsoft Foundry** | Pro developers + ML engineers | Full Azure platform for building, fine-tuning, and deploying production AI applications with code |
+| Tool                         | For Who                                 | What It Does                                                                                      |
+| ---------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| **Microsoft 365 Copilot**    | End users + IT admins                   | AI assistant embedded in M365 apps (Teams, Word, Outlook, etc.) grounded in your org's data       |
+| **Microsoft Copilot Studio** | Business analysts + low-code developers | Graphical tool for building custom agents and chatbots, no deep coding required                   |
+| **Microsoft Foundry**        | Pro developers + ML engineers           | Full Azure platform for building, fine-tuning, and deploying production AI applications with code |
 
 ---
 
@@ -159,17 +160,17 @@ Use Microsoft Foundry when:
 
 ## Side-by-Side Decision Guide
 
-| Question | M365 Copilot | Copilot Studio | Microsoft Foundry |
-|----------|:---:|:---:|:---:|
-| Who is the primary user? | End users | Business analysts / low-code devs | Pro developers / ML engineers |
-| Requires coding? | No | No (low-code) | Yes |
-| Grounded in Microsoft Graph? | ✅ Yes | Partial (via connectors) | Custom / bring your own |
-| Custom model fine-tuning? | ❌ No | ❌ No | ✅ Yes |
-| Customer-facing bot support? | ❌ No | ✅ Yes | ✅ Yes |
-| Multi-agent orchestration in code? | ❌ No | Limited | ✅ Full |
-| Extends M365 Copilot? | N/A (is M365 Copilot) | ✅ Yes | ✅ Yes (publish to M365) |
-| Azure resource required? | No (M365 license) | No (Power Platform license) | ✅ Yes |
-| Evaluation and model tracing? | ❌ No | Limited | ✅ Full |
+| Question                           |     M365 Copilot      |          Copilot Studio           |       Microsoft Foundry       |
+| ---------------------------------- | :-------------------: | :-------------------------------: | :---------------------------: |
+| Who is the primary user?           |       End users       | Business analysts / low-code devs | Pro developers / ML engineers |
+| Requires coding?                   |          No           |           No (low-code)           |              Yes              |
+| Grounded in Microsoft Graph?       |         ✅ Yes         |     Partial (via connectors)      |    Custom / bring your own    |
+| Custom model fine-tuning?          |         ❌ No          |               ❌ No                |             ✅ Yes             |
+| Customer-facing bot support?       |         ❌ No          |               ✅ Yes               |             ✅ Yes             |
+| Multi-agent orchestration in code? |         ❌ No          |              Limited              |            ✅ Full             |
+| Extends M365 Copilot?              | N/A (is M365 Copilot) |               ✅ Yes               |    ✅ Yes (publish to M365)    |
+| Azure resource required?           |   No (M365 license)   |    No (Power Platform license)    |             ✅ Yes             |
+| Evaluation and model tracing?      |         ❌ No          |              Limited              |            ✅ Full             |
 
 ---
 
@@ -215,3 +216,14 @@ Start: What are you building?
 - [What is Microsoft Foundry?](https://learn.microsoft.com/en-us/azure/foundry/what-is-foundry) — Microsoft Learn
 - [Microsoft 365 Copilot extensibility overview](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility) — for building agents that extend M365 Copilot
 - [Microsoft Foundry quickstart](https://learn.microsoft.com/en-us/azure/foundry/quickstarts/get-started-code) — getting started with the Foundry SDK
+
+---
+
+## Related on this blog
+
+Part of an ongoing thread on AI for Azure practitioners:
+
+- [Model Context Protocol (MCP): What It Is and Why Azure Users Should Care](/posts/2026-07-06-model-context-protocol-azure/)
+- [Adding Model Providers to GitHub Copilot and VS Code](/posts/2026-07-06-model-providers-copilot-vscode/)
+- [Building an Azure CSA Agent with MCP Servers and GitHub Copilot](/posts/2026-05-13-building-azure-csa-agent/)
+- [Why AI Cost Optimization Is Different from Traditional FinOps](/posts/2026-04-22-finops-for-ai/)
