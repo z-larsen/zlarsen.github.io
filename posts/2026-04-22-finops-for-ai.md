@@ -111,18 +111,18 @@ These compound. A single query routed through a retrieval pipeline with a reason
 
 ### Not all tokens are equal
 
-A token-count view assumes tokens are interchangeable. They are not. The concept that matters is **goodput**: output that meets a service-level objective, usually a time-to-first-token threshold and a sustained tokens-per-second rate. Enterprises buy goodput, not raw throughput. Token supply breaks into tiers worth knowing:
+A token-count view assumes tokens are interchangeable. They are not. The concept that matters is **goodput**: output that meets a service-level objective, usually a time-to-first-token threshold and a sustained tokens-per-second rate. Enterprises buy goodput, not raw throughput. Token supply breaks into tiers:
 
 - **Bulk tokens.** High throughput, low per-user speed. Fine for batch summarization and embeddings, unsuitable for interactive use.
 - **Goldilocks zone.** Moderate interactivity at near-optimal throughput. The sweet spot for chat and most enterprise apps.
 - **Premium low-latency tokens.** High per-user speed, needed for voice agents and anything where response time gates productivity. Higher cost.
 - **Reasoning tokens.** Reasoning models generate many internal tokens per externally returned token. The visible call may look Goldilocks-priced, but the consumption profile is very different, and reasoning workloads are the main source of recent spend growth.
 
-The takeaway for FinOps: track token quality alongside token quantity. An organization that measures only volume will misattribute cost.
+Track token quality alongside token quantity. An organization that measures only volume will misattribute cost.
 
 ### The 2026 price environment
 
-The early narrative was simple, per-token prices were falling fast. That was true and is no longer the whole story. Two things changed. The subsidy phase ended, where frontier providers priced below cost to grow, and Anthropic's April 2026 enterprise pricing move, from bundled token allowances to a seat fee plus pre-committed token consumption, reframed procurement from "how many seats" to "how much compute will you forecast and pre-pay." Per-token list prices still drift down, but the declines are concentrated in commodity tiers, while reasoning and agentic workloads consume five to thirty times more tokens per task. The defensible summary: a token at a fixed tier may get cheaper, but the tokens an enterprise actually consumes, weighted by tier and volume, are not.
+The early narrative was simple, per-token prices were falling fast. That was true and is no longer the whole story. Two things changed. The subsidy phase ended, where frontier providers priced below cost to grow, and Anthropic's April 2026 enterprise pricing move, from bundled token allowances to a seat fee plus pre-committed token consumption, reframed procurement from "how many seats" to "how much compute will you forecast and pre-pay." Per-token list prices still drift down, but the declines are concentrated in commodity tiers, while reasoning and agentic workloads consume five to thirty times more tokens per task. A token at a fixed tier may get cheaper, but the tokens an enterprise actually consumes, weighted by tier and volume, are not.
 
 ### Tokens are only one layer of the cost
 
@@ -132,11 +132,11 @@ That SaaS-embedding layer deserves a specific warning. AI-native developer tools
 
 ### Connecting tokens to value
 
-The point of tokenomics is not to minimize tokens. It is to connect tokens to value. A model that spends ten times the tokens but produces an outcome worth a hundred times more is the right choice. A model that spends a tenth of the tokens and produces something unusable is not a saving. The metrics that keep this honest include cost per inference, cost per token, and **token yield rate**, the share of generated tokens that contributed to a real business action after retries, abandoned sessions, and low-quality outputs.
+Tokenomics is about connecting tokens to value, not just cutting consumption. A model that spends ten times the tokens but produces an outcome worth a hundred times more is the right choice. A model that spends a tenth of the tokens and produces something unusable is not a saving. The metrics that keep this honest include cost per inference, cost per token, and **token yield rate**, the share of generated tokens that contributed to a real business action after retries, abandoned sessions, and low-quality outputs.
 
 ### The engineering levers
 
-The encouraging part is that reducing tokens-per-outcome is increasingly an engineering discipline, not just a finance one. The levers with the biggest reported impact:
+Reducing tokens-per-outcome is increasingly an engineering discipline, not just a finance one. The levers with the biggest reported impact:
 
 - **Model routing and cascading.** Route each query to the cheapest model that can answer it. Published work (FrugalGPT, RouteLLM) reports cost reductions well north of 80 percent, and this is exactly what [bringing your own model providers](/posts/2026-07-06-model-providers-copilot-vscode/) lets you do in your own tooling.
 - **Leaner tool exposure.** The [MCP](/posts/2026-07-06-model-context-protocol-azure/) pattern of loading every tool definition into context on every turn scales poorly. The "code mode" alternative, where the agent writes code that calls tools, has been reported to cut token usage dramatically for tool-heavy workflows.

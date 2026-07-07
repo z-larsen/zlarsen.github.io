@@ -16,7 +16,7 @@ The default Copilot experience picks a model for you, and for most work that is 
 
 BYOK lets you connect to a model provider using your own API key while still using the Copilot chat experience and tools. Your key stays private and requests go straight to your provider, which means you also control and monitor the usage directly on their billing, not Copilot's.
 
-Worth knowing up front: BYOK models work without signing into a GitHub account and without a Copilot plan. That is what makes fully offline, local-model workflows possible. The tradeoff is that some features still lean on the Copilot service. Semantic search, inline code completions, and anything that depends on embeddings still need a GitHub account. BYOK applies to the chat experience and background utility tasks.
+BYOK models work without signing into a GitHub account and without a Copilot plan. That is what makes fully offline, local-model workflows possible. The tradeoff is that some features still lean on the Copilot service. Semantic search, inline code completions, and anything that depends on embeddings still need a GitHub account. BYOK applies to the chat experience and background utility tasks.
 
 ## In the GitHub Copilot App
 
@@ -32,7 +32,7 @@ The Copilot app exposes this directly under **Model providers**. You add a provi
 | **Ollama (local)**    | A local runtime with no API key, over the OpenAI-compatible `/v1` endpoint              |
 | **OpenAI**            | Hosted models over the completions API                                                  |
 
-The shape is consistent: hosted providers ask for an API key, Azure asks for your resource endpoint and deployment details, and local runtimes like Ollama and Foundry Local need no key at all because they run on your machine. The note at the top of that panel says it plainly: your keys stay private and go straight to your provider.
+Hosted providers ask for an API key, Azure asks for your resource endpoint and deployment details, and local runtimes like Ollama and Foundry Local need no key at all because they run on your machine. The note at the top of that panel says it plainly: your keys stay private and go straight to your provider.
 
 ## In VS Code
 
@@ -118,13 +118,13 @@ Reference: [AI language models in VS Code](https://code.visualstudio.com/docs/co
 
 ## Why Bother (the FinOps Angle)
 
-Bringing your own provider is not just a preference knob. It changes who bills you and gives you levers that matter at scale:
+Bringing your own provider changes who bills you and gives you levers that matter at scale:
 
 - **Cost visibility.** Usage lands on your provider's bill, tagged to your account, so you can actually see and attribute it rather than having it disappear into a flat Copilot seat fee.
 - **Model tiering.** You can set up a cheap local or small model for routine work and reserve a frontier model for the hard tasks, which is exactly the model-routing discipline that keeps AI spend under control.
 - **Data residency.** Routing through your own Azure OpenAI deployment keeps traffic inside your tenant and region, which matters for regulated workloads.
 
-That last point connects to a broader theme: as more of your tooling becomes a token meter behind a subscription, controlling where the tokens go is part of governing the spend. I covered that dynamic in [Why AI Cost Optimization Is Different from Traditional FinOps](/posts/2026-04-22-finops-for-ai/).
+As more of your tooling becomes a token meter behind a subscription, controlling where the tokens go is part of governing the spend. I covered that dynamic in [Why AI Cost Optimization Is Different from Traditional FinOps](/posts/2026-04-22-finops-for-ai/).
 
 ## Where to Start
 

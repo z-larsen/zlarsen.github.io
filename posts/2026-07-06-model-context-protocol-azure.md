@@ -12,13 +12,13 @@ excerpt: "MCP is the open standard that lets AI assistants reach out of the chat
 
 For the first couple of years, using an AI assistant meant copying context in and copying answers out. You pasted a log, it suggested a fix, you pasted the fix somewhere else. The model could reason, but it could not reach anything. Model Context Protocol changes that. It is the standard that lets an AI assistant call your tools, read your data, and take actions, in a structured and permissioned way.
 
-If you work in Azure, this is the mechanism behind the GitHub Copilot for Azure experience, and it is something you can extend yourself. This post covers what MCP is, how it works, why it is useful for Azure users, and how to build your own custom server.
+If you work in Azure, this is the mechanism behind the GitHub Copilot for Azure experience, and it is something you can extend yourself.
 
 ## What MCP Is
 
 MCP is an open protocol that standardizes how language models connect to external tools, data, and context. Think of it as a common plug. Before MCP, every AI tool integration was bespoke: a custom connector for GitHub, another for your database, another for your ticketing system, each with its own auth and its own shape. MCP defines one contract so any compliant client can talk to any compliant server.
 
-It uses a client-server architecture with three roles worth knowing:
+It uses a client-server architecture with three roles:
 
 - **Hosts** are the apps you interact with. VS Code is a host. So is the GitHub Copilot app, Visual Studio, and Claude.
 - **Clients** live inside the host and manage the connection to a server. GitHub Copilot agent mode in VS Code acts as an MCP client.
@@ -71,7 +71,7 @@ You can also run **MCP: Add Server** from the Command Palette for a guided flow,
 }
 ```
 
-One rule to internalize early: **do not hardcode secrets** in `mcp.json`. Use input variables or environment files so API keys stay out of source control.
+Do not hardcode secrets in `mcp.json`. Use input variables or environment files so API keys stay out of source control.
 
 Reference: [Add and manage MCP servers in VS Code](https://code.visualstudio.com/docs/copilot/customization/mcp-servers).
 
@@ -85,7 +85,7 @@ MCP servers, especially local ones, can run arbitrary code on your machine. VS C
 
 The clearest reason to care is the [Azure MCP Server](https://learn.microsoft.com/azure/developer/azure-mcp-server/). It lets an AI agent interact with your Azure resources through natural language. Instead of remembering the exact `az` syntax, you ask "which storage accounts in this subscription still allow public blob access," and the agent uses the server's tools to run the underlying Azure Resource Graph query and answer.
 
-A few properties make it genuinely useful rather than a gimmick:
+A few properties make it useful:
 
 - **Entra ID auth.** It authenticates with your existing Azure identity through the Azure Identity library, so it respects the permissions you already have. It cannot see what you cannot see.
 - **Real tools, not guesses.** It runs actual Azure operations and Resource Graph queries, so answers are grounded in your live environment rather than the model's training data.
@@ -100,7 +100,7 @@ This is also what powers **GitHub Copilot for Azure**: it supplements the model'
 
 ### The bigger point
 
-The Azure MCP Server is one example of the real value: MCP lets you connect an AI assistant to *your* systems, not just Microsoft's. Your internal REST API, your on-call runbooks, your CMDB, your ticketing system, your data warehouse. Anything you can wrap in a server becomes something the assistant can use, with your auth and your guardrails. That is the shift from a model that talks about your systems to one that operates on them.
+The Azure MCP Server is one example of the real value: MCP lets you connect an AI assistant to *your* systems, not just Microsoft's. Your internal REST API, your on-call runbooks, your CMDB, your ticketing system, your data warehouse. Anything you can wrap in a server becomes something the assistant can use, with your auth and your guardrails.
 
 ## Building Your Own Custom MCP Server
 
@@ -126,7 +126,7 @@ If you already have logic built, you may not need to write a server from scratch
 
 ### What custom servers are good for
 
-The use cases fall into a few recognizable buckets:
+Common use cases:
 
 - **Wrapping an internal API.** Turn "look up the order status for customer X" into a tool so support engineers can ask in plain language.
 - **Runbook automation.** Expose safe, parameterized operations from your on-call runbooks so an agent can gather diagnostics or perform a known remediation with a human confirming the call.

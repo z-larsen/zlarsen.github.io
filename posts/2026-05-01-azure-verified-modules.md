@@ -28,11 +28,11 @@ AVM is a direct evolution of CARML (Common Azure Resource Module Library) and TF
 
 AVM publishes three kinds of modules:
 
-| Type | What It Is | Example |
-|------|-----------|---------|
-| **Resource Modules** | A single Azure resource type with all its child resources and extensions handled. Flexible, multi-purpose, covers the full footprint of that resource. | `avm/res/key-vault/vault`, `avm/res/network/virtual-network` |
-| **Pattern Modules** | A reusable architectural pattern composed of multiple resources. Encodes a known good design for a workload or scenario. | Hub-spoke networking, AKS baseline, secure storage account with private endpoint |
-| **Utility Modules** | Shared helper types and functions used by other AVM modules. Not deployed directly. | `avm/utl/types/avm-common-types` for shared user-defined types |
+| Type                 | What It Is                                                                                                                                             | Example                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| **Resource Modules** | A single Azure resource type with all its child resources and extensions handled. Flexible, multi-purpose, covers the full footprint of that resource. | `avm/res/key-vault/vault`, `avm/res/network/virtual-network`                     |
+| **Pattern Modules**  | A reusable architectural pattern composed of multiple resources. Encodes a known good design for a workload or scenario.                               | Hub-spoke networking, AKS baseline, secure storage account with private endpoint |
+| **Utility Modules**  | Shared helper types and functions used by other AVM modules. Not deployed directly.                                                                    | `avm/utl/types/avm-common-types` for shared user-defined types                   |
 
 Resource modules are where most of the library lives and where you should start. Pattern modules are being built on top of resource modules and are more opinionated, composing multiple resources into a coherent architecture.
 
