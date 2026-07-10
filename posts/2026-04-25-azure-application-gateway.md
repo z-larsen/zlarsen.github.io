@@ -38,7 +38,7 @@ Here's what it gives you, per the [Azure Application Gateway features docs](http
 | **AKS Ingress (AGIC)** | Application Gateway Ingress Controller lets AKS use Application Gateway as the cluster ingress. |
 | **WebSocket / HTTP/2** | Native support for both protocols with no extra configuration. |
 | **Connection Draining** | Gracefully removes backend pool members during updates; in-flight requests finish before the node is pulled. |
-| **Private Link** | Connect to backends privately; fully private-only deployment (public preview). |
+| **Private Link & Private-Only Deployment** | Expose the gateway to other VNets or subscriptions over Private Link, or deploy it with a private frontend IP only (no public IP). Both are now generally available. |
 
 <figure>
   <img src="https://learn.microsoft.com/en-us/azure/application-gateway/media/application-gateway-url-route-overview/figure1-720.png" alt="URL path-based routing diagram showing traffic directed to different backend pools based on URL path">

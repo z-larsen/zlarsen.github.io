@@ -116,7 +116,7 @@ Key points about this flow:
 
 ### Step 1: Create a WAF Policy
 
-WAF configuration lives in a WAF Policy resource, not on the App Gateway itself. This is important — the old way of configuring WAF directly on the gateway (WAF Configuration) is deprecated and retires March 2027. Always use WAF Policy.
+WAF configuration lives in a WAF Policy resource, not on the App Gateway itself. This is important — the old way of configuring WAF directly on the gateway (WAF Configuration) is deprecated and retires March 15, 2027. Always use WAF Policy.
 
 1. Portal → search **Web Application Firewall** → select **Create**
 2. Fill in the basics:
