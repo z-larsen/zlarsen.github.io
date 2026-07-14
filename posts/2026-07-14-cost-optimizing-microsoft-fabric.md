@@ -87,6 +87,22 @@ And for workloads that actually matter, **isolate your tier-1 capacity.** Don't 
 
 ---
 
+## Offload the heavy workload: Autoscale Billing for Spark
+
+There's a newer lever that sidesteps the capacity math entirely for one of the heaviest workloads. With [Autoscale Billing for Spark](https://learn.microsoft.com/fabric/data-engineering/autoscale-billing-for-spark-overview), your Spark jobs stop drawing from the shared capacity and instead run on **dedicated serverless compute billed pay-as-you-go** — you're charged only for a job's actual runtime, with **no idle cost** and no contention with your other Fabric workloads.
+
+Why it matters: Spark is exactly the workload most likely to spike and shove your interactive users into throttling. Instead of scaling the *whole* capacity up to survive a bursty nightly job, you move Spark off the capacity, set a **maximum CU limit** as a budget ceiling, and let it scale on its own. Your Power BI reports keep their CUs; your Spark bill tracks real usage.
+
+A few specifics that matter:
+
+- **F2 and above only** — not P-SKUs, not trial capacities — and you must be a Fabric Capacity Administrator to enable it.
+- **No bursting or smoothing under autoscale.** Interactive Spark jobs throttle when the CU limit is hit; background jobs queue. The predictability is the trade-off.
+- **Track spend in Azure Cost Analysis** under the `Autoscale for Spark Capacity Usage CU` meter — it bills on the subscription, separate from your capacity.
+
+It isn't automatically cheaper. A steady, well-packed Spark workload can still be cheaper on reserved capacity — Microsoft's [Spark capacity planning guidance](https://learn.microsoft.com/fabric/data-engineering/spark-best-practices-capacity-planning) notes a reservation runs roughly 40% below pay-as-you-go. But for **bursty or unpredictable Spark**, paying only for runtime beats paying 24/7 for a capacity sized to survive the peaks. It's the same "provision less, pay for what you run" idea, aimed at the one workload that breaks capacity sizing hardest.
+
+---
+
 ## Capacity reservations: the commitment discount
 
 Once you know your steady-state baseline, stop paying pay-as-you-go for it. [Fabric capacity reservations](https://learn.microsoft.com/azure/cost-management-billing/reservations/fabric-capacity) let you commit to a quantity of CUs in a region for **one or three years** in exchange for a discount off the pay-as-you-go rate. A few things that trip people up:
@@ -97,6 +113,15 @@ Once you know your steady-state baseline, stop paying pay-as-you-go for it. [Fab
 - **You can exchange a Synapse reservation for a Fabric one** if you're migrating off dedicated SQL pools — a nice detail if you're mid-transition.
 
 The order of operations matters: **right-size, prove the baseline is stable, *then* reserve.** Reserving an oversized capacity just locks in the waste for a year.
+
+---
+
+## The meters hiding outside the SKU
+
+The reservation covers capacity — but two costs live *outside* the CU model, and new users miss them because they assume the F SKU pays for everything.
+
+- **OneLake storage is billed separately.** Your lakehouse and warehouse data sits in [OneLake](https://learn.microsoft.com/fabric/onelake/onelake-consumption), billed pay-as-you-go per GB, and it **does not consume CUs.** Pausing the capacity stops compute charges, but your stored data keeps billing regardless. Storage is usually small next to compute — but it's a line item that survives every pause, so lifecycle-manage it like any other storage (the [Storage post](/posts/2026-07-14-cost-optimizing-azure-storage/) covers how in depth).
+- **Mirroring has a free allowance — with a pause gotcha.** [Mirroring](https://learn.microsoft.com/fabric/mirroring/overview#cost-of-mirroring) a database into OneLake is free for both the replication compute and the storage, **up to one free terabyte per CU you purchased** — an F64 gets 64 free TB. But two caveats bite: querying that mirrored data (via SQL, Power BI, or Spark) consumes capacity like any other workload, and the free storage allowance **stops applying when the capacity is paused** — a paused capacity begins billing for mirrored storage. So the pause-nights-and-weekends trick that's free for compute isn't entirely free if you're leaning on large mirrored datasets. Worth knowing before you schedule aggressive pausing on a capacity that mirrors terabytes.
 
 ---
 
@@ -114,7 +139,7 @@ Map it back to the cycle: **Inform** with the Metrics app and notifications, **O
 
 ## To Sum it up
 
-Fabric cost optimization comes down to a few ideas that don't exist anywhere else on Azure. You pay for the SKU, not the usage, so the wins come from *provisioning less* and *turning it off*. Smoothing and bursting mean you can usually size for the average, not the peak. Pause/resume is the biggest lever most people ignore — a paused capacity is free. Surge protection and utilization alerts keep you out of the 3x overage trap. And once your baseline is stable, a one- or three-year capacity reservation turns that steady spend into a discount.
+Fabric cost optimization comes down to a few ideas that don't exist anywhere else on Azure. You pay for the SKU, not the usage, so the wins come from *provisioning less* and *turning it off*. Smoothing and bursting mean you can usually size for the average, not the peak. Pause/resume is the biggest lever most people ignore — a paused capacity is free. Surge protection and utilization alerts keep you out of the 3x overage trap. And once your baseline is stable, a one- or three-year capacity reservation turns that steady spend into a discount. Offload bursty Spark to Autoscale Billing so it stops throttling everything else and bills only for runtime — and remember OneLake storage and mirrored data meter *outside* the SKU, even while the capacity is paused.
 
 Get the size right, automate the on/off schedule, reserve the baseline, and Fabric stops being the surprise line on your bill.
 
@@ -130,6 +155,9 @@ Next in the series: [Cost-Optimizing Azure AI Foundry](/posts/2026-07-14-cost-op
 - [Manage high compute usage and reduce throttling](https://learn.microsoft.com/fabric/enterprise/optimize-capacity)
 - [Scale your capacity](https://learn.microsoft.com/fabric/enterprise/scale-capacity)
 - [Save costs with Microsoft Fabric Capacity reservations](https://learn.microsoft.com/azure/cost-management-billing/reservations/fabric-capacity)
+- [Autoscale Billing for Spark in Microsoft Fabric](https://learn.microsoft.com/fabric/data-engineering/autoscale-billing-for-spark-overview)
+- [OneLake compute and storage consumption](https://learn.microsoft.com/fabric/onelake/onelake-consumption)
+- [Cost of mirroring in Fabric](https://learn.microsoft.com/fabric/mirroring/overview#cost-of-mirroring)
 - [Fabric Capacity Metrics app](https://learn.microsoft.com/fabric/enterprise/metrics-app)
 
 *Part of the [Azure Cost Optimization Playbook](/posts/2026-07-14-azure-cost-optimization-playbook/) series.*

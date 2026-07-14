@@ -79,13 +79,33 @@ Same discipline as everywhere in this series: **prove your steady-state PTU base
 
 ---
 
+## Size for baseline, spill over for the peaks
+
+There's a newer feature that changes how aggressively you should size PTUs: [spillover for provisioned deployments](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/spillover-traffic-management) (preview). Pair a provisioned deployment with a standard one, and when traffic exceeds what your PTUs can serve, the overflow automatically routes to pay-as-you-go instead of returning 429s. The billing stays clean: requests served by your PTUs cost only the hourly provisioned rate, and only the spilled-over requests bill at standard input/cached/output token rates.
+
+The cost consequence is the important part — **you can size PTUs for your baseline instead of your peak.** Without spillover you're stuck choosing between over-provisioning PTUs to survive spikes (idle capacity most of the time) or throttling at the worst moment. With it, you provision for the steady state and let standard absorb the occasional surge. For a workload with a predictable floor and an unpredictable ceiling, that's the single best answer to "how many PTUs?"
+
+---
+
 ## The cost levers people forget
 
-Beyond the deployment-type decision, three features quietly cut AI spend and new users routinely miss them:
+Beyond the deployment-type decision, four features quietly cut AI spend and new users routinely miss them:
 
 1. **Prompt caching.** For [supported models](https://learn.microsoft.com/azure/foundry/openai/how-to/prompt-caching), if the *beginning* of your prompt is identical across requests — a long system prompt, a fixed instruction block, a shared context — the cached input tokens are billed at a discount on Standard deployments, and at **up to a 100% discount on input tokens on Provisioned deployments.** If you have a big static system prompt, structure it to sit at the front of every request and let caching do the rest. It also cuts latency.
 2. **The [model router](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/model-router) (preview).** A single deployment that inspects each prompt and routes it to the cheapest model that can handle it well — reserving your expensive flagship for the prompts that actually need it. For mixed workloads, that's real money saved without a quality hit on the hard prompts.
 3. **Batch for anything that can wait.** Worth repeating because it's the biggest single discount: if a job doesn't need a real-time answer, running it through Global Batch cuts the token cost in half.
+4. **[Dynamic quota](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/dynamic-quota) (preview).** For standard deployments, this lets Azure temporarily grant *more* throughput than your TPM setting when spare capacity exists — so bulk jobs, RAG embedding runs, and offline analysis push through faster instead of hitting 429s early. The extra calls bill at normal rates (it's throughput headroom, not a discount) and it never drops you below your configured quota. Leave it off only where volatile throughput would hurt the experience.
+
+---
+
+## If you fine-tune, mind the hosting clock
+
+Fine-tuning earns its own warning because its cost model surprises people. Training is a one-time charge — but **a deployed fine-tuned model bills an hourly hosting fee the entire time it exists, whether or not anyone calls it.** Microsoft's [fine-tuning cost guidance](https://learn.microsoft.com/azure/foundry/openai/how-to/fine-tuning-cost-management) uses an example of **$1.70/hour** for a Standard-hosted fine-tune, on top of the usual per-token charges — that's roughly $1,200 a month for a model sitting idle.
+
+Two things follow:
+
+- **Don't leave experimental fine-tunes deployed.** A model you fine-tuned for a proof-of-concept and forgot about is pure burn. You can keep the trained model **stored in Foundry at no cost** and only deploy it when you actually need to serve traffic. (Azure auto-deletes a fine-tuned *deployment* after 15 days of zero calls — but don't lean on that as cleanup; 15 days of idle hosting is still a bill.)
+- **Justify the hosting floor against real usage.** A fine-tune only makes economic sense when its traffic is high enough that the quality gain beats prompt-engineering a base model — because you pay that hourly floor before a single token flows.
 
 ---
 
@@ -116,7 +136,7 @@ The [FinOps for AI post](/posts/2026-04-22-finops-for-ai/) covers this in depth,
 
 ## To Sum it up
 
-Foundry cost optimization starts with one decision: pay-as-you-go tokens for spiky and early-stage workloads, provisioned PTUs for steady high-throughput production, batch for anything asynchronous. Size PTUs with the calculator rather than guessing, remember output tokens cost more than input, and let per-minute proration serve short-term spikes. Once your baseline is stable, a one-month or one-year PTU reservation discounts it. Then layer on the forgotten levers — prompt caching (up to 100% off cached input on provisioned), the model router, and 50%-off batch — and you've configured for performance and cost at the same time. And once more than one team shares your models, put an AI gateway in front to cap per-consumer tokens, cache semantically similar prompts, and meter who's spending what.
+Foundry cost optimization starts with one decision: pay-as-you-go tokens for spiky and early-stage workloads, provisioned PTUs for steady high-throughput production, batch for anything asynchronous. Size PTUs with the calculator rather than guessing, remember output tokens cost more than input, and let per-minute proration serve short-term spikes. Once your baseline is stable, a one-month or one-year PTU reservation discounts it — and provisioned spillover lets you size those PTUs for the baseline rather than the peak. Then layer on the forgotten levers — prompt caching (up to 100% off cached input on provisioned), the model router, dynamic quota, and 50%-off batch — and you've configured for performance and cost at the same time. If you fine-tune, remember the hourly hosting fee runs whether the model is called or not, so don't leave idle fine-tunes deployed. And once more than one team shares your models, put an AI gateway in front to cap per-consumer tokens, cache semantically similar prompts, and meter who's spending what.
 
 For the *why* behind all of this — why AI pricing is so volatile and what that means for your practice — read the companion piece: [Why AI Cost Optimization Is Different from Traditional FinOps](/posts/2026-04-22-finops-for-ai/).
 
@@ -132,6 +152,9 @@ Next in the series: [Cost-Optimizing Azure Storage](/posts/2026-07-14-cost-optim
 - [Global Batch](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/batch)
 - [Prompt caching](https://learn.microsoft.com/azure/foundry/openai/how-to/prompt-caching)
 - [Model router](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/model-router)
+- [Cost management for fine-tuning](https://learn.microsoft.com/azure/foundry/openai/how-to/fine-tuning-cost-management)
+- [Spillover for provisioned deployments](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/spillover-traffic-management)
+- [Azure OpenAI dynamic quota](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/dynamic-quota)
 - [Save costs with Microsoft Foundry Provisioned Throughput Reservations](https://learn.microsoft.com/azure/cost-management-billing/reservations/microsoft-foundry)
 - [AI gateway capabilities in Azure API Management](https://learn.microsoft.com/azure/api-management/genai-gateway-capabilities)
 - [Limit Azure OpenAI API token usage policy](https://learn.microsoft.com/azure/api-management/azure-openai-token-limit-policy)
