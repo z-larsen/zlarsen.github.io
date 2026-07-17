@@ -8,6 +8,14 @@ Personal site and blog covering Azure architecture, FinOps, governance, and open
 
 | Date       | Title                                                                                                                  |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------- |
+| 2026-07-14 | [Cost-Optimizing Microsoft Fabric: Capacity, Smoothing, and the Pause Button](posts/2026-07-14-cost-optimizing-microsoft-fabric.md) |
+| 2026-07-14 | [Cost-Optimizing Azure Storage: Reservations, Tiers, and the Charges That Add Up](posts/2026-07-14-cost-optimizing-azure-storage.md) |
+| 2026-07-14 | [Cost-Optimizing Azure AI Foundry: Tokens, PTUs, and the Provisioning Decision](posts/2026-07-14-cost-optimizing-azure-ai-foundry.md) |
+| 2026-07-14 | [The Azure Cost Optimization Playbook: A FinOps Starting Point](posts/2026-07-14-azure-cost-optimization-playbook.md)  |
+| 2026-07-06 | [SHIR, ADF, and Synapse: Networking a Hybrid Data Pipeline (and Where Fabric Fits)](posts/2026-07-06-shir-adf-synapse-networking.md) |
+| 2026-07-06 | [Adding Model Providers to GitHub Copilot and VS Code](posts/2026-07-06-model-providers-copilot-vscode.md)             |
+| 2026-07-06 | [Model Context Protocol (MCP): What It Is and Why Azure Users Should Care](posts/2026-07-06-model-context-protocol-azure.md) |
+| 2026-06-29 | [GitHub Copilot for Teams: What It Is, How to License It, and How It Bills](posts/2026-06-29-github-copilot-for-teams.md) |
 | 2026-06-18 | [Git for Teams: A Practical Breakdown Before You Add GitHub Copilot](posts/2026-06-18-git-for-teams-github-copilot.md) |
 | 2026-06-18 | [Setting Up a FinOps Hub: Components, Benefits, and Querying the Data](posts/2026-06-18-finops-hub-setup.md)           |
 | 2026-06-18 | [Azure VPN Gateway: Setup and Best Practices](posts/2026-06-18-azure-vpn-gateway.md)                                   |
