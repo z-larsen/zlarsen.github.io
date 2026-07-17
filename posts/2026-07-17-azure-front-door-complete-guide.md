@@ -4,18 +4,19 @@ title: "Azure Front Door: What It Is, How to Deploy It, and Every Config Option 
 date: 2026-07-17
 tags: [posts, azure, networking, front-door, cdn, waf, edge-actions, load-balancing]
 category: Networking
-excerpt: "A complete, docs-validated guide to Azure Front Door — the global CDN and Layer 7 load balancer. What it is, a step-by-step deployment in the portal and Azure CLI, an explanation of every configuration option, when to reach for it, and a look at the new Edge Actions preview that runs custom JavaScript at the edge."
+excerpt: "A complete, docs-validated guide to Azure Front Door, the global CDN and Layer 7 load balancer. What it is, a step-by-step deployment in the portal and Azure CLI, an explanation of every configuration option, when to reach for it, and a look at the new Edge Actions preview that runs custom JavaScript at the edge."
 ---
+<!-- markdownlint-disable -->
 
 # Azure Front Door: What It Is, How to Deploy It, and Every Config Option Explained
 
-Every millisecond between your users and your app is a tax. A user in Sydney hitting an origin in East US pays that tax on every request — TLS handshakes, round trips, cold connections. Azure Front Door is Microsoft's answer: a global entry point that terminates connections close to the user, routes intelligently to the healthiest and fastest origin, caches what it can, and inspects everything through a web application firewall before it ever reaches your code.
+Every millisecond between your users and your app is a tax. A user in Sydney hitting an origin in East US pays that tax on every request: TLS handshakes, round trips, cold connections. Azure Front Door is Microsoft's answer: a global entry point that terminates connections close to the user, routes intelligently to the healthiest and fastest origin, caches what it can, and inspects everything through a web application firewall before it ever reaches your code.
 
 This post covers what Front Door is, how to deploy one step by step (portal and Azure CLI), what every configuration option actually does, when Front Door is the right tool, and the new **Edge Actions** preview that lets you run custom JavaScript at Microsoft's edge. Every claim here is cross-referenced against the official Microsoft Learn documentation, with links throughout.
 
 ## What Is Azure Front Door?
 
-Azure Front Door is an **advanced content delivery network (CDN) for the cloud** that combines global load balancing, dynamic and static site acceleration, TLS offload, caching, and a web application firewall into a single service. It uses Microsoft's global edge network — [global and local points of presence (PoPs)](https://learn.microsoft.com/en-us/azure/frontdoor/edge-locations-by-region) positioned close to users — to deliver content fast and reliably, per the [Azure Front Door overview](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-overview).
+Azure Front Door is an **advanced content delivery network (CDN) for the cloud** that combines global load balancing, dynamic and static site acceleration, TLS offload, caching, and a web application firewall into a single service. It uses Microsoft's global edge network, [global and local points of presence (PoPs)](https://learn.microsoft.com/en-us/azure/frontdoor/edge-locations-by-region) positioned close to users, to deliver content fast and reliably, per the [Azure Front Door overview](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-overview).
 
 <figure>
   <a href="https://learn.microsoft.com/en-us/azure/frontdoor/front-door-overview">
@@ -24,38 +25,38 @@ Azure Front Door is an **advanced content delivery network (CDN) for the cloud**
   <figcaption>Azure Front Door routes user traffic from the nearest edge PoP to the best backend. Source: Microsoft Learn</figcaption>
 </figure>
 
-Front Door operates at **OSI Layer 7** (the application layer), which means it makes decisions based on HTTP/HTTPS attributes — hostnames, paths, headers — not just IP and port. Because it terminates the client connection at the edge and opens a separate connection to your origin, it can offload TLS, cache responses, rewrite requests, and run WAF inspection before traffic reaches your servers.
+Front Door operates at **OSI Layer 7** (the application layer), which means it makes decisions based on HTTP/HTTPS attributes (hostnames, paths, headers), not just IP and port. Because it terminates the client connection at the edge and opens a separate connection to your origin, it can offload TLS, cache responses, rewrite requests, and run WAF inspection before traffic reaches your servers.
 
 Per the [overview docs](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-overview), the key benefits include:
 
-- **Global scale on Microsoft's network** — more than 118 edge locations across 100 metro areas, connected to Azure over a private enterprise-grade WAN. Microsoft cites latency improvements of up to three times.
-- **Acceleration** — [anycast](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-traffic-acceleration) routing and split TCP shorten the round trips between user and edge.
+- **Global scale on Microsoft's network**: more than 118 edge locations across 100 metro areas, connected to Azure over a private enterprise-grade WAN. Microsoft cites latency improvements of up to three times.
+- **Acceleration**: [anycast](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-traffic-acceleration) routing and split TCP shorten the round trips between user and edge.
 - **TLS offload at the edge** with integrated, free, auto-rotating managed certificates.
 - **Native IPv6 and HTTP/2** support end to end.
 - **Intelligent routing** across origins with [health-probe](https://learn.microsoft.com/en-us/azure/frontdoor/health-probes) monitoring and automatic global failover.
 - **An enhanced [rules engine](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-rules-engine)** with regular expressions and server variables to move routing logic to the edge.
-- **A secure perimeter** — built-in Layer 3/4 DDoS protection, a seamlessly attached [WAF](https://learn.microsoft.com/en-us/azure/web-application-firewall/afds/afds-overview) for Layer 7, bot management, and [Private Link](https://learn.microsoft.com/en-us/azure/frontdoor/private-link) to reach origins privately.
+- **A secure perimeter**: built-in Layer 3/4 DDoS protection, a seamlessly attached [WAF](https://learn.microsoft.com/en-us/azure/web-application-firewall/afds/afds-overview) for Layer 7, bot management, and [Private Link](https://learn.microsoft.com/en-us/azure/frontdoor/private-link) to reach origins privately.
 
 If you've read my [Application Gateway post](/posts/2026-04-25-azure-application-gateway/), the mental model is: **Application Gateway is regional Layer 7; Front Door is global Layer 7.** They're complementary, not competitors.
 
 ## Standard vs. Premium: Which Tier?
 
-New Front Door deployments use one of two tiers: **Standard** or **Premium**. (Azure Front Door *classic* no longer supports new profile creation as of August 15, 2025 and [retires on March 31, 2027](https://learn.microsoft.com/en-us/azure/frontdoor/tier-migration) — don't build anything new on it.)
+New Front Door deployments use one of two tiers: **Standard** or **Premium**. (Azure Front Door *classic* no longer supports new profile creation as of August 15, 2025 and [retires on March 31, 2027](https://learn.microsoft.com/en-us/azure/frontdoor/tier-migration), so don't build anything new on it.)
 
 The practical difference comes down to security features. Here's the docs-sourced comparison from the [tier comparison](https://learn.microsoft.com/en-us/azure/frontdoor/standard-premium/tier-comparison):
 
-| Capability | Standard | Premium |
-|---|:---:|:---:|
-| Static + dynamic delivery, caching, compression | ✓ | ✓ |
-| Custom domains, managed TLS, bring-your-own cert | ✓ | ✓ |
-| Origin load balancing, path-based routing, rules engine | ✓ | ✓ |
-| Server variables + regex in the rules engine | ✓ | ✓ |
-| WebSockets, HTTP/2, IPv4/IPv6 dual stack | ✓ | ✓ |
-| Custom WAF rules | ✓ | ✓ |
-| Geo-filtering, Layer 3/4 DDoS protection | ✓ | ✓ |
-| **Microsoft-managed WAF rule set** | — | ✓ |
-| **Bot protection** | — | ✓ |
-| **Private Link connection to origin** | — | ✓ |
+| Capability                                              | Standard | Premium |
+| ------------------------------------------------------- | :------: | :-----: |
+| Static + dynamic delivery, caching, compression         |    ✓     |    ✓    |
+| Custom domains, managed TLS, bring-your-own cert        |    ✓     |    ✓    |
+| Origin load balancing, path-based routing, rules engine |    ✓     |    ✓    |
+| Server variables + regex in the rules engine            |    ✓     |    ✓    |
+| WebSockets, HTTP/2, IPv4/IPv6 dual stack                |    ✓     |    ✓    |
+| Custom WAF rules                                        |    ✓     |    ✓    |
+| Geo-filtering, Layer 3/4 DDoS protection                |    ✓     |    ✓    |
+| **Microsoft-managed WAF rule set**                      |    —     |    ✓    |
+| **Bot protection**                                      |    —     |    ✓    |
+| **Private Link connection to origin**                   |    —     |    ✓    |
 
 **Rule of thumb:** choose **Premium** if you need Microsoft-managed WAF rule sets, bot protection, or Private Link to a private origin. Choose **Standard** for content delivery and acceleration where custom WAF rules are enough. You can [upgrade Standard to Premium](https://learn.microsoft.com/en-us/azure/frontdoor/tier-upgrade) later without re-creating the profile; there is no seamless downgrade.
 
@@ -75,12 +76,12 @@ Profile (the Front Door resource + tier)
         └── Rule set (optional edge logic applied to the route)
 ```
 
-- **Profile** — the top-level Front Door resource; it carries the tier (Standard or Premium).
-- **[Endpoint](https://learn.microsoft.com/en-us/azure/frontdoor/endpoint)** — a logical grouping of routes with a Front Door–assigned hostname (`*.z01.azurefd.net`). A profile can have many endpoints.
-- **[Origin](https://learn.microsoft.com/en-us/azure/frontdoor/origin)** — a backend Front Door pulls content from on a cache miss (App Service, Blob Storage, a VM, or any reachable public host).
-- **Origin group** — a set of origins that share health-probe and load-balancing settings; this is where failover and traffic distribution are defined.
-- **[Route](https://learn.microsoft.com/en-us/azure/frontdoor/routing-methods)** — the mapping that takes matching requests on an endpoint and forwards them to an origin group.
-- **[Rule set](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-rules-engine)** — optional match-and-action logic (rewrites, header changes, caching overrides, and now Edge Action invocations) attached to a route.
+- **Profile**: the top-level Front Door resource; it carries the tier (Standard or Premium).
+- **[Endpoint](https://learn.microsoft.com/en-us/azure/frontdoor/endpoint)**: a logical grouping of routes with a Front Door–assigned hostname (`*.z01.azurefd.net`). A profile can have many endpoints.
+- **[Origin](https://learn.microsoft.com/en-us/azure/frontdoor/origin)**: a backend Front Door pulls content from on a cache miss (App Service, Blob Storage, a VM, or any reachable public host).
+- **Origin group**: a set of origins that share health-probe and load-balancing settings; this is where failover and traffic distribution are defined.
+- **[Route](https://learn.microsoft.com/en-us/azure/frontdoor/routing-methods)**: the mapping that takes matching requests on an endpoint and forwards them to an origin group.
+- **[Rule set](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-rules-engine)**: optional match-and-action logic (rewrites, header changes, caching overrides, and now Edge Action invocations) attached to a route.
 
 ## Deploy Azure Front Door, Step by Step
 
@@ -92,11 +93,11 @@ The portal's **Custom create** flow walks you through the same objects described
 
 1. In the portal, search for **Front Door and CDN profiles** and select **Create**.
 2. Choose **Custom create** (the guided option that exposes routing and security settings).
-3. **Basics** — pick the subscription, resource group, profile name, and **tier** (Standard or Premium).
-4. **Endpoint** — add an endpoint; it gets a `*.z01.azurefd.net` hostname.
-5. **Origins** — add one or more origin types (App Service, Storage, Custom host), set the **origin host header**, and add them to an **origin group**.
-6. **Routing** — create a route that links the endpoint to the origin group, choose supported protocols (HTTP/HTTPS), and enable **HTTPS redirect**.
-7. **Security** *(Premium for managed rules)* — attach a WAF policy, then **Review + create**.
+3. **Basics**: pick the subscription, resource group, profile name, and **tier** (Standard or Premium).
+4. **Endpoint**: add an endpoint; it gets a `*.z01.azurefd.net` hostname.
+5. **Origins**: add one or more origin types (App Service, Storage, Custom host), set the **origin host header**, and add them to an **origin group**.
+6. **Routing**: create a route that links the endpoint to the origin group, choose supported protocols (HTTP/HTTPS), and enable **HTTPS redirect**.
+7. **Security** *(Premium for managed rules)*: attach a WAF policy, then **Review + create**.
 
 After creation it takes a few minutes to propagate globally, then you browse the endpoint hostname to test.
 
@@ -148,7 +149,7 @@ az afd origin-group create \
     --additional-latency-in-milliseconds 50
 ```
 
-**4. Origins.** Add each backend. Note `--origin-host-header`, `--priority`, and `--weight` — all explained in the next section.
+**4. Origins.** Add each backend. Note `--origin-host-header`, `--priority`, and `--weight`, all explained in the next section.
 
 ```azurecli
 az afd origin create \
@@ -200,7 +201,7 @@ az network front-door waf-policy managed-rules add \
     --version 2.1
 ```
 
-Get the endpoint hostname with `az afd endpoint show`, then browse to `contosofrontend-<hash>.z01.azurefd.net`. Requests route to the least-latent healthy origin. Stop one Web App and refresh: Front Door fails over automatically — that's the point.
+Get the endpoint hostname with `az afd endpoint show`, then browse to `contosofrontend-<hash>.z01.azurefd.net`. Requests route to the least-latent healthy origin. Stop one Web App and refresh: Front Door fails over automatically. That's the point.
 
 ### Option C: Bicep / ARM / PowerShell
 
@@ -212,28 +213,28 @@ This is the part most guides skip. Here's what each knob actually does.
 
 ### Origin settings
 
-| Option | What it does |
-|---|---|
-| **Host name** | The address of the backend Front Door connects to (e.g. `app.azurewebsites.net`). |
-| **Origin host header** | The `Host` header Front Door sends to the origin. Many PaaS backends (App Service, Storage) route on it, so it usually matches the host name. |
-| **Priority** | Integer **1–5**; lower means higher priority. Drives the *priority* routing method (primary/backup). Multiple origins can share a priority. |
-| **Weight** | Integer **1–1,000** (default **50**); drives *weighted* distribution across origins of equal latency. |
-| **HTTP / HTTPS ports** | The ports Front Door uses to reach the origin (defaults 80 / 443). |
+| Option                       | What it does                                                                                                                                                        |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Host name**                | The address of the backend Front Door connects to (e.g. `app.azurewebsites.net`).                                                                                   |
+| **Origin host header**       | The `Host` header Front Door sends to the origin. Many PaaS backends (App Service, Storage) route on it, so it usually matches the host name.                       |
+| **Priority**                 | Integer **1–5**; lower means higher priority. Drives the *priority* routing method (primary/backup). Multiple origins can share a priority.                         |
+| **Weight**                   | Integer **1–1,000** (default **50**); drives *weighted* distribution across origins of equal latency.                                                               |
+| **HTTP / HTTPS ports**       | The ports Front Door uses to reach the origin (defaults 80 / 443).                                                                                                  |
 | **Private Link** *(Premium)* | Connect to a private origin over [Azure Private Link](https://learn.microsoft.com/en-us/azure/frontdoor/private-link) so the backend never needs a public endpoint. |
-| **Enabled state** | Toggle an origin in or out of rotation without deleting it — handy for maintenance. |
+| **Enabled state**            | Toggle an origin in or out of rotation without deleting it, handy for maintenance.                                                                                  |
 
 ### Origin group: health probes and load balancing
 
 The origin group governs how Front Door decides an origin is healthy and how it spreads traffic. Per the [health probes docs](https://learn.microsoft.com/en-us/azure/frontdoor/health-probes):
 
-| Setting | What it does |
-|---|---|
-| **Probe protocol / path** | HTTP or HTTPS request to a path (e.g. `/`) on each origin. Probes carry a `User-Agent: Edge Health Probe` header. |
-| **Probe method** | **HEAD** or **GET**. New profiles default to **HEAD** — Microsoft recommends it to lower origin load and cost. |
-| **Probe interval** | How often each Front Door edge probes (default frequency is 30 seconds). A **200 OK** means healthy; anything else counts as a failure. |
-| **Sample size** | The last *n* probe responses Front Door evaluates per edge. |
-| **Successful samples required** | How many of those *n* must be healthy for the origin to be considered up. |
-| **Additional latency** | The latency sensitivity band. Origins within this many milliseconds of the fastest are all eligible for traffic. |
+| Setting                         | What it does                                                                                                                            |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| **Probe protocol / path**       | HTTP or HTTPS request to a path (e.g. `/`) on each origin. Probes carry a `User-Agent: Edge Health Probe` header.                       |
+| **Probe method**                | **HEAD** or **GET**. New profiles default to **HEAD**, which Microsoft recommends to lower origin load and cost.                        |
+| **Probe interval**              | How often each Front Door edge probes (default frequency is 30 seconds). A **200 OK** means healthy; anything else counts as a failure. |
+| **Sample size**                 | The last *n* probe responses Front Door evaluates per edge.                                                                             |
+| **Successful samples required** | How many of those *n* must be healthy for the origin to be considered up.                                                               |
+| **Additional latency**          | The latency sensitivity band. Origins within this many milliseconds of the fastest are all eligible for traffic.                        |
 
 If **every** origin in a group fails its probes, Front Door treats them all as unhealthy and distributes traffic round-robin until one recovers.
 
@@ -241,15 +242,15 @@ If **every** origin in a group fails its probes, Front Door treats them all as u
 
 The route is where request matching and forwarding behavior live:
 
-| Option | What it does |
-|---|---|
-| **Supported protocols** | Accept HTTP, HTTPS, or both from clients. |
-| **HTTPS redirect** | Automatically 301/308 redirect HTTP to HTTPS — enable it for public sites. |
-| **Forwarding protocol** | How Front Door talks to the origin: `MatchRequest`, `HttpOnly`, or `HttpsOnly`. |
-| **Patterns to match** | The path patterns (e.g. `/*`, `/api/*`) this route handles. |
-| **Origin group** | The pool this route forwards matched traffic to. |
-| **Caching** | Enable/disable caching, and control query-string behavior (ignore, use, or ignore-specific), compression, and cache duration. |
-| **Rule sets** | Attach one or more rule sets to run edge logic for this route. |
+| Option                  | What it does                                                                                                                  |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **Supported protocols** | Accept HTTP, HTTPS, or both from clients.                                                                                     |
+| **HTTPS redirect**      | Automatically 301/308 redirect HTTP to HTTPS; enable it for public sites.                                                     |
+| **Forwarding protocol** | How Front Door talks to the origin: `MatchRequest`, `HttpOnly`, or `HttpsOnly`.                                               |
+| **Patterns to match**   | The path patterns (e.g. `/*`, `/api/*`) this route handles.                                                                   |
+| **Origin group**        | The pool this route forwards matched traffic to.                                                                              |
+| **Caching**             | Enable/disable caching, and control query-string behavior (ignore, use, or ignore-specific), compression, and cache duration. |
+| **Rule sets**           | Attach one or more rule sets to run edge logic for this route.                                                                |
 
 ### Traffic routing methods
 
@@ -262,10 +263,10 @@ Front Door supports **four** routing methods, documented in [Traffic routing met
   <figcaption>How Front Door selects an origin: healthy origins → highest priority → within the latency band → distributed by weight. Source: Microsoft Learn</figcaption>
 </figure>
 
-- **Latency** *(default)* — routes to the origin with the lowest measured network latency within the sensitivity band. Each edge measures independently, so users everywhere get the closest-performing origin. Default latency sensitivity is **0 ms** (always the fastest available).
-- **Priority** — a primary/backup pattern. All traffic goes to the highest-priority (lowest-numbered) healthy origins; if they go down, traffic shifts to the next tier. Great for active/standby.
-- **Weighted** — distributes traffic by weight ratios (1–1,000, default 50) among origins of equal latency. Ideal for gradual rollouts, cloud migration, and cloud-bursting.
-- **Session affinity** — cookie-based stickiness (`ASLBSA` / `ASLBSACORS` cookies) that keeps a user's session on the same origin, useful for stateful apps and authentication flows.
+- **Latency** *(default)*: routes to the origin with the lowest measured network latency within the sensitivity band. Each edge measures independently, so users everywhere get the closest-performing origin. Default latency sensitivity is **0 ms** (always the fastest available).
+- **Priority**: a primary/backup pattern. All traffic goes to the highest-priority (lowest-numbered) healthy origins; if they go down, traffic shifts to the next tier. Great for active/standby.
+- **Weighted**: distributes traffic by weight ratios (1–1,000, default 50) among origins of equal latency. Ideal for gradual rollouts, cloud migration, and cloud-bursting.
+- **Session affinity**: cookie-based stickiness (`ASLBSA` / `ASLBSACORS` cookies) that keeps a user's session on the same origin, useful for stateful apps and authentication flows.
 
 ### Rule sets (the rules engine)
 
@@ -275,9 +276,9 @@ The [rules engine](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-
 
 Front Door's [WAF](https://learn.microsoft.com/en-us/azure/web-application-firewall/afds/afds-overview) inspects traffic at the edge before it reaches your origin:
 
-- **Managed rule sets** *(Premium)* — Microsoft-maintained rules like the Default Rule Set (DRS) 2.1 and the Bot Manager rule set, protecting against OWASP-class threats and malicious bots.
-- **Custom rules** *(Standard + Premium)* — your own IP allow/block lists, geo-filters, rate limits, and header/query matches. Custom rules evaluate before managed rules.
-- **Modes** — **Detection** logs matches without blocking (use it to tune); **Prevention** actively blocks. Start in Detection, then switch to Prevention once you've confirmed no false positives. See [policy settings](https://learn.microsoft.com/en-us/azure/web-application-firewall/afds/waf-front-door-policy-settings). For a deeper WAF walkthrough, see my [Application Gateway WAF post](/posts/2026-05-14-azure-application-gateway-waf/) — many of the same concepts apply.
+- **Managed rule sets** *(Premium)*: Microsoft-maintained rules like the Default Rule Set (DRS) 2.1 and the Bot Manager rule set, protecting against OWASP-class threats and malicious bots.
+- **Custom rules** *(Standard + Premium)*: your own IP allow/block lists, geo-filters, rate limits, and header/query matches. Custom rules evaluate before managed rules.
+- **Modes**: **Detection** logs matches without blocking (use it to tune); **Prevention** actively blocks. Start in Detection, then switch to Prevention once you've confirmed no false positives. See [policy settings](https://learn.microsoft.com/en-us/azure/web-application-firewall/afds/waf-front-door-policy-settings). For a deeper WAF walkthrough, see my [Application Gateway WAF post](/posts/2026-05-14-azure-application-gateway-waf/). Many of the same concepts apply.
 
 ### Custom domains and TLS
 
@@ -285,7 +286,7 @@ Bring your own domain and secure it with either a **free Front Door–managed ce
 
 ## New: Front Door Edge Actions (Preview)
 
-[Edge Actions](https://learn.microsoft.com/en-us/azure/frontdoor/edge-actions) is a newer capability (currently in **preview**) that lets you run **custom JavaScript logic directly at Front Door's global edge PoPs** — against the request or response, with single-digit-millisecond execution. If the rules engine is "match a condition, take a predefined action," Edge Actions is "run my own code."
+[Edge Actions](https://learn.microsoft.com/en-us/azure/frontdoor/edge-actions) is a newer capability (currently in **preview**) that lets you run **custom JavaScript logic directly at Front Door's global edge PoPs**, against the request or response, with single-digit-millisecond execution. If the rules engine is "match a condition, take a predefined action," Edge Actions is "run my own code."
 
 <figure>
   <a href="https://learn.microsoft.com/en-us/azure/frontdoor/edge-actions">
@@ -319,22 +320,22 @@ Preview limits are worth knowing up front: **JavaScript only**, **16 KB** code s
 
 ### Why use it
 
-- **Latency** — logic runs at the edge, microseconds from the user, instead of after a round trip to your origin.
-- **Origin offload** — reject bad requests, validate tokens, and answer redirects at the edge so your backend never sees them.
-- **Expressiveness** — real code (conditionals, string manipulation, JWT parsing) goes beyond what static rules-engine actions can express.
-- **Safe, fast iteration** — versioning plus **execution filters** let you canary a new version to header-tagged requests and switch the default with zero downtime.
+- **Latency**: logic runs at the edge, microseconds from the user, instead of after a round trip to your origin.
+- **Origin offload**: reject bad requests, validate tokens, and answer redirects at the edge so your backend never sees them.
+- **Expressiveness**: real code (conditionals, string manipulation, JWT parsing) goes beyond what static rules-engine actions can express.
+- **Safe, fast iteration**: versioning plus **execution filters** let you canary a new version to header-tagged requests and switch the default with zero downtime.
 
 ### When it comes in handy
 
-- **A/B testing and canary releases** — route a slice of traffic to a variant based on a header or cookie, and shift the default version without redeploying anything.
-- **Edge authentication** — validate a JWT and reject unauthenticated requests before they touch your origin.
-- **Personalization and request shaping** — rewrite URLs or set headers based on the caller's country, device type, or the current time.
-- **Dynamic origin selection** — pick an origin at request time from the healthy set, based on your own logic.
-- **Security guards** — reject malformed or unwanted requests at the edge as a complement to the WAF.
+- **A/B testing and canary releases**: route a slice of traffic to a variant based on a header or cookie, and shift the default version without redeploying anything.
+- **Edge authentication**: validate a JWT and reject unauthenticated requests before they touch your origin.
+- **Personalization and request shaping**: rewrite URLs or set headers based on the caller's country, device type, or the current time.
+- **Dynamic origin selection**: pick an origin at request time from the healthy set, based on your own logic.
+- **Security guards**: reject malformed or unwanted requests at the edge as a complement to the WAF.
 
 ### Rules engine vs. Edge Actions
 
-Reach for the **rules engine** when a predefined match/action covers your need (simple header rewrites, redirects, caching overrides, geo rules) — it's GA and requires no code. Reach for **Edge Actions** when you need real logic: parsing a token, computing a variant assignment, or making a decision that a static rule can't express. In practice they work together — the rules engine is what *invokes* your Edge Action.
+Reach for the **rules engine** when a predefined match/action covers your need (simple header rewrites, redirects, caching overrides, geo rules). It's GA and requires no code. Reach for **Edge Actions** when you need real logic: parsing a token, computing a variant assignment, or making a decision that a static rule can't express. In practice they work together: the rules engine is what *invokes* your Edge Action.
 
 ## When to Use Azure Front Door
 
@@ -347,13 +348,13 @@ Front Door is the right pick when **all** of these are true:
 
 Here's how it fits against the other Azure load-balancing options (see Microsoft's [load balancing decision guide](https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/load-balancing-overview)):
 
-| Scenario | Right tool | Why |
-|---|---|---|
-| Global, internet-facing web app/API needing CDN, edge WAF, failover | **Azure Front Door** | Global Layer 7, anycast, caching, edge WAF |
-| Internet-facing web app in a **single region** needing WAF/URL routing | **Application Gateway** | Regional Layer 7, WAF, path-based routing |
-| Global **+** deep per-region Layer 7 processing | **Front Door + Application Gateway** | Front Door for global routing; App Gateway per region |
-| **Non-HTTP** (TCP/UDP) traffic | **Load Balancer** | Layer 4, any TCP/UDP protocol |
-| **DNS-based** global routing, no TLS termination | **Traffic Manager** | DNS load balancing only, no proxying |
+| Scenario                                                               | Right tool                           | Why                                                   |
+| ---------------------------------------------------------------------- | ------------------------------------ | ----------------------------------------------------- |
+| Global, internet-facing web app/API needing CDN, edge WAF, failover    | **Azure Front Door**                 | Global Layer 7, anycast, caching, edge WAF            |
+| Internet-facing web app in a **single region** needing WAF/URL routing | **Application Gateway**              | Regional Layer 7, WAF, path-based routing             |
+| Global **+** deep per-region Layer 7 processing                        | **Front Door + Application Gateway** | Front Door for global routing; App Gateway per region |
+| **Non-HTTP** (TCP/UDP) traffic                                         | **Load Balancer**                    | Layer 4, any TCP/UDP protocol                         |
+| **DNS-based** global routing, no TLS termination                       | **Traffic Manager**                  | DNS load balancing only, no proxying                  |
 
 **When *not* to use Front Door:** if your traffic isn't HTTP(S), use [Azure Load Balancer](https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-overview) or Traffic Manager. If you only need regional Layer 7 with deep per-request inspection, [Application Gateway](/posts/2026-04-25-azure-application-gateway/) is the simpler, cheaper fit.
 
@@ -363,7 +364,7 @@ Here's how it fits against the other Azure load-balancing options (see Microsoft
 - **Premium** adds managed WAF rules, bot protection, and Private Link; **Standard** covers delivery, acceleration, and custom WAF rules. Don't build new workloads on *classic*.
 - Deployment is a predictable chain: **profile → endpoint → origin group → origins → route** (plus a WAF policy on Premium), and it's fully scriptable with `az afd`.
 - Every knob has a job: **priority/weight** shape routing, **health probes** decide origin health, **routes** control matching and caching, **rule sets** run edge logic, and the **WAF** guards the perimeter.
-- **Edge Actions (preview)** brings custom JavaScript to the edge for A/B testing, edge auth, personalization, and request shaping — use it when the rules engine can't express your logic.
+- **Edge Actions (preview)** brings custom JavaScript to the edge for A/B testing, edge auth, personalization, and request shaping. Use it when the rules engine can't express your logic.
 
 ## Go Deeper
 
