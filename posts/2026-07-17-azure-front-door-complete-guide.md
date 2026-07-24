@@ -198,7 +198,7 @@ az network front-door waf-policy managed-rules add \
     --resource-group myRGFD \
     --type Microsoft_DefaultRuleSet \
     --action Block \
-    --version 2.1
+    --version 2.2
 ```
 
 Get the endpoint hostname with `az afd endpoint show`, then browse to `contosofrontend-<hash>.z01.azurefd.net`. Requests route to the least-latent healthy origin. Stop one Web App and refresh: Front Door fails over automatically. That's the point.
@@ -276,7 +276,7 @@ The [rules engine](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-
 
 Front Door's [WAF](https://learn.microsoft.com/en-us/azure/web-application-firewall/afds/afds-overview) inspects traffic at the edge before it reaches your origin:
 
-- **Managed rule sets** *(Premium)*: Microsoft-maintained rules like the Default Rule Set (DRS) 2.1 and the Bot Manager rule set, protecting against OWASP-class threats and malicious bots.
+- **Managed rule sets** *(Premium)*: Microsoft-maintained rules like the Default Rule Set (DRS) 2.2 — the latest version, baselined off OWASP CRS 3.3.4 — and the Bot Manager rule set, protecting against OWASP-class threats and malicious bots.
 - **Custom rules** *(Standard + Premium)*: your own IP allow/block lists, geo-filters, rate limits, and header/query matches. Custom rules evaluate before managed rules.
 - **Modes**: **Detection** logs matches without blocking (use it to tune); **Prevention** actively blocks. Start in Detection, then switch to Prevention once you've confirmed no false positives. See [policy settings](https://learn.microsoft.com/en-us/azure/web-application-firewall/afds/waf-front-door-policy-settings). For a deeper WAF walkthrough, see my [Application Gateway WAF post](/posts/2026-05-14-azure-application-gateway-waf/). Many of the same concepts apply.
 
