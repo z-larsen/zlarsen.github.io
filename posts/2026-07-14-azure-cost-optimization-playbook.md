@@ -31,7 +31,7 @@ That's why this series is organized around a *cycle* rather than a checklist. Yo
 
 ## The FinOps cycle, in one table
 
-If you've read the [Azure FinOps framework post](/posts/2026-01-16-azure-finops-framework/), this will be familiar. If not, here's the whole idea in one place. Microsoft maps its [Cloud Adoption Framework FinOps guidance](https://learn.microsoft.com/azure/cloud-adoption-framework/manage/finops) onto the same three phases the [FinOps Foundation](https://www.finops.org/framework/) defines:
+If you've read the [Azure FinOps framework post](/posts/2026-01-16-azure-finops-framework/), this will be familiar. If not, here's the whole idea in one place. Microsoft maps its [Cloud Adoption Framework FinOps guidance](https://learn.microsoft.com/azure/cloud-adoption-framework/strategy/inform/cost-efficiency) onto the same three phases the [FinOps Foundation](https://www.finops.org/framework/) defines:
 
 | Phase | The question it answers | What it looks like on Azure |
 | --- | --- | --- |
@@ -108,7 +108,7 @@ Start with whichever deep dive matches what you're building. If you're standing 
 ## References
 
 - [Microsoft Cost Management documentation](https://learn.microsoft.com/azure/cost-management-billing/costs/overview-cost-management)
-- [FinOps and the Cloud Adoption Framework](https://learn.microsoft.com/azure/cloud-adoption-framework/manage/finops)
+- [FinOps and the Cloud Adoption Framework](https://learn.microsoft.com/azure/cloud-adoption-framework/strategy/inform/cost-efficiency)
 - [Azure Advisor cost recommendations](https://learn.microsoft.com/azure/advisor/advisor-cost-recommendations)
 - [Azure Policy overview](https://learn.microsoft.com/azure/governance/policy/overview)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)

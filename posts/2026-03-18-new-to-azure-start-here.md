@@ -146,7 +146,7 @@ While CAF guides your cloud *adoption journey*, the [Well-Architected Framework]
 
 **Consumption-Based Model**: You only pay for cloud resources you actually use. Billing is based on consumption metrics: VM running hours, storage GBs used, database DTUs consumed, and so on.
 
-> Reference: [Cost Model](https://learn.microsoft.com/azure/architecture/framework/cost/cost-model)
+> Reference: [Cost Model](https://learn.microsoft.com/azure/well-architected/cost-optimization/cost-model)
 
 ---
 

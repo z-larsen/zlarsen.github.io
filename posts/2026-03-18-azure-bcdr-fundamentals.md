@@ -116,7 +116,7 @@ Key benefits:
 
 **Immutable backups:** Enable immutability to prevent deletion (ransomware protection). Requires Multi-User Authorization (MUA) to disable. Backups cannot be deleted until the retention period expires.
 
-> Reference: [Immutable Vault](https://learn.microsoft.com/azure/backup/backup-azure-immutable-vault)
+> Reference: [Immutable Vault](https://learn.microsoft.com/azure/backup/backup-azure-immutable-vault-concept)
 
 ---
 
