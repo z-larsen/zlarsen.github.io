@@ -8,6 +8,7 @@ Personal site and blog covering Azure architecture, FinOps, governance, and open
 
 | Date       | Title                                                                                                                  |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------- |
+| 2026-07-17 | [Azure Front Door: What It Is, How to Deploy It, and Every Config Option Explained](posts/2026-07-17-azure-front-door-complete-guide.md) |
 | 2026-07-14 | [Cost-Optimizing Microsoft Fabric: Capacity, Smoothing, and the Pause Button](posts/2026-07-14-cost-optimizing-microsoft-fabric.md) |
 | 2026-07-14 | [Cost-Optimizing Azure Storage: Reservations, Tiers, and the Charges That Add Up](posts/2026-07-14-cost-optimizing-azure-storage.md) |
 | 2026-07-14 | [Cost-Optimizing Azure AI Foundry: Tokens, PTUs, and the Provisioning Decision](posts/2026-07-14-cost-optimizing-azure-ai-foundry.md) |

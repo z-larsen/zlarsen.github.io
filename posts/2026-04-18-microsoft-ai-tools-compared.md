@@ -127,7 +127,7 @@ Foundry consolidates what were previously separate services (Azure OpenAI Servic
 
 ### Key Capabilities
 
-- **Model catalog and deployment** — Access Azure OpenAI models (GPT-4o, o-series), Meta Llama, Mistral, Cohere, and others. Deploy with provisioned throughput or pay-as-you-go.
+- **Model catalog and deployment** — Access 1,900+ models from Microsoft, OpenAI (GPT-5 family), Anthropic, Meta Llama, Mistral, Cohere, and others. Deploy with provisioned throughput or pay-as-you-go.
 - **Agent development with code** — Build agents using the Responses API (Agents v2), with Python, C#, JavaScript, and Java SDKs. Full multi-agent orchestration and complex workflow execution.
 - **Tool catalog** — Connect to 1,400+ tools through public and private catalogs, including MCP (Model Context Protocol) and A2A (Agent-to-Agent) support.
 - **Fine-tuning** — Customize foundation models on your own data for domain-specific tasks.
@@ -214,7 +214,7 @@ Start: What are you building?
 - [Microsoft 365 Copilot overview](https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot-overview) — Microsoft Learn
 - [What is Copilot Studio?](https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio) — Microsoft Learn
 - [What is Microsoft Foundry?](https://learn.microsoft.com/en-us/azure/foundry/what-is-foundry) — Microsoft Learn
-- [Microsoft 365 Copilot extensibility overview](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility) — for building agents that extend M365 Copilot
+- [Microsoft 365 Copilot extensibility overview](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/) — for building agents that extend M365 Copilot
 - [Microsoft Foundry quickstart](https://learn.microsoft.com/en-us/azure/foundry/quickstarts/get-started-code) — getting started with the Foundry SDK
 
 ---
