@@ -65,7 +65,7 @@ You can also run **MCP: Add Server** from the Command Palette for a guided flow,
     },
     "playwright": {
       "command": "npx",
-      "args": ["-y", "@microsoft/mcp-server-playwright"]
+      "args": ["-y", "@playwright/mcp@latest"]
     }
   }
 }
