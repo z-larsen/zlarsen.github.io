@@ -29,7 +29,7 @@ Front Door operates at **OSI Layer 7** (the application layer), which means it m
 
 Per the [overview docs](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-overview), the key benefits include:
 
-- **Global scale on Microsoft's network**: more than 118 edge locations across 100 metro areas, connected to Azure over a private enterprise-grade WAN. Microsoft cites latency improvements of up to three times.
+- **Global scale on Microsoft's network**: more than 192 edge locations across 109 metro areas, connected to Azure over a private enterprise-grade WAN. Microsoft cites latency improvements of up to three times.
 - **Acceleration**: [anycast](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-traffic-acceleration) routing and split TCP shorten the round trips between user and edge.
 - **TLS offload at the edge** with integrated, free, auto-rotating managed certificates.
 - **Native IPv6 and HTTP/2** support end to end.

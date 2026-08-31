@@ -27,7 +27,7 @@ Here's what it gives you, per the [Azure Application Gateway features docs](http
 | Feature | What It Does |
 |---------|-------------|
 | **SSL/TLS Termination** | Terminates HTTPS at the gateway; backends can run HTTP, removing encryption overhead from your servers. End-to-end TLS is also supported if required. |
-| **Web Application Firewall (WAF)** | OWASP core rule sets (3.1, 3.0, 2.2.9), bot protection via Microsoft Threat Intelligence, DDoS application-layer protection. |
+| **Web Application Firewall (WAF)** | Azure-managed Default Rule Set (DRS 2.2, based on OWASP CRS 3.3.4), bot protection via Microsoft Threat Intelligence, DDoS application-layer protection. |
 | **URL-Based Routing** | Route `/images/*` to one backend pool and `/video/*` to another based on path. |
 | **Multi-Site Hosting** | Host 100+ websites on a single gateway, each routing to its own backend pool by hostname or domain. |
 | **Autoscaling** | Standard_v2 scales with traffic automatically. No instance count to tune during provisioning. |

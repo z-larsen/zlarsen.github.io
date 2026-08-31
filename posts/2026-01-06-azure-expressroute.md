@@ -23,7 +23,7 @@ Connectivity is established in one of four ways:
 
 ExpressRoute connections offer:
 - **Higher reliability** — built-in redundancy via dual connections to two Microsoft Enterprise Edge routers (MSEEs)
-- **Faster speeds** — from 50 Mbps up to 100 Gbps (via ExpressRoute Direct)
+- **Faster speeds** — from 50 Mbps up to 400 Gbps (via ExpressRoute Direct)
 - **Consistent latency** — deterministic performance vs. internet variability
 - **Higher security** — traffic never traverses the public internet
 - **SLA-backed uptime** — covered by Microsoft's connection uptime SLA
@@ -44,7 +44,7 @@ ExpressRoute and VPN Gateway are both hybrid connectivity options, but they serv
 | Factor | ExpressRoute | VPN Gateway |
 |---|---|---|
 | Path | Private (not internet) | Encrypted over internet |
-| Bandwidth | Up to 100 Gbps (Direct) | Up to ~10 Gbps |
+| Bandwidth | Up to 400 Gbps (Direct) | Up to ~10 Gbps |
 | Latency | Consistent / low | Variable |
 | Availability SLA | Yes | Yes |
 | Setup complexity | Higher (requires provider) | Lower |
