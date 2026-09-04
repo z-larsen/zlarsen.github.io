@@ -127,7 +127,7 @@ Foundry consolidates what were previously separate services (Azure OpenAI Servic
 
 ### Key Capabilities
 
-- **Model catalog and deployment** — Access 10,000+ models (with roughly 50 new models added each month) from Microsoft, OpenAI (GPT-5 family), Anthropic, Meta Llama, Mistral, Cohere, and others. Deploy with provisioned throughput or pay-as-you-go.
+- **Model catalog and deployment** — Access 10,000+ models (with roughly 50 new models added each month) from Microsoft, OpenAI (GPT-5 family), Anthropic, DeepSeek, Meta Llama, Mistral, Cohere, and others. Deploy with provisioned throughput or pay-as-you-go.
 - **Agent development with code** — Build agents using the Responses API (Agents v2), with Python, C#, JavaScript, and Java SDKs. Full multi-agent orchestration and complex workflow execution.
 - **Tool catalog** — Connect to 1,000+ connectors (SaaS, data, and line-of-business integrations) plus MCP (Model Context Protocol) and A2A (Agent-to-Agent) tools through the Foundry Tools Catalog.
 - **Fine-tuning** — Customize foundation models on your own data for domain-specific tasks.
