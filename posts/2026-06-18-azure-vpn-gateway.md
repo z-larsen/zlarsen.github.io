@@ -78,7 +78,7 @@ Before you pick a SKU, decide on the VPN type. There are two, and the choice is 
 
 ## Choosing a SKU
 
-VPN Gateway SKUs differ in throughput, the number of tunnels they support, and which features they enable. The current generation is the **AZ SKU family** (VpnGw1AZ through VpnGw5AZ), which supports [availability zones](https://learn.microsoft.com/en-us/azure/vpn-gateway/about-zone-redundant-vnet-gateways) for zone-redundant deployments. **Deploy an AZ SKU** — the non-zonal VpnGw1–VpnGw5 SKUs can no longer be created for new gateways (as of November 1, 2025) and are [scheduled for retirement on September 30, 2026](https://learn.microsoft.com/en-us/azure/vpn-gateway/gateway-sku-consolidation), so existing non-AZ gateways should be upgraded to their AZ equivalent.
+VPN Gateway SKUs differ in throughput, the number of tunnels they support, and which features they enable. The current generation is the **AZ SKU family** (VpnGw1AZ through VpnGw5AZ), which supports [availability zones](https://learn.microsoft.com/en-us/azure/vpn-gateway/about-zone-redundant-vnet-gateways) for zone-redundant deployments. **Deploy an AZ SKU** — the non-zonal VpnGw1–VpnGw5 SKUs can no longer be created for new gateways (as of November 1, 2025) and [reached end-of-life on September 30, 2026](https://learn.microsoft.com/en-us/azure/vpn-gateway/gateway-sku-consolidation). Microsoft is automatically migrating any remaining non-AZ gateways to their AZ equivalent (a seamless process with no expected downtime), but all new deployments should target the AZ family directly.
 
 | SKU            | Aggregate throughput benchmark | Max S2S/VNet tunnels | Max P2S connections (IKEv2/OpenVPN) | Zone-redundant |
 | -------------- | ------------------------------ | -------------------- | ----------------------------------- | -------------- |
@@ -92,7 +92,7 @@ VPN Gateway SKUs differ in throughput, the number of tunnels they support, and w
 A few things to know:
 
 - **The Basic SKU is for dev/test only.** It doesn't support active-active, BGP, or zone redundancy, only supports SSTP for point-to-site, and it can't be resized to a production SKU without a rebuild.
-- **AZ SKUs are the only SKUs to deploy now.** Zone redundancy means the gateway survives a datacenter failure within a region. The non-zonal VpnGw1–5 SKUs can no longer be created for new gateways and retire on September 30, 2026, so new deployments use the AZ family exclusively.
+- **AZ SKUs are the only SKUs to deploy now.** Zone redundancy means the gateway survives a datacenter failure within a region. The non-zonal VpnGw1–5 SKUs can no longer be created for new gateways and reached retirement on September 30, 2026; Microsoft automatically migrates any remaining non-AZ gateways to the AZ equivalent, so new deployments use the AZ family exclusively.
 - **The old Standard and High Performance legacy SKUs were retired on June 30, 2026.** If you're still on one, migrate now. The Basic public IP migration tool maps Standard to VpnGw1AZ and High Performance to VpnGw2AZ automatically as part of moving the gateway's Basic public IP to a Standard public IP.
 - **Throughput figures are an aggregate benchmark, not a guarantee.** They're measured between VNets in the same region under ideal conditions, not a guaranteed cross-internet rate. Real throughput depends on your on-premises device, the encryption algorithm, and internet quality. GCMAES256 gives the best performance.
 
