@@ -4,7 +4,7 @@ title: "Setting Up a FinOps Hub: Components, Benefits, and Querying the Data"
 date: 2026-06-18
 tags: [posts, azure, finops, cost-management, finops-hub, data-explorer, fabric, focus]
 category: FinOps
-excerpt: "A FinOps hub turns raw Cost Management exports into a real analytics platform. This post breaks down every resource the template deploys and why, the benefits over a plain cost export, and how to interface with the data using Microsoft Fabric, Azure Data Explorer, and the FinOps Multitool."
+excerpt: "A FinOps hub turns raw Cost Management exports into a real analytics platform. This post breaks down every resource the template deploys and why, the benefits over a plain cost export, and how to interface with the data using Microsoft Fabric, Azure Data Explorer, and FinOps Explorer."
 ---
 
 # Setting Up a FinOps Hub: Components, Benefits, and Querying the Data
@@ -67,7 +67,7 @@ Cost Management export (FOCUS)
    ingestion_ETL_dataExplorer pipeline
         │  ingests parquet into Kusto
         ▼
-   Data Explorer / Fabric  →  Power BI, KQL, MCP, the Multitool
+   Data Explorer / Fabric  →  Power BI, KQL, MCP, FinOps Explorer
 ```
 
 It also runs housekeeping pipelines: `config_ConfigureExports` creates the Cost Management exports for you (with managed exports enabled), `config_StartBackfillProcess` pulls historical months on first deploy, and daily/monthly schedule triggers keep current and prior-month data fresh.
@@ -158,14 +158,14 @@ Costs
 
 `EffectiveCost`, `ChargePeriodStart`, and `ServiceName` are all FOCUS columns, so these queries are portable to any FOCUS-aligned dataset. If you want to go deeper on writing KQL, I have a [dedicated post on Log Analytics and KQL](/posts/2026-05-15-log-analytics-kql/) that covers the query language in detail.
 
-### 3. The FinOps Multitool
+### 3. FinOps Explorer
 
-This is where it comes full circle for me. The [Azure FinOps Multitool](/posts/2026-4-16-azure-finops-multitool/) I built reads cost data from a FinOps hub or Cost Management export **by default**, and only falls back to the live Cost Management APIs when no hub is in scope. Pointing it at a tenant that has a hub means faster, cheaper scans with real history, because it's reading the conformed parquet data model instead of hammering the throttled Query API.
+This is where it comes full circle for me. The [FinOps Explorer](/posts/2026-4-16-azure-finops-multitool/) I built reads cost data from a FinOps hub or Cost Management export **by default**, and only falls back to the live Cost Management APIs when no hub is in scope. Pointing it at a tenant that has a hub means faster, cheaper scans with real history, because it's reading the conformed parquet data model instead of hammering the throttled Query API.
 
-The Multitool's **MCP server** is the agentic version of the same idea, and it lines up with the hub's own AI story. The FinOps hub benefits explicitly call out an MCP server that "understands FinOps and seamlessly connects to your data", so you can ask GitHub Copilot or a custom agent plain-language questions and have it reason over your actual cost data. Between the hub's data model and an MCP layer on top, "where am I wasting money this month" becomes a question you can just ask.
+FinOps Explorer's **MCP server** is the agentic version of the same idea, and it lines up with the hub's own AI story. The FinOps hub benefits explicitly call out an MCP server that "understands FinOps and seamlessly connects to your data", so you can ask GitHub Copilot or a custom agent plain-language questions and have it reason over your actual cost data. Between the hub's data model and an MCP layer on top, "where am I wasting money this month" becomes a question you can just ask.
 
 ## Conclusion
 
-A FinOps hub is the difference between *having* cost data and being able to *use* it. The template hands you a maintained data platform, storage for staging, Data Factory for the ETL, and Data Explorer or Fabric for fast analytics, all aligned to the open FOCUS schema. From there, the data is yours to query in Fabric, KQL, Power BI, or the FinOps Multitool, whichever fits how you work.
+A FinOps hub is the difference between *having* cost data and being able to *use* it. The template hands you a maintained data platform, storage for staging, Data Factory for the ETL, and Data Explorer or Fabric for fast analytics, all aligned to the open FOCUS schema. From there, the data is yours to query in Fabric, KQL, Power BI, or FinOps Explorer, whichever fits how you work.
 
 If you're already living in Cost Management exports and feeling the ceiling, the hub is the natural next step. Start with the [FinOps hubs overview](https://learn.microsoft.com/en-us/cloud-computing/finops/toolkit/hubs/finops-hubs-overview) and the [deploy tutorial](https://learn.microsoft.com/en-us/cloud-computing/finops/toolkit/hubs/deploy).

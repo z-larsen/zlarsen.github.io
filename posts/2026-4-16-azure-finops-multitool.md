@@ -1,22 +1,24 @@
 ---
 layout: post.njk
-title: "Azure FinOps Multitool: A Fast Track to Cost Optimization"
+title: "FinOps Explorer: A Fast Track to Cost Optimization"
 date: 2026-04-16
 tags: [posts, azure, finops, cost-management, powershell, tools, mcp, cli]
 category: Tools
 tool: true
-excerpt: "The Azure FinOps Multitool now comes in four flavors: a Windows GUI, a cross-platform terminal UI, an MCP server for AI agents, and an automated function for scheduled scans. It reads from your FinOps Hub or Cost Management exports first and falls back to live APIs when it needs to, giving you a fast, accurate picture of your Azure costs, tagging health, and optimization opportunities."
+excerpt: "FinOps Explorer now comes in four flavors: a Windows GUI, a cross-platform terminal UI, an MCP server for AI agents, and an automated function for scheduled scans. It reads from your FinOps Hub or Cost Management exports first and falls back to live APIs when it needs to, giving you a fast, accurate picture of your Azure costs, tagging health, and optimization opportunities."
 ---
 
-# Azure FinOps Multitool: A Fast Track to Cost Optimization
+# FinOps Explorer: A Fast Track to Cost Optimization
 
 ![PowerShell 7.0+](https://img.shields.io/badge/PowerShell-7.0%2B-blue?logo=powershell&logoColor=white) ![Azure Az Modules](https://img.shields.io/badge/Azure-Az%20Modules-0078D4?logo=microsoftazure&logoColor=white) ![License MIT](https://img.shields.io/badge/License-MIT-green) ![Version 2.20.2](https://img.shields.io/badge/Version-2.20.2-brightgreen)
 
-I built this tool out of a recurring pattern I kept seeing while working with customers across industries; organizations knew they had Azure cost challenges but had no quick way to get a clear picture of where they stood. Every engagement started with the same manual effort: piecing together cost data, chasing down tagging gaps, and trying to size optimization opportunities across subscriptions. The Azure FinOps Multitool is my answer to that problem, built to solve the "cold start", helping teams quickly understand their current FinOps posture and identify immediate optimization opportunities without the usual setup overhead.
+I built this tool out of a recurring pattern I kept seeing while working with customers across industries; organizations knew they had Azure cost challenges but had no quick way to get a clear picture of where they stood. Every engagement started with the same manual effort: piecing together cost data, chasing down tagging gaps, and trying to size optimization opportunities across subscriptions. FinOps Explorer is my answer to that problem, built to solve the "cold start", helping teams quickly understand their current FinOps posture and identify immediate optimization opportunities without the usual setup overhead.
 
-## What is the Azure FinOps Multitool?
+This post originally appeared under the Azure FinOps Multitool name.
 
-The Azure FinOps Multitool scans your Azure estate and gives you a clear view of your costs, tagging health, optimization opportunities, and FinOps maturity, all organized around the three core FinOps pillars: **Understand**, **Quantify**, and **Optimize**.
+## What is FinOps Explorer?
+
+FinOps Explorer scans your Azure estate and gives you a clear view of your costs, tagging health, optimization opportunities, and FinOps maturity, all organized around the three core FinOps pillars: **Understand**, **Quantify**, and **Optimize**.
 
 It started as a single Windows desktop app. Since then it has grown into a family of four tools that share the same scan engine, so you can run the exact same analysis whichever way fits your workflow:
 
@@ -31,18 +33,18 @@ Whichever one you pick, there's no platform to stand up first. You point it at a
 
 The four form factors aren't four different tools doing four different things. They're four front doors to the same scan engine. Here's how I think about choosing one.
 
-### Windows GUI
+### FinOps Explorer Desktop (Windows GUI)
 The original. A WPF desktop app with a single-pane-of-glass layout, click-to-deploy buttons for tags, policies, and budgets, and one-click export to HTML, CSV, or a ready-to-open Power BI template. This is the one I reach for during a customer review or when I want to fix something on the spot. If you want to see everything at once and click your way through remediation, run the GUI.
 
-### Terminal UI (TUI)
+### FinOps Explorer TUI
 Same scans, no GUI. It runs in any terminal on Windows, macOS, or Linux, which means it works in Cloud Shell, over SSH, or anywhere you can't (or don't want to) launch a desktop app. If you live in a terminal, or you're scanning from a Mac or a build agent, the TUI gets you the same picture without the Windows dependency.
 
-![FinOps Multitool TUI](/assets/img/posts/azure-finops-multitool/finops-multitool-tui.png)
+![FinOps Explorer TUI](/assets/img/posts/azure-finops-multitool/finops-multitool-tui.png)
 
 ### MCP Server
 This is the one that changes how you interact with the data. The MCP server exposes every scan as an AI-callable tool over the Model Context Protocol, so Copilot, Claude, or a custom agent can run them and reason over the results. It also ships remediation tools (deallocate an idle VM, enable Hybrid Benefit, delete an orphaned resource) that sit behind a write-safety gate. If you want to ask "where am I wasting money" in plain language and have an agent answer it, or connect FinOps checks into an agentic workflow, this is the one.
 
-![FinOps Multitool MCP server tool catalog](/assets/img/posts/azure-finops-multitool/finops-multitool-mcp.png)
+![FinOps Explorer MCP server tool catalog](/assets/img/posts/azure-finops-multitool/finops-multitool-mcp.png)
 
 One thing I added recently that I'm pretty happy with: FinOps KPI insights. Most people don't know the [FinOps Foundation KPI catalog](https://www.finops.org/finops-kpis/) by name, so the server shows it for them. Every scan automatically tags its results with the industry KPIs they map to, like Cost per GB Stored, Commitment Utilization Score, or Percentage of Untagged Costs, and computes the value when the data supports it. There's also an `explore_finops_kpis` tool to browse the KPIs grouped by FinOps domain. The point is to meet people where they are: you run a normal scan, and the tool quietly connects what it found to the metrics the FinOps community actually tracks, so you can learn the framework as you go instead of having to know it first. It never makes up a number; if it can't compute a KPI from your data, it flags the correlation and points you at the scan that would.
 
@@ -66,7 +68,7 @@ The part I want to call out: this is a great fit for organizations that don't us
 
 This is the biggest change under the hood, and it matters for both speed and accuracy.
 
-By default, the tool now reads cost data from your **FinOps Hub data model or Cost Management exports** when one is in scope. Exported data is already conformed, deduplicated, and sitting in storage, so reading it is faster, cheaper, and gives you real history without hammering the Cost Management Query API (which throttles hard and only reaches back so far). If you've invested in a hub or set up exports, the Multitool takes advantage of it automatically.
+By default, the tool now reads cost data from your **FinOps Hub data model or Cost Management exports** when one is in scope. Exported data is already conformed, deduplicated, and sitting in storage, so reading it is faster, cheaper, and gives you real history without hammering the Cost Management Query API (which throttles hard and only reaches back so far). If you've invested in a hub or set up exports, FinOps Explorer takes advantage of it automatically.
 
 When there's no hub or export to read, it **falls back to the live Cost Management APIs**. You still get a complete scan, it just queries Azure directly instead of reading the data model. There's nothing to configure. It detects what's available and picks the better source.
 
@@ -263,7 +265,7 @@ The scan engine is in a good place. Most of the roadmap now is about meeting peo
 
 ## Community & Support
 
-The Azure FinOps Multitool is an open-source project released under the MIT License. It's actively maintained and welcomes contributions from the FinOps community.
+FinOps Explorer is an open-source project released under the MIT License. It's actively maintained and welcomes contributions from the FinOps community.
 
 - **Documentation**: Comprehensive README with setup instructions
 - **Issue Tracking**: GitHub Issues for bug reports and feature requests
@@ -272,7 +274,7 @@ The Azure FinOps Multitool is an open-source project released under the MIT Lice
 
 ## Conclusion
 
-FinOps doesn't have to start with a months-long implementation. The Multitool gives you a clear starting point, run it, see what it finds, and you'll know where to focus.
+FinOps doesn't have to start with a months-long implementation. FinOps Explorer gives you a clear starting point, run it, see what it finds, and you'll know where to focus.
 
 [Open source on GitHub](https://github.com/z-larsen/Azure-FinOps-Multitool) if you want to give it a try.
 

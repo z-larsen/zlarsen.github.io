@@ -33,7 +33,7 @@ Personal site and blog covering Azure architecture, FinOps, governance, and open
 | 2026-04-22 | [Why AI Cost Optimization Is Different from Traditional FinOps](posts/2026-04-22-finops-for-ai.md)                     |
 | 2026-04-18 | [Azure Landing Zone: Brownfield Transition Guide](posts/2026-04-18-azure-landing-zone-brownfield.md)                   |
 | 2026-04-18 | [Microsoft AI Tools Compared: M365 Copilot vs Copilot Studio vs Foundry](posts/2026-04-18-microsoft-ai-tools-compared.md) |
-| 2026-04-16 | [Azure FinOps Multitool: A Fast Track to Cost Optimization](posts/2026-4-16-azure-finops-multitool.md)                 |
+| 2026-04-16 | [FinOps Explorer: A Fast Track to Cost Optimization](posts/2026-4-16-azure-finops-multitool.md)                        |
 | 2026-03-18 | [New to Azure? Start Here](posts/2026-03-18-new-to-azure-start-here.md)                                                |
 | 2026-03-18 | [Azure Networking Fundamentals](posts/2026-03-18-azure-networking-fundamentals.md)                                     |
 | 2026-03-18 | [Azure Storage & Database Fundamentals](posts/2026-03-18-azure-storage-database-fundamentals.md)                       |
@@ -51,7 +51,7 @@ Personal site and blog covering Azure architecture, FinOps, governance, and open
 
 | Tool                                                                         | Description                                                                           |
 | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| [Azure FinOps Multitool](https://github.com/z-larsen/Azure-FinOps-Multitool) | Tenant-wide FinOps scanner -- costs, tags, optimization, policy, and maturity scoring |
+| [FinOps Explorer](https://github.com/z-larsen/Azure-FinOps-Multitool) | Tenant-wide FinOps scanner -- costs, tags, optimization, policy, and maturity scoring |
 | [Azure Resource Tagger](https://github.com/z-larsen/AzureResourceTagger)     | Bulk tag scanning, gap analysis, and application for Azure subscriptions              |
 
 ## Stack
