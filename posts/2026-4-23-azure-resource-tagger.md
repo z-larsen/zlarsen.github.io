@@ -122,7 +122,7 @@ Here's the scenario this was built for:
 
 ## Related
 
-If you're looking at tagging as part of a broader FinOps initiative, the [FinOps Explorer](https://github.com/z-larsen/Azure-FinOps-Multitool) covers cost analysis, optimization opportunities, policy management, and more. The Resource Tagger is a focused companion for the tagging piece specifically.
+If you're looking at tagging as part of a broader FinOps initiative, the [FinOps Explorer](/posts/2026-4-16-azure-finops-multitool/) covers cost analysis, optimization opportunities, policy management, and more. The Resource Tagger is a focused companion for the tagging piece specifically.
 
 [Open source on GitHub](https://github.com/z-larsen/AzureResourceTagger). MIT licensed, contributions welcome.
 

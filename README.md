@@ -51,7 +51,6 @@ Personal site and blog covering Azure architecture, FinOps, governance, and open
 
 | Tool                                                                         | Description                                                                           |
 | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| [FinOps Explorer](https://github.com/z-larsen/Azure-FinOps-Multitool) | Tenant-wide FinOps scanner -- costs, tags, optimization, policy, and maturity scoring |
 | [Azure Resource Tagger](https://github.com/z-larsen/AzureResourceTagger)     | Bulk tag scanning, gap analysis, and application for Azure subscriptions              |
 
 ## Stack

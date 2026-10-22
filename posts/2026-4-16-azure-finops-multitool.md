@@ -164,58 +164,6 @@ If you're new to FinOps, it's a practical starting point before investing in hea
 
 It doesn't replace Azure Cost Management, FinOps Toolkit, or Power BI. It reads from them where it can and gets you answers faster when you need them.
 
-## Getting Started with the GUI
-
-The walkthrough below covers the Windows GUI, since that's the most hands-on edition. The TUI runs the same scans from any PowerShell 7 terminal (including macOS and Linux), the MCP server is launched as a tool endpoint for your agent, and the automated function runs on a timer once deployed.
-
-### Prerequisites
-- **Windows** with PowerShell 5.1+ for the GUI (the TUI runs cross-platform on PowerShell 7)
-- **Az PowerShell modules**: `Az.Accounts`, `Az.Resources`, `Az.ResourceGraph`, `Az.CostManagement`, `Az.Advisor`, `Az.Billing`
-- **Azure RBAC**: Reader + Cost Management Reader on target scope (minimum for scanning)
-
-Install modules if needed:
-```powershell
-Install-Module Az.Accounts, Az.Resources, Az.ResourceGraph, Az.CostManagement, Az.Advisor, Az.Billing -Scope CurrentUser
-```
-
-### Installation & Usage
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/z-larsen/Azure-FinOps-Multitool.git
-   cd Azure-FinOps-Multitool
-   ```
-
-2. **Unblock downloaded files** (required on Windows for files from the internet):
-   ```powershell
-   Get-ChildItem -Path .\AzureFinOpsMultitool -Recurse | Unblock-File
-   ```
-
-3. **Run the tool**:
-   ```powershell
-   .\Start-FinOpsMultitool.ps1
-   # Or bypass execution policy without changing system settings:
-   powershell -ExecutionPolicy Bypass -File .\Start-FinOpsMultitool.ps1
-   ```
-
-4. Click **Commercial Tenant** (or **Gov Tenant** for Azure Government). A browser login opens, then a tenant picker dialog lists all accessible tenants.
-
-5. If your tenant has more than 5 subscriptions, a **subscription selector dialog** appears. Choose which subscriptions to scan or select all, then click OK.
-
-6. Click **Scan**. The tool runs through 23 data-collection stages with a progress bar.
-
-7. Browse the tabs when the scan completes:
-   - **Overview**: cost summary cards, savings realized, budget status, subscription cost table with orphan savings, top resources by spend, scorecard
-   - **Cost Analysis**: 6-month cost trend bar chart, cost anomaly flags (25%+ MoM change), Cost Management alerts (triggered + configured rules), spend by tag value
-   - **Tags**: tag inventory with coverage %, CAF compliance check, inline Add/Remove buttons to deploy or remove tags on subscriptions/RGs/individual resources
-   - **Policy**: effective policy inventory with compliance %, CAF-recommended policies, inline Deploy/Unassign buttons, remediation tasks for DINE/Modify policies
-   - **Optimization**: RI/SP utilization, orphaned resources with cost and estimated annual waste, idle VM detection (14-day metrics), storage tier advice, AHB gaps, RI/SP recs, Advisor recs
-   - **Billing**: billing accounts, billing profiles (MCA), invoice sections, EA departments, MACC consumption readout, cost allocation rules
-   - **FinOps Guidance**: FinOps Maturity Score (0-100) with pillar-by-pillar assessment
-   - **Resources**: curated links to FinOps Framework, Cost Management, Azure Workbooks, and more
-
-8. Click **Export Scan Results** to save as HTML, CSV, or Power BI template (.pbit)
-
 ## Use Cases & Scenarios
 
 ### Initial FinOps Assessment
@@ -275,8 +223,6 @@ FinOps Explorer is an open-source project released under the MIT License. It's a
 ## Conclusion
 
 FinOps doesn't have to start with a months-long implementation. FinOps Explorer gives you a clear starting point, run it, see what it finds, and you'll know where to focus.
-
-[Open source on GitHub](https://github.com/z-larsen/Azure-FinOps-Multitool) if you want to give it a try.
 
 ---
 
