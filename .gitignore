@@ -25,3 +25,29 @@ package-lock.json
 # Misc
 _sass/vendors
 assets/js/dist
+
+# Secrets guard: keep credentials and key material out of Git
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+*.pem
+*.key
+*.pfx
+*.p12
+id_rsa
+id_ecdsa
+id_ed25519
+local.settings.json
+*.publishsettings
+*.pubxml.user
+*.tfstate
+*.tfstate.*
+kubeconfig
+*.kubeconfig
+secrets.json
+secrets.yaml
+secrets.yml
+credentials.json
+credentials.xml
