@@ -42,7 +42,6 @@ Personal site and blog covering Azure architecture, FinOps, governance, and open
 | 2026-03-18 | [Azure BCDR Fundamentals](posts/2026-03-18-azure-bcdr-fundamentals.md)                                                 |
 | 2026-03-18 | [Azure Governance, Cost & Tagging](posts/2026-03-18-azure-governance-cost-tagging.md)                                  |
 | 2026-01-16 | [Azure FinOps: Implementing the FinOps Framework](posts/2026-01-16-azure-finops-framework.md)                          |
-| 2026-01-12 | [NPS + Entra MFA Setup](posts/2026-01-12-nps-entra-mfa-setup.md)                                                       |
 | 2026-01-10 | [Azure DNS 101](posts/2026-1-10-2026-azure-dns-101.md)                                                                 |
 | 2026-01-06 | [Azure ExpressRoute](posts/2026-01-06-azure-expressroute.md)                                                           |
 | 2026-01-06 | [GitHub Pages Setup with Actions & VS Code](posts/2026-01-06-github-pages-setup-with-actions-vscode.md)                |
